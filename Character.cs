@@ -73,7 +73,7 @@ namespace DiceBattleGame
         Weapon weapon = new Rapier();
     }
 
-    // enemies
+    // enemies (no weapons yet)
     internal class Goblin : Character
     {
         int health = 10;
