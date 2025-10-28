@@ -28,12 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            DiceRollerbtn = new Button();
+            RollResults = new TextBox();
+            SuspendLayout();
+            // 
+            // DiceRollerbtn
+            // 
+            DiceRollerbtn.Location = new Point(596, 246);
+            DiceRollerbtn.Name = "DiceRollerbtn";
+            DiceRollerbtn.Size = new Size(94, 29);
+            DiceRollerbtn.TabIndex = 0;
+            DiceRollerbtn.Text = "Roll Dice";
+            DiceRollerbtn.UseVisualStyleBackColor = true;
+            DiceRollerbtn.Click += DiceRollerbtn_Click;
+            // 
+            // RollResults
+            // 
+            RollResults.Location = new Point(568, 146);
+            RollResults.Name = "RollResults";
+            RollResults.Size = new Size(125, 27);
+            RollResults.TabIndex = 1;
+            RollResults.TextChanged += RollResults_TextChanged;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(RollResults);
+            Controls.Add(DiceRollerbtn);
+            Name = "Form1";
+            Text = "Form1";
+            Load += Form1_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Button DiceRollerbtn;
+        private TextBox RollResults;
     }
 }

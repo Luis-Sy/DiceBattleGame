@@ -6,12 +6,26 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame
 {
+    //==============================================================================ABSTRACT
     internal abstract class Weapon
     {
-        private string weaponType = "Weapon";
-        private string weaponName = "Weapon";
+        protected string weaponType = "Weapon";
+        protected string weaponName = "Weapon";
 
-        private string damageType = "Damage";
+        protected string damageType = "Damage";
+
+        public Weapon()
+        {
+            weaponType = string.Empty;
+            weaponName = string.Empty;
+            damageType = string.Empty;
+        }
+        public Weapon(string weaponType, string weaponName, string damageType)
+        {
+            this.weaponType = weaponType;
+            this.weaponName = weaponName;
+            this.damageType = damageType;
+        }
 
         public virtual int Attack()
         {
@@ -20,14 +34,31 @@ namespace DiceBattleGame
         }
 
     }
-
+    //=================================================================================DEBUG
     internal class Debug : Weapon //This is a weapon for debuggin purposes. Mess with this to if you want to play around before commmiting any changes
     {
-        Dice d20 = new D20();
-        private string weaponType = "Debug";
-        private string weaponName = "debugging tool";
+        Dice die;
 
-        private string damageType = "ouchy";
+        public Debug() : base()
+        {
+        die = new D20();
+        weaponType = "Debug";
+        weaponName = "debugging tool";
+
+        damageType = "ouchy";
+        }
+
+        
+
+
+        public Debug(string weaponType, string weaponName, string damageType)
+        {
+            die = new D4();
+            this.weaponType = weaponType;
+            this.weaponName = weaponName;
+            this.damageType = damageType;
+        }
+
 
         public override int Attack()
         {
@@ -35,40 +66,79 @@ namespace DiceBattleGame
 
             //Console.WriteLine($"Damage was {damage}"); DEBUG
 
-            return d20.Roll();
+            return die.Roll();
         }
     }
 
     internal class Sword : Weapon
     {
-        Dice d8 = new D8();
-        private string weaponType = "Sword";
-        private string weaponName = "Bernard's Large Cake Cutter";
-
-        private string damageType = "Slash";
+        Dice die;
+        public Sword()
+        {
+            die = new D8();
+            weaponType = "Sword";
+            weaponName = "Cake Cutter";
+            damageType = "Slash";
+        }
+        public Sword(string weaponType, string weaponName, string damageType)
+        {
+            die = new D8();
+            this.weaponType = weaponType;
+            this.weaponName = weaponName;
+            this.damageType = damageType;
+        }
 
         public override int Attack()
         {
-            return d8.Roll();
+            return die.Roll();
         }
     }
 
     internal class Rapier : Weapon
     {
-        Dice d4 = new D4();
-        private string weaponType = "Rapier";
-        private string weaponName = "Medieval Hole Puncher";
-
-        private string damageType = "Pierce";
+        Dice die;
+        public Rapier()
+        {
+            die = new D8();
+            weaponType = "Sword";
+            weaponName = "Cake Cutter";
+            damageType = "Slash";
+        }
+        public Rapier(string weaponType, string weaponName, string damageType)
+        {
+            die = new D8();
+            this.weaponType = weaponType;
+            this.weaponName = weaponName;
+            this.damageType = damageType;
+        }
 
         public override int Attack()
         {
-            return d4.Roll();
+            return die.Roll();
         }
     }
 
-    internal class Hammer : Weapon
+    internal class Custom : Weapon
     {
+        Dice die;
+        public Custom()
+        {
+            die = new D8();
+            weaponType = "Sword";
+            weaponName = "Cake Cutter";
+            damageType = "Slash";
+        }
+        public Custom(string weaponType, string weaponName, string damageType, Dice dice)
+        {
+            die = dice;
+            this.weaponType = weaponType;
+            this.weaponName = weaponName;
+            this.damageType = damageType;
+        }
 
+        public override int Attack()
+        {
+            return die.Roll();
+        }
     }
 }

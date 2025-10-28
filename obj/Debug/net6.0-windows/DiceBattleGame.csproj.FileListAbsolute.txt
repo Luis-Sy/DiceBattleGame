@@ -1,0 +1,16 @@
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\bin\Debug\net6.0-windows\DiceBattleGame.exe
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\bin\Debug\net6.0-windows\DiceBattleGame.deps.json
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\bin\Debug\net6.0-windows\DiceBattleGame.runtimeconfig.json
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\bin\Debug\net6.0-windows\DiceBattleGame.dll
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\bin\Debug\net6.0-windows\DiceBattleGame.pdb
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\DiceBattleGame.Form1.resources
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\DiceBattleGame.csproj.GenerateResource.cache
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\DiceBattleGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\DiceBattleGame.AssemblyInfoInputs.cache
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\DiceBattleGame.AssemblyInfo.cs
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\DiceBattleGame.csproj.CoreCompileInputs.cache
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\DiceBattleGame.dll
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\refint\DiceBattleGame.dll
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\DiceBattleGame.pdb
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\DiceBattleGame.genruntimeconfig.cache
+C:\Users\uzayr\Desktop\DiceBattleGame-master\DiceBattleGame-master\obj\Debug\net6.0-windows\ref\DiceBattleGame.dll
