@@ -9,14 +9,14 @@ namespace DiceBattleGame
     // this class is used as a base for both playable and non-playable characters
     internal abstract class Character
     {
+        // make these protected so derived classes set them instead of hiding them
+        protected int health;
+        protected int armorClass;
+        protected double slashRes;
+        protected double pierceRes;
+        protected double bluntRes;
 
-        int health;
-        int armorClass;
-        double slashRes;
-        double pierceRes;
-        double bluntRes;
-        
-        Weapon? weapon;
+        protected Weapon? weapon;
 
         public int attack()
         {
@@ -59,66 +59,81 @@ namespace DiceBattleGame
     // player classes
     internal class Knight : Character
     {
-
-        int health = 15;
-        int armorClass = 15;
-        double slashRes = 1.0;
-        double pierceRes = 0.5;
-        double bluntRes = 2.0;
-        Weapon weapon = new Sword();
-
-
+        public Knight()
+        {
+            health = 15;
+            armorClass = 15;
+            slashRes = 1.0;
+            pierceRes = 0.5;
+            bluntRes = 2.0;
+            weapon = new Sword();
+        }
     }
 
     internal class Duelist : Character
     {
-        int health = 10;
-        int armorClass = 12;
-        double slashRes = 2.0;
-        double pierceRes = 0.5;
-        double bluntRes = 1.0;
-        Weapon weapon = new Rapier();
+        public Duelist()
+        {
+            health = 10;
+            armorClass = 12;
+            slashRes = 2.0;
+            pierceRes = 0.5;
+            bluntRes = 1.0;
+            weapon = new Rapier();
+        }
     }
 
     // enemies (no weapons yet)
     internal class Goblin : Character
     {
-        int health = 10;
-        int armorClass = 10;
-        double slashRes = 1.25;
-        double pierceRes = 1.25;
-        double bluntRes = 1.25;
-        Weapon weapon = new Debug();
+        public Goblin()
+        {
+            health = 10;
+            armorClass = 10;
+            slashRes = 1.25;
+            pierceRes = 1.25;
+            bluntRes = 1.25;
+            weapon = new Debug();
+        }
     }
 
     internal class HoboGoblin : Character
     {
-        int health = 20;
-        int armorClass = 14;
-        double slashRes = 1.0;
-        double pierceRes = 1.5;
-        double bluntRes = 0.5;
-        Weapon weapon = new Debug();
+        public HoboGoblin()
+        {
+            health = 20;
+            armorClass = 14;
+            slashRes = 1.0;
+            pierceRes = 1.5;
+            bluntRes = 0.5;
+            weapon = new Debug();
+        }
     }
 
     internal class Bandit : Character
     {
-        int health = 15;
-        int armorClass = 12;
-        double slashRes = 1.5;
-        double pierceRes = 1.0;
-        double bluntRes = 1.0;
-        Weapon weapon = new Debug();
+        public Bandit()
+        {
+            health = 15;
+            armorClass = 12;
+            slashRes = 1.5;
+            pierceRes = 1.0;
+            bluntRes = 1.0;
+            weapon = new Debug();
+        }
     }
 
     internal class Skeleton : Character
     {
-        int health = 15;
-        int armorClass = 12;
-        double slashRes = 0.5;
-        double pierceRes = 0.5;
-        double bluntRes = 1.5;
-        Weapon weapon = new Debug();
+        public Skeleton()
+        {
+            health = 15;
+            armorClass = 12;
+            slashRes = 0.5;
+            pierceRes = 0.5;
+            bluntRes = 1.5;
+            weapon = new Debug();
+        }
     }
 
 }
