@@ -49,6 +49,11 @@ namespace DiceBattleGame
 
             health -= finalDamage;
         }
+
+        public int getHealth()
+        {
+            return this.health;
+        }
     }
 
     // player classes
@@ -61,6 +66,8 @@ namespace DiceBattleGame
         double pierceRes = 0.5;
         double bluntRes = 2.0;
         Weapon weapon = new Sword();
+
+
     }
 
     internal class Duelist : Character
