@@ -46,11 +46,8 @@ namespace DiceBattleGame
         weaponName = "debugging tool";
 
         damageType = "ouchy";
-        }
-
-     //=================================================================================WEAPONS=================   
-
-
+        }   
+        
         public Debug(string weaponType, string weaponName, string damageType)
         {
             die = new D4();
@@ -65,7 +62,7 @@ namespace DiceBattleGame
             return die.Roll();
         }
     }
-
+     //=================================================================================WEAPONS=================
     internal class Sword : Weapon
     {
         Dice die;
@@ -144,3 +141,4 @@ namespace DiceBattleGame
         }
     }
 }
+
