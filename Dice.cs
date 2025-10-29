@@ -20,6 +20,31 @@ namespace DiceBattleGame
 
     }
 
+    // flexible class made for rolling multiple dice at once
+    internal class diceBag : Dice
+    {
+        private int sides;
+        private int amount;
+
+        Random roll = new Random();
+
+        public diceBag(int sides, int amount)
+        {
+            this.sides = sides;
+            this.amount = amount;
+        }
+
+        public override int Roll()
+        {
+            int sum = 0;
+            for(int i = 0; i < this.amount; i++)
+            {
+                sum += this.roll.Next(1, this.sides);
+            }
+            return sum;
+        }
+    }
+
     internal class D20 : Dice
     {
         private int sides = 21; //needs max value +1 so it actually rolls the 20, changes made in the other dice types

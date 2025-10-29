@@ -140,5 +140,10 @@ namespace DiceBattleGame
             return die.Roll();
         }
     }
+
+    internal class Hammer : Weapon
+    {
+
+    }
 }
 
