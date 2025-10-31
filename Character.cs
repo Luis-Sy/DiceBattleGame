@@ -179,7 +179,7 @@ namespace DiceBattleGame
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 1.0;
-            weapon = new Custom("Fists", "Spiritual Fists", "Blunt", new diceBag(4, 3));
+            weapon = new Custom("Fists", "Spiritual Fists", "Blunt", new diceBag(5, 3));
         }
     }
 
@@ -277,7 +277,7 @@ namespace DiceBattleGame
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 1.0;
-            weapon = new Custom("Magic Staff", "Staff of Awakening", "Blunt", new diceBag(6, 2));
+            weapon = new Custom("Magic Staff", "Staff of Awakening", "Blunt", new diceBag(7, 2));
         }
     }
 
@@ -420,7 +420,7 @@ namespace DiceBattleGame
             slashRes = 1.5;
             pierceRes = 1.0;
             bluntRes = 0.5;
-            weapon = new Custom("Fists", "Rotten Fists", "Blunt", new diceBag(4, 2));
+            weapon = new Custom("Fists", "Rotten Fists", "Blunt", new diceBag(5, 2));
         }
     }
 
