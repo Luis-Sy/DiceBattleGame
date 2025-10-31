@@ -19,7 +19,8 @@ namespace DiceBattleGame
 
             Trace.WriteLine($"Knight attacking Duelist with HP: {player2.getHealth()}");
             Trace.WriteLine($"Knight rolled: {damage} with damage type: Slash");
-            player2.takeDamage(damage, "slash"); // need a way to get damage type from weapon
+            Weapon? weapon = player1.getWeapon();
+            player2.takeDamage(damage, weapon.getDamageType());
             Trace.WriteLine($"Duelist has 2.0x Slash resistance (slash damage taken is doubled)");
             Trace.WriteLine($"Duelist now has {player2.getHealth()} HP");
 

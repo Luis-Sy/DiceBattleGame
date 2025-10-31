@@ -33,6 +33,16 @@ namespace DiceBattleGame
             return damage;
         }
 
+        public string GetWeaponType()
+        {
+            return weaponType;
+        }
+
+        public string getDamageType()
+        {
+            return damageType;
+        }
+
     }
     //=================================================================================DEBUG
     internal class Debug : Weapon //This is a weapon for debuggin purposes. Mess with this to if you want to play around before commmiting any changes
