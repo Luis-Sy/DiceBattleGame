@@ -18,7 +18,8 @@ namespace DiceBattleGame
         protected double pierceRes;
         protected double bluntRes;
 
-        protected string name = "Character";
+        protected string name = "Character"; // display name
+        protected string type = "Character"; // type of character (player/enemy/etc)
 
         protected Weapon? weapon;
 
@@ -92,8 +93,9 @@ namespace DiceBattleGame
             health = 15;
             armorClass = 15;
             name = "Knight";
+            type = "Player";
             slashRes = 1.0;
-            pierceRes = 0.5;
+            pierceRes = 0.5;                                            
             bluntRes = 2.0;
             weapon = new Sword();
         }
@@ -106,6 +108,7 @@ namespace DiceBattleGame
             health = 12;
             armorClass = 12;
             name = "Duelist";
+            type = "Player";
             slashRes = 2.0;
             pierceRes = 0.5;
             bluntRes = 1.0;
@@ -120,6 +123,7 @@ namespace DiceBattleGame
             health = 25;
             armorClass = 18;
             name = "Paladin";
+            type = "Player";
             slashRes = 0.5;
             pierceRes = 1.0;
             bluntRes = 1.5;
@@ -134,6 +138,7 @@ namespace DiceBattleGame
             health = 20;
             armorClass = 14;
             name = "Cleric";
+            type = "Player";
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -148,6 +153,7 @@ namespace DiceBattleGame
             health = 12;
             armorClass = 13;
             name = "Ranger";
+            type = "Player";
             slashRes = 1.5;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -162,6 +168,7 @@ namespace DiceBattleGame
             health = 18;
             armorClass = 14;
             name = "Berserker";
+            type = "Player";
             slashRes = 1.0;
             pierceRes = 1.5;
             bluntRes = 1.0;
@@ -176,6 +183,7 @@ namespace DiceBattleGame
             health = 14;
             armorClass = 12;
             name = "Monk";
+            type = "Player";
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -190,6 +198,7 @@ namespace DiceBattleGame
             health = 10;
             armorClass = 12;
             name = "Assassin";
+            type = "Player";
             slashRes = 2.0;
             pierceRes = 0.5;
             bluntRes = 1.5;
@@ -204,6 +213,7 @@ namespace DiceBattleGame
             health = 16;
             armorClass = 13;
             name = "Heretic";
+            type = "Player";
             slashRes = 1.0;
             pierceRes = 1.5;
             bluntRes = 1.0;
@@ -218,6 +228,7 @@ namespace DiceBattleGame
             health = 20;
             armorClass = 10;
             name = "Deprived";
+            type = "Player";
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -232,6 +243,7 @@ namespace DiceBattleGame
             health = 8;
             armorClass = 14;
             name = "Tourist";
+            type = "Player";
             slashRes = 1.5;
             pierceRes = 1.5;
             bluntRes = 1.5;
@@ -246,6 +258,7 @@ namespace DiceBattleGame
             health = 16;
             armorClass = 16;
             name = "Warden";
+            type = "Player";
             slashRes = 0.5;
             pierceRes = 1.0;
             bluntRes = 1.5;
@@ -260,6 +273,7 @@ namespace DiceBattleGame
             health = 18;
             armorClass = 14;
             name = "Instructor";
+            type = "Player";
             slashRes = 1.0;
             pierceRes = 1.5;
             bluntRes = 0.5;
@@ -274,6 +288,7 @@ namespace DiceBattleGame
             health = 14;
             armorClass = 12;
             name = "Awakened";
+            type = "Player";
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -288,6 +303,7 @@ namespace DiceBattleGame
             health = 15;
             armorClass = 17;
             name = "Samurai";
+            type = "Player";
             slashRes = 0.5;
             pierceRes = 1.25;
             bluntRes = 1.25;
@@ -302,6 +318,7 @@ namespace DiceBattleGame
             health = 18;
             armorClass = 15;
             name = "Fallen Noble";
+            type = "Player";
             slashRes = 1.25;
             pierceRes = 1.25;
             bluntRes = 1.25;
@@ -319,6 +336,7 @@ namespace DiceBattleGame
             health = 10;
             armorClass = 10;
             name = "Goblin";
+            type = "Enemy";
             slashRes = 1.25;
             pierceRes = 1.25;
             bluntRes = 1.25;
@@ -333,6 +351,7 @@ namespace DiceBattleGame
             health = 20;
             armorClass = 14;
             name = "HoboGoblin";
+            type = "Enemy";
             slashRes = 1.0;
             pierceRes = 1.5;
             bluntRes = 0.5;
@@ -347,6 +366,7 @@ namespace DiceBattleGame
             health = 12;
             armorClass = 8;
             name = "Slime";
+            type = "Enemy";
             slashRes = 1.5;
             pierceRes = 1.5;
             bluntRes = 0.5;
@@ -361,6 +381,7 @@ namespace DiceBattleGame
             health = 15;
             armorClass = 12;
             name = "Bandit";
+            type = "Enemy";
             slashRes = 1.5;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -375,6 +396,7 @@ namespace DiceBattleGame
             health = 20;
             armorClass = 15;
             name = "Mercenary";
+            type = "Enemy";
             slashRes = 1.25;
             pierceRes = 1.0;
             bluntRes = 1.5;
@@ -389,6 +411,7 @@ namespace DiceBattleGame
             health = 25;
             armorClass = 16;
             name = "Orc";
+            type = "Enemy";
             slashRes = 0.5;
             pierceRes = 1.5;
             bluntRes = 1.5;
@@ -403,6 +426,7 @@ namespace DiceBattleGame
             health = 15;
             armorClass = 12;
             name = "Skeleton";
+            type = "Enemy";
             slashRes = 0.5;
             pierceRes = 0.5;
             bluntRes = 1.5;
@@ -417,6 +441,7 @@ namespace DiceBattleGame
             health = 30;
             armorClass = 8;
             name = "Zombie";
+            type = "Enemy";
             slashRes = 1.5;
             pierceRes = 1.0;
             bluntRes = 0.5;
@@ -433,6 +458,7 @@ namespace DiceBattleGame
             health = 25;
             armorClass = 12;
             name = "Cultist";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 1.5;
             bluntRes = 1.0;
@@ -447,6 +473,7 @@ namespace DiceBattleGame
             health = 40;
             armorClass = 14;
             name = "Cultist Leader";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 1.25;
             bluntRes = 1.5;
@@ -461,6 +488,7 @@ namespace DiceBattleGame
             health = 35;
             armorClass = 13;
             name = "Mad Warrior";
+            type = "Elite Enemy";
             slashRes = 1.5;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -475,6 +503,7 @@ namespace DiceBattleGame
             health = 50;
             armorClass = 14;
             name = "Mad Commander";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 1.5;
             bluntRes = 0.5;
@@ -489,6 +518,7 @@ namespace DiceBattleGame
             health = 45;
             armorClass = 15;
             name = "Lich";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 1.25;
             bluntRes = 1.5;
@@ -503,6 +533,7 @@ namespace DiceBattleGame
             health = 40;
             armorClass = 16;
             name = "Mimic";
+            type = "Elite Enemy";
             slashRes = 1.5;
             pierceRes = 1.0;
             bluntRes = 0.5;
@@ -517,6 +548,7 @@ namespace DiceBattleGame
             health = 55;
             armorClass = 15;
             name = "Werewolf";
+            type = "Elite Enemy";
             slashRes = 0.5;
             pierceRes = 2.0;
             bluntRes = 1.0;
@@ -531,6 +563,7 @@ namespace DiceBattleGame
             health = 50;
             armorClass = 16;
             name = "Vampire";
+            type = "Elite Enemy";
             slashRes = 0.5;
             pierceRes = 2.0;
             bluntRes = 0.5;
@@ -545,6 +578,7 @@ namespace DiceBattleGame
             health = 45;
             armorClass = 18;
             name = "Wandering Swordsman";
+            type = "Elite Enemy";
             slashRes = 0.5;
             pierceRes = 1.25;
             bluntRes = 1.25;
@@ -559,6 +593,7 @@ namespace DiceBattleGame
             health = 60;
             armorClass = 14;
             name = "Elder Fragment";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 2.0;
@@ -575,6 +610,7 @@ namespace DiceBattleGame
             health = 40;
             armorClass = 16;
             name = "Fallen Knight";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 1.5;
             bluntRes = 1.0;
@@ -589,6 +625,7 @@ namespace DiceBattleGame
             health = 30;
             armorClass = 14;
             name = "Shadow Duelist";
+            type = "Elite Enemy";
             slashRes = 1.5;
             pierceRes = 1.0;
             bluntRes = 1.5;
@@ -603,6 +640,7 @@ namespace DiceBattleGame
             health = 50;
             armorClass = 16;
             name = "Corrupted Paladin";
+            type = "Elite Enemy";
             slashRes = 1.5;
             pierceRes = 1.5;
             bluntRes = 1.0;
@@ -617,6 +655,7 @@ namespace DiceBattleGame
             health = 30;
             armorClass = 13;
             name = "Phantom Ranger";
+            type = "Elite Enemy";
             slashRes = 1.5;
             pierceRes = 1.5;
             bluntRes = 1.5;
@@ -631,6 +670,7 @@ namespace DiceBattleGame
             health = 45;
             armorClass = 15;
             name = "Savage Berserker";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 2.0;
             bluntRes = 1.0;
@@ -645,6 +685,7 @@ namespace DiceBattleGame
             health = 28;
             armorClass = 12;
             name = "Shadow Monk";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -659,6 +700,7 @@ namespace DiceBattleGame
             health = 25;
             armorClass = 13;
             name = "Nightstalker Assassin";
+            type = "Elite Enemy";
             slashRes = 2.0;
             pierceRes = 0.5;
             bluntRes = 1.0;
@@ -673,6 +715,7 @@ namespace DiceBattleGame
             health = 35;
             armorClass = 14;
             name = "Blighted Heretic";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 2.0;
             bluntRes = 1.0;
@@ -687,6 +730,7 @@ namespace DiceBattleGame
             health = 50;
             armorClass = 10;
             name = "Loathsome Deprived";
+            type = "Elite Enemy";
             slashRes = 1.5;
             pierceRes = 1.5;
             bluntRes = 1.5;
@@ -701,6 +745,7 @@ namespace DiceBattleGame
             health = 20;
             armorClass = 14;
             name = "Cursed Tourist";
+            type = "Elite Enemy";
             slashRes = 1.5;
             pierceRes = 1.5;
             bluntRes = 1.5;
@@ -715,6 +760,7 @@ namespace DiceBattleGame
             health = 40;
             armorClass = 16;
             name = "Corrupted Warden";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 1.5;
             bluntRes = 1.0;
@@ -729,6 +775,7 @@ namespace DiceBattleGame
             health = 45;
             armorClass = 15;
             name = "Slave Driver Instructor";
+            type = "Elite Enemy";
             slashRes = 1.5;
             pierceRes = 1.0;
             bluntRes = 1.5;
@@ -743,6 +790,7 @@ namespace DiceBattleGame
             health = 38;
             armorClass = 15;
             name = "Avaricious Noble";
+            type = "Elite Enemy";
             slashRes = 1.25;
             pierceRes = 1.25;
             bluntRes = 1.25;
@@ -757,6 +805,7 @@ namespace DiceBattleGame
             health = 35;
             armorClass = 13;
             name = "True Awakened";
+            type = "Elite Enemy";
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -773,6 +822,7 @@ namespace DiceBattleGame
             health = 100;
             armorClass = 15;
             name = "Dragon";
+            type = "Boss Enemy";
             slashRes = 1.0;
             pierceRes = 2.0;
             bluntRes = 0.75;
@@ -787,6 +837,7 @@ namespace DiceBattleGame
             health = 120;
             armorClass = 15;
             name = "Demon Lord";
+            type = "Boss Enemy";
             slashRes = 2.0;
             pierceRes = 1.25;
             bluntRes = 1.25;
@@ -801,6 +852,7 @@ namespace DiceBattleGame
             health = 110;
             armorClass = 15;
             name = "Lich King";
+            type = "Boss Enemy";
             slashRes = 1.0;
             pierceRes = 1.5;
             bluntRes = 2.0;
@@ -815,6 +867,7 @@ namespace DiceBattleGame
             health = 150;
             armorClass = 10;
             name = "Dark Avatar";
+            type = "Boss Enemy";
             slashRes = 2.0;
             pierceRes = 2.0;
             bluntRes = 2.0;
@@ -829,6 +882,7 @@ namespace DiceBattleGame
             health = 150;
             armorClass = 14;
             name = "Elder God";
+            type = "Boss Enemy";
             slashRes = 1.0;
             pierceRes = 1.0;
             bluntRes = 1.0;
@@ -843,6 +897,7 @@ namespace DiceBattleGame
             health = 250;
             armorClass = 10;
             name = "The Malformed";
+            type = "Boss Enemy";
             slashRes = 2.0;
             pierceRes = 2.0;
             bluntRes = 2.0;
@@ -857,6 +912,7 @@ namespace DiceBattleGame
             health = 200;
             armorClass = 12;
             name = "Avatar of Wrath";
+            type = "Boss Enemy";
             slashRes = 2.0;
             pierceRes = 2.0;
             bluntRes = 1.0;
@@ -871,6 +927,7 @@ namespace DiceBattleGame
             health = 200;
             armorClass = 13;
             name = "Avatar of Gluttony";
+            type = "Boss Enemy";
             slashRes = 2.0;
             pierceRes = 1.5;
             bluntRes = 2.0;
@@ -885,6 +942,7 @@ namespace DiceBattleGame
             health = 400;
             armorClass = 10;
             name = "Avatar of Sloth";
+            type = "Boss Enemy";
             slashRes = 2.0;
             pierceRes = 2.0;
             bluntRes = 2.0;
@@ -899,6 +957,7 @@ namespace DiceBattleGame
             health = 150;
             armorClass = 16;
             name = "Avatar of Pride";
+            type = "Boss Enemy";
             slashRes = 2.0;
             pierceRes = 2.0;
             bluntRes = 2.0;
@@ -913,6 +972,7 @@ namespace DiceBattleGame
             health = 200;
             armorClass = 12;
             name = "Avatar of Envy";
+            type = "Boss Enemy";
             slashRes = 2.0;
             pierceRes = 2.0;
             bluntRes = 2.0;
@@ -927,6 +987,7 @@ namespace DiceBattleGame
             health = 180;
             armorClass = 14;
             name = "Avatar of Lust";
+            type = "Boss Enemy";
             slashRes = 1.5;
             pierceRes = 1.0;
             bluntRes = 1.5;
@@ -941,6 +1002,7 @@ namespace DiceBattleGame
             health = 220;
             armorClass = 13;
             name = "Avatar of Avarice";
+            type = "Boss Enemy";
             slashRes = 2.0;
             pierceRes = 1.5;
             bluntRes = 2.0;
