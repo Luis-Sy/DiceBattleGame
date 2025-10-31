@@ -8,7 +8,6 @@ namespace DiceBattleGame
 {
     internal abstract class Weapon
     {
-        private string weaponType = "Weapon";
         private string weaponName = "Weapon";
 
         private string damageType = "Damage";
@@ -18,13 +17,30 @@ namespace DiceBattleGame
             int damage = 0;
             return damage;
         }
+        // Added helper methods //read only info to UI/systems
+        public string GetName()
+        {
+            return weaponName;
+        }
+
+        public string GetDamageType()
+        {
+            return damageType;
+        }
+
+        // Let child classes update the base name/type safely
+        protected void SetWeaponInfo(string name, string type)
+        {
+            // these assign to the *base* private fields
+            weaponName = name;
+            damageType = type;
+        }
 
     }
 
     internal class Debug : Weapon //This is a weapon for debuggin purposes. Mess with this to if you want to play around before commmiting any changes
     {
         Dice d20 = new D20();
-        private string weaponType = "Debug";
         private string weaponName = "debugging tool";
 
         private string damageType = "ouchy";
@@ -42,33 +58,38 @@ namespace DiceBattleGame
     internal class Sword : Weapon
     {
         Dice d8 = new D8();
-        private string weaponType = "Sword";
-        private string weaponName = "Bernard's Large Cake Cutter";
+        string weaponName = "Bernard's Large Cake Cutter";
 
-        private string damageType = "Slash";
+        string damageType = "Slash";
 
         public override int Attack()
         {
             return d8.Roll();
         }
+        public Sword()
+        {
+            // Use the base setter so GetName()/GetDamageType() return the right values
+            SetWeaponInfo("Bernard's Large Cake Cutter", "Slash");
+        }
+
     }
 
     internal class Rapier : Weapon
     {
         Dice d4 = new D4();
-        private string weaponType = "Rapier";
-        private string weaponName = "Medieval Hole Puncher";
 
-        private string damageType = "Pierce";
+        string weaponName = "Medieval Hole Puncher";
+
+        string damageType = "Pierce";
 
         public override int Attack()
         {
             return d4.Roll();
         }
-    }
-
-    internal class Hammer : Weapon
-    {
+        public Rapier()
+        {
+            SetWeaponInfo("Medieval Hole Puncher", "Pierce");
+        }
 
     }
 }
