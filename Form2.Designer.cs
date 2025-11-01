@@ -28,34 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            txt_TextBox = new System.Windows.Forms.TextBox();
-            btn_StartBattle = new System.Windows.Forms.Button();
-            btn_NextTurn = new System.Windows.Forms.Button();
-            lbl_selectPlayer = new System.Windows.Forms.Label();
-            cmb_PlayerSelector = new System.Windows.Forms.ComboBox();
-            cmb_EnemySelector = new System.Windows.Forms.ComboBox();
-            lbl_selectEnemy = new System.Windows.Forms.Label();
-            cmb_WeaponSelector = new System.Windows.Forms.ComboBox();
-            label1 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
-            cmb_EnemyWeaponSelector = new System.Windows.Forms.ComboBox();
+            txt_TextBox = new TextBox();
+            btn_StartBattle = new Button();
+            btn_NextTurn = new Button();
+            lbl_selectPlayer = new Label();
+            cmb_PlayerSelector = new ComboBox();
+            cmb_EnemySelector = new ComboBox();
+            lbl_selectEnemy = new Label();
+            cmb_WeaponSelector = new ComboBox();
+            label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // txt_TextBox
             // 
-            txt_TextBox.Location = new System.Drawing.Point(199, 273);
+            txt_TextBox.Location = new Point(199, 273);
             txt_TextBox.Multiline = true;
             txt_TextBox.Name = "txt_TextBox";
-            txt_TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            txt_TextBox.Size = new System.Drawing.Size(766, 352);
+            txt_TextBox.ScrollBars = ScrollBars.Vertical;
+            txt_TextBox.Size = new Size(766, 352);
             txt_TextBox.TabIndex = 0;
             txt_TextBox.TextChanged += txt_TextBox_TextChanged;
             // 
             // btn_StartBattle
             // 
-            btn_StartBattle.Location = new System.Drawing.Point(327, 662);
+            btn_StartBattle.Location = new Point(327, 662);
             btn_StartBattle.Name = "btn_StartBattle";
-            btn_StartBattle.Size = new System.Drawing.Size(131, 40);
+            btn_StartBattle.Size = new Size(131, 40);
             btn_StartBattle.TabIndex = 1;
             btn_StartBattle.Text = "Start Battle";
             btn_StartBattle.UseVisualStyleBackColor = true;
@@ -63,9 +62,9 @@
             // 
             // btn_NextTurn
             // 
-            btn_NextTurn.Location = new System.Drawing.Point(689, 662);
+            btn_NextTurn.Location = new Point(689, 662);
             btn_NextTurn.Name = "btn_NextTurn";
-            btn_NextTurn.Size = new System.Drawing.Size(131, 40);
+            btn_NextTurn.Size = new Size(131, 40);
             btn_NextTurn.TabIndex = 2;
             btn_NextTurn.Text = "Next turn";
             btn_NextTurn.UseVisualStyleBackColor = true;
@@ -74,79 +73,62 @@
             // lbl_selectPlayer
             // 
             lbl_selectPlayer.AutoSize = true;
-            lbl_selectPlayer.Location = new System.Drawing.Point(199, 66);
+            lbl_selectPlayer.Location = new Point(199, 66);
             lbl_selectPlayer.Name = "lbl_selectPlayer";
-            lbl_selectPlayer.Size = new System.Drawing.Size(130, 30);
+            lbl_selectPlayer.Size = new Size(130, 30);
             lbl_selectPlayer.TabIndex = 3;
             lbl_selectPlayer.Text = "Select player";
             // 
             // cmb_PlayerSelector
             // 
             cmb_PlayerSelector.FormattingEnabled = true;
-            cmb_PlayerSelector.Location = new System.Drawing.Point(199, 109);
+            cmb_PlayerSelector.Location = new Point(199, 109);
             cmb_PlayerSelector.Name = "cmb_PlayerSelector";
-            cmb_PlayerSelector.Size = new System.Drawing.Size(212, 38);
+            cmb_PlayerSelector.Size = new Size(212, 38);
             cmb_PlayerSelector.TabIndex = 4;
             // 
             // cmb_EnemySelector
             // 
             cmb_EnemySelector.FormattingEnabled = true;
-            cmb_EnemySelector.Location = new System.Drawing.Point(753, 109);
+            cmb_EnemySelector.Location = new Point(753, 109);
             cmb_EnemySelector.Name = "cmb_EnemySelector";
-            cmb_EnemySelector.Size = new System.Drawing.Size(212, 38);
+            cmb_EnemySelector.Size = new Size(212, 38);
             cmb_EnemySelector.TabIndex = 5;
             // 
             // lbl_selectEnemy
             // 
             lbl_selectEnemy.AutoSize = true;
-            lbl_selectEnemy.Location = new System.Drawing.Point(753, 66);
+            lbl_selectEnemy.Location = new Point(753, 66);
             lbl_selectEnemy.Name = "lbl_selectEnemy";
-            lbl_selectEnemy.Size = new System.Drawing.Size(136, 30);
+            lbl_selectEnemy.Size = new Size(136, 30);
             lbl_selectEnemy.TabIndex = 6;
             lbl_selectEnemy.Text = "Select Enemy";
             // 
             // cmb_WeaponSelector
             // 
             cmb_WeaponSelector.FormattingEnabled = true;
-            cmb_WeaponSelector.Location = new System.Drawing.Point(199, 201);
+            cmb_WeaponSelector.Location = new Point(199, 201);
             cmb_WeaponSelector.Name = "cmb_WeaponSelector";
-            cmb_WeaponSelector.Size = new System.Drawing.Size(212, 38);
+            cmb_WeaponSelector.Size = new Size(212, 38);
             cmb_WeaponSelector.TabIndex = 7;
             cmb_WeaponSelector.SelectedIndexChanged += cmb_WeaponSelector_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(199, 159);
+            label1.Location = new Point(199, 159);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(168, 30);
+            label1.Size = new Size(168, 30);
             label1.TabIndex = 8;
             label1.Text = "Weapon selector";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(753, 159);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(168, 30);
-            label2.TabIndex = 9;
-            label2.Text = "Weapon selector";
-            // 
-            // cmb_EnemyWeaponSelector
-            // 
-            cmb_EnemyWeaponSelector.FormattingEnabled = true;
-            cmb_EnemyWeaponSelector.Location = new System.Drawing.Point(753, 201);
-            cmb_EnemyWeaponSelector.Name = "cmb_EnemyWeaponSelector";
-            cmb_EnemyWeaponSelector.Size = new System.Drawing.Size(212, 38);
-            cmb_EnemyWeaponSelector.TabIndex = 10;
-            cmb_EnemyWeaponSelector.SelectedIndexChanged += cmb_EnemyWeaponSelector_SelectedIndexChanged;
+            
             // 
             // Form2
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1212, 768);
-            Controls.Add(cmb_EnemyWeaponSelector);
+            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1212, 768);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(cmb_WeaponSelector);
@@ -175,6 +157,6 @@
         private System.Windows.Forms.ComboBox cmb_WeaponSelector;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmb_EnemyWeaponSelector;
+        
     }
 }
