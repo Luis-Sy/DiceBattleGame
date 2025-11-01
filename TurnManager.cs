@@ -54,40 +54,54 @@ namespace DiceBattleGame
 
             Log($"Player rolled {playerRoll}, enemy rolled {enemyRoll}");
 
-            if (playerRoll > enemyRoll)
-            {
-                playerTurn = true;
-                Console.WriteLine("Player goes first");
-            }
-            else
-            {
-                playerTurn = false;
-                Console.WriteLine("Enemy goes first");
-            }
-
-            //whoever starts gets to attack immediatly
+            playerTurn = playerRoll > enemyRoll;
             if (playerTurn)
             {
-                int damage = player.attack();
-                string dmgType = player.GetWeaponType();
-                Log($"Player {player.GetName()} attacks for {damage} damage");
-                enemy.takeDamage(damage, dmgType);
-                shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
-                Log($"Enemy {enemy.GetName()} Health is now: {shownHP}");
-                //after attack switch turn
-                playerTurn = false;
+                Log($"Player {player.GetName()} goes first, against enemy {enemy.GetName()}.");
+                PerformAttack(player, enemy);
+                playerTurn = false; 
             }
             else
             {
-                int damage = enemy.attack();
-                string dmgType = enemy.GetWeaponType();
-                Log($"Enemy {enemy.GetName()} attacks for {damage} damage");
-                player.takeDamage(damage, dmgType);
-                shownHP = Math.Max(0, player.getHealth());//to not show negative health
-                Log($"Player {player.GetName()} Health is now: {shownHP}");
-
+                Log($"Enemy {enemy.GetName()} goes first, against player {player.GetName()}.");
+                PerformAttack(enemy, player);
                 playerTurn = true;
             }
+
+            //if (playerRoll > enemyRoll)
+            //{
+            //    playerTurn = true;
+            //    Console.WriteLine("Player goes first");
+            //}
+            //else
+            //{
+            //    playerTurn = false;
+            //    Console.WriteLine("Enemy goes first");
+            //}
+
+            ////whoever starts gets to attack immediatly
+            //if (playerTurn)
+            //{
+            //    int damage = player.attack();
+            //    string dmgType = player.GetWeaponType();
+            //    Log($"Player {player.GetName()} attacks for {damage} damage");
+            //    enemy.takeDamage(damage, dmgType);
+            //    shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
+            //    Log($"Enemy {enemy.GetName()} Health is now: {shownHP}");
+            //    //after attack switch turn
+            //    playerTurn = false;
+            //}
+            //else
+            //{
+            //    int damage = enemy.attack();
+            //    string dmgType = enemy.GetWeaponType();
+            //    Log($"Enemy {enemy.GetName()} attacks for {damage} damage");
+            //    player.takeDamage(damage, dmgType);
+            //    shownHP = Math.Max(0, player.getHealth());//to not show negative health
+            //    Log($"Player {player.GetName()} Health is now: {shownHP}");
+
+            //    playerTurn = true;
+            //}
         }
 
         //this method runs each new turn-- so player attacks if its their turn or enemy 
@@ -98,41 +112,88 @@ namespace DiceBattleGame
             //player turn attacks 
             if (playerTurn)
             {
-                int damage = player.attack();
-                string dmgType = player.GetWeaponType();
-                Log($"Player {player.GetName()} attacks for {damage} damage");
-                enemy.takeDamage(damage, dmgType);
-                shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
-                Log($"Enemy {enemy.GetName()} Health is now: {shownHP}");
-
-                //check if the health is 0:
+                PerformAttack(player, enemy);
                 if (enemy.getHealth() <= 0)
                 {
-                    Log("Enemy has been defeated");
+                    Log($"Enemy {enemy.GetName()} has been defeated");
                     battleOver = true;
                     return;
                 }
-                //If not, turn finished
                 playerTurn = false;
             }
             else
             {
-                int damage = enemy.attack();
-                string dmgType = enemy.GetWeaponType();
-                Log($"Enemy {enemy.GetName()} attacks for {damage} damage");
-                player.takeDamage(damage,dmgType);
-                shownHP = Math.Max(0, player.getHealth());//to not show negative health
-                Log($"Player {player.GetName()} Health is now: {shownHP}");
-
+                PerformAttack(enemy, player);
                 if (player.getHealth() <= 0)
                 {
-                    Log("Player has been defeated");
+                    Log($"Player {player.GetName()} has been defeated");
                     battleOver = true;
                     return;
                 }
-                //if not player turn
                 playerTurn = true;
 
+            }
+
+            //if (playerTurn)
+            //{
+            //    int damage = player.attack();
+            //    string dmgType = player.GetWeaponType();
+            //    Log($"Player {player.GetName()} attacks for {damage} damage");
+            //    enemy.takeDamage(damage, dmgType);
+            //    shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
+            //    Log($"Enemy {enemy.GetName()} Health is now: {shownHP}");
+
+            //    //check if the health is 0:
+            //    if (enemy.getHealth() <= 0)
+            //    {
+            //        Log("Enemy has been defeated");
+            //        battleOver = true;
+            //        return;
+            //    }
+            //    //If not, turn finished
+            //    playerTurn = false;
+            //}
+            //else
+            //{
+            //    int damage = enemy.attack();
+            //    string dmgType = enemy.GetWeaponType();
+            //    Log($"Enemy {enemy.GetName()} attacks for {damage} damage");
+            //    player.takeDamage(damage,dmgType);
+            //    shownHP = Math.Max(0, player.getHealth());//to not show negative health
+            //    Log($"Player {player.GetName()} Health is now: {shownHP}");
+
+            //    if (player.getHealth() <= 0)
+            //    {
+            //        Log("Player has been defeated");
+            //        battleOver = true;
+            //        return;
+            //    }
+            //    //if not player turn
+            //    playerTurn = true;
+
+            //}
+        }
+
+        private void PerformAttack(Character attacker, Character defender)
+        {
+            D20 d20 = new D20();
+            int roll = d20.Roll();
+            int ac = defender.getArmoclass();
+            string attackerName = attacker.GetName();
+            string deffenderName = defender.GetName();
+
+            if (roll >= ac)
+            {
+                int damage = attacker.attack();
+                string dmgType = attacker.GetWeaponType();
+                Log($"{attackerName} hits {deffenderName} for {damage} damage! (roll {roll} vs AC{ac});");
+                defender.takeDamage(damage, dmgType);
+                shownHP = Math.Max(0, defender.getHealth());
+                Log($"{deffenderName}'s health is now: {shownHP}");
+            }
+            else
+            {
+                Log($"{attackerName} missed! (Roll{roll} vs AC{ac})");
             }
         }
     }

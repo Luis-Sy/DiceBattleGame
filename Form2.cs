@@ -38,7 +38,6 @@ namespace DiceBattleGame
             //set default "placeholders" for the dropdowns
             cmb_PlayerSelector.SelectedIndex = 0;
             cmb_EnemySelector.SelectedIndex = 0;
-            cmb_EnemyWeaponSelector.SelectedIndex = 0;
             cmb_WeaponSelector.SelectedIndex = 0;
         }
 
@@ -49,16 +48,47 @@ namespace DiceBattleGame
             playerOptions = new List<Character>
             {
                 new Knight(),
-                new Duelist()
+                new Duelist(),
+                new Paladin(),
+                new Cleric(),
+                new Ranger(),
+                new Berserker(),
+                new Monk(),
+                new Assassin(),
+                new Heretic(),
+                new Deprived(),
+                new Tourist(),
+                new Warden(),
+                new Instructor(),
+                new Awakened(),
+                new Samurai(),
+                new FallenNoble()
             };
 
             // add here more characters for the enemy in the future
             enemyOptions = new List<Character>
             {
+                // Standard enemies
                 new Goblin(),
                 new HoboGoblin(),
+                new Slime(),
                 new Bandit(),
-                new Skeleton()
+                new Mercenary(),
+                new Orc(),
+                new Skeleton(),
+                new Zombie(),
+
+                // Elite enemies
+                new Cultist(),
+                new CultistLeader(),
+                new MadWarrior(),
+                new MadCommander(),
+                new Lich(),
+                new Mimic(),
+                new Werewolf(),
+                new Vampire(),
+                new WanderingSwordsman(),
+                new ElderFragment()
             };
 
             //popilate dropdowns with character names
@@ -85,15 +115,11 @@ namespace DiceBattleGame
         private void PopulateSelectorsWeapons()
         {
             cmb_WeaponSelector.Items.Clear();
-            foreach(var name in playerWeapons.GetWeaponNames())
+            foreach (var name in playerWeapons.GetWeaponNames())
             {
                 cmb_WeaponSelector.Items.Add(name);
             }
-            cmb_EnemyWeaponSelector.Items.Clear();
-            foreach(var name in enemyWeapons.GetWeaponNames())
-            {
-                cmb_EnemyWeaponSelector.Items.Add(name);
-            }
+            
         }
 
         private Character BuildPlayerFromUI()
@@ -127,20 +153,11 @@ namespace DiceBattleGame
                 playerWeapons.SelectByIndex(cmb_WeaponSelector.SelectedIndex);
                 var chosen = playerWeapons.GetCurrentWeapon();
                 selectedPlayer.Equip(chosen);
-                
+
 
             }
 
-            if(cmb_EnemyWeaponSelector.SelectedIndex >= 0)
-            {
-                enemyWeapons.SelectByIndex(cmb_EnemyWeaponSelector.SelectedIndex);
-                var enemyChosen = enemyWeapons.GetCurrentWeapon();
-                selectedEnemy.Equip(enemyChosen);
-                
-            }
-
-
-
+          
             //Start battle
             tm = new TurnManager();
             tm.SetOutputBox(txt_TextBox);
@@ -161,9 +178,8 @@ namespace DiceBattleGame
 
         }
 
-        private void cmb_EnemyWeaponSelector_SelectedIndexChanged(object sender, EventArgs e)
-        {
+       
 
-        }
+        
     }
 }
