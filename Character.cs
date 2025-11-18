@@ -1,4 +1,3 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,9 @@ namespace DiceBattleGame
     {
         // make these protected so derived classes set them instead of hiding them
         protected int health;
+        // armor class is the value an attack roll must meet or exceed to hit the character
         protected int armorClass;
+        // resistances are multipliers to incoming damage (higher means more damage received from that type)
         protected double slashRes;
         protected double pierceRes;
         protected double bluntRes;
@@ -22,17 +23,11 @@ namespace DiceBattleGame
 
         protected Weapon? weapon;
 
-        //to get the player or enemy character in turn manager
-        public virtual string GetName()
-        {
-            return this.GetType().Name;
-        }
-
         public int attack()
         {
             if (weapon != null)
             {
-                return weapon.Attack();
+                return weapon.Attack(); // roll weapon's damage dice
             }
             else
             {
@@ -48,11 +43,11 @@ namespace DiceBattleGame
             {
                 finalDamage = (int)Math.Ceiling(amount * slashRes);
             }
-            else if (type.ToLower() == "pierce")
+            if (type.ToLower() == "pierce")
             {
                 finalDamage = (int)Math.Ceiling(amount * pierceRes);
             }
-            else if (type.ToLower() == "blunt")
+            if (type.ToLower() == "blunt")
             {
                 finalDamage = (int)Math.Ceiling(amount * bluntRes);
             }
@@ -64,30 +59,7 @@ namespace DiceBattleGame
         {
             return this.health;
         }
-
-        //alows the character to change weapons dynamically
-        public void Equip(Weapon newWeapon)
-        {
-            weapon = newWeapon;
-        }
-        //returns the current weapon name 
-        public string CurrentWeaponName()
-        {
-            return weapon != null ? weapon.GetName() : "(none)";
-        }
-        //
-        public string GetWeaponType()
-        {
-            if(weapon != null)
-            {
-                return weapon.GetDamageType();
-            }
-            else 
-            {
-                return "-";
-
-            }
-        }
+        
         public int getArmoclass()
         {
             return this.armorClass;
@@ -105,8 +77,13 @@ namespace DiceBattleGame
         }
     }
 
-
-
+    /// <summary>
+    /// TODO FOR FINAL:
+    /// -Add unique abilities to each class (both player and enemy)
+    /// -Add stat scaling to weapons and character stats
+    /// -Add elemental damage types and resistances(?)
+    /// -separate each category of character into their own files for organization
+    /// </summary>
 
     // player classes
     internal class Knight : Character
@@ -118,7 +95,7 @@ namespace DiceBattleGame
             name = "Knight";
             type = "Player";
             slashRes = 1.0;
-            pierceRes = 0.5;
+            pierceRes = 0.5;                                            
             bluntRes = 2.0;
             weapon = new Sword();
         }
@@ -349,11 +326,7 @@ namespace DiceBattleGame
         }
     }
 
-
-    // enemies (no weapons yet)
-
-
-    // enemies(uses custom weapons)
+    // enemies (uses custom weapons)
 
     // standard enemies
     internal class Goblin : Character
@@ -523,7 +496,7 @@ namespace DiceBattleGame
         }
     }
 
-    internal class MadCommander : Character
+    internal class MadCommander :Character
     {
         public MadCommander()
         {
@@ -625,6 +598,415 @@ namespace DiceBattleGame
             pierceRes = 1.0;
             bluntRes = 2.0;
             weapon = new Custom("Crystal Spike", "Elder Crystal Spike", "Pierce", new diceBag(11, 2));
+        }
+    }
+
+    // twisted elite enemies (enemies based on the playable classes, but with major differences)
+
+    internal class FallenKnight : Character
+    {
+        public FallenKnight()
+        {
+            health = 40;
+            armorClass = 16;
+            name = "Fallen Knight";
+            type = "Elite Enemy";
+            slashRes = 1.0;
+            pierceRes = 1.5;
+            bluntRes = 1.0;
+            weapon = new Custom("Cursed Sword", "Sword of the Damned", "Slash", new D10());
+        }
+    }
+
+    internal class ShadowDuelist : Character
+    {
+        public ShadowDuelist()
+        {
+            health = 30;
+            armorClass = 14;
+            name = "Shadow Duelist";
+            type = "Elite Enemy";
+            slashRes = 1.5;
+            pierceRes = 1.0;
+            bluntRes = 1.5;
+            weapon = new Custom("Shadow Rapier", "Rapier of Shadows", "Pierce", new D10());
+        }
+    }
+
+    internal class CorruptedPaladin : Character
+    {
+        public CorruptedPaladin()
+        {
+            health = 50;
+            armorClass = 16;
+            name = "Corrupted Paladin";
+            type = "Elite Enemy";
+            slashRes = 1.5;
+            pierceRes = 1.5;
+            bluntRes = 1.0;
+            weapon = new Custom("Dark Hammer", "Hammer of Corruption", "Blunt", new D12());
+        }
+    }
+
+    internal class PhantomRanger : Character
+    {
+        public PhantomRanger()
+        {
+            health = 30;
+            armorClass = 13;
+            name = "Phantom Ranger";
+            type = "Elite Enemy";
+            slashRes = 1.5;
+            pierceRes = 1.5;
+            bluntRes = 1.5;
+            weapon = new Custom("Ethereal Bow", "Bow of Phantoms", "Pierce", new diceBag(5, 4));
+        }
+    }
+
+    internal class SavageBerserker : Character
+    {
+        public SavageBerserker()
+        {
+            health = 45;
+            armorClass = 15;
+            name = "Savage Berserker";
+            type = "Elite Enemy";
+            slashRes = 1.0;
+            pierceRes = 2.0;
+            bluntRes = 1.0;
+            weapon = new Custom("Savage Axe", "Axe of the Savage", "Slash", new D12());
+        }
+    }
+
+    internal class ShadowMonk : Character
+    {
+        public ShadowMonk()
+        {
+            health = 28;
+            armorClass = 12;
+            name = "Shadow Monk";
+            type = "Elite Enemy";
+            slashRes = 1.0;
+            pierceRes = 1.0;
+            bluntRes = 1.0;
+            weapon = new Custom("Shadow Fists", "Fists of the Shadow", "Blunt", new diceBag(7, 3));
+        }
+    }
+
+    internal class NightstalkerAssassin : Character
+    {
+        public NightstalkerAssassin()
+        {
+            health = 25;
+            armorClass = 13;
+            name = "Nightstalker Assassin";
+            type = "Elite Enemy";
+            slashRes = 2.0;
+            pierceRes = 0.5;
+            bluntRes = 1.0;
+            weapon = new Custom("Shadow Daggers", "Daggers of the Night", "Pierce", new diceBag(9, 2));
+        }
+    }
+
+    internal class BlightedHeretic : Character
+    {
+        public BlightedHeretic()
+        {
+            health = 35;
+            armorClass = 14;
+            name = "Blighted Heretic";
+            type = "Elite Enemy";
+            slashRes = 1.0;
+            pierceRes = 2.0;
+            bluntRes = 1.0;
+            weapon = new Custom("Blighted Scythe", "Scythe of the Blight", "Slash", new diceBag(9, 2));
+        }
+    }
+
+    internal class LoathsomeDeprived : Character
+    {
+        public LoathsomeDeprived()
+        {
+            health = 50;
+            armorClass = 10;
+            name = "Loathsome Deprived";
+            type = "Elite Enemy";
+            slashRes = 1.5;
+            pierceRes = 1.5;
+            bluntRes = 1.5;
+            weapon = new Custom("Spiked Club", "Club of the Loathsome", "Blunt", new D10());
+        }
+    }
+
+    internal class CursedTourist : Character
+    {
+        public CursedTourist()
+        {
+            health = 20;
+            armorClass = 14;
+            name = "Cursed Tourist";
+            type = "Elite Enemy";
+            slashRes = 1.5;
+            pierceRes = 1.5;
+            bluntRes = 1.5;
+            weapon = new Custom("Cursed Camera", "Camera of Misfortune", "Blunt", new D10());
+        }
+    }
+
+    internal class CorruptedWarden : Character
+    {
+        public CorruptedWarden()
+        {
+            health = 40;
+            armorClass = 16;
+            name = "Corrupted Warden";
+            type = "Elite Enemy";
+            slashRes = 1.0;
+            pierceRes = 1.5;
+            bluntRes = 1.0;
+            weapon = new Custom("Corrupted Flail", "Flail of Corruption", "Blunt", new D12());
+        }
+    }
+
+    internal class SlaveDriverInstructor : Character
+    {
+        public SlaveDriverInstructor()
+        {
+            health = 45;
+            armorClass = 15;
+            name = "Slave Driver Instructor";
+            type = "Elite Enemy";
+            slashRes = 1.5;
+            pierceRes = 1.0;
+            bluntRes = 1.5;
+            weapon = new Custom("Whip of Pain", "Whip of Endless Pain", "Slash", new diceBag(9, 2));
+        }
+    }
+
+    internal class AvariciousNoble : Character
+    {
+        public AvariciousNoble()
+        {
+            health = 38;
+            armorClass = 15;
+            name = "Avaricious Noble";
+            type = "Elite Enemy";
+            slashRes = 1.25;
+            pierceRes = 1.25;
+            bluntRes = 1.25;
+            weapon = new Custom("Jeweled Rapier", "Rapier of Avarice", "Pierce", new D10());
+        }
+    }
+
+    internal class TrueAwakened : Character
+    {
+        public TrueAwakened()
+        {
+            health = 35;
+            armorClass = 13;
+            name = "True Awakened";
+            type = "Elite Enemy";
+            slashRes = 1.0;
+            pierceRes = 1.0;
+            bluntRes = 1.0;
+            weapon = new Custom("Staff of Truth", "Staff of True Awakening", "Blunt", new diceBag(9, 3));
+        }
+    }
+
+    // boss enemies
+
+    internal class Dragon : Character
+    {
+        public Dragon()
+        {
+            health = 100;
+            armorClass = 15;
+            name = "Dragon";
+            type = "Boss Enemy";
+            slashRes = 1.0;
+            pierceRes = 2.0;
+            bluntRes = 0.75;
+            weapon = new Custom("Fire Breath", "Inferno", "Blunt", new diceBag(11, 3));
+        }
+    }
+
+    internal class DemonLord : Character
+    {
+        public DemonLord()
+        {
+            health = 120;
+            armorClass = 15;
+            name = "Demon Lord";
+            type = "Boss Enemy";
+            slashRes = 2.0;
+            pierceRes = 1.25;
+            bluntRes = 1.25;
+            weapon = new Custom("Hellfire Sword", "Demon's Blade", "Slash", new D20());
+        }
+    }
+
+    internal class LichKing : Character
+    {
+        public LichKing()
+        {
+            health = 110;
+            armorClass = 15;
+            name = "Lich King";
+            type = "Boss Enemy";
+            slashRes = 1.0;
+            pierceRes = 1.5;
+            bluntRes = 2.0;
+            weapon = new Custom("Frost Staff", "Staff of the Frozen Dead", "Blunt", new diceBag(11, 3));
+        }
+    }
+
+    internal class DarkAvatar : Character
+    {
+        public DarkAvatar()
+        {
+            health = 150;
+            armorClass = 10;
+            name = "Dark Avatar";
+            type = "Boss Enemy";
+            slashRes = 2.0;
+            pierceRes = 2.0;
+            bluntRes = 2.0;
+            weapon = new Custom("Shadow Claws", "Claws of the Abyss", "Slash", new D20());
+        }
+    }
+
+    internal class ElderGod : Character
+    {
+        public ElderGod()
+        {
+            health = 150;
+            armorClass = 14;
+            name = "Elder God";
+            type = "Boss Enemy";
+            slashRes = 1.0;
+            pierceRes = 1.0;
+            bluntRes = 1.0;
+            weapon = new Custom("Cosmic Wrath", "Elder God's Wrath", "Blunt", new diceBag(13, 3));
+        }
+    }
+
+    internal class TheMalformed : Character
+    {
+        public TheMalformed()
+        {
+            health = 250;
+            armorClass = 10;
+            name = "The Malformed";
+            type = "Boss Enemy";
+            slashRes = 2.0;
+            pierceRes = 2.0;
+            bluntRes = 2.0;
+            weapon = new Custom("Reality Shred", "Shredder of Realities", "Slash", new D20());
+        }
+    }
+
+    internal class AvatarOfWrath : Character
+    {
+        public AvatarOfWrath()
+        {
+            health = 200;
+            armorClass = 12;
+            name = "Avatar of Wrath";
+            type = "Boss Enemy";
+            slashRes = 2.0;
+            pierceRes = 2.0;
+            bluntRes = 1.0;
+            weapon = new Custom("Wrathful Strike", "Strike of Ultimate Wrath", "Blunt", new diceBag(13, 2));
+        }
+    }
+
+    internal class AvatarOfGluttony : Character
+    {
+        public AvatarOfGluttony()
+        {
+            health = 200;
+            armorClass = 13;
+            name = "Avatar of Gluttony";
+            type = "Boss Enemy";
+            slashRes = 2.0;
+            pierceRes = 1.5;
+            bluntRes = 2.0;
+            weapon = new Custom("Devouring Slash", "Slash of Endless Hunger", "Slash", new diceBag(5, 6));
+        }
+    }
+
+    internal class AvatarOfSloth : Character
+    {
+        public AvatarOfSloth()
+        {
+            health = 400;
+            armorClass = 10;
+            name = "Avatar of Sloth";
+            type = "Boss Enemy";
+            slashRes = 2.0;
+            pierceRes = 2.0;
+            bluntRes = 2.0;
+            weapon = new Custom("Lethargic Pierce", "Pierce of Eternal Laziness", "Pierce", new D20());
+        }
+    }
+
+    internal class AvatarOfPride : Character
+    {
+        public AvatarOfPride()
+        {
+            health = 150;
+            armorClass = 16;
+            name = "Avatar of Pride";
+            type = "Boss Enemy";
+            slashRes = 2.0;
+            pierceRes = 2.0;
+            bluntRes = 2.0;
+            weapon = new Custom("Haughty Blow", "Blow of Supreme Arrogance", "Blunt", new D20());
+        }
+    }
+
+    internal class AvatarOfEnvy : Character
+    {
+        public AvatarOfEnvy()
+        {
+            health = 200;
+            armorClass = 12;
+            name = "Avatar of Envy";
+            type = "Boss Enemy";
+            slashRes = 2.0;
+            pierceRes = 2.0;
+            bluntRes = 2.0;
+            weapon = new Custom("Covetous Strike", "Strike of Jealous Desire", "Slash", new diceBag(7, 3));
+        }
+    }
+
+    internal class AvatarOfLust : Character
+    {
+        public AvatarOfLust()
+        {
+            health = 180;
+            armorClass = 14;
+            name = "Avatar of Lust";
+            type = "Boss Enemy";
+            slashRes = 1.5;
+            pierceRes = 1.0;
+            bluntRes = 1.5;
+            weapon = new Custom("Alluring Thrust", "Thrust of Irresistible Desire", "Pierce", new diceBag(9, 3));
+        }
+    }
+    
+    internal class AvatarOfAvarice : Character
+    {
+        public AvatarOfAvarice()
+        {
+            health = 220;
+            armorClass = 13;
+            name = "Avatar of Avarice";
+            type = "Boss Enemy";
+            slashRes = 2.0;
+            pierceRes = 1.5;
+            bluntRes = 2.0;
+            weapon = new Custom("Greedy Slash", "Slash of Insatiable Greed", "Slash", new diceBag(9, 3));
         }
     }
 

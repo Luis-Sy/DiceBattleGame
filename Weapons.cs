@@ -6,12 +6,26 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame
 {
+    //==============================================================================ABSTRACT
     internal abstract class Weapon
     {
         protected string weaponType = "Weapon";
         protected string weaponName = "Weapon";
 
         protected string damageType = "Damage";
+
+        public Weapon()
+        {
+            weaponType = string.Empty;
+            weaponName = string.Empty;
+            damageType = string.Empty;
+        }
+        public Weapon(string weaponType, string weaponName, string damageType)
+        {
+            this.weaponType = weaponType;
+            this.weaponName = weaponName;
+            this.damageType = damageType;
+        }
 
         public Weapon()
         {
@@ -49,21 +63,31 @@ namespace DiceBattleGame
             damageType = type;
         }
 
-    }
+        public string GetWeaponType()
+        {
+            return weaponType;
+        }
 
+        public string getDamageType()
+        {
+            return damageType;
+        }
+
+    }
+    //=================================================================================DEBUG
     internal class Debug : Weapon //This is a weapon for debuggin purposes. Mess with this to if you want to play around before commmiting any changes
     {
         Dice die;
 
         public Debug() : base()
         {
-            die = new D20();
-            weaponType = "Debug";
-            weaponName = "debugging tool";
+        die = new D20();
+        weaponType = "Debug";
+        weaponName = "debugging tool";
 
-            damageType = "ouchy";
-        }
-
+        damageType = "ouchy";
+        }   
+        
         public Debug(string weaponType, string weaponName, string damageType)
         {
             die = new D4();
@@ -78,8 +102,7 @@ namespace DiceBattleGame
             return die.Roll();
         }
     }
-
-    //=================================================================================WEAPONS=================
+     //=================================================================================WEAPONS=================
     internal class Sword : Weapon
     {
         Dice die;
@@ -127,7 +150,7 @@ namespace DiceBattleGame
             return die.Roll();
         }
     }
-    //============================================================CUSTOM WEAPONS======================================
+//============================================================CUSTOM WEAPONS======================================
     internal class Custom : Weapon
     {
         //To use this constructor in forms 1, you must use static objects. examples below

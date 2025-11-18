@@ -37,7 +37,7 @@ namespace DiceBattleGame
         public override int Roll()
         {
             int sum = 0;
-            for (int i = 0; i < this.amount; i++)
+            for(int i = 0; i < this.amount; i++)
             {
                 sum += this.roll.Next(1, this.sides);
             }
