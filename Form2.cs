@@ -167,7 +167,7 @@ namespace DiceBattleGame
 
             // Bind status bars to health values of characters (they start at Max health)
             statusBar1.maxValue = selectedPlayer.getHealth();
-            statusBar1.currentValue = selectedEnemy.getHealth();
+            statusBar1.maxValue = selectedEnemy.getHealth();
 
             tm.StartBattle(selectedPlayer, selectedEnemy);
         }
