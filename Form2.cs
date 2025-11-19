@@ -177,6 +177,8 @@ namespace DiceBattleGame
             if (tm != null)
             {
                 tm.NextTurn();
+                statusBar1.UpdateValue(-1f);
+                statusBar2.UpdateValue(-1f);
             }
         }
 
