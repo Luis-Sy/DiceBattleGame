@@ -55,6 +55,11 @@ namespace DiceBattleGame
             health -= finalDamage;
         }
 
+        public string getName()
+        {
+            return this.name;
+        }
+
         public int getHealth()
         {
             return this.health;
@@ -68,6 +73,23 @@ namespace DiceBattleGame
         public Weapon? getWeapon()
         {
             return this.weapon;
+        }
+
+        public string getWeaponType()
+        {
+             if (weapon != null)
+            {
+                return weapon.GetDamageType();
+            }
+            else
+            {
+                return "None";
+            }
+        }
+
+        public void equip(Weapon weapon)
+        {
+            this.weapon = weapon;
         }
 
         public int attackRoll()

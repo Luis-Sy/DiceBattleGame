@@ -39,7 +39,10 @@ namespace DiceBattleGame
             cmb_PlayerSelector.SelectedIndex = 0;
             cmb_EnemySelector.SelectedIndex = 0;
             cmb_WeaponSelector.SelectedIndex = 0;
+            
         }
+
+        
 
         //add all available characters to player and enemy selectors
         private void PopulateSelectorsCharacters()
@@ -95,14 +98,14 @@ namespace DiceBattleGame
             cmb_PlayerSelector.Items.Clear();
             foreach (var c in playerOptions)
             {
-                cmb_PlayerSelector.Items.Add(c.GetName());
+                cmb_PlayerSelector.Items.Add(c.getName());
 
             }
 
             cmb_EnemySelector.Items.Clear();
             foreach (var e in enemyOptions)
             {
-                cmb_EnemySelector.Items.Add(e.GetName());
+                cmb_EnemySelector.Items.Add(e.getName());
             }
 
             //defaults selections
@@ -152,7 +155,7 @@ namespace DiceBattleGame
             {
                 playerWeapons.SelectByIndex(cmb_WeaponSelector.SelectedIndex);
                 var chosen = playerWeapons.GetCurrentWeapon();
-                selectedPlayer.Equip(chosen);
+                selectedPlayer.equip(chosen);
 
 
             }
@@ -161,6 +164,10 @@ namespace DiceBattleGame
             //Start battle
             tm = new TurnManager();
             tm.SetOutputBox(txt_TextBox);
+
+            // Bind status bars to health values of characters (they start at Max health)
+            statusBar1.maxValue = selectedPlayer.getHealth();
+            statusBar1.currentValue = selectedEnemy.getHealth();
 
             tm.StartBattle(selectedPlayer, selectedEnemy);
         }

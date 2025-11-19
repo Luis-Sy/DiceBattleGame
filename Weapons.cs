@@ -26,19 +26,6 @@ namespace DiceBattleGame
             this.weaponName = weaponName;
             this.damageType = damageType;
         }
-
-        public Weapon()
-        {
-            weaponType = string.Empty;
-            weaponName = string.Empty;
-            damageType = string.Empty;
-        }
-        public Weapon(string weaponType, string weaponName, string damageType)
-        {
-            this.weaponType = weaponType;
-            this.weaponName = weaponName;
-            this.damageType = damageType;
-        }
         public virtual int Attack()
         {
             int damage = 0;
