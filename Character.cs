@@ -11,6 +11,7 @@ namespace DiceBattleGame
     {
         // make these protected so derived classes set them instead of hiding them
         protected int health;
+        protected int defaultHealth; // This stores the original hp for the character, this will need to be changed to account for longer gameplay. - Junaid
         // armor class is the value an attack roll must meet or exceed to hit the character
         protected int armorClass;
         // resistances are multipliers to incoming damage (higher means more damage received from that type)
@@ -97,6 +98,17 @@ namespace DiceBattleGame
             Dice dice = new D20();
             return dice.Roll();
         }
+
+        public void setHealth() //This allows us to directly restore the health of a character back its default - Junaid
+        {
+            this.health = this.defaultHealth;
+        }
+
+        public int defaultHp() //I messed up and forgot the names of variables, this menthod is extra but gets the job done. sends the full hp of character to the statusbar when setting its intial width
+        {
+            int r = this.defaultHealth;
+            return r;
+        }
     }
 
     /// <summary>
@@ -112,6 +124,7 @@ namespace DiceBattleGame
     {
         public Knight()
         {
+            defaultHealth = 15; //during combat the characters hp will fall but be unable to revert to its original value, this value fixes this problem. this needs to be readonly but I forgor - Junaid
             health = 15;
             armorClass = 15;
             name = "Knight";
@@ -127,6 +140,7 @@ namespace DiceBattleGame
     {
         public Duelist()
         {
+            defaultHealth = 12;
             health = 12;
             armorClass = 12;
             name = "Duelist";
@@ -142,6 +156,7 @@ namespace DiceBattleGame
     {
         public Paladin()
         {
+            defaultHealth = 25;
             health = 25;
             armorClass = 18;
             name = "Paladin";
@@ -157,6 +172,7 @@ namespace DiceBattleGame
     {
         public Cleric()
         {
+            defaultHealth = 20;
             health = 20;
             armorClass = 14;
             name = "Cleric";
@@ -172,6 +188,7 @@ namespace DiceBattleGame
     {
         public Ranger()
         {
+            defaultHealth = 12;
             health = 12;
             armorClass = 13;
             name = "Ranger";
@@ -187,6 +204,7 @@ namespace DiceBattleGame
     {
         public Berserker()
         {
+            defaultHealth = 18;
             health = 18;
             armorClass = 14;
             name = "Berserker";
@@ -202,6 +220,7 @@ namespace DiceBattleGame
     {
         public Monk()
         {
+            defaultHealth = 14;
             health = 14;
             armorClass = 12;
             name = "Monk";
@@ -217,6 +236,7 @@ namespace DiceBattleGame
     {
         public Assassin()
         {
+            defaultHealth = 10;
             health = 10;
             armorClass = 12;
             name = "Assassin";
@@ -232,6 +252,7 @@ namespace DiceBattleGame
     {
         public Heretic()
         {
+            defaultHealth = 16;
             health = 16;
             armorClass = 13;
             name = "Heretic";
@@ -247,6 +268,7 @@ namespace DiceBattleGame
     {
         public Deprived()
         {
+            defaultHealth = 20;
             health = 20;
             armorClass = 10;
             name = "Deprived";
@@ -262,6 +284,7 @@ namespace DiceBattleGame
     {
         public Tourist()
         {
+            defaultHealth = 8;
             health = 8;
             armorClass = 14;
             name = "Tourist";
@@ -277,6 +300,7 @@ namespace DiceBattleGame
     {
         public Warden()
         {
+            defaultHealth = 16;
             health = 16;
             armorClass = 16;
             name = "Warden";
@@ -292,6 +316,7 @@ namespace DiceBattleGame
     {
         public Instructor()
         {
+            defaultHealth = 18;
             health = 18;
             armorClass = 14;
             name = "Instructor";
@@ -307,6 +332,7 @@ namespace DiceBattleGame
     {
         public Awakened()
         {
+            defaultHealth = 14;
             health = 14;
             armorClass = 12;
             name = "Awakened";
@@ -322,6 +348,7 @@ namespace DiceBattleGame
     {
         public Samurai()
         {
+            defaultHealth = 15;
             health = 15;
             armorClass = 17;
             name = "Samurai";
@@ -337,6 +364,7 @@ namespace DiceBattleGame
     {
         public FallenNoble()
         {
+            defaultHealth = 18;
             health = 18;
             armorClass = 15;
             name = "Fallen Noble";
@@ -355,6 +383,7 @@ namespace DiceBattleGame
     {
         public Goblin()
         {
+            defaultHealth = 10;
             health = 10;
             armorClass = 10;
             name = "Goblin";
@@ -370,6 +399,7 @@ namespace DiceBattleGame
     {
         public HoboGoblin()
         {
+            defaultHealth = 20;
             health = 20;
             armorClass = 14;
             name = "HoboGoblin";
@@ -385,6 +415,7 @@ namespace DiceBattleGame
     {
         public Slime()
         {
+            defaultHealth = 12;
             health = 12;
             armorClass = 8;
             name = "Slime";
@@ -400,6 +431,7 @@ namespace DiceBattleGame
     {
         public Bandit()
         {
+            defaultHealth = 15;
             health = 15;
             armorClass = 12;
             name = "Bandit";
@@ -415,6 +447,7 @@ namespace DiceBattleGame
     {
         public Mercenary()
         {
+            defaultHealth = 20;
             health = 20;
             armorClass = 15;
             name = "Mercenary";
@@ -430,6 +463,7 @@ namespace DiceBattleGame
     {
         public Orc()
         {
+            defaultHealth = 25;
             health = 25;
             armorClass = 16;
             name = "Orc";
@@ -445,6 +479,7 @@ namespace DiceBattleGame
     {
         public Skeleton()
         {
+            defaultHealth = 15;
             health = 15;
             armorClass = 12;
             name = "Skeleton";
@@ -460,6 +495,7 @@ namespace DiceBattleGame
     {
         public Zombie()
         {
+            defaultHealth = 30;
             health = 30;
             armorClass = 8;
             name = "Zombie";
@@ -477,6 +513,7 @@ namespace DiceBattleGame
     {
         public Cultist()
         {
+            defaultHealth = 25;
             health = 25;
             armorClass = 12;
             name = "Cultist";
@@ -492,6 +529,7 @@ namespace DiceBattleGame
     {
         public CultistLeader()
         {
+            defaultHealth = 40;
             health = 40;
             armorClass = 14;
             name = "Cultist Leader";
@@ -507,6 +545,7 @@ namespace DiceBattleGame
     {
         public MadWarrior()
         {
+            defaultHealth = 35;
             health = 35;
             armorClass = 13;
             name = "Mad Warrior";
@@ -522,6 +561,7 @@ namespace DiceBattleGame
     {
         public MadCommander()
         {
+            defaultHealth = 50;
             health = 50;
             armorClass = 14;
             name = "Mad Commander";
@@ -537,6 +577,7 @@ namespace DiceBattleGame
     {
         public Lich()
         {
+            defaultHealth = 45;
             health = 45;
             armorClass = 15;
             name = "Lich";
@@ -552,6 +593,7 @@ namespace DiceBattleGame
     {
         public Mimic()
         {
+            defaultHealth = 40;
             health = 40;
             armorClass = 16;
             name = "Mimic";
@@ -567,6 +609,7 @@ namespace DiceBattleGame
     {
         public Werewolf()
         {
+            defaultHealth = 55;
             health = 55;
             armorClass = 15;
             name = "Werewolf";
@@ -582,6 +625,7 @@ namespace DiceBattleGame
     {
         public Vampire()
         {
+            defaultHealth = 50;
             health = 50;
             armorClass = 16;
             name = "Vampire";
@@ -597,6 +641,7 @@ namespace DiceBattleGame
     {
         public WanderingSwordsman()
         {
+            defaultHealth = 45;
             health = 45;
             armorClass = 18;
             name = "Wandering Swordsman";
@@ -612,6 +657,7 @@ namespace DiceBattleGame
     {
         public ElderFragment()
         {
+            defaultHealth = 60;
             health = 60;
             armorClass = 14;
             name = "Elder Fragment";
@@ -629,6 +675,7 @@ namespace DiceBattleGame
     {
         public FallenKnight()
         {
+            defaultHealth = 40;
             health = 40;
             armorClass = 16;
             name = "Fallen Knight";
@@ -644,6 +691,7 @@ namespace DiceBattleGame
     {
         public ShadowDuelist()
         {
+            defaultHealth = 30;
             health = 30;
             armorClass = 14;
             name = "Shadow Duelist";
@@ -659,6 +707,7 @@ namespace DiceBattleGame
     {
         public CorruptedPaladin()
         {
+            defaultHealth = 50;
             health = 50;
             armorClass = 16;
             name = "Corrupted Paladin";
@@ -674,6 +723,7 @@ namespace DiceBattleGame
     {
         public PhantomRanger()
         {
+            defaultHealth = 30;
             health = 30;
             armorClass = 13;
             name = "Phantom Ranger";
@@ -689,6 +739,7 @@ namespace DiceBattleGame
     {
         public SavageBerserker()
         {
+            defaultHealth = 45;
             health = 45;
             armorClass = 15;
             name = "Savage Berserker";
@@ -704,6 +755,7 @@ namespace DiceBattleGame
     {
         public ShadowMonk()
         {
+            defaultHealth = 28;
             health = 28;
             armorClass = 12;
             name = "Shadow Monk";
@@ -719,6 +771,7 @@ namespace DiceBattleGame
     {
         public NightstalkerAssassin()
         {
+            defaultHealth = 25;
             health = 25;
             armorClass = 13;
             name = "Nightstalker Assassin";
@@ -734,6 +787,7 @@ namespace DiceBattleGame
     {
         public BlightedHeretic()
         {
+            defaultHealth = 35;
             health = 35;
             armorClass = 14;
             name = "Blighted Heretic";
@@ -749,6 +803,7 @@ namespace DiceBattleGame
     {
         public LoathsomeDeprived()
         {
+            defaultHealth = 50;
             health = 50;
             armorClass = 10;
             name = "Loathsome Deprived";
@@ -764,6 +819,7 @@ namespace DiceBattleGame
     {
         public CursedTourist()
         {
+            defaultHealth = 20;
             health = 20;
             armorClass = 14;
             name = "Cursed Tourist";
@@ -779,6 +835,7 @@ namespace DiceBattleGame
     {
         public CorruptedWarden()
         {
+            defaultHealth = 40;
             health = 40;
             armorClass = 16;
             name = "Corrupted Warden";
@@ -794,6 +851,7 @@ namespace DiceBattleGame
     {
         public SlaveDriverInstructor()
         {
+            defaultHealth = 45;
             health = 45;
             armorClass = 15;
             name = "Slave Driver Instructor";
@@ -809,6 +867,7 @@ namespace DiceBattleGame
     {
         public AvariciousNoble()
         {
+            defaultHealth = 38;
             health = 38;
             armorClass = 15;
             name = "Avaricious Noble";
@@ -824,6 +883,7 @@ namespace DiceBattleGame
     {
         public TrueAwakened()
         {
+            defaultHealth = 35;
             health = 35;
             armorClass = 13;
             name = "True Awakened";
@@ -841,6 +901,7 @@ namespace DiceBattleGame
     {
         public Dragon()
         {
+            defaultHealth = 100;
             health = 100;
             armorClass = 15;
             name = "Dragon";
@@ -856,6 +917,7 @@ namespace DiceBattleGame
     {
         public DemonLord()
         {
+            defaultHealth = 120;
             health = 120;
             armorClass = 15;
             name = "Demon Lord";
@@ -871,6 +933,7 @@ namespace DiceBattleGame
     {
         public LichKing()
         {
+            defaultHealth = 110;
             health = 110;
             armorClass = 15;
             name = "Lich King";
@@ -886,6 +949,7 @@ namespace DiceBattleGame
     {
         public DarkAvatar()
         {
+            defaultHealth = 150;
             health = 150;
             armorClass = 10;
             name = "Dark Avatar";
@@ -901,6 +965,7 @@ namespace DiceBattleGame
     {
         public ElderGod()
         {
+            defaultHealth = 150;
             health = 150;
             armorClass = 14;
             name = "Elder God";
@@ -916,6 +981,7 @@ namespace DiceBattleGame
     {
         public TheMalformed()
         {
+            defaultHealth = 250;
             health = 250;
             armorClass = 10;
             name = "The Malformed";
@@ -931,6 +997,7 @@ namespace DiceBattleGame
     {
         public AvatarOfWrath()
         {
+            defaultHealth = 200;
             health = 200;
             armorClass = 12;
             name = "Avatar of Wrath";
@@ -946,6 +1013,7 @@ namespace DiceBattleGame
     {
         public AvatarOfGluttony()
         {
+            defaultHealth = 200;
             health = 200;
             armorClass = 13;
             name = "Avatar of Gluttony";
@@ -961,6 +1029,7 @@ namespace DiceBattleGame
     {
         public AvatarOfSloth()
         {
+            defaultHealth = 400;
             health = 400;
             armorClass = 10;
             name = "Avatar of Sloth";
@@ -976,6 +1045,7 @@ namespace DiceBattleGame
     {
         public AvatarOfPride()
         {
+            defaultHealth = 150;
             health = 150;
             armorClass = 16;
             name = "Avatar of Pride";
@@ -991,6 +1061,7 @@ namespace DiceBattleGame
     {
         public AvatarOfEnvy()
         {
+            defaultHealth = 200;
             health = 200;
             armorClass = 12;
             name = "Avatar of Envy";
@@ -1006,6 +1077,7 @@ namespace DiceBattleGame
     {
         public AvatarOfLust()
         {
+            defaultHealth = 180;
             health = 180;
             armorClass = 14;
             name = "Avatar of Lust";
@@ -1021,6 +1093,7 @@ namespace DiceBattleGame
     {
         public AvatarOfAvarice()
         {
+            defaultHealth = 220;
             health = 220;
             armorClass = 13;
             name = "Avatar of Avarice";
