@@ -104,10 +104,9 @@ namespace DiceBattleGame
             this.health = this.defaultHealth;
         }
 
-        public int defaultHp() //I messed up and forgot the names of variables, this menthod is extra but gets the job done. sends the full hp of character to the statusbar when setting its intial width
+        public void restoreHp() //Restores the character back to full health, currently used on battle start, will need to be changed when longer campaign - J
         {
-            int r = this.defaultHealth;
-            return r;
+            this.health = this.defaultHealth;
         }
     }
 

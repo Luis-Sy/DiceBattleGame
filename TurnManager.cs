@@ -48,18 +48,24 @@ namespace DiceBattleGame
             return enemy;
         }
 
+        /*public void restoreCharacters(Character player, Character enemy) //this worked, but I didnt realize it was working, DO NOT ENABLE - J
+        {
+            enemy.restoreHp();
+            player.restoreHp();
+        }*/
+
 
         public void StartBattle(Character playerChar, Character enemyChar)
         {
             this.player = playerChar;
             this.enemy = enemyChar;
+            //playerChar.restoreHp();
+            //enemyChar.restoreHp(); STACKOVERFLOW HERE DO NOT ENABLE
             this.battleOver = false;
-
             //roll d20 to see who starts
             D20 d20 = new D20();
             int playerRoll = d20.Roll();
             int enemyRoll = d20.Roll();
-
 
 
             Log($"Player rolled {playerRoll}, enemy rolled {enemyRoll}");

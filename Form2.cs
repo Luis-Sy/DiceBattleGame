@@ -149,7 +149,8 @@ namespace DiceBattleGame
             //create the chosen character
             Character selectedPlayer = BuildPlayerFromUI();
             Character selectedEnemy = BuildEnemyFromUI();
-
+            selectedEnemy.restoreHp(); //restores the characters to full hp for the next battle
+            selectedPlayer.restoreHp();
             //Equip players weapon
             if (cmb_WeaponSelector.SelectedIndex >= 0)
             {
@@ -164,7 +165,7 @@ namespace DiceBattleGame
             //Start battle
             tm = new TurnManager();
             tm.SetOutputBox(txt_TextBox);
-
+            //tm.restoreCharacters(selectedPlayer, selectedEnemy);
             // Bind status bars to health values of characters (they start at Max health)
             statusBar1.maxValue = selectedPlayer.getHealth();
             statusBar1.currentValue = selectedPlayer.getHealth();
