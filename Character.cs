@@ -108,6 +108,11 @@ namespace DiceBattleGame
         {
             this.health = this.defaultHealth;
         }
+
+        public void changeHp(int x)
+        {
+            this.health = x;
+        }
     }
 
     /// <summary>

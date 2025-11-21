@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj": {}
+    "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj": {
+    "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj",
+        "projectUniqueName": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj",
         "projectName": "DiceBattleGame",
-        "projectPath": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj",
+        "projectPath": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj",
         "packagesPath": "C:\\Users\\uzayr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\obj\\",
+        "outputPath": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\uzayr\\AppData\\Roaming\\NuGet\\NuGet.Config",

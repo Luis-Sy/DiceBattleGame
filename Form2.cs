@@ -39,10 +39,10 @@ namespace DiceBattleGame
             cmb_PlayerSelector.SelectedIndex = 0;
             cmb_EnemySelector.SelectedIndex = 0;
             cmb_WeaponSelector.SelectedIndex = 0;
-            
+
         }
 
-        
+
 
         //add all available characters to player and enemy selectors
         private void PopulateSelectorsCharacters()
@@ -122,7 +122,7 @@ namespace DiceBattleGame
             {
                 cmb_WeaponSelector.Items.Add(name);
             }
-            
+
         }
 
         private Character BuildPlayerFromUI()
@@ -161,7 +161,7 @@ namespace DiceBattleGame
 
             }
 
-          
+
             //Start battle
             tm = new TurnManager();
             tm.SetOutputBox(txt_TextBox);
@@ -194,8 +194,71 @@ namespace DiceBattleGame
 
         }
 
-       
+        private void enemy_health_debug_TextChanged(object sender, EventArgs e)
+        {
 
-        
+        }
+
+        private void enemy_health_debugbtn_Click(object sender, EventArgs e)
+        {
+            if (tm == null)
+            {
+                MessageBox.Show("Please start the battle!");
+            }
+            else
+            {
+                int x;
+                if (enemy_health_debug == null)
+                {
+
+                }
+                else
+                {
+
+
+                    if (int.TryParse(enemy_health_debug.Text, out x))
+                    {
+                        tm.GetEnemy().changeHp(x);
+                        txt_TextBox.AppendText($"Enemies hp is now: {tm.GetEnemy().getHealth()}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please input an integer!");
+                    }
+            }
+                }
+                
+
+        }
+
+        private void player_health_debugbtn_Click(object sender, EventArgs e)
+        {
+            if(tm == null)
+            {
+                MessageBox.Show("Please start the battle!");
+            }
+            else
+            {
+                int x;
+                if (player_health_debug == null)
+                {
+
+                }
+                else
+                {
+                    if (int.TryParse(player_health_debug.Text, out x))
+                    {
+                        tm.GetPlayer().changeHp(x);
+                        txt_TextBox.AppendText($"Players hp is now: {tm.GetPlayer().getHealth()}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please input an integer!");
+                    }
+                
+            }
+                }
+               
+        }
     }
 }
