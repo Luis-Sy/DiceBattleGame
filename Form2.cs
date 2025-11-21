@@ -174,6 +174,8 @@ namespace DiceBattleGame
 
 
             tm.StartBattle(selectedPlayer, selectedEnemy);
+            statusBar1.SetCurrentValue(tm.GetPlayer().getHealth());
+            statusBar2.SetCurrentValue(tm.GetEnemy().getHealth());
         }
 
         private void btn_NextTurn_Click(object sender, EventArgs e)
@@ -181,8 +183,8 @@ namespace DiceBattleGame
             if (tm != null)
             {
                 tm.NextTurn();
-                statusBar1.UpdateValue(-1f);
-                statusBar2.UpdateValue(-1f);
+                statusBar1.SetCurrentValue(tm.GetPlayer().getHealth());
+                statusBar2.SetCurrentValue(tm.GetEnemy().getHealth());
             }
         }
 

@@ -38,7 +38,17 @@ namespace DiceBattleGame
             }
         }
 
-        
+        public Character? GetPlayer()
+        {
+            return player;
+        }
+
+        public Character? GetEnemy()
+        {
+            return enemy;
+        }
+
+
         public void StartBattle(Character playerChar, Character enemyChar)
         {
             this.player = playerChar;
