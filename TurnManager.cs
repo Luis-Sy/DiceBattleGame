@@ -69,6 +69,9 @@ namespace DiceBattleGame
 
 
             Log($"Player rolled {playerRoll}, enemy rolled {enemyRoll}");
+            Log($"Player HP: {player.getHealth()}, Enemy HP: {enemy.getHealth()}");
+            Log($"Player AC: {player.getArmoclass()}, Enemy AC: {enemy.getArmoclass()}");
+            
 
             playerTurn = playerRoll > enemyRoll;
             if (playerTurn)
