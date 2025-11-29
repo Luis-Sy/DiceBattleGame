@@ -38,32 +38,51 @@ namespace DiceBattleGame
             }
         }
 
-        
+        public Character? GetPlayer()
+        {
+            return player;
+        }
+
+        public Character? GetEnemy()
+        {
+            return enemy;
+        }
+
+        /*public void restoreCharacters(Character player, Character enemy) //this worked, but I didnt realize it was working, DO NOT ENABLE - J
+        {
+            enemy.restoreHp();
+            player.restoreHp();
+        }*/
+
+
         public void StartBattle(Character playerChar, Character enemyChar)
         {
             this.player = playerChar;
             this.enemy = enemyChar;
+            //playerChar.restoreHp();
+            //enemyChar.restoreHp(); STACKOVERFLOW HERE DO NOT ENABLE
             this.battleOver = false;
-
             //roll d20 to see who starts
             D20 d20 = new D20();
             int playerRoll = d20.Roll();
             int enemyRoll = d20.Roll();
 
 
-
             Log($"Player rolled {playerRoll}, enemy rolled {enemyRoll}");
+            Log($"Player HP: {player.getHealth()}, Enemy HP: {enemy.getHealth()}");
+            Log($"Player AC: {player.getArmoclass()}, Enemy AC: {enemy.getArmoclass()}");
+            
 
             playerTurn = playerRoll > enemyRoll;
             if (playerTurn)
             {
-                Log($"Player {player.GetName()} goes first, against enemy {enemy.GetName()}.");
+                Log($"Player {player.getName()} goes first, against enemy {enemy.getName()}.");
                 PerformAttack(player, enemy);
                 playerTurn = false; 
             }
             else
             {
-                Log($"Enemy {enemy.GetName()} goes first, against player {player.GetName()}.");
+                Log($"Enemy {enemy.getName()} goes first, against player {player.getName()}.");
                 PerformAttack(enemy, player);
                 playerTurn = true;
             }
@@ -83,22 +102,22 @@ namespace DiceBattleGame
             //if (playerTurn)
             //{
             //    int damage = player.attack();
-            //    string dmgType = player.GetWeaponType();
-            //    Log($"Player {player.GetName()} attacks for {damage} damage");
+            //    string dmgType = player.getWeaponType();
+            //    Log($"Player {player.getName()} attacks for {damage} damage");
             //    enemy.takeDamage(damage, dmgType);
             //    shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
-            //    Log($"Enemy {enemy.GetName()} Health is now: {shownHP}");
+            //    Log($"Enemy {enemy.getName()} Health is now: {shownHP}");
             //    //after attack switch turn
             //    playerTurn = false;
             //}
             //else
             //{
             //    int damage = enemy.attack();
-            //    string dmgType = enemy.GetWeaponType();
-            //    Log($"Enemy {enemy.GetName()} attacks for {damage} damage");
+            //    string dmgType = enemy.getWeaponType();
+            //    Log($"Enemy {enemy.getName()} attacks for {damage} damage");
             //    player.takeDamage(damage, dmgType);
             //    shownHP = Math.Max(0, player.getHealth());//to not show negative health
-            //    Log($"Player {player.GetName()} Health is now: {shownHP}");
+            //    Log($"Player {player.getName()} Health is now: {shownHP}");
 
             //    playerTurn = true;
             //}
@@ -115,7 +134,7 @@ namespace DiceBattleGame
                 PerformAttack(player, enemy);
                 if (enemy.getHealth() <= 0)
                 {
-                    Log($"Enemy {enemy.GetName()} has been defeated");
+                    Log($"Enemy {enemy.getName()} has been defeated");
                     battleOver = true;
                     return;
                 }
@@ -126,7 +145,7 @@ namespace DiceBattleGame
                 PerformAttack(enemy, player);
                 if (player.getHealth() <= 0)
                 {
-                    Log($"Player {player.GetName()} has been defeated");
+                    Log($"Player {player.getName()} has been defeated");
                     battleOver = true;
                     return;
                 }
@@ -137,11 +156,11 @@ namespace DiceBattleGame
             //if (playerTurn)
             //{
             //    int damage = player.attack();
-            //    string dmgType = player.GetWeaponType();
-            //    Log($"Player {player.GetName()} attacks for {damage} damage");
+            //    string dmgType = player.getWeaponType();
+            //    Log($"Player {player.getName()} attacks for {damage} damage");
             //    enemy.takeDamage(damage, dmgType);
             //    shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
-            //    Log($"Enemy {enemy.GetName()} Health is now: {shownHP}");
+            //    Log($"Enemy {enemy.getName()} Health is now: {shownHP}");
 
             //    //check if the health is 0:
             //    if (enemy.getHealth() <= 0)
@@ -156,11 +175,11 @@ namespace DiceBattleGame
             //else
             //{
             //    int damage = enemy.attack();
-            //    string dmgType = enemy.GetWeaponType();
-            //    Log($"Enemy {enemy.GetName()} attacks for {damage} damage");
+            //    string dmgType = enemy.getWeaponType();
+            //    Log($"Enemy {enemy.getName()} attacks for {damage} damage");
             //    player.takeDamage(damage,dmgType);
             //    shownHP = Math.Max(0, player.getHealth());//to not show negative health
-            //    Log($"Player {player.GetName()} Health is now: {shownHP}");
+            //    Log($"Player {player.getName()} Health is now: {shownHP}");
 
             //    if (player.getHealth() <= 0)
             //    {
@@ -179,13 +198,13 @@ namespace DiceBattleGame
             D20 d20 = new D20();
             int roll = d20.Roll();
             int ac = defender.getArmoclass();
-            string attackerName = attacker.GetName();
-            string deffenderName = defender.GetName();
+            string attackerName = attacker.getName();
+            string deffenderName = defender.getName();
 
             if (roll >= ac)
             {
                 int damage = attacker.attack();
-                string dmgType = attacker.GetWeaponType();
+                string dmgType = attacker.getWeaponType();
                 Log($"{attackerName} hits {deffenderName} for {damage} damage! (roll {roll} vs AC{ac});");
                 defender.takeDamage(damage, dmgType);
                 shownHP = Math.Max(0, defender.getHealth());
