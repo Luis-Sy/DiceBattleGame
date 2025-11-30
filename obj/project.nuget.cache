@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "uxudg8Lu/wo=",
+  "dgSpecHash": "4H5kl10rE3Y=",
   "success": true,
-  "projectFilePath": "C:\\Users\\luism\\Documents\\Github\\DiceBattleGame\\DiceBattleGame.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\uzayr\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\uzayr\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\uzayr\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.36\\microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\uzayr\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.36\\microsoft.netcore.app.host.win-x64.6.0.36.nupkg.sha512"
+  ],
   "logs": []
 }
