@@ -1,7 +1,7 @@
 ﻿using DiceBattleGame.Data.Characters;
-using DiceBattleGame.Data.Characters.Playable;
 using DiceBattleGame.GameData.Characters.Enemies.Common;
 using DiceBattleGame.GameData.Characters.Enemies.Elite;
+using DiceBattleGame.GameData.Characters.Playable;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +23,7 @@ namespace DiceBattleGame
             InitializeComponent();
 
             // change this to test different characters
-            Character character = new Goblin();
+            Character character = new Samurai();
 
             // change this to see how a character's stats grow
             character.setLevel(1);
