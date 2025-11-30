@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualBasic.Logging;
+﻿using DiceBattleGame.Data.Characters;
+using DiceBattleGame.Data.System;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +33,7 @@ namespace DiceBattleGame
             InitializeComponent();
 
             //populate character and weapon dropdowns
-            PopulateSelectorsCharacters();
+            //PopulateSelectorsCharacters();
             PopulateSelectorsWeapons();
 
 
@@ -43,7 +45,7 @@ namespace DiceBattleGame
         }
 
 
-
+        /*
         //add all available characters to player and enemy selectors
         private void PopulateSelectorsCharacters()
         {
@@ -112,7 +114,7 @@ namespace DiceBattleGame
             if (cmb_PlayerSelector.Items.Count > 0) cmb_PlayerSelector.SelectedIndex = 0;
             if (cmb_EnemySelector.Items.Count > 0) cmb_EnemySelector.SelectedIndex = 0;
 
-        }
+        }*/
 
         //populates both players and enemy weapons dropdowns
         private void PopulateSelectorsWeapons()
