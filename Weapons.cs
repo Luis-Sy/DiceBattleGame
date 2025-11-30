@@ -26,11 +26,28 @@ namespace DiceBattleGame
             this.weaponName = weaponName;
             this.damageType = damageType;
         }
-
         public virtual int Attack()
         {
             int damage = 0;
             return damage;
+        }
+        // Added helper methods //read only info to UI/systems
+        public string GetName()
+        {
+            return weaponName;
+        }
+
+        public string GetDamageType()
+        {
+            return damageType;
+        }
+
+        // Let child classes update the base name/type safely
+        protected void SetWeaponInfo(string name, string type)
+        {
+            // these assign to the *base* private fields
+            weaponName = name;
+            damageType = type;
         }
 
         public string GetWeaponType()

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\luism\\Documents\\Github\\DiceBattleGame\\DiceBattleGame.csproj": {}
+    "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\luism\\Documents\\Github\\DiceBattleGame\\DiceBattleGame.csproj": {
+    "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\luism\\Documents\\Github\\DiceBattleGame\\DiceBattleGame.csproj",
+        "projectUniqueName": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj",
         "projectName": "DiceBattleGame",
-        "projectPath": "C:\\Users\\luism\\Documents\\Github\\DiceBattleGame\\DiceBattleGame.csproj",
-        "packagesPath": "C:\\Users\\luism\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\luism\\Documents\\Github\\DiceBattleGame\\obj\\",
+        "projectPath": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\DiceBattleGame.csproj",
+        "packagesPath": "C:\\Users\\uzayr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\uzayr\\Desktop\\DiceBattleGame-healthbar-ui\\DiceBattleGame-healthbar-ui\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\luism\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\uzayr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,7 +40,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net6.0-windows7.0": {
@@ -56,6 +56,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -64,7 +82,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
