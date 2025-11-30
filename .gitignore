@@ -418,3 +418,4 @@ FodyWeavers.xsd
 *.msp
 /obj/Debug
 obj/Debug/net6.0-windows/DiceBattleGame.AssemblyInfo.cs
+/obj/Debug/net6.0-windows
