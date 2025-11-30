@@ -1,0 +1,37 @@
+﻿using DiceBattleGame.Data.Characters;
+using DiceBattleGame.Data.System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DiceBattleGame.GameData.Characters.Playable
+{
+    internal class WardenPlayer : Character
+    {
+        public WardenPlayer() : base()
+        {
+            type = "Player";
+            name = "Warden";
+            statGrowths = new Dictionary<string, int>
+            {
+                {"Vigor", -2},
+                {"Constitution", 5},
+                {"Strength", 3},
+                {"Dexterity", -2},
+                {"Intellect", -3},
+                {"Faith", 0}
+            };
+            initializeStats();
+            damageResistances = new Dictionary<string, double>
+            {
+                { "Slash", 0.5 },
+                { "Pierce", 1.0 },
+                { "Blunt", 1.5 }
+            };
+            armorClass = 16;
+            weapon = new Custom("Halberd", "Halberd", "Slash", new D10());
+        }
+    }
+}

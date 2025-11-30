@@ -1,37 +1,37 @@
-﻿using DiceBattleGame.Data.System;
+﻿using DiceBattleGame.Data.Characters;
+using DiceBattleGame.Data.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceBattleGame.Data.Characters.Playable
+namespace DiceBattleGame.GameData.Characters.Playable
 {
-    internal class RangerPlayer : Character
+    internal class MonkPlayer : Character
     {
-        public RangerPlayer() : base()
+        public MonkPlayer() : base()
         {
             type = "Player";
-            name = "Ranger";
+            name = "Monk";
             statGrowths = new Dictionary<string, int>
             {
-                {"Vigor", -4},
-                {"Constitution", 1},
+                {"Vigor", -1},
+                {"Constitution", 2},
                 {"Strength", 1},
                 {"Dexterity", 4},
                 {"Intellect", 0},
-                {"Faith", -2}
+                {"Faith", 3}
             };
             initializeStats();
             damageResistances = new Dictionary<string, double>
             {
-                { "Slash", 1.5 },
+                { "Slash", 1.0 },
                 { "Pierce", 1.0 },
                 { "Blunt", 1.0 }
             };
-            
-            armorClass = 13;
-            weapon = new Custom("Bow", "Longbow", "Pierce", new diceBag(7, 2));
+            armorClass = 14;
+            weapon = new Custom("Fists", "Monk's Fists", "Blunt", new diceBag(5, 2));
         }
     }
 }

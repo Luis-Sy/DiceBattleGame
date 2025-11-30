@@ -1,25 +1,27 @@
-﻿using DiceBattleGame.Data.System;
+﻿
+using DiceBattleGame.Data.Characters;
+using DiceBattleGame.Data.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceBattleGame.Data.Characters.Playable
+namespace DiceBattleGame.GameData.Characters.Enemies.Common
 {
-    internal class RangerPlayer : Character
+    internal class Bandit : Character
     {
-        public RangerPlayer() : base()
+        public Bandit() : base()
         {
-            type = "Player";
-            name = "Ranger";
+            type = "Enemy";
+            name = "Bandit";
             statGrowths = new Dictionary<string, int>
             {
-                {"Vigor", -4},
-                {"Constitution", 1},
+                {"Vigor", -3},
+                {"Constitution", 0},
                 {"Strength", 1},
-                {"Dexterity", 4},
-                {"Intellect", 0},
+                {"Dexterity", 3},
+                {"Intellect", -2},
                 {"Faith", -2}
             };
             initializeStats();
@@ -29,9 +31,8 @@ namespace DiceBattleGame.Data.Characters.Playable
                 { "Pierce", 1.0 },
                 { "Blunt", 1.0 }
             };
-            
-            armorClass = 13;
-            weapon = new Custom("Bow", "Longbow", "Pierce", new diceBag(7, 2));
+            armorClass = 12;
+            weapon = new Custom("Dagger", "Sharp Dagger", "Pierce", new diceBag(5, 2));
         }
     }
 }

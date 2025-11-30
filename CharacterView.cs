@@ -21,7 +21,7 @@ namespace DiceBattleGame
 
             Character character = new RangerPlayer();
 
-            character.setLevel(5);
+            character.setLevel(1);
 
             nameLbl.Text = character.getName();
             typeLbl.Text = character.getCharacterType();
