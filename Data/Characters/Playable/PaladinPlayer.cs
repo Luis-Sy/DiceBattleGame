@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.Data.Characters.Playable
 {
-    internal class PaladinPlayable : Character
+    internal class PaladinPlayer : Character
     {
-        public PaladinPlayable() : base()
+        public PaladinPlayer() : base()
         {
             type = "Player";
             name = "Paladin";

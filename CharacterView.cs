@@ -19,7 +19,7 @@ namespace DiceBattleGame
         {
             InitializeComponent();
 
-            Character character = new KnightPlayer();
+            Character character = new RangerPlayer();
 
             character.setLevel(5);
 
@@ -35,7 +35,15 @@ namespace DiceBattleGame
 
             foreach (var growth in character.getStatGrowths())
             {
-                statGrowthBox.Items.Add(growth.Key + ": " + growth.Value.ToString());
+                if (growth.Value > 0)
+                {
+                    statGrowthBox.Items.Add(growth.Key + ": +" + growth.Value.ToString());
+                }
+                else
+                {
+                    statGrowthBox.Items.Add(growth.Key + ": " + growth.Value.ToString());
+                }
+                
             }
 
         }
