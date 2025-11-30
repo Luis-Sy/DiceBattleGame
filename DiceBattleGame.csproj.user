@@ -10,7 +10,7 @@
     <Compile Update="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Data\System\StatusBar.cs">
+    <Compile Update="GameData\System\StatusBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
