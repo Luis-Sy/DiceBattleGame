@@ -1,9 +1,4 @@
 using DiceBattleGame.Data.System;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiceBattleGame.Data.Characters
 {
@@ -27,10 +22,22 @@ namespace DiceBattleGame.Data.Characters
             {"Slash", 1.0},
             {"Pierce", 1.0},
             {"Blunt", 1.0}
+            /* pulled from standard dnd damage types for reference
+             * probably cutting the number down for simplicity
+            {"Fire", 1.0},
+            {"Ice", 1.0},
+            {"Lightning", 1.0},
+            {"Acid", 1.0},
+            {"Poison", 1.0},
+            {"Force", 1.0},
+            {"Psychic", 1.0},
+            {"Radiant", 1.0},
+            {"Necrotic", 1.0}
+             */
         };
 
         protected string name = "Character"; // display name
-        protected string type = "Character"; // type of character (player/enemy/etc)
+        protected string type = "Character"; // type of character (player/common enemy/elite enemy/twisted elite enemy, boss enemy)
 
         protected Weapon? weapon;
 
@@ -38,9 +45,9 @@ namespace DiceBattleGame.Data.Characters
         // all stats start at 10 by default
         protected Dictionary<string, int> stats = new Dictionary<string, int>()
         {
-            {"Vigor", 10},
-            {"Constitution", 10},
-            {"Strength", 10},
+            {"Vigor", 10}, // determines max health (Vigor * 2 = health)
+            {"Constitution", 10}, // factors in damage mitigation and resistances later
+            {"Strength", 10}, // the rest are for damage scaling and stat checks
             {"Dexterity", 10},
             {"Intellect", 10},
             {"Faith", 10}
@@ -61,30 +68,14 @@ namespace DiceBattleGame.Data.Characters
         // default constructor to create a level 1 character
         public Character()
         {
-            // set stats based on growth modifiers
-            foreach(var stat in stats.Keys.ToList())
-            {
-                stats[stat] += statGrowths[stat];
-            }
-
-            // calculate health
-            defaultHealth = stats["Vigor"] * 2;
-            health = defaultHealth;
+            initializeStats();
 
         }
 
         // constructor to make a character of a specific level
         public Character(int level)
         {
-            // calculate stats based on growth modifiers
-            foreach (var stat in stats.Keys.ToList())
-            {
-                stats[stat] = 10 + (level - 1) + statGrowths[stat];
-            }
-
-            // calculate health
-            defaultHealth = stats["Vigor"] * 2;
-            health = defaultHealth;
+            initializeStats();
 
         }
 
@@ -92,7 +83,7 @@ namespace DiceBattleGame.Data.Characters
         // currently, a character will level up for every 5 exp accumulated
         public void levelUp()
         {
-            foreach(var stat in stats.Keys.ToList())
+            foreach (var stat in stats.Keys.ToList())
             {
                 stats[stat] += 1;
             }
@@ -121,12 +112,12 @@ namespace DiceBattleGame.Data.Characters
         {
             int finalDamage = 0;
             // check to see if the damage type exists
-            if(damageResistances.ContainsKey(type))
+            if (damageResistances.ContainsKey(type))
             {
                 finalDamage = (int)Math.Ceiling(amount * damageResistances[type]);
 
                 // round up to 1 if necessary
-                if(finalDamage < 1)
+                if (finalDamage < 1)
                 {
                     finalDamage = 1;
                 }
@@ -139,7 +130,7 @@ namespace DiceBattleGame.Data.Characters
                 Console.WriteLine($"Damage type {type} not recognized! No damage taken.");
                 finalDamage = 0;
             }
-            
+
         }
 
         public string getName()
@@ -159,18 +150,29 @@ namespace DiceBattleGame.Data.Characters
 
         public int setLevel(int level)
         {
-            while(level > this.level)
+            // if the level is greater than the current level, repeat level ups until the desired level is reached
+            if (level > 1)
             {
-                levelUp();
+                while (level > this.level)
+                {
+                    levelUp();
+                }
             }
-            return this.level;
+            else // if the level change is lower than the current level, set the level down directly and recalculate stats
+            {
+                this.level = level;
+                initializeStats();
+            }
+
+                return this.level;
         }
+
 
         public int gainExp(int amount)
         {
             experience += amount;
             // check for level up
-            while(experience >= 5)
+            while (experience >= 5)
             {
                 levelUp();
             }
@@ -203,7 +205,7 @@ namespace DiceBattleGame.Data.Characters
                 return (int)Math.Floor(stats[stat] / 5.0);
             }
             else
-            { 
+            {
                 // otherwise, return no bonus and log to console
                 Console.WriteLine($"Stat {stat} not recognized! No bonus applied.");
                 return 0;
@@ -213,9 +215,10 @@ namespace DiceBattleGame.Data.Characters
         // method for external character files
         public void initializeStats()
         {
-            foreach(var stat in stats.Keys.ToList())
+            foreach (var stat in stats.Keys.ToList())
             {
-                stats[stat] += statGrowths[stat];
+                // calculate stat based on level and growth modifier
+                stats[stat] = 10 + (level - 1) + statGrowths[stat];
             }
 
             defaultHealth = stats["Vigor"] * 2;
@@ -239,7 +242,7 @@ namespace DiceBattleGame.Data.Characters
 
         public string getWeaponType()
         {
-             if (weapon != null)
+            if (weapon != null)
             {
                 return weapon.GetDamageType();
             }
@@ -727,4 +730,3 @@ namespace DiceBattleGame.Data.Characters
 
 */
 }
-    

@@ -23,10 +23,11 @@ namespace DiceBattleGame
             InitializeComponent();
 
             // change this to test different characters
-            Character character = new MadSoldier();
+            Character character = new Goblin();
 
             // change this to see how a character's stats grow
-            character.setLevel(10);
+            character.setLevel(1);
+            character.initializeStats();
 
             nameLbl.Text = character.getName();
             typeLbl.Text = character.getCharacterType();
