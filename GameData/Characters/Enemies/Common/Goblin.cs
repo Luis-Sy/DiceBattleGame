@@ -16,7 +16,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             name = "Goblin";
             statGrowths = new Dictionary<string, int>
             {
-                {"Vigor", -5},
+                {"Vigor", -3},
                 {"Constitution", -2},
                 {"Strength", 0},
                 {"Dexterity", 2},

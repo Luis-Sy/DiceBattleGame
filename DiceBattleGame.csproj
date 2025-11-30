@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="GameData\Characters\Enemies\" />
+    <Folder Include="GameData\Characters\Enemies\Boss\" />
   </ItemGroup>
 
 </Project>
