@@ -1,5 +1,6 @@
 ﻿using DiceBattleGame.Data.Characters;
 using Microsoft.VisualBasic;
+using System.Diagnostics;
 using System.Numerics;
 
 namespace DiceBattleGame.GameData.System
@@ -7,7 +8,16 @@ namespace DiceBattleGame.GameData.System
     internal class CampaignManager // this is the master class for handling the data of the game state during a playthrough
     {
         private List<Character> playerParty = new List<Character>();
-        // private MapData mapData; // future implementation for map handling
+        private MapData mapData;
+        public List<string> NodeTypes = new List<string> // default node types
+        { 
+            "Battle",
+            "Elite Battle",
+            "Boss Battle",
+            "Shop", 
+            "Event", 
+            "Rest" 
+        };
         // private List<Item> inventory; // future implementation for inventory handling
 
         // method to initialize a new campaign with a player character and a random seed
@@ -17,10 +27,9 @@ namespace DiceBattleGame.GameData.System
             int seed = DateAndTime.Now.Millisecond;
             Random random = new Random(seed);
 
+            mapData = new MapData(seed, this.NodeTypes); // initialize map data and generate with random seed
+
             /*
-            mapData = new MapData(); // initialize map data
-            
-            mapData.Generate(seed); // generate map with the random seed
             inventory = new List<Item>(); // initialize empty inventory
             inventory.add(new HealthPotion()); // starting item
 
@@ -35,16 +44,41 @@ namespace DiceBattleGame.GameData.System
             playerParty.Add(player);
             Random random = new Random(seed);
 
-            /*
-            mapData = new MapData(); // initialize map data
             
-            mapData.Generate(seed); // generate map with the set seed
+            mapData = new MapData(seed, this.NodeTypes); // initialize map data and generate map with the set seed
+            
+            /*
             inventory = new List<Item>(); // initialize empty inventory
             inventory.add(new HealthPotion()); // starting item
 
             whatever else needs to be initialized here
             
             */
+        }
+
+        // method to start a campaign with a specified seed and custom node types
+        public CampaignManager(Character player, int seed, List<string> nodeTypes)
+        {
+            playerParty.Add(player);
+            Random random = new Random(seed);
+            this.NodeTypes = nodeTypes;
+            mapData = new MapData(seed, nodeTypes); // initialize map data and generate map with the set seed
+
+            /*
+            inventory = new List<Item>(); // initialize empty inventory
+            inventory.add(new HealthPotion()); // starting item
+            whatever else needs to be initialized here
+            
+            */
+        }
+
+        public void displayMapData()
+        {
+            List<MapNode> nodes = mapData.GetAllNodes();
+            foreach (MapNode node in nodes)
+            {
+                Trace.WriteLine("Node Type: " + node.GetNodeType() + ", Visited: " + node.IsVisited());
+            }
         }
 
     }

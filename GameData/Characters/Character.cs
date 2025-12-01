@@ -540,22 +540,6 @@ namespace DiceBattleGame.Data.Characters
 
     // boss enemies
 
-    internal class Dragon : Character
-    {
-        public Dragon()
-        {
-            defaultHealth = 100;
-            health = 100;
-            armorClass = 15;
-            name = "Dragon";
-            type = "Boss Enemy";
-            slashRes = 1.0;
-            pierceRes = 2.0;
-            bluntRes = 0.75;
-            weapon = new Custom("Fire Breath", "Inferno", "Blunt", new diceBag(11, 3));
-        }
-    }
-
     internal class DemonLord : Character
     {
         public DemonLord()
