@@ -199,7 +199,7 @@ namespace DiceBattleGame.Data.Characters
         public int getStatCheckBonus(string stat)
         {
             // every 5 points in a stat gives +1 bonus
-            // on the contrary, every 5 points below 10 gives -1 penalty
+            
             if (stats.ContainsKey(stat))
             {
                 return (int)Math.Floor(stats[stat] / 5.0);
@@ -277,6 +277,13 @@ namespace DiceBattleGame.Data.Characters
         {
             health = x;
         }
+
+        // used exclusively for enemy ai actions
+        public virtual bool takeAction()
+        {
+            return true;
+        }
+
     }
 
     /// <summary>
