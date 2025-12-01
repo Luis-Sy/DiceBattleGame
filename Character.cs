@@ -24,6 +24,12 @@ namespace DiceBattleGame
 
         protected Weapon? weapon;
 
+        // --- !! NEW !!  ---
+        public List<BattleItem> Items { get; } = new List<BattleItem>();
+        public List<BattleSkill> Skills { get; } = new List<BattleSkill>();
+        public bool HasUsedItemThisTurn { get; set; }
+        // --- !! NEW !! ---
+
         public int attack()
         {
             if (weapon != null)
@@ -113,7 +119,74 @@ namespace DiceBattleGame
         {
             this.health = x;
         }
+        // --- !!! NEW METHODS !!! ---
+        public bool isAlive()
+        {
+            return health > 0;
+        }
+
+        public bool isPlayer()
+        {
+            return type == "Player";
+        }
+
+        public void ResetSkills()
+        {
+            foreach (var skill in Skills)
+                skill.Reset();
+
+            HasUsedItemThisTurn = false;
+        }
+    // --- NEW METHODS END HERE ---
+
     }
+    // --- NEW ITEM + SKILL BASE CLASSES START HERE ---
+    internal abstract class BattleItem
+    {
+        public string Name { get; }
+
+        protected BattleItem(string name)
+        {
+            Name = name;
+        }
+
+        public abstract void Use(Character user, Character target);
+    }
+
+    internal abstract class BattleSkill
+    {
+        public string Name { get; }
+        public int MaxUses { get; }
+        public int UsesLeft { get; private set; }
+
+        protected BattleSkill(string name, int maxUses)
+        {
+            Name = name;
+            MaxUses = maxUses;
+            UsesLeft = maxUses;
+        }
+
+        public bool CanUse => UsesLeft > 0;
+
+        public void Use(Character user, Character target)
+        {
+            if (!CanUse) return;
+            UsesLeft--;
+            Apply(user, target);
+        }
+
+        protected abstract void Apply(Character user, Character target);
+
+        public void Reset()
+        {
+            UsesLeft = MaxUses;
+        }
+    }
+    // --- NEW ITEM + SKILL BASE CLASSES END HERE ---
+
+
+
+
 
     /// <summary>
     /// TODO FOR FINAL:
