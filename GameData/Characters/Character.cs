@@ -235,6 +235,7 @@ namespace DiceBattleGame.Data.Characters
             return weapon;
         }
 
+        // used to diffrentiate between player and enemy characters
         public string getCharacterType()
         {
             return type;
@@ -284,6 +285,17 @@ namespace DiceBattleGame.Data.Characters
         {
             return true;
         }
+
+        /* below are placeholder methods for using skills and items
+         
+        public void useItem(Item item){
+            item.use();
+        }
+
+        public void useSkill(Skill skill){
+            skill.use();
+        }
+         */
 
     }
 
