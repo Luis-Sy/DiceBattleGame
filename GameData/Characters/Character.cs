@@ -279,6 +279,7 @@ namespace DiceBattleGame.Data.Characters
         }
 
         // used exclusively for enemy ai actions
+        // inside each defined enemy class , this method will be overridden to define unique behaviors
         public virtual bool takeAction()
         {
             return true;
