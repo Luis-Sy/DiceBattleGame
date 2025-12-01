@@ -14,7 +14,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
         {
             type = "Elite Enemy";
             name = "Mad Soldier";
-            statGrowths = new Dictionary<string, int>
+            statGrowths = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             {
                 {"Vigor", 4},
                 {"Constitution", 4},
@@ -24,7 +24,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 {"Faith", -2}
             };
             initializeStats();
-            damageResistances = new Dictionary<string, double>
+            damageResistances = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
             {
                 { "Slash", 1.5 },
                 { "Pierce", 1.0 },

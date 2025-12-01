@@ -17,7 +17,7 @@ namespace DiceBattleGame.Data.Characters
         // resistances are multipliers to incoming damage (higher means more damage received from that type)
         // e.g. 1.0 = normal damage, 0.5 = half damage, 2.0 = double damage
         // elemental resistances at some point?
-        protected Dictionary<string, double> damageResistances = new Dictionary<string, double>()
+        protected Dictionary<string, double> damageResistances = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
         {
             {"Slash", 1.0},
             {"Pierce", 1.0},
@@ -43,7 +43,7 @@ namespace DiceBattleGame.Data.Characters
 
         // this dictionary holds character stats
         // all stats start at 10 by default
-        protected Dictionary<string, int> stats = new Dictionary<string, int>()
+        protected Dictionary<string, int> stats = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
         {
             {"Vigor", 10}, // determines max health (Vigor * 2 = health)
             {"Constitution", 10}, // factors in damage mitigation and resistances later
@@ -55,7 +55,7 @@ namespace DiceBattleGame.Data.Characters
         // this dictionary sets the character's stat growth modifiers, they vary from each character
         // modifiers in the same order as above and are clamped between -5 and +5
         // may consider lifting this restriction for enemies only
-        protected Dictionary<string, int> statGrowths = new Dictionary<string, int>()
+        protected Dictionary<string, int> statGrowths = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
         {
             {"Vigor", 0},
             {"Constitution", 0},

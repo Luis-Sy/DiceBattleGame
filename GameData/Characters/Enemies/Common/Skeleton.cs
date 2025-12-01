@@ -14,7 +14,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
         {
             type = "Enemy";
             name = "Skeleton";
-            statGrowths = new Dictionary<string, int>
+            statGrowths = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             {
                 {"Vigor", -5},
                 {"Constitution", -5},
@@ -24,7 +24,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
                 {"Faith", -5}
             };
             initializeStats();
-            damageResistances = new Dictionary<string, double>
+            damageResistances = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
             {
                 { "Slash", 0.5 },
                 { "Pierce", 0.5 },

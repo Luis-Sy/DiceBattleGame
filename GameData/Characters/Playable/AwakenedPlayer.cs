@@ -14,7 +14,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
         {
             type = "Player";
             name = "Awakened";
-            statGrowths = new Dictionary<string, int>
+            statGrowths = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             {
                 {"Vigor", -3},
                 {"Constitution", 4},
@@ -24,7 +24,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 {"Faith", 3}
             };
             initializeStats();
-            damageResistances = new Dictionary<string, double>
+            damageResistances = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
             {
                 { "Slash", 1.0 },
                 { "Pierce", 1.0 },
