@@ -1,4 +1,4 @@
-﻿using DiceBattleGame.Data.Characters;
+﻿using DiceBattleGame.GameData.Characters;
 using DiceBattleGame.GameData.Characters.Enemies.Common;
 using DiceBattleGame.GameData.Characters.Enemies.Elite;
 using DiceBattleGame.GameData.Characters.Playable;

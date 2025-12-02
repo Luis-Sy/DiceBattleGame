@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceBattleGame.Data.Characters.Playable
+namespace DiceBattleGame.GameData.Characters.Playable
 {
     internal class PaladinPlayer : Character
     {

@@ -1,6 +1,6 @@
-using DiceBattleGame.Data.System;
+using DiceBattleGame.GameData.System;
 
-namespace DiceBattleGame.Data.Characters
+namespace DiceBattleGame.GameData.Characters
 {
     // this class is used as a base for both playable and non-playable characters
     internal abstract class Character

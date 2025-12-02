@@ -1,4 +1,4 @@
-﻿using DiceBattleGame.Data.Characters;
+﻿using DiceBattleGame.GameData.Characters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DiceBattleGame.Data.System
+namespace DiceBattleGame.GameData.System
 {
     //this class manages the flow of the turns between 2 characters
     internal class TurnManager

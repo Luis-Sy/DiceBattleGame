@@ -1,35 +1,120 @@
-﻿using System;
+﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.Forms_UI;
+using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace DiceBattleGame
 {
     public partial class CharacterSelectForm : Form
     {
+        private List<Character> availableCharacters = new List<Character>();
         public CharacterSelectForm()
         {
             InitializeComponent();
             this.Text = "Choose Your Character";
-            SetupUI();
+            LoadCharactersIntoDropdown();
         }
-        private void SetupUI()
+        private void LoadCharactersIntoDropdown()
         {
-            
-            this.Width = 600;
-            this.Height = 400;
+            var assembly = Assembly.GetExecutingAssembly();
 
-            Button startButton = new Button();
-            startButton.Text = "Start Game";
-            startButton.Width = 200;
-            startButton.Height = 50;
-            startButton.Left = (this.ClientSize.Width - startButton.Width) / 2;
-            startButton.Top = (this.ClientSize.Height - startButton.Height) / 2;
+            //find all classes in Playable namespace 
+            var characterTypes = assembly
+                .GetTypes().Where(t =>
+                    t.IsClass && t.Namespace == "DiceBattleGame.GameData.Characters.Playable" && typeof(Character).IsAssignableFrom(t)
+                );
 
-            startButton.Click += (s, e) =>
+            foreach (var type in characterTypes)
             {
-                GameManager.SwitchTo(new StartMenuForm());
-            };
+                //create an instance of each character class
+                Character c = (Character)Activator.CreateInstance(type)!;
 
-            this.Controls.Add(startButton);
+                //add to list
+                availableCharacters.Add(c);
+
+                //add to the dropdown menu
+                cmb_PlayerSelector.Items.Add(c.getName());
+            }
+
+            cmb_PlayerSelector.SelectedIndexChanged += cmb_PlayerSelector_SelectedIndexChanged;
+
+            //select first item automaticaly
+            if (cmb_PlayerSelector.Items.Count > 0)
+            {
+                cmb_PlayerSelector.SelectedIndex = 0;
+                //to trigger the even manually otherwise the dropdown menu has selected the fist charc but doesn't charge the label name and the image
+                cmb_PlayerSelector_SelectedIndexChanged(cmb_PlayerSelector, EventArgs.Empty);
+            }
+
+
+
+
+
+        }
+
+        private void cmb_PlayerSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = cmb_PlayerSelector.SelectedIndex;
+            if (index < 0 || index >= availableCharacters.Count) return;
+
+            Character selected = availableCharacters[index];
+            //to update the label with the character name
+            lbl_characterName.Text = selected.getName();
+            //display the image
+            loadCharacterAvatar(selected.getName());
+
+            //update stats in the table
+            var stats = selected.getStats();
+            lbl_Vigor.Text = stats["Vigor"].ToString();
+            lbl_Constitution.Text = stats["Constitution"].ToString();
+            lbl_Strength.Text = stats["Strength"].ToString();
+            lbl_Dexterity.Text = stats["Dexterity"].ToString();
+            lbl_Intellect.Text = stats["Intellect"].ToString();
+            lbl_Faith.Text = stats["Faith"].ToString();
+
+
+
+        }
+
+        private void loadCharacterAvatar(string characterName)
+        {
+            //images path 
+            string imgPath = Path.Combine("Assets", "Images", $"{characterName}.png");
+            string imgPathPlaceholder = Path.Combine("Assets", "Images", "placeholder.png");
+            if (File.Exists(imgPath))
+            {
+                pic_charactherPortrait.Image = Image.FromFile(imgPath);
+            }
+            else
+            {
+                pic_charactherPortrait.Image = Image.FromFile(imgPathPlaceholder);
+            }
+        }
+
+        private void btn_StartMenuForm_Click(object sender, EventArgs e)
+        {
+            GameManager.SwitchTo(new StartMenuForm());
+        }
+
+        private void lbl_characterName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Next_Click(object sender, EventArgs e)
+        {
+            GameManager.SwitchTo(new MapForm());
+        }
+
+        private void tbl_Stats_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

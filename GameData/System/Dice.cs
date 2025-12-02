@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceBattleGame.Data.System
+namespace DiceBattleGame.GameData.System
 {
     internal abstract class Dice
     {

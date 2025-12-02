@@ -19,6 +19,9 @@
     <Compile Update="Forms UI\InstructionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms UI\MapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="GameData\System\StatusBar.cs">
       <SubType>UserControl</SubType>
     </Compile>

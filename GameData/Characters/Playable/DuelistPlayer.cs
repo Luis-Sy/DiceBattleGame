@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DiceBattleGame.GameData.Characters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DiceBattleGame.Data.Characters.Playable
+namespace DiceBattleGame.GameData.Characters.Playable
 {
     internal class DuelistPlayer : Character
     {
