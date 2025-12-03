@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.Data.Characters;
+﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;

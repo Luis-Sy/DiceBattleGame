@@ -1,4 +1,4 @@
-﻿using DiceBattleGame.Data.Characters;
+﻿using DiceBattleGame.GameData.Characters;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
 using System.Numerics;

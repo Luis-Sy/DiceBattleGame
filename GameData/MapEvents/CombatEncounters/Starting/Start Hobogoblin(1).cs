@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiceBattleGame.GameData.Characters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Starting
         }
         public override void initializeEvent(int targetLevel)
         {
-            enemies = new List<Data.Characters.Character>()
+            enemies = new List<Character>()
             {
                 new Characters.Enemies.Common.Hobogoblin()
             };

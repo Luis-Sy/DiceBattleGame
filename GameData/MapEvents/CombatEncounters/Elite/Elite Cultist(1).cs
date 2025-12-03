@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.GameData.Characters.Enemies.Elite;
+﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Characters.Enemies.Elite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Elite
         }
         public override void initializeEvent(int targetLevel)
         {
-            enemies = new List<Data.Characters.Character>()
+            enemies = new List<Character>()
             {
                 new Cultist()
             };

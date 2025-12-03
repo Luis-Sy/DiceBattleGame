@@ -1,4 +1,4 @@
-﻿using DiceBattleGame.Data.Characters;
+﻿using DiceBattleGame.GameData.Characters;
 using DiceBattleGame.GameData.MapEvents;
 using DiceBattleGame.GameData.MapEvents.CombatEncounters;
 using System;

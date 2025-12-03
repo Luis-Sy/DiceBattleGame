@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiceBattleGame.GameData.Characters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters
     internal abstract class CombatEncounter : MapEvent // this is the generic class used to represent combat encounters on the map
     {
         protected int targetLevel; // target level for scaling enemy difficulty
-        protected List<Data.Characters.Character> enemies = new List<Data.Characters.Character>(); // list of enemy characters in the encounter
+        protected List<Character> enemies = new List<Character>(); // list of enemy characters in the encounter
         
         public CombatEncounter(int targetLevel)
         {
@@ -34,7 +35,7 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters
 
         public override T GetEventData<T>()
         {
-            if (typeof(T) == typeof(List<Data.Characters.Character>))
+            if (typeof(T) == typeof(List<Character>))
             {
                 return (T)(object)enemies;
             }
