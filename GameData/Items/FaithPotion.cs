@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.Items
 {
-    internal class StrengthPotion:Item
+    internal class FaithPotion:Item
     {
-        public StrengthPotion()
+        public FaithPotion() 
         {
-            string name = "Strength Potion";
+            string name = "Faith Potion"; //just read a prayer book really fast or some random mushroom
             int price = 10;
         }
 
-        public override void Use(Character entity) //I dont know if this even works - J
+        public override void Use(Character entity)
         {
-            entity.getStats()["Strength"] += 5;
+            entity.getStats()["Faith"] += 5;
         }
 
         public string Examine() //hate that the hp restore value must be static :( - J
         {
-            return "Increases strength by 5";
+            return "Increases faith by 5";
         }
     }
 }
