@@ -138,12 +138,12 @@ namespace DiceBattleGame.Forms_UI
                 //GameManager.SwitchTo(new BattleForm)
                 //break;
 
-                //case NodeType.Shop:
-                //    GameManager.SwitchTo(new ShopForm)
-                //    break;
+                case NodeType.Shop:
+                    GameManager.SwitchTo(new ShopForm());
+                    break;
 
-                //If we want a different form for boss battle goes here in other switch 
-                //and also we can do a new form to summarize or show the healing in the rest node
+                    //If we want a different form for boss battle goes here in other switch 
+                    //and also we can do a new form to summarize or show the healing in the rest node
             }
 
             currentNodeIndex = nextNode;
