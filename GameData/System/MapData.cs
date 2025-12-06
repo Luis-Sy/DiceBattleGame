@@ -1,13 +1,8 @@
 ﻿using DiceBattleGame.GameData.Characters;
 using DiceBattleGame.GameData.MapEvents;
 using DiceBattleGame.GameData.MapEvents.CombatEncounters;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.Reflection;
 
 namespace DiceBattleGame.GameData.System
 {
@@ -18,35 +13,62 @@ namespace DiceBattleGame.GameData.System
         private List<string> nodeTypes;
         private MapNode currentNode;
 
+        /*
+         TODO
+         -implement validation for node types
+         -implement more complex map layouts with branching paths
+         */
         public MapData(int seed, List<string> nodeTypes)
         {
             // generate map data based on seed
             random = new Random(seed);
             this.nodeTypes = nodeTypes;
             Generate(seed);
+            currentNode = mapNodes[0];
         }
 
+        // default map gen with default node types
         private void Generate(int seed)
         {
             // generate a map layout based on the seed
 
-            // retrieve possible encounter types
-            List<Type> combatEncounters = getCombatEncounters()
-                .Where(type => type.Name.Contains("Common") || type.Name.Contains("Elite"))
+            // create a weight table for selecting encounters
+            WeightedRandomSelector<string> encounterTable = new WeightedRandomSelector<string>(seed);
+            encounterTable.AddItem("Common Battle", 70.0);
+            encounterTable.AddItem("Elite Battle", 30.0);
+
+
+            // get all the defined map events
+            List<Type> events = getAllEvents();
+
+            // retrieve possible combat encounter types by querying their custom attribute
+
+            // get starting battle encounters
+            List<Type> startingEncounters = events
+                .Where(type => type.GetCustomAttribute<EventType>()?.TypeName == "Start")
                 .ToList();
-            // get starting encounters
-            List<Type> startingEncounters = getCombatEncounters()
-                .Where(type => type.Name.Contains("Start") )
+            // get common battle encounters
+            List<Type> commonEncounters = events
+                .Where(type => type.GetCustomAttribute<EventType>()?.TypeName == "Common Battle")
+                .ToList();
+            // get elite battle encounters
+            List<Type> eliteEncounters = events
+                .Where(type => type.GetCustomAttribute<EventType>()?.TypeName == "Elite Battle")
                 .ToList();
             // get boss encounters
-            List<Type> bossEncounters = getCombatEncounters()
-                .Where(type => type.Name.Contains("Boss"))
+            List<Type> bossEncounters = events
+                .Where(type => type.GetCustomAttribute<EventType>()?.TypeName == "Boss Battle")
                 .ToList();
 
-            Trace.WriteLine($"Found {startingEncounters.Count} starting combat encounters.");
-            Trace.WriteLine($"Found {combatEncounters.Count} combat encounters.");
-            Trace.WriteLine($"Found {bossEncounters.Count} boss combat encounters.");
-            
+            Trace.WriteLine(
+                $"Map Generation Debug Info:\n" +
+                $"----------------------------------------\n" +
+                $"Found {startingEncounters.Count} starting battle encounters\n" +
+                $"Found {commonEncounters.Count} common battle encounters\n" +
+                $"Found {eliteEncounters.Count} elite battle encounters\n" +
+                $"Found {bossEncounters.Count} boss battle encounters\n"
+                );
+
 
             // level for enemy scaling
             int enemyLevel = 1;
@@ -55,7 +77,7 @@ namespace DiceBattleGame.GameData.System
             MapEvent? startEvent = null;
             if (startingEncounters.Count > 0)
             {
-                startEvent = Activator.CreateInstance(startingEncounters[random.Next(startingEncounters.Count)], enemyLevel) as MapEvent;
+                startEvent = Activator.CreateInstance(startingEncounters[random.Next(startingEncounters.Count)], enemyLevel) as CombatEncounter;
             }
             if (startEvent == null)
             {
@@ -66,21 +88,57 @@ namespace DiceBattleGame.GameData.System
             mapNodes.Add(start);
 
             // create a series of random nodes based on the node types provided
+
+            // use a weighted selector to select battle types
+
+            WeightedRandomSelector<string> selector = new WeightedRandomSelector<string>();
+            selector.AddItem("Common Battle", 75);
+            selector.AddItem("Elite Battle", 25);
+
+
             for (int i = 0; i < 8; i++) // generate the next 8 nodes
             {
-                string nodeType = nodeTypes[random.Next(nodeTypes.Count)];
+                string nodeType = "undefined";
                 MapEvent? nodeEvent = null;
-                if (combatEncounters.Count > 0)
+                string selectedNode = selector.GetRandomItem();
+
+                if (selectedNode == "Common Battle")
                 {
-                    nodeEvent = Activator.CreateInstance(combatEncounters[random.Next(combatEncounters.Count)], enemyLevel) as MapEvent;
-                    // scale the encounter to the current enemy level
-                    nodeEvent.initializeEvent(enemyLevel);
-                    enemyLevel++;
-                }
-                if (nodeEvent == null)
+                    if (commonEncounters.Count > 0)
+                    {
+                        int selection = random.Next(commonEncounters.Count);
+                        nodeEvent = Activator.CreateInstance(commonEncounters[selection], enemyLevel) as CombatEncounter;
+                        nodeType = typeof(CombatEncounter).GetCustomAttribute<EventType>()?.TypeName ?? "Common Battle";
+                        // scale the encounter to the current enemy level
+                        nodeEvent.initializeEvent(enemyLevel);
+                        enemyLevel++;
+                        // remove the encounter from the list to prevent repeats
+                        commonEncounters.RemoveAt(selection);
+                    }
+                    if (nodeEvent == null)
+                    {
+                        throw new InvalidOperationException("No valid combat encounter found for node.");
+                    }
+                }else if (selectedNode == "Elite Battle")
                 {
-                    throw new InvalidOperationException("No valid combat encounter found for node.");
+                    if (eliteEncounters.Count > 0)
+                    {
+                        int selection = random.Next(eliteEncounters.Count);
+                        nodeEvent = Activator.CreateInstance(eliteEncounters[selection], enemyLevel) as CombatEncounter;
+                        nodeType = typeof(CombatEncounter).GetCustomAttribute<EventType>()?.TypeName ?? "Elite Battle";
+                        // scale the encounter to the current enemy level
+                        nodeEvent.initializeEvent(enemyLevel);
+                        enemyLevel++;
+                        // remove the encounter from the list to prevent repeats
+                        eliteEncounters.RemoveAt(selection);
+                    }
+                    if (nodeEvent == null)
+                    {
+                        throw new InvalidOperationException("No valid combat encounter found for node.");
+                    }
                 }
+
+
                 MapNode newNode = new MapNode(nodeType, nodeEvent);
                 mapNodes.Add(newNode);
             }
@@ -89,7 +147,7 @@ namespace DiceBattleGame.GameData.System
             MapEvent? bossEvent = null;
             if (bossEncounters.Count > 0)
             {
-                bossEvent = Activator.CreateInstance(bossEncounters[random.Next(bossEncounters.Count)], enemyLevel) as MapEvent;
+                bossEvent = Activator.CreateInstance(bossEncounters[random.Next(bossEncounters.Count)], enemyLevel) as CombatEncounter;
                 // scale the encounter to the current enemy level
                 bossEvent.initializeEvent(enemyLevel);
                 enemyLevel++;
@@ -102,15 +160,19 @@ namespace DiceBattleGame.GameData.System
             MapNode bossNode = new MapNode("Boss Battle", bossEvent);
             mapNodes.Add(bossNode);
 
-            // link them all together from start to finish
-            for (int i = 0; i < mapNodes.Count - 1; i++)
+            for (int i = 0; i < mapNodes.Count; i++)
             {
-                mapNodes[i].next = mapNodes[i + 1];
-                if (mapNodes[i].GetNodeType().Contains("Battle"))
+                // if the encounter is a combat encounter, write enemy list to console
+                if (mapNodes[i].GetNodeData() is CombatEncounter)
                 {
-                    Trace.WriteLine($"Node {i} is a {mapNodes[i].GetNodeType()} " +
-                        $"with encounter {mapNodes[i].GetNodeData().GetEventData<List<Character>>().Last()}.");
+                    Trace.WriteLine($"Node {i} is a combat encounter with these enemies:");
+                    List<Character> enemies = mapNodes[i].GetNodeData().GetEventData<List<Character>>();
+                    foreach (var enemy in enemies)
+                    {
+                        Trace.WriteLine(enemy);
+                    }
                 }
+
             }
 
             // set the current node to the start
@@ -127,13 +189,13 @@ namespace DiceBattleGame.GameData.System
             return mapNodes;
         }
 
-        // helper functions to retrieve all defined encounters in the database
+        // helper function to retrieve all defined map events
 
-        private List<Type> getCombatEncounters()
+        private List<Type> getAllEvents()
         {
             return AppDomain.CurrentDomain
                 .GetAssemblies().SelectMany(assembly => assembly.GetTypes())
-                .Where(type => type.IsSubclassOf(typeof(CombatEncounter)) && !type.IsAbstract)
+                .Where(type => type.IsSubclassOf(typeof(MapEvent)) && !type.IsAbstract)
                 .ToList();
 
         }

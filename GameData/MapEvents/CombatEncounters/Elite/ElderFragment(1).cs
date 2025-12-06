@@ -8,18 +8,20 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Elite
 {
-    internal class Elite_Cultist_1_ : CombatEncounter
+    [EventType("Elite Battle")]
+    internal class ElderFragment_1_ : CombatEncounter
     {
-        public Elite_Cultist_1_(int targetLevel) : base(targetLevel)
-        {
+        public ElderFragment_1_(int targetLevel) : base(targetLevel) {
+
             eventType = "Elite Battle";
             initializeEvent(targetLevel);
         }
+
         public override void initializeEvent(int targetLevel)
         {
             enemies = new List<Character>()
             {
-                new Cultist()
+                new ElderFragment()
             };
 
             scaleEnemies(targetLevel);

@@ -1,4 +1,5 @@
 ﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Characters.Enemies.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Common
 {
-    internal class Common_Goblin_1__Hobogoblin_1_ : CombatEncounter
+    [EventType("Common Battle")]
+    internal class Zombie_2_ : CombatEncounter
     {
-        public Common_Goblin_1__Hobogoblin_1_(int targetLevel) : base(targetLevel)
+        public Zombie_2_(int targetLevel) : base(targetLevel)
         {
             eventType = "Battle";
             initializeEvent(targetLevel);
@@ -18,9 +20,8 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Common
         {
             enemies = new List<Character>()
             {
-                new Characters.Enemies.Common.Goblin(),
-                new Characters.Enemies.Common.Goblin(),
-                new Characters.Enemies.Common.Hobogoblin()
+                new Zombie(),
+                new Zombie()
             };
 
             scaleEnemies(targetLevel);

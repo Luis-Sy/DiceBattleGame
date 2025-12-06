@@ -1,24 +1,27 @@
 ﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Characters.Enemies.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Boss
+namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Common
 {
-    internal class Boss_Dragon_1_ : CombatEncounter
+    [EventType("Common Battle")]
+    internal class Skeleton_2_ : CombatEncounter
     {
-        public Boss_Dragon_1_(int targetLevel) : base(targetLevel)
+        public Skeleton_2_(int targetLevel) : base(targetLevel)
         {
-            eventType = "Starting Battle";
+            eventType = "Battle";
             initializeEvent(targetLevel);
         }
         public override void initializeEvent(int targetLevel)
         {
             enemies = new List<Character>()
             {
-                new Characters.Enemies.Boss.Dragon()
+                new Skeleton(),
+                new Skeleton()
             };
 
             scaleEnemies(targetLevel);

@@ -1,4 +1,4 @@
-﻿using DiceBattleGame.Data.System;
+﻿using DiceBattleGame.GameData.System;
 using DiceBattleGame.GameData.Characters;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceBattleGame.Data.Characters.Playable
+namespace DiceBattleGame.GameData.Characters.Playable
 {
     internal class RangerPlayer : Character
     {

@@ -11,7 +11,8 @@ namespace DiceBattleGame.GameData.System
         private MapData mapData;
         public List<string> NodeTypes = new List<string> // default node types
         { 
-            "Battle",
+            "Start", // starting nodes
+            "Common Battle",
             "Elite Battle",
             "Boss Battle",
             "Shop", 
@@ -20,7 +21,7 @@ namespace DiceBattleGame.GameData.System
         };
         // private List<Item> inventory; // future implementation for inventory handling
 
-        // method to initialize a new campaign with a player character and a random seed
+        // default method to initialize a new campaign with a player character, a random seed, and the default node types
         public CampaignManager(Character player)
         {
             playerParty.Add(player);

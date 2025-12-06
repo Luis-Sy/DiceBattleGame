@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DiceBattleGame.GameData.MapEvents
+﻿namespace DiceBattleGame.GameData.MapEvents
 {
     internal abstract class MapEvent // this is the generic class used to represent map events during a campaign
     {
         protected string eventType = "undefined"; // type of map event (e.g., combat, shop, rest, story, etc.)
-        
+
         public MapEvent()
         {
             // base constructor for map events
@@ -27,15 +21,15 @@ namespace DiceBattleGame.GameData.MapEvents
             // parameter is to scale event difficulty or content based on target level
         }
 
-        public string GetEventType()
+        public MapEvent GetMapEvent()
         {
-            return eventType;
+            return this;
         }
 
-        public virtual T GetEventData<T>()
+        public virtual T? GetEventData<T>()
         {
             // override in derived classes to return specific event data
-            return default(T);
+            return default;
         }
     }
 }

@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Starting
+namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Boss
 {
-    internal class Start_Goblin_Slime : CombatEncounter
+    [EventType("Boss Battle")]
+    internal class Dragon_1_ : CombatEncounter
     {
-        public Start_Goblin_Slime(int targetLevel) : base(targetLevel)
+        public Dragon_1_(int targetLevel) : base(targetLevel)
         {
             eventType = "Starting Battle";
             initializeEvent(targetLevel);
@@ -18,10 +19,10 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Starting
         {
             enemies = new List<Character>()
             {
-                new Characters.Enemies.Common.Goblin(),
-                new Characters.Enemies.Common.Slime()
+                new Characters.Enemies.Boss.Dragon()
             };
 
+            scaleEnemies(targetLevel);
         }
     }
 }

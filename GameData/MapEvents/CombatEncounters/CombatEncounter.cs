@@ -11,7 +11,7 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters
     {
         protected int targetLevel; // target level for scaling enemy difficulty
         protected List<Character> enemies = new List<Character>(); // list of enemy characters in the encounter
-        
+
         public CombatEncounter(int targetLevel)
         {
             initializeEvent(targetLevel);
@@ -33,13 +33,24 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters
             }
         }
 
+        public List<Character> getEnemies()
+        {
+            return enemies;
+        }
+
+        // Fix for CS0508 and CS0453:
+        // - Change return type from T? to T to match the base class signature.
+        // - Remove use of Nullable<T> (T?) since T can be a reference type or value type.
         public override T GetEventData<T>()
         {
             if (typeof(T) == typeof(List<Character>))
             {
+                // Cast enemies to T and return
                 return (T)(object)enemies;
             }
-            return default(T);
+
+            return base.GetEventData<T>();
         }
+
     }
 }

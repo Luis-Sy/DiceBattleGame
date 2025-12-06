@@ -1,4 +1,4 @@
-﻿using DiceBattleGame.Data.System;
+﻿using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;

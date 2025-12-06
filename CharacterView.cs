@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,25 +25,37 @@ namespace DiceBattleGame
 
             // change this to test different characters
             Character character = new Samurai();
+            Character character2 = new Samurai();
 
             // change this to see how a character's stats grow
             character.setLevel(1);
             character.initializeStats();
 
-            nameLbl.Text = character.getName();
-            typeLbl.Text = character.getCharacterType();
-            levelLbl.Text = "Level: " + character.getLevel().ToString();
-            healthLbl.Text = "Health: " + character.getHealth().ToString();
+            // how to access and modify the stats
+            character.getStats()["Strength"] += 5;
+            // works with stat growths too
+            character2.getStatGrowths()["Strength"] += 5;
+
+            character.getResistances()["Slash"] = 1.6;
+            Trace.WriteLine(character.getResistances()["Slash"]);
+
+            character2.setLevel(5);
+            character2.initializeStats();
+
+            nameLbl.Text = character2.getName();
+            typeLbl.Text = character2.getCharacterType();
+            levelLbl.Text = "Level: " + character2.getLevel().ToString();
+            healthLbl.Text = "Health: " + character2.getHealth().ToString();
 
 
             // display stats
-            foreach (var stat in character.getStats())
+            foreach (var stat in character2.getStats())
             {
                 statBox.Items.Add(stat.Key + ": " + stat.Value);
             }
 
             // display stat growths
-            foreach (var growth in character.getStatGrowths())
+            foreach (var growth in character2.getStatGrowths())
             {
                 if (growth.Value > 0)
                 {

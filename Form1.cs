@@ -1,8 +1,8 @@
 namespace DiceBattleGame
 {
-    using DiceBattleGame.Data.Characters;
-    using DiceBattleGame.Data.Characters.Playable;
-    using DiceBattleGame.Data.System;
+    using DiceBattleGame.GameData.Characters;
+    using DiceBattleGame.GameData.Characters.Playable;
+    using DiceBattleGame.GameData.System;
     using DiceBattleGame.GameData.System;
     using System.Diagnostics;
     public partial class Form1 : Form

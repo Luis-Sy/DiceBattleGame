@@ -1,4 +1,6 @@
+using DiceBattleGame.GameData.Items;
 using DiceBattleGame.GameData.System;
+using System.Diagnostics;
 
 namespace DiceBattleGame.GameData.Characters
 {
@@ -7,7 +9,7 @@ namespace DiceBattleGame.GameData.Characters
     {
         // make these protected so derived classes set them instead of hiding them
         protected int health;
-        protected int defaultHealth; // This stores the original hp for the character, this will need to be changed to account for longer gameplay. - Junaid
+        protected int maxHealth; // This stores the original hp for the character, this will need to be changed to account for longer gameplay. - Junaid
         // armor class is the value an attack roll must meet or exceed to hit the character
         protected int armorClass;
 
@@ -89,7 +91,7 @@ namespace DiceBattleGame.GameData.Characters
             }
 
             //additionally, recalculate health
-            defaultHealth = stats["Vigor"] * 2;
+            maxHealth = stats["Vigor"] * 2;
 
             level += 1;
             experience -= 5;
@@ -126,9 +128,9 @@ namespace DiceBattleGame.GameData.Characters
             }
             else
             {
-                // deal no damage and log a message to the console
-                Console.WriteLine($"Damage type {type} not recognized! No damage taken.");
-                finalDamage = 0;
+                // deal unmodified damage and log to console
+                Trace.WriteLine($"Damage type {type} not recognized! Dealing raw damage.");
+                finalDamage = amount;
             }
 
         }
@@ -179,6 +181,7 @@ namespace DiceBattleGame.GameData.Characters
             return experience;
         }
 
+        // methods to retrieve different dictionaries of the character
         public Dictionary<string, int> getStats()
         {
             return stats;
@@ -221,8 +224,8 @@ namespace DiceBattleGame.GameData.Characters
                 stats[stat] = 10 + (level - 1) + statGrowths[stat];
             }
 
-            defaultHealth = stats["Vigor"] * 2;
-            health = defaultHealth;
+            maxHealth = stats["Vigor"] * 2;
+            restoreHp();
         }
 
         public int getArmoclass()
@@ -264,14 +267,14 @@ namespace DiceBattleGame.GameData.Characters
             return dice.Roll();
         }
 
-        public void setHealth() //This allows us to directly restore the health of a character back its default - Junaid
+        public void setHealth(int amount) // updated to allow changing the character's current health to whatever we want - Luis
         {
-            health = defaultHealth;
+            health = amount;
         }
 
         public void restoreHp() //Restores the character back to full health, currently used on battle start, will need to be changed when longer campaign - J
         {
-            health = defaultHealth;
+            health = maxHealth;
         }
 
         public void changeHp(int x)
@@ -286,11 +289,13 @@ namespace DiceBattleGame.GameData.Characters
             return true;
         }
 
-        /* below are placeholder methods for using skills and items
+        
          
-        public void useItem(Item item){
-            item.use();
+        public void useItem(Item item, Character target){
+            item.Use(target);
         }
+
+        /* placeholder skill usage method
 
         public void useSkill(Skill skill){
             skill.use();
@@ -310,7 +315,6 @@ namespace DiceBattleGame.GameData.Characters
     // player classes (in the process of migrating to separate files)
     /*
 
-    // enemies (uses custom weapons)
 
     // twisted elite enemies (enemies based on the playable classes, but with major differences)
 
