@@ -73,6 +73,11 @@ namespace DiceBattleGame.GameData.System
             */
         }
 
+        public List<MapNode> getMapNodes()
+        {
+            return mapData.GetAllNodes();
+        }
+
         // debug function to log the nodes to the console
         public void displayMapData()
         {
