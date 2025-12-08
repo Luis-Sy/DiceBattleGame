@@ -23,19 +23,11 @@ namespace DiceBattleGame.GameData.Characters
         {
             {"Slash", 1.0},
             {"Pierce", 1.0},
-            {"Blunt", 1.0}
-            /* pulled from standard dnd damage types for reference
-             * probably cutting the number down for simplicity
-            {"Fire", 1.0},
-            {"Ice", 1.0},
-            {"Lightning", 1.0},
-            {"Acid", 1.0},
-            {"Poison", 1.0},
-            {"Force", 1.0},
-            {"Psychic", 1.0},
-            {"Radiant", 1.0},
-            {"Necrotic", 1.0}
-             */
+            {"Blunt", 1.0},
+            {"Magic", 1.0 },
+            {"Radiant", 1.0 },
+            {"Arcane", 1.0 },
+            {"Psychic", 1.0 }
         };
 
         protected string name = "Character"; // display name
@@ -128,8 +120,8 @@ namespace DiceBattleGame.GameData.Characters
             }
             else
             {
-                // deal unmodified damage and log to console
-                Trace.WriteLine($"Damage type {type} not recognized! Dealing raw damage.");
+                // if no defined damage resistance for provided type, deal raw damage
+                Trace.WriteLine($"Character does not have a defined value for {type} resistance. Assuming 1.0x and dealing damage.");
                 finalDamage = amount;
             }
 
