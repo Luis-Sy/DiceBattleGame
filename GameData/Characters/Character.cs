@@ -105,12 +105,13 @@ namespace DiceBattleGame.GameData.Characters
         public void takeDamage(int amount, string type)
         {
             int finalDamage = 0;
-            // check to see if the damage type exists
+            // check to see if the character has a defined resistance for the provided damage type
             if (damageResistances.ContainsKey(type))
             {
+                // multiply damage by the character's damage resistance modifier
                 finalDamage = (int)Math.Ceiling(amount * damageResistances[type]);
 
-                // round up to 1 if necessary
+                // round up to 1 if necessary to prevent stalemates
                 if (finalDamage < 1)
                 {
                     finalDamage = 1;
@@ -276,9 +277,10 @@ namespace DiceBattleGame.GameData.Characters
 
         // used exclusively for enemy ai actions
         // inside each defined enemy class , this method will be overridden to define unique behaviors
-        public virtual bool takeAction()
+        public virtual Character takeAction(List<Character> targets)
         {
-            return true;
+            Random random = new Random();
+            return targets[random.Next(targets.Count)];
         }
 
         
