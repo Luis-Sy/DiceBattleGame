@@ -12,8 +12,10 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters
         protected int targetLevel; // target level for scaling enemy difficulty
         protected List<Character> enemies = new List<Character>(); // list of enemy characters in the encounter
 
-        public CombatEncounter(int targetLevel)
+        public CombatEncounter(int targetLevel):base("Combat Encounter")
+
         {
+            this.targetLevel = targetLevel; 
             initializeEvent(targetLevel);
         }
 

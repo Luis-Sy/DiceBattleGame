@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiceBattleGame.GameData.System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,31 +15,34 @@ namespace DiceBattleGame.Forms_UI
     {
 
 
-        private enum NodeType
-        {
-            Battle,
-            Shop,
-            Rest,
-            Boss
-        }
-        private List<NodeType> nodeTypes = new List<NodeType>
-        {
-            NodeType.Battle,
-            NodeType.Battle,
-            NodeType.Rest,
-            NodeType.Shop,
-            NodeType.Battle,
-            NodeType.Battle,
-            NodeType.Rest,
-            NodeType.Boss
-        };
+        //private enum NodeType
+        //{
+        //    Battle,
+        //    Shop,
+        //    Rest,
+        //    Boss
+        //}
+        //private List<NodeType> nodeTypes = new List<NodeType>
+        //{
+        //    NodeType.Battle,
+        //    NodeType.Battle,
+        //    NodeType.Rest,
+        //    NodeType.Shop,
+        //    NodeType.Battle,
+        //    NodeType.Battle,
+        //    NodeType.Rest,
+        //    NodeType.Boss
+        //};
 
-        private int currentNodeIndex = 0;
+        private List<MapNode> nodes;
+        private int currentNodeIndex=0;
 
         //-------------------
         public MapForm()
         {
             InitializeComponent();
+            nodes = GameManager.Campaign.getMapNodes();
+            
 
 
         }
@@ -53,16 +57,21 @@ namespace DiceBattleGame.Forms_UI
             GameManager.SwitchTo(new CharacterSelectForm());
         }
 
-        private Brush GetNodeColor(NodeType type)
+        private Brush GetNodeColor(MapNode node)
         {
-            switch (type)
+            string type = node.GetNodeType();
+
+            return (type) switch
             {
-                case NodeType.Battle: return Brushes.LightGray;
-                case NodeType.Shop: return Brushes.Pink;
-                case NodeType.Rest: return Brushes.LightBlue;
-                case NodeType.Boss: return Brushes.DarkRed;
-                default: return Brushes.LightGray;
-            }
+                "Start" => Brushes.LightBlue,
+                "Common Battle" => Brushes.Orange,
+                "Elite Battle" => Brushes.DarkRed,
+                "Boss Battle" => Brushes.Purple,
+                "Shop" => Brushes.LightGreen,
+                "Rest" => Brushes.LightGray,
+                "Event" => Brushes.Gold,
+                _ => Brushes.White
+            };
         }
 
 
@@ -72,7 +81,7 @@ namespace DiceBattleGame.Forms_UI
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             //length of the game
-            int nodeCount = nodeTypes.Count;
+            int nodeCount = nodes.Count;
             int margin = 40;
 
             //center the nodes
@@ -103,9 +112,9 @@ namespace DiceBattleGame.Forms_UI
 
                 Rectangle nodeRect = new Rectangle(x - nodeSize / 2, centerY - nodeSize / 2, nodeSize, nodeSize);
 
-                Brush fillBrush = GetNodeColor(nodeTypes[i]);
+                Brush nodeBrush = GetNodeColor(nodes[i]);
                 //draw node
-                g.FillEllipse(fillBrush, nodeRect);
+                g.FillEllipse(nodeBrush, nodeRect);
                 g.DrawEllipse(Pens.Black, nodeRect);
 
             }
@@ -122,29 +131,20 @@ namespace DiceBattleGame.Forms_UI
         //move foward to next node
         private void btn_Continue_Click(object sender, EventArgs e)
         {
-            if (currentNodeIndex >= nodeTypes.Count - 1)
+            if (currentNodeIndex >= nodes.Count - 1)
             {
                 return;
             }
             //next node index
             int nextNode = currentNodeIndex + 1;
 
-            //detect node type
-            NodeType type = nodeTypes[nextNode];
+            string nodeType = nodes[nextNode].GetNodeType();
 
-            switch (type)
+            if(nodeType == "Shop")
             {
-                //case NodeType.Battle:
-                //GameManager.SwitchTo(new BattleForm)
-                //break;
-
-                case NodeType.Shop:
-                    GameManager.SwitchTo(new ShopForm());
-                    break;
-
-                    //If we want a different form for boss battle goes here in other switch 
-                    //and also we can do a new form to summarize or show the healing in the rest node
+                GameManager.SwitchTo(new ShopForm());
             }
+
 
             currentNodeIndex = nextNode;
             pic_Map.Invalidate();

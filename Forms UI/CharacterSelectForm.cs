@@ -104,7 +104,12 @@ namespace DiceBattleGame
 
         private void btn_Next_Click(object sender, EventArgs e)
         {
-            GameManager.SwitchTo(new MapForm());
+            int index = cmb_PlayerSelector.SelectedIndex;
+
+            GameManager.SelectedCharacter = availableCharacters[index];
+            GameManager.StartCampaign();
+            GameManager.MapInstance = new MapForm();
+            GameManager.SwitchTo(GameManager.MapInstance);
         }
 
         private void tbl_Stats_Paint(object sender, PaintEventArgs e)

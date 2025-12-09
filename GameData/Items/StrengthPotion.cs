@@ -9,10 +9,10 @@ namespace DiceBattleGame.GameData.Items
 {
     internal class StrengthPotion:Item
     {
-        public StrengthPotion()
+        public StrengthPotion():base("Strength Potion",10,"Description")
         {
-            string name = "Strength Potion";
-            int price = 10;
+            //string name = "Strength Potion";
+            //int price = 10;
         }
 
         public override void Use(Character entity) //I dont know if this even works - J

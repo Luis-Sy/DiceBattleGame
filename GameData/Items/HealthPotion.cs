@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.Items
 {
-    internal class HealthPotion:Item
+    internal class HealthPotion : Item
     {
-        public HealthPotion() 
-        {
-            string name = "Health Potion";
-            int price = 10; //TO BE CHANGED
-            
+      
+
+        public HealthPotion():base("Health Potion",10,"Restores 5 HP") { 
         }
+        
 
         public override void Use(Character entity) //uses the changehp method on characters to add the value to the hp, value given must be an int
         {

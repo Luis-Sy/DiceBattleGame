@@ -9,10 +9,9 @@ namespace DiceBattleGame.GameData.Items
 {
     internal class DexterityPotion:Item
     {
-        public DexterityPotion()
+        public DexterityPotion():base("Dexeterity Potion",10,"Description")
         {
-            string name = "Dexeterity Potion"; //Can we rename this to coffee - J
-            int price = 10;
+            
         }
 
         public override void Use(Character entity)

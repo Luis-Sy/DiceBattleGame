@@ -9,10 +9,10 @@ namespace DiceBattleGame.GameData.Items
 {
     internal class IntelligencePotion:Item
     {
-        public IntelligencePotion() 
+        public IntelligencePotion() :base("Intelligence Potion",10,"Description")
         {
-            string name = "Intelligence Potion";
-            int price = 10;
+            //string name = "Intelligence Potion";
+            //int price = 10;
         }
 
         public override void Use(Character entity)

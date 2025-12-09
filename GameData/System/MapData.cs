@@ -36,6 +36,7 @@ namespace DiceBattleGame.GameData.System
             WeightedRandomSelector<string> encounterTable = new WeightedRandomSelector<string>(seed);
             encounterTable.AddItem("Common Battle", 70.0);
             encounterTable.AddItem("Elite Battle", 30.0);
+            
 
 
             // get all the defined map events
@@ -92,14 +93,24 @@ namespace DiceBattleGame.GameData.System
             // use a weighted selector to select battle types
 
             WeightedRandomSelector<string> selector = new WeightedRandomSelector<string>();
-            selector.AddItem("Common Battle", 75);
-            selector.AddItem("Elite Battle", 25);
+            selector.AddItem("Common Battle", 70);
+            selector.AddItem("Elite Battle", 30);
+            
 
 
             for (int i = 0; i < 8; i++) // generate the next 8 nodes
             {
                 string nodeType = "undefined";
                 MapEvent? nodeEvent = null;
+                
+
+                if (i == 2)
+                {
+                    nodeEvent = new ShopEvent();
+                    nodeType = "Shop";
+                    mapNodes.Add(new MapNode(nodeType, nodeEvent));
+                    continue;//to prevent the overwriting 
+                }
                 string selectedNode = selector.GetRandomItem();
 
                 if (selectedNode == "Common Battle")
@@ -137,9 +148,14 @@ namespace DiceBattleGame.GameData.System
                         throw new InvalidOperationException("No valid combat encounter found for node.");
                     }
                 }
+                else if (selectedNode == "Shop")
+                {
+                    nodeEvent = new ShopEvent();
+                    nodeType = "Shop";
+                }
 
 
-                MapNode newNode = new MapNode(nodeType, nodeEvent);
+                    MapNode newNode = new MapNode(nodeType, nodeEvent);
                 mapNodes.Add(newNode);
             }
 
