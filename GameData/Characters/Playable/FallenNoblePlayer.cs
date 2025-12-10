@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 1.25 },
                 { "Pierce", 1.25 },
-                { "Blunt", 1.25 }
+                { "Blunt", 1.25 },
+                { "Magic", 1.25 },
+                { "Radiant", 1.25 },
+                { "Arcane", 1.25 },
+                { "Psychic", 0.5 }
             };
             armorClass = 15;
             weapon = new Custom("Rapier", "Worn Rapier", "Pierce", new D8());

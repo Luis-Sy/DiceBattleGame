@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 1.0 },
                 { "Pierce", 1.0 },
-                { "Blunt", 1.0 }
+                { "Blunt", 1.0 },
+                { "Magic", 0.75 },
+                { "Radiant", 1.25 },
+                { "Arcane", 1.5 },
+                { "Psychic", 1.5 }
             };
             armorClass = 12;
             weapon = new Custom("Magic Staff", "Staff of Awakening", "Blunt", new diceBag(7, 2));

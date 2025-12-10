@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 0.5 },
                 { "Pierce", 1.25 },
-                { "Blunt", 1.25 }
+                { "Blunt", 1.25 },
+                { "Magic", 1.0 },
+                { "Radiant", 1.0 },
+                { "Arcane", 1.25 },
+                { "Psychic", 0.5 }
             };
             armorClass = 17;
             weapon = new Custom("Katana", "Aged Katana", "Slash", new D10());

@@ -301,9 +301,6 @@ namespace DiceBattleGame.GameData.Characters
     /// <summary>
     /// TODO FOR FINAL:
     /// -Add unique abilities to each class (both player and enemy)
-    /// -Add stat scaling to weapons and character stats
-    /// -Add elemental damage types and resistances(?)
-    /// -separate each category of character into their own files for organization
     /// </summary>
 
     // player classes (in the process of migrating to separate files)

@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 1.0 },
                 { "Pierce", 1.0 },
-                { "Blunt", 1.0 }
+                { "Blunt", 1.0 },
+                { "Magic", 1.0 },
+                { "Radiant", 1.0 },
+                { "Arcane", 2.0 },
+                { "Psychic", 2.0 }
             };
             armorClass = 10;
             weapon = new Custom("Club", "Wooden Club", "Blunt", new D6());

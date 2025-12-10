@@ -28,7 +28,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 1.5 },
                 { "Pierce", 1.0 },
-                { "Blunt", 1.0 }
+                { "Blunt", 1.0 },
+                { "Magic", 1.0 },
+                { "Radiant", 1.0 },
+                { "Arcane", 1.5 },
+                { "Psychic", 0.5 }
             };
             
             armorClass = 13;

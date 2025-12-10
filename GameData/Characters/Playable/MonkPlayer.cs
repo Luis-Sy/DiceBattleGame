@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 1.0 },
                 { "Pierce", 1.0 },
-                { "Blunt", 1.0 }
+                { "Blunt", 1.0 },
+                { "Magic", 1.5 },
+                { "Radiant", 1.5 },
+                { "Arcane", 0.5 },
+                { "Psychic", 0.5 }
             };
             armorClass = 14;
             weapon = new Custom("Fists", "Monk's Fists", "Blunt", new diceBag(5, 2));
