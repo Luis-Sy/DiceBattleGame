@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             {
                 { "Slash", 1.5 },
                 { "Pierce", 1.0 },
-                { "Blunt", 1.0 }
+                { "Blunt", 1.0 },
+                { "Magic", 0.5 },
+                { "Radiant", 0.5 },
+                { "Arcane", 1.0 },
+                { "Psychic", 1.0 }
             };
             armorClass = 15;
             weapon = new Custom("Great Axe", "Berserker's Great Axe", "Slash", new diceBag(9, 2));
