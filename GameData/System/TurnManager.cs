@@ -217,6 +217,10 @@ namespace DiceBattleGame.GameData.System
                 Log($"{attackerName} missed! (Roll{roll} vs AC{ac})");
             }
         }
+        public void ForceEndBattle()
+        {
+            battleOver = true;
+        }
     }
 
 

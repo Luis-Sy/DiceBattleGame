@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DiceBattleGame
 {
     //==============================================================================ABSTRACT
-    internal abstract class Weapon
+    public abstract class Weapon
     {
         protected string weaponType = "Weapon";
         protected string weaponName = "Weapon";

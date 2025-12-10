@@ -15,8 +15,13 @@ namespace DiceBattleGame
 
         //selected player before creating the campaingManager
         public static Character? SelectedCharacter { get;  set; }
+        //saves the player's current position on the map
+        public static int CurrentMapNodeIndex { get; set; } = 0;
 
         public static MapForm? MapInstance { get; set; }
+
+        //to finalize the game when the player dies
+        public static bool PlayerIsDead { get; set; } = false;
 
         // Sets the starting form when the application launches.
         public static Form GetStartupForm()
@@ -32,6 +37,8 @@ namespace DiceBattleGame
                 throw new Exception("No characther selected before starting campaign");
 
             Campaign = new CampaignManager(SelectedCharacter);
+            CurrentMapNodeIndex = 0;
+            PlayerIsDead = false;
         }
 
 

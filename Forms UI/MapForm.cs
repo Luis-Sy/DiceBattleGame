@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.GameData.System;
+﻿using DiceBattleGame.GameData.MapEvents.CombatEncounters;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,7 +36,8 @@ namespace DiceBattleGame.Forms_UI
         //};
 
         private List<MapNode> nodes;
-        private int currentNodeIndex=0;
+        //private int currentNodeIndex=0;
+        private int currentNodeIndex = GameManager.CurrentMapNodeIndex;
 
         //-------------------
         public MapForm()
@@ -137,13 +139,48 @@ namespace DiceBattleGame.Forms_UI
             }
             //next node index
             int nextNode = currentNodeIndex + 1;
+            MapNode node = nodes[nextNode];
 
-            string nodeType = nodes[nextNode].GetNodeType();
+            string nodeType = node.GetNodeType();
+
+            //save the progress befroe switching screens
+            currentNodeIndex = nextNode;
+            GameManager.CurrentMapNodeIndex = currentNodeIndex;
+            pic_Map.Invalidate();
 
             if(nodeType == "Shop")
             {
+                currentNodeIndex = nextNode;
+                pic_Map.Invalidate();
                 GameManager.SwitchTo(new ShopForm());
+                return;
             }
+
+
+            //--------------------------------------
+
+            //here goes the other forms to keep going with the map
+            if (nodeType == "Common Battle" || nodeType == "Elite Battle" || nodeType =="Boss Battle")
+            {
+                CombatEncounter enc = node.GetNodeData() as CombatEncounter;
+
+                currentNodeIndex = nextNode;
+                
+
+                BattleForm bf = new BattleForm(GameManager.SelectedCharacter, enc);
+                GameManager.SwitchTo(bf);
+                return;
+            }
+            if(nodeType == "Rest")
+            {
+                MessageBox.Show("You feel stronger now. Your hp is restored");
+                GameManager.SelectedCharacter.restoreHp();
+
+                currentNodeIndex = nextNode;
+                
+                return;
+            }
+            //-----------------------------------------
 
 
             currentNodeIndex = nextNode;
@@ -156,6 +193,7 @@ namespace DiceBattleGame.Forms_UI
             if (currentNodeIndex > 0)
             {
                 currentNodeIndex--;
+                GameManager.CurrentMapNodeIndex = currentNodeIndex;
                 pic_Map.Invalidate();
             }
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.MapEvents.CombatEncounters
 {
-    internal abstract class CombatEncounter : MapEvent // this is the generic class used to represent combat encounters on the map
+    public abstract class CombatEncounter : MapEvent // this is the generic class used to represent combat encounters on the map
     {
         protected int targetLevel; // target level for scaling enemy difficulty
         protected List<Character> enemies = new List<Character>(); // list of enemy characters in the encounter

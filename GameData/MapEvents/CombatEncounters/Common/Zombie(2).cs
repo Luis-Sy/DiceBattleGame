@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Common
 {
     [EventType("Common Battle")]
-    internal class Zombie_2_ : CombatEncounter
+    public class Zombie_2_ : CombatEncounter
     {
         public Zombie_2_(int targetLevel) : base(targetLevel)
         {
