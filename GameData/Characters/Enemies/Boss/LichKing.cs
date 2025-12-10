@@ -7,35 +7,34 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Boss
 {
-    internal class Dragon : Character
+    internal class LichKing : Character
     {
-
-        public Dragon() : base()
+        public LichKing() : base()
         {
             type = "Boss Enemy";
-            name = "Dragon";
+            name = "Lich King";
             statGrowths = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             {
-                {"Vigor", 20},
-                {"Constitution", 15},
-                {"Strength", 10},
-                {"Dexterity", 8},
-                {"Intellect", 8},
-                {"Faith", 6}
+                {"Vigor", 15},
+                {"Constitution", 10},
+                {"Strength", 8},
+                {"Dexterity", 12},
+                {"Intellect", 20},
+                {"Faith", 15}
             };
             initializeStats();
             damageResistances = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
             {
-                { "Slash", 1.0 },
-                { "Pierce", 2.0 },
-                { "Blunt", 0.75 },
+                { "Slash", 1.5 },
+                { "Pierce", 1.0 },
+                { "Blunt", 1.25 },
                 { "Magic", 0.5 },
-                { "Radiant", 1.5 },
-                { "Arcane", 1.0 },
+                { "Radiant", 2.0 },
+                { "Arcane", 0.75 },
                 { "Psychic", 1.0 }
             };
-            armorClass = 16;
-            weapon = new Custom("Magic", "Fire Breath", "Magic", new diceBag(11, 3));
+            armorClass = 15;
+            weapon = new Custom("Staff", "Frostmourne", "Magic", new diceBag(11, 3));
         }
     }
 }
