@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             {
                 { "Slash", 1.25 },
                 { "Pierce", 1.25 },
-                { "Blunt", 1.25 }
+                { "Blunt", 1.25 },
+                { "Magic", 1.0 },
+                { "Radiant", 0.75 },
+                { "Arcane", 1.0 },
+                { "Psychic", 0.5 }
             };
             armorClass = 10;
             weapon = new Custom("Club", "Dirty Club", "Blunt", new D4());
