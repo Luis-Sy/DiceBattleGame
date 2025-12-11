@@ -4,7 +4,7 @@
     {
         protected string eventType = "undefined"; // type of map event (e.g., combat, shop, rest, story, etc.)
 
-        public MapEvent(string v)
+        public MapEvent()
         {
             // base constructor for map events
         }

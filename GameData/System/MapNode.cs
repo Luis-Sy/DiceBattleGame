@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.System
 {
-    internal class MapNode // this is the container class used to represent the nodes on the map during a campaign
+    public class MapNode // this is the container class used to represent the nodes on the map during a campaign
     {
         private string nodeType = "undefined"; // type of node (e.g., battle, shop, event, rest, etc.)
         private bool isVisited = false; // whether the node has been visited by the player

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace DiceBattleGame.GameData.System
 {
-    internal class MapData // this is the class used for handling map data and generation in a campaign
+    public class MapData // this is the class used for handling map data and generation in a campaign
     {
         private Random random;
         private List<MapNode> mapNodes = new List<MapNode>();
@@ -36,7 +36,6 @@ namespace DiceBattleGame.GameData.System
             WeightedRandomSelector<string> encounterTable = new WeightedRandomSelector<string>(seed);
             encounterTable.AddItem("Common Battle", 70.0);
             encounterTable.AddItem("Elite Battle", 30.0);
-            
 
 
             // get all the defined map events
@@ -93,23 +92,21 @@ namespace DiceBattleGame.GameData.System
             // use a weighted selector to select battle types
 
             WeightedRandomSelector<string> selector = new WeightedRandomSelector<string>();
-            selector.AddItem("Common Battle", 70);
-            selector.AddItem("Elite Battle", 30);
-            
+            selector.AddItem("Common Battle", 80);
+            selector.AddItem("Elite Battle", 20);
+            //selector.AddItem("Shop", 20);
 
 
             for (int i = 0; i < 8; i++) // generate the next 8 nodes
             {
                 string nodeType = "undefined";
                 MapEvent? nodeEvent = null;
-                
-
-                if (i == 2)
+                if (i == 2 || i==5)
                 {
-                    nodeEvent = new ShopEvent();
+                    nodeEvent = new Shop(enemyLevel);
                     nodeType = "Shop";
                     mapNodes.Add(new MapNode(nodeType, nodeEvent));
-                    continue;//to prevent the overwriting 
+                    continue;
                 }
                 string selectedNode = selector.GetRandomItem();
 
@@ -130,7 +127,8 @@ namespace DiceBattleGame.GameData.System
                     {
                         throw new InvalidOperationException("No valid combat encounter found for node.");
                     }
-                }else if (selectedNode == "Elite Battle")
+                }
+                else if (selectedNode == "Elite Battle")
                 {
                     if (eliteEncounters.Count > 0)
                     {
@@ -150,12 +148,16 @@ namespace DiceBattleGame.GameData.System
                 }
                 else if (selectedNode == "Shop")
                 {
-                    nodeEvent = new ShopEvent();
+                    nodeEvent = new Shop(enemyLevel);
                     nodeType = "Shop";
+                }
+                else
+                {
+                    throw new InvalidOperationException("Selected node type is not implemented in map generation.");
                 }
 
 
-                    MapNode newNode = new MapNode(nodeType, nodeEvent);
+                MapNode newNode = new MapNode(nodeType, nodeEvent);
                 mapNodes.Add(newNode);
             }
 

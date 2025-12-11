@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace DiceBattleGame.GameData.System
 {
-    internal class CampaignManager // this is the master class for handling the data of the game state during a playthrough
+    public class CampaignManager // this is the master class for handling the data of the game state during a playthrough
     {
         private List<Character> playerParty = new List<Character>();
         private List<Item> playerInventory = new List<Item>(); // the player's inventory during a play session
@@ -20,7 +20,7 @@ namespace DiceBattleGame.GameData.System
             "Event",
             "Rest"
         };
-        // private List<Item> inventory; // future implementation for inventory handling
+
 
         // default method to initialize a new campaign with a player character, a random seed, and the default node types
         public CampaignManager(Character player)
@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.System
 
             playerInventory.Clear(); // initialize empty inventory
             playerInventory.Add(new HealthPotion()); // starting item
-            
+
             // whatever else needs to be initialized here
         }
 

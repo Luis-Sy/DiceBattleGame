@@ -56,8 +56,8 @@ namespace DiceBattleGame.Forms_UI
             statusBar1.maxValue = player.getMaxHealth();
             statusBar2.maxValue = enemy.getMaxHealth();
 
-            statusBar1.currentValue = player.getMaxHealth();
-            statusBar2.currentValue = enemy.getMaxHealth();
+            statusBar1.currentValue = player.getHealth();
+            statusBar2.currentValue = enemy.getHealth();
         }
 
         private void UpdateStatusBars()
