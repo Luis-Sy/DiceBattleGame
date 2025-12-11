@@ -92,8 +92,9 @@ namespace DiceBattleGame.GameData.System
             // use a weighted selector to select battle types
 
             WeightedRandomSelector<string> selector = new WeightedRandomSelector<string>();
-            selector.AddItem("Common Battle", 75);
-            selector.AddItem("Elite Battle", 25);
+            selector.AddItem("Common Battle", 60);
+            selector.AddItem("Elite Battle", 20);
+            selector.AddItem("Shop", 20);
 
 
             for (int i = 0; i < 8; i++) // generate the next 8 nodes
@@ -136,6 +137,14 @@ namespace DiceBattleGame.GameData.System
                     {
                         throw new InvalidOperationException("No valid combat encounter found for node.");
                     }
+                }else if (selectedNode == "Shop")
+                {
+                    nodeEvent = new Shop(enemyLevel);
+                    nodeType = "Shop";
+                }
+                else
+                {
+                    throw new InvalidOperationException("Selected node type is not implemented in map generation.");
                 }
 
 
