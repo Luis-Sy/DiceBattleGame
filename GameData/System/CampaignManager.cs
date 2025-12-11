@@ -20,7 +20,7 @@ namespace DiceBattleGame.GameData.System
             "Event",
             "Rest"
         };
-        // private List<Item> inventory; // future implementation for inventory handling
+        
 
         // default method to initialize a new campaign with a player character, a random seed, and the default node types
         public CampaignManager(Character player)
