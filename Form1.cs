@@ -1,5 +1,9 @@
 namespace DiceBattleGame
 {
+    using DiceBattleGame.GameData.Characters;
+    using DiceBattleGame.GameData.Characters.Playable;
+    using DiceBattleGame.GameData.System;
+    using DiceBattleGame.GameData.System;
     using System.Diagnostics;
     public partial class Form1 : Form
     {
@@ -7,23 +11,10 @@ namespace DiceBattleGame
         {
             InitializeComponent();
 
-            // test for dicebag
-            Dice dice = new diceBag(5, 4);
-            Trace.WriteLine(dice.Roll());
+            // test code to view campaign and map generation
+            CampaignManager cm = new CampaignManager(new KnightPlayer());
 
-            // testing characters and weapons
-            Character player1 = new Knight();
-            Character player2 = new Duelist();
-
-            int damage = player1.attack();
-
-            Trace.WriteLine($"Knight attacking Duelist with HP: {player2.getHealth()}");
-            Trace.WriteLine($"Knight rolled: {damage} with damage type: Slash");
-            Weapon? weapon = player1.getWeapon();
-            player2.takeDamage(damage, weapon.getDamageType());
-            Trace.WriteLine($"Duelist has 2.0x Slash resistance (slash damage taken is doubled)");
-            Trace.WriteLine($"Duelist now has {player2.getHealth()} HP");
-
+            cm.displayMapData();
 
         }
     }
