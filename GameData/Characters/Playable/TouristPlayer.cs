@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 1.25 },
                 { "Pierce", 1.25 },
-                { "Blunt", 1.25 }
+                { "Blunt", 1.25 },
+                { "Magic", 1.0 },
+                { "Radiant", 0.5 },
+                { "Arcane", 1.0 },
+                { "Psychic", 1.5 }
             };
             armorClass = 14;
             weapon = new Custom("Camera", "Digital Camera", "Blunt", new D8());

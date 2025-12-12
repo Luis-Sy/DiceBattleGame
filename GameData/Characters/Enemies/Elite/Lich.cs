@@ -28,6 +28,10 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Slash", 0.8 },
                 { "Pierce", 1.25 },
                 { "Blunt", 1.5 },
+                { "Magic", 0.5 },
+                { "Radiant", 1.5 },
+                { "Arcane", 0.75 },
+                { "Psychic", 1.0 }
             };
             armorClass = 12;
             weapon = new Custom("Staff", "Staff of the Damned", "Blunt", new diceBag(7, 2));

@@ -1,9 +1,4 @@
 ﻿using DiceBattleGame.GameData.System;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.Characters.Playable
 {
@@ -27,7 +22,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 2.0 },
                 { "Pierce", 0.5 },
-                { "Blunt", 1.5 }
+                { "Blunt", 1.5 },
+                { "Magic", 1.0 },
+                { "Radiant", 1.5 },
+                { "Arcane", 1.0 },
+                { "Psychic", 0.5 }
             };
             armorClass = 12;
             weapon = new Custom("Daggers", "Twin Daggers", "Pierce", new diceBag(7, 2));

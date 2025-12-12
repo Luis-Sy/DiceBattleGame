@@ -28,6 +28,10 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Slash", 1.0 },
                 { "Pierce", 1.0 },
                 { "Blunt", 2.0 },
+                { "Magic", 0.5 },
+                { "Radiant", 1.25 },
+                { "Arcane", 0.75 },
+                { "Psychic", 0.75 }
             };
             armorClass = 14;
             weapon = new Custom("Crystal Spike", "Elder Crystal Spike", "Pierce", new diceBag(11, 2));

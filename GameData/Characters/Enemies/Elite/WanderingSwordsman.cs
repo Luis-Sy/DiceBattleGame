@@ -28,6 +28,10 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Slash", 0.5 },
                 { "Pierce", 1.25 },
                 { "Blunt", 1.25 },
+                { "Magic", 1.0 },
+                { "Radiant", 1.0 },
+                { "Arcane", 1.0 },
+                { "Psychic", 0.75 }
             };
             armorClass = 18;
             weapon = new Custom("Sword", "Katana", "Slash", new D10());

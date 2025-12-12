@@ -28,6 +28,10 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Slash", 0.5 },
                 { "Pierce", 2.0 },
                 { "Blunt", 0.5 },
+                { "Magic", 1.0 },
+                { "Radiant", 2.0 },
+                { "Arcane", 1.5 },
+                { "Psychic", 0.5 }
             };
             armorClass = 16;
             weapon = new Custom("Fangs", "Vampire's Fangs", "Pierce", new D12());

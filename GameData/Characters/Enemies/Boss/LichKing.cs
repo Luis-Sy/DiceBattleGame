@@ -5,36 +5,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceBattleGame.GameData.Characters.Enemies.Elite
+namespace DiceBattleGame.GameData.Characters.Enemies.Boss
 {
-    internal class MadSoldier : Character
+    internal class LichKing : Character
     {
-        public MadSoldier() : base()
+        public LichKing() : base()
         {
-            type = "Elite Enemy";
-            name = "Mad Soldier";
+            type = "Boss Enemy";
+            name = "Lich King";
             statGrowths = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             {
-                {"Vigor", 4},
-                {"Constitution", 4},
-                {"Strength", 4},
-                {"Dexterity", -2},
-                {"Intellect", -3},
-                {"Faith", -2}
+                {"Vigor", 15},
+                {"Constitution", 10},
+                {"Strength", 8},
+                {"Dexterity", 12},
+                {"Intellect", 20},
+                {"Faith", 15}
             };
             initializeStats();
             damageResistances = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
             {
                 { "Slash", 1.5 },
                 { "Pierce", 1.0 },
-                { "Blunt", 1.0 },
+                { "Blunt", 1.25 },
                 { "Magic", 0.5 },
-                { "Radiant", 0.5 },
-                { "Arcane", 1.0 },
+                { "Radiant", 2.0 },
+                { "Arcane", 0.75 },
                 { "Psychic", 1.0 }
             };
             armorClass = 15;
-            weapon = new Custom("Great Axe", "Berserker's Great Axe", "Slash", new diceBag(9, 2));
+            weapon = new Custom("Staff", "Frostmourne", "Magic", new diceBag(11, 3));
         }
     }
 }

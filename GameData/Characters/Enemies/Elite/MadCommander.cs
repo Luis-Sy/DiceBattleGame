@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             {
                 { "Slash", 1.0 },
                 { "Pierce", 1.5 },
-                { "Blunt", 0.75 }
+                { "Blunt", 0.75 },
+                { "Magic", 1.0 },
+                { "Radiant", 1.0 },
+                { "Arcane", 1.0 },
+                { "Psychic", 1.5 }
             };
             armorClass = 14;
             weapon = new Custom("Warhammer", "War Commander's Hammer", "Blunt", new D12());
