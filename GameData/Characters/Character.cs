@@ -278,26 +278,29 @@ namespace DiceBattleGame.GameData.Characters
         // used exclusively for enemy ai actions
         // inside each defined enemy class, this method will be overridden to define unique behaviors
         // by default, the character will attack a random target and return the attack roll
-        public virtual int takeAction(List<Character> targets)
+        public virtual Character enemySelectTarget(List<Character> targets)
         {
             // enemies will now have their attacks be handled by this method instead of in TurnManager
             Random random = new Random();
-            Dice dice = new D20();
             Character target = targets[random.Next(targets.Count)];
-            int attackRoll = dice.Roll();
 
-            // deal damage if attack hits
-            if (attackRoll >= target.getArmoclass())
-            {
-                target.takeDamage(this.attack(), this.getWeaponType());
-            }
-
-            // return the attack roll for logging on the battle screen
-            return attackRoll;
+            return target;
         }
 
-        
-         
+        // used exclusively for enemy ai actions
+        // enemies will return a string to determine their action that turn
+        public virtual string enemyTakeAction()
+        {
+            // by default, enemies will always attack
+            // override this in enemy classes to define unique behaviors
+            List<string> actions = new List<string> { "Attack" };
+
+            return actions[0];
+        }
+
+        // TurnManager will use the above two methods to determine enemy actions during their turn
+
+
         public void useItem(Item item, Character target){
             item.Use(target);
         }
