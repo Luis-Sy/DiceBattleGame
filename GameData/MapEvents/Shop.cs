@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.MapEvents
 {
-    internal class Shop : MapEvent
+    public class Shop : MapEvent
     {
-        private List<Item > shopInventory = new List<Item>();
+        private List<Item> shopInventory = new List<Item>();
 
         public Shop(int targetLevel)
         {

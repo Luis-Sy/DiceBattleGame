@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Boss
 {
     [EventType("Boss Battle")]
-    internal class Dragon_1_ : CombatEncounter
+    public class Dragon_1_ : CombatEncounter
     {
         public Dragon_1_(int targetLevel) : base(targetLevel)
         {

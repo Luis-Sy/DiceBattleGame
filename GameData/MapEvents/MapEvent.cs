@@ -1,6 +1,6 @@
 ﻿namespace DiceBattleGame.GameData.MapEvents
 {
-    internal abstract class MapEvent // this is the generic class used to represent map events during a campaign
+    public abstract class MapEvent // this is the generic class used to represent map events during a campaign
     {
         protected string eventType = "undefined"; // type of map event (e.g., combat, shop, rest, story, etc.)
 

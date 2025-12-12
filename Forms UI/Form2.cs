@@ -1,5 +1,5 @@
-﻿using DiceBattleGame.GameData.System;
-using DiceBattleGame.GameData.Characters;
+﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.System;
 using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;

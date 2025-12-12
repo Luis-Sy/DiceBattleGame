@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace DiceBattleGame.GameData.System
 {
-    internal class MapData // this is the class used for handling map data and generation in a campaign
+    public class MapData // this is the class used for handling map data and generation in a campaign
     {
         private Random random;
         private List<MapNode> mapNodes = new List<MapNode>();
@@ -101,6 +101,13 @@ namespace DiceBattleGame.GameData.System
             {
                 string nodeType = "undefined";
                 MapEvent? nodeEvent = null;
+                if (i == 2 || i==5)
+                {
+                    nodeEvent = new Shop(enemyLevel);
+                    nodeType = "Shop";
+                    mapNodes.Add(new MapNode(nodeType, nodeEvent));
+                    continue;
+                }
                 string selectedNode = selector.GetRandomItem();
 
                 if (selectedNode == "Common Battle")
@@ -120,7 +127,8 @@ namespace DiceBattleGame.GameData.System
                     {
                         throw new InvalidOperationException("No valid combat encounter found for node.");
                     }
-                }else if (selectedNode == "Elite Battle")
+                }
+                else if (selectedNode == "Elite Battle")
                 {
                     if (eliteEncounters.Count > 0)
                     {
@@ -138,6 +146,15 @@ namespace DiceBattleGame.GameData.System
                         throw new InvalidOperationException("No valid combat encounter found for node.");
                     }
                 }else if (selectedNode == "Shop")
+                {
+                    nodeEvent = new Shop(enemyLevel);
+                    nodeType = "Shop";
+                }
+                else
+                {
+                    throw new InvalidOperationException("Selected node type is not implemented in map generation.");
+                }
+                else if (selectedNode == "Shop")
                 {
                     nodeEvent = new Shop(enemyLevel);
                     nodeType = "Shop";

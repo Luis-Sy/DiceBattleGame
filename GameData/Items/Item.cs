@@ -7,11 +7,19 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.Items
 { //ABSTRACT CLASS, ADD METHODS.
-    internal abstract class Item
+    public abstract class Item
     {
-        string name;
-        int price;
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public string Description {  get; set; }
 
+        protected Item(string name, int price, string description)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+            
+        }
         public virtual void Use(Character entity)
         {
             

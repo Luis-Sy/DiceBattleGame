@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Common
 {
     [EventType("Common Battle")]
-    internal class Slime_2__Goblin_1_ : CombatEncounter
+    public class Slime_2__Goblin_1_ : CombatEncounter
     {
         public Slime_2__Goblin_1_(int targetLevel) : base(targetLevel)
         {

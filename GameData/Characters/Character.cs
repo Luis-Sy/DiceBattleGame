@@ -5,7 +5,7 @@ using System.Diagnostics;
 namespace DiceBattleGame.GameData.Characters
 {
     // this class is used as a base for both playable and non-playable characters
-    internal abstract class Character
+    public abstract class Character
     {
         // make these protected so derived classes set them instead of hiding them
         protected int health;
@@ -136,6 +136,11 @@ namespace DiceBattleGame.GameData.Characters
         public int getHealth()
         {
             return health;
+        }
+
+        public int getMaxHealth()
+        {
+            return maxHealth;
         }
 
         public int getLevel()
