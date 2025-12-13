@@ -16,6 +16,13 @@ namespace DiceBattleGame.GameData.Characters
         protected int level = 1;
         protected int experience = 0;
 
+        // inventory used exclusively for enemy characters, player inventory is managed in the CampaignManager
+        protected List<Item> enemyInventory = new List<Item>();
+
+        // to be implemented
+        // protected List<Skill> skills = new List<Skill>();
+
+
         // resistances are multipliers to incoming damage (higher means more damage received from that type)
         // e.g. 1.0 = normal damage, 0.5 = half damage, 2.0 = double damage
         // elemental resistances at some point?
@@ -196,7 +203,7 @@ namespace DiceBattleGame.GameData.Characters
 
 
         // get the stat roll bonus for a given stat
-        // used for anything that requires a stat check
+        // used for anything that requires a stat check (item usage, skill checks, etc.)
         public int getStatCheckBonus(string stat)
         {
             // every 5 points in a stat gives +1 bonus
@@ -208,7 +215,7 @@ namespace DiceBattleGame.GameData.Characters
             else
             {
                 // otherwise, return no bonus and log to console
-                Console.WriteLine($"Stat {stat} not recognized! No bonus applied.");
+                Trace.WriteLine($"Stat {stat} not recognized! No bonus applied.");
                 return 0;
             }
         }
@@ -293,6 +300,26 @@ namespace DiceBattleGame.GameData.Characters
         }
 
         // used exclusively for enemy ai actions
+        // return the item to be used and handle usage in TurnManager
+        public virtual Item enemyUseItem()
+        {
+            Random random = new Random();
+            Item item = enemyInventory[random.Next(enemyInventory.Count)];
+            return item;
+        }
+
+        /*
+        // used exclusively for enemy ai actions
+        // return skill to be used and handle usage in TurnManager
+        public virtual Skill enemyUseSkill(){
+            Random random = new Random();
+            Skill skill = skills[random.Next(skills.Count)];
+            return skill;
+        }
+         
+         */
+
+        // used exclusively for enemy ai actions
         // enemies will return a string to determine their action that turn
         public virtual string enemyTakeAction()
         {
@@ -310,10 +337,14 @@ namespace DiceBattleGame.GameData.Characters
             item.Use(target);
         }
 
-        /* placeholder skill usage method
+        /* placeholder skill methods
 
         public void useSkill(Skill skill){
             skill.use();
+        }
+
+        public List<Skill> getSkills(){
+            return skills;
         }
          */
 
