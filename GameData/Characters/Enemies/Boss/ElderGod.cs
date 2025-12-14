@@ -5,36 +5,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiceBattleGame.GameData.Characters.Playable
+namespace DiceBattleGame.GameData.Characters.Enemies.Boss
 {
-    internal class MonkPlayer : Character
+    internal class ElderGod : Character
     {
-        public MonkPlayer() : base()
+        public ElderGod() : base()
         {
-            type = "Player";
-            name = "Monk";
+            type = "Boss Enemy";
+            name = "Elder God";
             statGrowths = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             {
-                {"Vigor", -1},
-                {"Constitution", 2},
-                {"Strength", 1},
-                {"Dexterity", 4},
-                {"Intellect", 0},
-                {"Faith", 3}
+                {"Vigor", 35},
+                {"Constitution", 25},
+                {"Strength", 15},
+                {"Dexterity", 10},
+                {"Intellect", 25},
+                {"Faith", 25}
             };
             initializeStats();
             damageResistances = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
             {
-                { "Slash", 1.0 },
+                { "Slash", 1.5 },
                 { "Pierce", 1.0 },
                 { "Blunt", 1.0 },
-                { "Magic", 1.5 },
-                { "Radiant", 1.5 },
+                { "Magic", 0.25 },
+                { "Radiant", 2.0 },
                 { "Arcane", 0.5 },
                 { "Psychic", 0.5 }
             };
             armorClass = 14;
-            weapon = new Custom("Fists", "Monk's Fists", "Blunt", new diceBag(5, 2));
+            weapon = new Custom("Arcane", "Eldritch Blast", "Arcane", new diceBag(13, 3));
         }
     }
 }

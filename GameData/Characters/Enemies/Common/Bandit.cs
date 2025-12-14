@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             {
                 { "Slash", 1.5 },
                 { "Pierce", 1.0 },
-                { "Blunt", 1.0 }
+                { "Blunt", 1.0 },
+                { "Magic", 1.0 },
+                { "Radiant", 1.0 },
+                { "Arcane", 1.0 },
+                { "Psychic", 1.0 }
             };
             armorClass = 12;
             weapon = new Custom("Dagger", "Sharp Dagger", "Pierce", new diceBag(5, 2));

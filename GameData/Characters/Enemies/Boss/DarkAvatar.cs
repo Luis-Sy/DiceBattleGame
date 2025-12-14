@@ -7,35 +7,34 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Boss
 {
-    internal class Dragon : Character
+    internal class DarkAvatar : Character
     {
-
-        public Dragon() : base()
+        public DarkAvatar() : base()
         {
             type = "Boss Enemy";
-            name = "Dragon";
+            name = "Dark Avatar";
             statGrowths = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             {
-                {"Vigor", 20},
+                {"Vigor", 30},
                 {"Constitution", 15},
-                {"Strength", 10},
-                {"Dexterity", 8},
-                {"Intellect", 8},
-                {"Faith", 6}
+                {"Strength", 5},
+                {"Dexterity", 25},
+                {"Intellect", 5},
+                {"Faith", 5}
             };
             initializeStats();
             damageResistances = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
             {
-                { "Slash", 1.0 },
+                { "Slash", 2.0 },
                 { "Pierce", 2.0 },
-                { "Blunt", 0.75 },
-                { "Magic", 0.5 },
-                { "Radiant", 1.5 },
-                { "Arcane", 1.0 },
-                { "Psychic", 1.0 }
+                { "Blunt", 2.0 },
+                { "Magic", 0.25 },
+                { "Radiant", 2.0 },
+                { "Arcane", 1.75 },
+                { "Psychic", 0.5 }
             };
-            armorClass = 16;
-            weapon = new Custom("Magic", "Fire Breath", "Magic", new diceBag(11, 3));
+            armorClass = 14;
+            weapon = new Custom("Claws", "Shadow Claws", "Arcane", new diceBag(9, 3));
         }
     }
 }

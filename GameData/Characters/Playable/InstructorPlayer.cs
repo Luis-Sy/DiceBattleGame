@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 1.0 },
                 { "Pierce", 1.5 },
-                { "Blunt", 1.0 }
+                { "Blunt", 1.0 },
+                { "Magic", 0.5 },
+                { "Radiant", 1.0 },
+                { "Arcane", 1.0 },
+                { "Psychic", 0.5 }
             };
             armorClass = 14;
             weapon = new Custom("Whip", "Leather Whip", "Slash", new diceBag(7, 2));

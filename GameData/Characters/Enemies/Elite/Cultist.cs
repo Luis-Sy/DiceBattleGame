@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             {
                 { "Slash", 1.0 },
                 { "Pierce", 1.5 },
-                { "Blunt", 1.0 }
+                { "Blunt", 1.0 },
+                { "Magic", 0.5 },
+                { "Radiant", 2.0 },
+                { "Arcane", 0.5 },
+                { "Psychic", 1.0 }
             };
             armorClass = 13;
             weapon = new Custom("Dagger", "Ritual Dagger", "Pierce", new diceBag(5, 3));

@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             {
                 { "Slash", 1.0 },
                 { "Pierce", 1.25 },
-                { "Blunt", 1.5 }
+                { "Blunt", 1.5 },
+                { "Magic", 0.5 },
+                { "Radiant", 0.5 },
+                { "Arcane", 0.75 },
+                { "Psychic", 0.5 }
             };
             armorClass = 14;
             weapon = new Custom("Ritual Staff", "Ornate Ritual Staff", "Blunt", new diceBag(7, 2));

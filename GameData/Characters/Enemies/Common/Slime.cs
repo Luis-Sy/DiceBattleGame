@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             {
                 { "Slash", 1.5 },
                 { "Pierce", 1.5 },
-                { "Blunt", 0.5 }
+                { "Blunt", 0.5 },
+                { "Magic", 1.0 },
+                { "Radiant", 1.0 },
+                { "Arcane", 1.0 },
+                { "Psychic", 0.5 }
             };
             armorClass = 8;
             weapon = new Custom("Pseudopod", "Gooey Pseudopod", "Blunt", new diceBag(5,2));

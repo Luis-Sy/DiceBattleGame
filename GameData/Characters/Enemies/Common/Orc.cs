@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             {
                 { "Slash", 0.5 },
                 { "Pierce", 1.5 },
-                { "Blunt", 1.5 }
+                { "Blunt", 1.5 },
+                { "Magic", 1.0 },
+                { "Radiant", 0.5 },
+                { "Arcane", 1.0 },
+                { "Psychic", 1.0 }
             };
             armorClass = 16;
             weapon = new Custom("Axe", "Battle Axe", "Slash", new D12());

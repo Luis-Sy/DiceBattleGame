@@ -27,7 +27,11 @@ namespace DiceBattleGame.GameData.Characters.Playable
             {
                 { "Slash", 1.0 },
                 { "Pierce", 0.5 },
-                { "Blunt", 2.0 }
+                { "Blunt", 2.0 },
+                { "Magic", 1.0 },
+                { "Radiant", 1.0 },
+                { "Arcane", 1.5 },
+                { "Psychic", 0.75 }
             };
             armorClass = 15;
             weapon = new Sword();
