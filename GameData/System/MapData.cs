@@ -101,7 +101,7 @@ namespace DiceBattleGame.GameData.System
             {
                 string nodeType = "undefined";
                 MapEvent? nodeEvent = null;
-                if (i == 2 || i==5)
+                if (i == 0 || i==5)
                 {
                     nodeEvent = new Shop(enemyLevel);
                     nodeType = "Shop";

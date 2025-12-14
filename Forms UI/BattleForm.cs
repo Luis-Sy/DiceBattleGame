@@ -24,6 +24,12 @@ namespace DiceBattleGame.Forms_UI
         public BattleForm(Character player, CombatEncounter encounter)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Font = new Font("Segoe UI", 10);
+            this.Text = "Battle";
+
             // Assign player
             this.player = player;
             this.encounter = encounter;
@@ -42,10 +48,23 @@ namespace DiceBattleGame.Forms_UI
             enemy.restoreHp();
 
             InitializeUI();
-
-
-
+            StyleButtons();
             StartBattle();
+        }
+        private void StyleButtons()
+        {
+            StyleButton(btn_NextTurn, Color.FromArgb(76, 175, 80)); //green
+            StyleButton(btn_BackMap, Color.FromArgb(120, 120, 120));//gray
+        }
+        private void StyleButton(Button btn, Color backColor)
+        {
+            btn.BackColor = backColor;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
+
         }
 
         private void InitializeUI()
@@ -58,12 +77,19 @@ namespace DiceBattleGame.Forms_UI
 
             statusBar1.currentValue = player.getHealth();
             statusBar2.currentValue = enemy.getHealth();
+
+            //health is reaching negative value so I'm fixing it in character
+            PlayerHealtNumber.Text = $"{player.getHealth()}/{player.getMaxHealth()}";
+            EnemyHealtNumber.Text = $"{enemy.getHealth()}/{enemy.getMaxHealth()}";
         }
 
         private void UpdateStatusBars()
         {
             statusBar1.SetCurrentValue(player.getHealth());
             statusBar2.SetCurrentValue(enemy.getHealth());
+
+            PlayerHealtNumber.Text = $"{player.getHealth()}/{player.getMaxHealth()}";
+            EnemyHealtNumber.Text = $"{enemy.getHealth()}/{enemy.getMaxHealth()}";
         }
 
         private void StartBattle()

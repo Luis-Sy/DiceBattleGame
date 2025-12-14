@@ -104,7 +104,7 @@ namespace DiceBattleGame.GameData.Characters
 
         public void takeDamage(int amount, string type)
         {
-            int finalDamage = 0;
+            int finalDamage ;
             // check to see if the character has a defined resistance for the provided damage type
             if (damageResistances.ContainsKey(type))
             {
@@ -117,13 +117,18 @@ namespace DiceBattleGame.GameData.Characters
                     finalDamage = 1;
                 }
 
-                health -= finalDamage;
+                
             }
             else
             {
                 // if no defined damage resistance for provided type, deal raw damage
                 Trace.WriteLine($"Character does not have a defined value for {type} resistance. Assuming 1.0x and dealing damage.");
                 finalDamage = amount;
+            }
+            health -= finalDamage;
+            if(health < 0)
+            {
+                health = 0;
             }
 
         }
