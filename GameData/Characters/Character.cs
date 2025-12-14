@@ -229,7 +229,13 @@ namespace DiceBattleGame.GameData.Characters
                 stats[stat] = 10 + (level - 1) + statGrowths[stat];
             }
 
+
             maxHealth = stats["Vigor"] * 2;
+            // if it's a player class, add a flat 10 hp to their health pool
+            if(this.type == "Player")
+            {
+                maxHealth += 10;
+            }
             restoreHp();
         }
 
