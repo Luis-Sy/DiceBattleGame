@@ -1,3 +1,5 @@
+using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,8 @@ namespace DiceBattleGame
     internal class TurnManager
     {
         //this holds refrences to the player and enemy characters
-        private Character? player = null;
-        private Character? enemy = null;
+        private List<Character>? playerParty = null;
+        private List<Character>? enemyParty = null;
         //to keep track of whose turn it is and if the battle has ended
         private bool playerTurn;
         private bool battleOver;
@@ -20,10 +22,10 @@ namespace DiceBattleGame
         int shownHP;
 
 
-        // !!! NEW — list of all characters in battle
+        // list of all characters in battle
         private List<Character> turnOrder = new List<Character>();
 
-        // !!! NEW — index pointing to whose turn it is
+        // index pointing to whose turn it is
         private int turnIndex = 0;
 
         // NEW — helper to get all alive characters
@@ -50,14 +52,14 @@ namespace DiceBattleGame
             }
         }
 
-        public Character? GetPlayer()
+        public List<Character>? GetPlayerParty()
         {
-            return player;
+            return playerParty;
         }
 
-        public Character? GetEnemy()
+        public List<Character>? GetEnemyParty()
         {
-            return enemy;
+            return enemyParty;
         }
 
         /*public void restoreCharacters(Character player, Character enemy) //this worked, but I didnt realize it was working, DO NOT ENABLE - J
@@ -66,7 +68,7 @@ namespace DiceBattleGame
             player.restoreHp();
         }*/
 
-
+        /*  ️OLD STARTBATTLE FOR 2 CHARACTERS ONLY
         public void StartBattle(Character playerChar, Character enemyChar)
         {
             this.player = playerChar;
@@ -99,12 +101,12 @@ namespace DiceBattleGame
                 playerTurn = true;
             }
         }
-
-            // NEW STARTBATTLE FOR MULTI-CHARACTER SUPPORT
-public void StartBattle(List<Character> characters)
+*/
+        // Starting a new battle now requires two lists of characters, one for player characters, one for enemies
+        public void StartBattle(List<Character> playerCharacters, List<Character> enemyCharacters)
         {
             // assign all fighters
-            turnOrder = characters.Where(c => c != null).ToList();
+            turnOrder = playerCharacters.Concat(enemyCharacters).ToList();
 
             // remove any dead characters just in case
             turnOrder = turnOrder.Where(c => c.getHealth() > 0).ToList();
@@ -112,62 +114,27 @@ public void StartBattle(List<Character> characters)
             battleOver = false;
 
             // roll initiative for each character
-            Dictionary<Character, int> rolls = new Dictionary<Character, int>();
+            List<(Character c, int roll)> rolls = new List<(Character c, int roll)>();
             D20 d20 = new D20();
 
             foreach (var c in turnOrder)
-                rolls[c] = d20.Roll();
+                rolls.Add((c, d20.Roll()));
 
-            // sort by initiative (highest roll goes first)
-            turnOrder = turnOrder
-                .OrderByDescending(c => rolls[c])
+            // sort by initiative (highest roll goes first) and rebuild turnOrder
+            turnOrder = rolls
+                .OrderByDescending(r => r.roll)
+                .Select(r => r.c)
                 .ToList();
 
             turnIndex = 0;
 
-            // log the order
+            // log the order (use the sorted rolls for correct roll values)
             Log("=== TURN ORDER ESTABLISHED ===");
-            foreach (var c in turnOrder)
-                Log($"{c.getName()} rolled {rolls[c]} initiative.");
-
+            foreach (var entry in rolls.OrderByDescending(r => r.roll))
+                Log($"{entry.c.getName()} rolled {entry.roll} initiative.");
             Log("===============================");
         }
-
-        //if (playerRoll > enemyRoll)
-        //{
-        //    playerTurn = true;
-        //    Console.WriteLine("Player goes first");
-        //}
-        //else
-        //{
-        //    playerTurn = false;
-        //    Console.WriteLine("Enemy goes first");
-        //}
-
-        ////whoever starts gets to attack immediatly
-        //if (playerTurn)
-        //{
-        //    int damage = player.attack();
-        //    string dmgType = player.getWeaponType();
-        //    Log($"Player {player.getName()} attacks for {damage} damage");
-        //    enemy.takeDamage(damage, dmgType);
-        //    shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
-        //    Log($"Enemy {enemy.getName()} Health is now: {shownHP}");
-        //    //after attack switch turn
-        //    playerTurn = false;
-        //}
-        //else
-        //{
-        //    int damage = enemy.attack();
-        //    string dmgType = enemy.getWeaponType();
-        //    Log($"Enemy {enemy.getName()} attacks for {damage} damage");
-        //    player.takeDamage(damage, dmgType);
-        //    shownHP = Math.Max(0, player.getHealth());//to not show negative health
-        //    Log($"Player {player.getName()} Health is now: {shownHP}");
-
-        //    playerTurn = true;
-        //}
-
+        
 
         // NEW -----
         public void NextTurn()
@@ -201,12 +168,12 @@ public void StartBattle(List<Character> characters)
             }
 
             // PLAYER TURN
-            if (current.isPlayer())
+            if (current.getCharacterType() == "Player")
             {
                 Log($"It is {current.getName()}'s turn (PLAYER).");
 
                 Character? target = turnOrder
-                    .FirstOrDefault(c => c.isAlive() && !c.isPlayer());
+                    .FirstOrDefault(c => c.isAlive() && c.getCharacterType() != "Player");
 
                 if (target == null)
                 {
@@ -215,15 +182,16 @@ public void StartBattle(List<Character> characters)
                     return;
                 }
 
-                PerformAttack(current, target);
+                
             }
             // ENEMY TURN
             else
             {
                 Log($"It is {current.getName()}'s turn (ENEMY).");
 
-                Character? target = turnOrder
-                    .FirstOrDefault(c => c.isAlive() && c.isPlayer());
+                // enemy selects target based on its behavior
+                Character? target = current.enemySelectTarget(playerParty!);
+                
 
                 if (target == null)
                 {
@@ -231,8 +199,24 @@ public void StartBattle(List<Character> characters)
                     battleOver = true;
                     return;
                 }
+                // enemy then acts using its defined behavior
+                string enemyAction = current.enemyTakeAction();
+                
+                if (enemyAction == "Attack")
+                {
+                    PerformAttack(current, target);
+                }else if (enemyAction == "Skill")
+                {
 
-                PerformAttack(current, target);
+                }else if (enemyAction == "Item")
+                {
+
+                }
+                else
+                {
+                    Log($"{current.getName()} does nothing.");
+                }
+
             }
 
             // Check if the battle is over AFTER attack
@@ -244,53 +228,13 @@ public void StartBattle(List<Character> characters)
             if (turnIndex >= turnOrder.Count)
                 turnIndex = 0;
         }
-
-
-            //if (playerTurn)
-            //{
-            //    int damage = player.attack();
-            //    string dmgType = player.getWeaponType();
-            //    Log($"Player {player.getName()} attacks for {damage} damage");
-            //    enemy.takeDamage(damage, dmgType);
-            //    shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
-            //    Log($"Enemy {enemy.getName()} Health is now: {shownHP}");
-
-            //    //check if the health is 0:
-            //    if (enemy.getHealth() <= 0)
-            //    {
-            //        Log("Enemy has been defeated");
-            //        battleOver = true;
-            //        return;
-            //    }
-            //    //If not, turn finished
-            //    playerTurn = false;
-            //}
-            //else
-            //{
-            //    int damage = enemy.attack();
-            //    string dmgType = enemy.getWeaponType();
-            //    Log($"Enemy {enemy.getName()} attacks for {damage} damage");
-            //    player.takeDamage(damage,dmgType);
-            //    shownHP = Math.Max(0, player.getHealth());//to not show negative health
-            //    Log($"Player {player.getName()} Health is now: {shownHP}");
-
-            //    if (player.getHealth() <= 0)
-            //    {
-            //        Log("Player has been defeated");
-            //        battleOver = true;
-            //        return;
-            //    }
-            //    //if not player turn
-            //    playerTurn = true;
-
-            //}
         
 
         // NEW !!! ADDED HELPER
         private bool CheckBattleOver()
         {
-            bool anyPlayers = turnOrder.Any(c => c.isAlive() && c.isPlayer());
-            bool anyEnemies = turnOrder.Any(c => c.isAlive() && !c.isPlayer());
+            bool anyPlayers = turnOrder.Any(c => c.isAlive() && c.getCharacterType() == "Player");
+            bool anyEnemies = turnOrder.Any(c => c.isAlive() && c.getCharacterType() != "Player");
 
             if (!anyPlayers)
             {
@@ -315,16 +259,16 @@ public void StartBattle(List<Character> characters)
             int roll = d20.Roll();
             int ac = defender.getArmoclass();
             string attackerName = attacker.getName();
-            string deffenderName = defender.getName();
+            string defenderName = defender.getName();
 
             if (roll >= ac)
             {
                 int damage = attacker.attack();
                 string dmgType = attacker.getWeaponType();
-                Log($"{attackerName} hits {deffenderName} for {damage} damage! (roll {roll} vs AC{ac});");
+                Log($"{attackerName} hits {defenderName} for {damage} damage! (roll {roll} vs AC{ac});");
                 defender.takeDamage(damage, dmgType);
                 shownHP = Math.Max(0, defender.getHealth());
-                Log($"{deffenderName}'s health is now: {shownHP}");
+                Log($"{defenderName}'s health is now: {shownHP}");
             }
             else
             {

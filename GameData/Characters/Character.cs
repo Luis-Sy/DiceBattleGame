@@ -171,7 +171,7 @@ namespace DiceBattleGame.GameData.Characters
                 initializeStats();
             }
 
-                return this.level;
+            return this.level;
         }
 
 
@@ -207,7 +207,7 @@ namespace DiceBattleGame.GameData.Characters
         public int getStatCheckBonus(string stat)
         {
             // every 5 points in a stat gives +1 bonus
-            
+
             if (stats.ContainsKey(stat))
             {
                 return (int)Math.Floor(stats[stat] / 5.0);
@@ -232,7 +232,7 @@ namespace DiceBattleGame.GameData.Characters
 
             maxHealth = stats["Vigor"] * 2;
             // if it's a player class, add a flat 10 hp to their health pool
-            if(this.type == "Player")
+            if (this.type == "Player")
             {
                 maxHealth += 10;
             }
@@ -242,6 +242,11 @@ namespace DiceBattleGame.GameData.Characters
         public int getArmoclass()
         {
             return armorClass;
+        }
+
+        public bool isAlive()
+        {
+            return health > 0;
         }
 
         public Weapon? getWeapon()
@@ -339,7 +344,8 @@ namespace DiceBattleGame.GameData.Characters
         // TurnManager will use the above two methods to determine enemy actions during their turn
 
 
-        public void useItem(Item item, Character target){
+        public void useItem(Item item, Character target)
+        {
             item.Use(target);
         }
 
