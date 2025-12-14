@@ -1,5 +1,3 @@
-﻿using DiceBattleGame.GameData.Characters;
-using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DiceBattleGame.GameData.System
+namespace DiceBattleGame
 {
     //this class manages the flow of the turns between 2 characters
     internal class TurnManager
@@ -19,8 +17,20 @@ namespace DiceBattleGame.GameData.System
         private bool playerTurn;
         private bool battleOver;
 
+        int shownHP;
 
-        int shownHP; 
+
+        // !!! NEW — list of all characters in battle
+        private List<Character> turnOrder = new List<Character>();
+
+        // !!! NEW — index pointing to whose turn it is
+        private int turnIndex = 0;
+
+        // NEW — helper to get all alive characters
+        public List<Character> GetAliveCharacters()
+        {
+            return turnOrder.Where(c => c.getHealth() > 0).ToList();
+        }
 
         //reference to the textbox where the battle log is displayed
         private TextBox? logOutput;
@@ -59,11 +69,11 @@ namespace DiceBattleGame.GameData.System
 
         public void StartBattle(Character playerChar, Character enemyChar)
         {
-            player = playerChar;
-            enemy = enemyChar;
+            this.player = playerChar;
+            this.enemy = enemyChar;
             //playerChar.restoreHp();
             //enemyChar.restoreHp(); STACKOVERFLOW HERE DO NOT ENABLE
-            battleOver = false;
+            this.battleOver = false;
             //roll d20 to see who starts
             D20 d20 = new D20();
             int playerRoll = d20.Roll();
@@ -73,14 +83,14 @@ namespace DiceBattleGame.GameData.System
             Log($"Player rolled {playerRoll}, enemy rolled {enemyRoll}");
             Log($"Player HP: {player.getHealth()}, Enemy HP: {enemy.getHealth()}");
             Log($"Player AC: {player.getArmoclass()}, Enemy AC: {enemy.getArmoclass()}");
-            
+
 
             playerTurn = playerRoll > enemyRoll;
             if (playerTurn)
             {
                 Log($"Player {player.getName()} goes first, against enemy {enemy.getName()}.");
                 PerformAttack(player, enemy);
-                playerTurn = false; 
+                playerTurn = false;
             }
             else
             {
@@ -88,72 +98,153 @@ namespace DiceBattleGame.GameData.System
                 PerformAttack(enemy, player);
                 playerTurn = true;
             }
-
-            //if (playerRoll > enemyRoll)
-            //{
-            //    playerTurn = true;
-            //    Console.WriteLine("Player goes first");
-            //}
-            //else
-            //{
-            //    playerTurn = false;
-            //    Console.WriteLine("Enemy goes first");
-            //}
-
-            ////whoever starts gets to attack immediatly
-            //if (playerTurn)
-            //{
-            //    int damage = player.attack();
-            //    string dmgType = player.getWeaponType();
-            //    Log($"Player {player.getName()} attacks for {damage} damage");
-            //    enemy.takeDamage(damage, dmgType);
-            //    shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
-            //    Log($"Enemy {enemy.getName()} Health is now: {shownHP}");
-            //    //after attack switch turn
-            //    playerTurn = false;
-            //}
-            //else
-            //{
-            //    int damage = enemy.attack();
-            //    string dmgType = enemy.getWeaponType();
-            //    Log($"Enemy {enemy.getName()} attacks for {damage} damage");
-            //    player.takeDamage(damage, dmgType);
-            //    shownHP = Math.Max(0, player.getHealth());//to not show negative health
-            //    Log($"Player {player.getName()} Health is now: {shownHP}");
-
-            //    playerTurn = true;
-            //}
         }
 
-        //this method runs each new turn-- so player attacks if its their turn or enemy 
+            // NEW STARTBATTLE FOR MULTI-CHARACTER SUPPORT
+public void StartBattle(List<Character> characters)
+        {
+            // assign all fighters
+            turnOrder = characters.Where(c => c != null).ToList();
+
+            // remove any dead characters just in case
+            turnOrder = turnOrder.Where(c => c.getHealth() > 0).ToList();
+
+            battleOver = false;
+
+            // roll initiative for each character
+            Dictionary<Character, int> rolls = new Dictionary<Character, int>();
+            D20 d20 = new D20();
+
+            foreach (var c in turnOrder)
+                rolls[c] = d20.Roll();
+
+            // sort by initiative (highest roll goes first)
+            turnOrder = turnOrder
+                .OrderByDescending(c => rolls[c])
+                .ToList();
+
+            turnIndex = 0;
+
+            // log the order
+            Log("=== TURN ORDER ESTABLISHED ===");
+            foreach (var c in turnOrder)
+                Log($"{c.getName()} rolled {rolls[c]} initiative.");
+
+            Log("===============================");
+        }
+
+        //if (playerRoll > enemyRoll)
+        //{
+        //    playerTurn = true;
+        //    Console.WriteLine("Player goes first");
+        //}
+        //else
+        //{
+        //    playerTurn = false;
+        //    Console.WriteLine("Enemy goes first");
+        //}
+
+        ////whoever starts gets to attack immediatly
+        //if (playerTurn)
+        //{
+        //    int damage = player.attack();
+        //    string dmgType = player.getWeaponType();
+        //    Log($"Player {player.getName()} attacks for {damage} damage");
+        //    enemy.takeDamage(damage, dmgType);
+        //    shownHP = Math.Max(0, enemy.getHealth());//to not show negative health
+        //    Log($"Enemy {enemy.getName()} Health is now: {shownHP}");
+        //    //after attack switch turn
+        //    playerTurn = false;
+        //}
+        //else
+        //{
+        //    int damage = enemy.attack();
+        //    string dmgType = enemy.getWeaponType();
+        //    Log($"Enemy {enemy.getName()} attacks for {damage} damage");
+        //    player.takeDamage(damage, dmgType);
+        //    shownHP = Math.Max(0, player.getHealth());//to not show negative health
+        //    Log($"Player {player.getName()} Health is now: {shownHP}");
+
+        //    playerTurn = true;
+        //}
+
+
+        // NEW -----
         public void NextTurn()
         {
-            if (battleOver || player == null || enemy == null) return;
+            if (battleOver || turnOrder.Count == 0)
+                return;
 
-            //player turn attacks 
-            if (playerTurn)
+            // Remove dead characters
+            turnOrder = turnOrder.Where(c => c.isAlive()).ToList();
+
+            if (turnOrder.Count == 0)
             {
-                PerformAttack(player, enemy);
-                if (enemy.getHealth() <= 0)
+                Log("Everyone has died. Battle over.");
+                battleOver = true;
+                return;
+            }
+
+            // Keep turnIndex safe
+            if (turnIndex >= turnOrder.Count)
+                turnIndex = 0;
+
+            Character current = turnOrder[turnIndex];
+
+            // If current is dead, skip
+            if (!current.isAlive())
+            {
+                turnIndex++;
+                if (turnIndex >= turnOrder.Count)
+                    turnIndex = 0;
+                return;
+            }
+
+            // PLAYER TURN
+            if (current.isPlayer())
+            {
+                Log($"It is {current.getName()}'s turn (PLAYER).");
+
+                Character? target = turnOrder
+                    .FirstOrDefault(c => c.isAlive() && !c.isPlayer());
+
+                if (target == null)
                 {
-                    Log($"Enemy {enemy.getName()} has been defeated");
+                    Log("No enemies left.");
                     battleOver = true;
                     return;
                 }
-                playerTurn = false;
+
+                PerformAttack(current, target);
             }
+            // ENEMY TURN
             else
             {
-                PerformAttack(enemy, player);
-                if (player.getHealth() <= 0)
+                Log($"It is {current.getName()}'s turn (ENEMY).");
+
+                Character? target = turnOrder
+                    .FirstOrDefault(c => c.isAlive() && c.isPlayer());
+
+                if (target == null)
                 {
-                    Log($"Player {player.getName()} has been defeated");
+                    Log("All players have fallen.");
                     battleOver = true;
                     return;
                 }
-                playerTurn = true;
 
+                PerformAttack(current, target);
             }
+
+            // Check if the battle is over AFTER attack
+            if (CheckBattleOver())
+                return;
+
+            // Move to next character
+            turnIndex++;
+            if (turnIndex >= turnOrder.Count)
+                turnIndex = 0;
+        }
+
 
             //if (playerTurn)
             //{
@@ -193,6 +284,29 @@ namespace DiceBattleGame.GameData.System
             //    playerTurn = true;
 
             //}
+        
+
+        // NEW !!! ADDED HELPER
+        private bool CheckBattleOver()
+        {
+            bool anyPlayers = turnOrder.Any(c => c.isAlive() && c.isPlayer());
+            bool anyEnemies = turnOrder.Any(c => c.isAlive() && !c.isPlayer());
+
+            if (!anyPlayers)
+            {
+                Log("All players have been defeated.");
+                battleOver = true;
+                return true;
+            }
+
+            if (!anyEnemies)
+            {
+                Log("All enemies have been defeated.");
+                battleOver = true;
+                return true;
+            }
+
+            return false;
         }
 
         private void PerformAttack(Character attacker, Character defender)
@@ -217,11 +331,6 @@ namespace DiceBattleGame.GameData.System
                 Log($"{attackerName} missed! (Roll{roll} vs AC{ac})");
             }
         }
-        public void ForceEndBattle()
-        {
-            battleOver = true;
-        }
     }
-
 
 }
