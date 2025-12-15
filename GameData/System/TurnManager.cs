@@ -208,10 +208,10 @@ namespace DiceBattleGame
                     PerformAttack(current, target);
                 }else if (enemyAction == "Skill")
                 {
-
+                    // to be implemented
                 }else if (enemyAction == "Item")
                 {
-
+                    // to be implemented
                 }
                 else
                 {
