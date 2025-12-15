@@ -93,19 +93,30 @@ namespace DiceBattleGame.GameData.System
 
             WeightedRandomSelector<string> selector = new WeightedRandomSelector<string>();
             selector.AddItem("Common Battle", 60);
-            selector.AddItem("Elite Battle", 20);
-            selector.AddItem("Shop", 20);
+            selector.AddItem("Elite Battle", 30);
+            selector.AddItem("Shop", 10);
 
+            int scaleInterval = 3; // increase enemy level every 3 nodes
+            int scaleCounter = 0;
 
-            for (int i = 0; i < 8; i++) // generate the next 8 nodes
+            for (int i = 0; i < 13; i++) // generate the next 13 nodes
             {
                 string nodeType = "undefined";
                 MapEvent? nodeEvent = null;
-                if (i == 2 || i==5)
+
+                // guarantee shops on certain nodes for balancing
+                if (i == 2 || i == 5 || i == 8 || i == 11)
                 {
                     nodeEvent = new Shop(enemyLevel);
                     nodeType = "Shop";
                     mapNodes.Add(new MapNode(nodeType, nodeEvent));
+                    continue;
+                }
+                // guarantee a rest node before the boss
+                if(i == 12)
+                {
+                    nodeType = "Rest";
+                    mapNodes.Add(new MapNode(nodeType, nodeEvent)); // I've yet to implement rest nodes, so no event data for now - Luis
                     continue;
                 }
                 string selectedNode = selector.GetRandomItem();
@@ -158,6 +169,17 @@ namespace DiceBattleGame.GameData.System
 
                 MapNode newNode = new MapNode(nodeType, nodeEvent);
                 mapNodes.Add(newNode);
+
+                // scale up difficulty at set intervals
+                if(scaleCounter < scaleInterval)
+                {
+                    enemyLevel++;
+                    scaleCounter++;
+                }
+                else
+                {
+                    scaleCounter = 0;
+                }
             }
 
             // create the boss node at the end
