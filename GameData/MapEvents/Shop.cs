@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.GameData.Items;
+﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Items;
 using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace DiceBattleGame.GameData.MapEvents
     public class Shop : MapEvent
     {
         private List<Item> shopInventory = new List<Item>();
-
+        private List<Character> partyMemberList = new List<Character>();
         public Shop(int targetLevel)
         {
             initializeEvent(targetLevel);
@@ -21,7 +22,7 @@ namespace DiceBattleGame.GameData.MapEvents
         {
             // When there are more items it'll use a weighted selector instead
             // WeightedRandomSelector<String> itemSelector = new WeightedRandomSelector<string>();
-
+            Random rand = new Random();
 
             // get a list of all available items
             shopInventory = new List<Item>()
@@ -32,13 +33,35 @@ namespace DiceBattleGame.GameData.MapEvents
                 new IntelligencePotion(),
                 new FaithPotion()
             };
+
+            // generate recruitable party members
+
+            // load every defined player character type
+            List<Type> characterPool = AppDomain.CurrentDomain
+                .GetAssemblies().SelectMany(assembly => assembly.GetTypes())
+                .Where(type => type.IsSubclassOf(typeof(Character)) && !type.IsAbstract && type.Name.Contains("Player"))
+                .ToList();
+
+            int numRecruits = rand.Next(2, 5); // between 2 and 4 recruitable members
+            for (int i = 0; i < numRecruits; i++)
+            {
+                Character recruit = (Character)Activator.CreateInstance(
+                    characterPool[rand.Next(characterPool.Count)], targetLevel)!;
+                partyMemberList.Add(recruit);
+            }
         }
 
         public override T GetEventData<T>()
         {
+            // retrieve the shop inventory
             if (typeof(T) == typeof(List<Item>))
             {
                 return (T)(object)shopInventory;
+            }
+            // retrieve recruitable party members
+            else if (typeof(T) == typeof(List<Character>))
+            {
+                return (T)(object)partyMemberList;
             }
             return base.GetEventData<T>();
         }

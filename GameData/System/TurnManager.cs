@@ -199,6 +199,7 @@ namespace DiceBattleGame
                     battleOver = true;
                     return;
                 }
+
                 // enemy then acts using its defined behavior
                 string enemyAction = current.enemyTakeAction();
                 
@@ -253,6 +254,8 @@ namespace DiceBattleGame
             return false;
         }
 
+
+        // methods below for handling actions during battle
         private void PerformAttack(Character attacker, Character defender)
         {
             D20 d20 = new D20();
@@ -274,6 +277,18 @@ namespace DiceBattleGame
             {
                 Log($"{attackerName} missed! (Roll{roll} vs AC{ac})");
             }
+        }
+
+        private void performSkill(Character user, Character target, string skillName)
+        {
+            // Placeholder for skill logic
+            Log($"{user.getName()} uses {skillName} on {target.getName()}.");
+        }
+
+        private void useItem(Character user, string itemName)
+        {
+            // Placeholder for item usage logic
+            Log($"{user.getName()} uses {itemName}.");
         }
     }
 

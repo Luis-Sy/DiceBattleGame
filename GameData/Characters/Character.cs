@@ -336,9 +336,30 @@ namespace DiceBattleGame.GameData.Characters
         {
             // by default, enemies will always attack
             // override this in enemy classes to define unique behaviors
-            List<string> actions = new List<string> { "Attack" };
+            WeightedRandomSelector<string> actionSelector = new WeightedRandomSelector<string>();
+            actionSelector.AddItem("Attack", 40);
+            //actionSelector.AddItem("Skill", 40); to be implemented when skills are available
+            actionSelector.AddItem("Item", 20);
 
-            return actions[0];
+            string selectedAction = actionSelector.GetRandomItem();
+
+            // if the enemy tries to use an item but has none, attack instead
+            if (selectedAction == "Item" && enemyInventory.Count == 0){
+                return "Attack";
+            }
+            if (selectedAction == "Skill"){
+                // if the enemy has no skills, attack instead
+                /*
+                if(skills.Count == 0){
+                    return "Attack";
+                }
+                */
+                // temporarily return attack until skills are implemented
+                return "Attack";
+            }
+
+
+            return selectedAction;
         }
 
         // TurnManager will use the above two methods to determine enemy actions during their turn
