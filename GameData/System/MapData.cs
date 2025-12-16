@@ -150,10 +150,7 @@ namespace DiceBattleGame.GameData.System
                     nodeEvent = new Shop(enemyLevel);
                     nodeType = "Shop";
                 }
-                else
-                {
-                    throw new InvalidOperationException("Selected node type is not implemented in map generation.");
-                }
+                
                 else if (selectedNode == "Shop")
                 {
                     nodeEvent = new Shop(enemyLevel);
