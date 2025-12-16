@@ -68,6 +68,16 @@ namespace DiceBattleGame.GameData.System
             // whatever else needs to be initialized here
         }
 
+        public List<Character> GetPlayerParty()
+        {
+            return playerParty;
+        }
+
+        public List<Item> GetPlayerInventory()
+        {
+            return playerInventory;
+        }
+
         public List<MapNode> getMapNodes()
         {
             return mapData.GetAllNodes();

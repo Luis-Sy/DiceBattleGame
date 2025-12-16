@@ -370,6 +370,12 @@ namespace DiceBattleGame.GameData.Characters
             item.Use(target);
         }
 
+        // used to get the inventory of an enemy character
+        public List<Item> getInventory()
+        {
+            return enemyInventory;
+        }
+
         /* placeholder skill methods
 
         public void useSkill(Skill skill){

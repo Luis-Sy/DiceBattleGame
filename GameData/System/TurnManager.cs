@@ -1,4 +1,5 @@
 using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Items;
 using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
@@ -279,16 +280,47 @@ namespace DiceBattleGame
             }
         }
 
-        private void performSkill(Character user, Character target, string skillName)
+        public void performSkill(Character user, Character target, string skillName)
         {
             // Placeholder for skill logic
-            Log($"{user.getName()} uses {skillName} on {target.getName()}.");
+            // the skillname parameter is a placeholder for an actual skill object
+            if (target == null || user == target)
+            {
+                Log($"{user.getName()} uses {skillName}.");
+            }
+            else
+            {
+                Log($"{user.getName()} uses {skillName} on {target.getName()}.");
+            }
         }
 
-        private void useItem(Character user, string itemName)
+        public void useItem(Character user, Character target, Item item)
         {
             // Placeholder for item usage logic
-            Log($"{user.getName()} uses {itemName}.");
+            // items require a target to use on and an item object, typically pulled from an inventory
+
+            if(user.getCharacterType() == "Player")
+            {
+                user.useItem(item, target);
+                // remove from the player's inventory in the CampaignManager
+                GameManager.Campaign.GetPlayerInventory().Remove(item);
+            }
+            else
+            {
+                user.useItem(item, target);
+                // remove the item from the enemy's inventory
+                user.getInventory().Remove(item);
+            }
+
+            // messages for item usage should probably be handled inside the item class itself
+            if (target == null || user == target)
+            {
+                Log($"{user.getName()} uses {item.Name}.");
+            }
+            else
+            {
+                Log($"{user.getName()} uses {item.Name} on {target.getName()}.");
+            }
         }
     }
 
