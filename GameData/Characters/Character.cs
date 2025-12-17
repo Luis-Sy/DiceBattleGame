@@ -315,6 +315,14 @@ namespace DiceBattleGame.GameData.Characters
         public void changeHp(int x)
         {
             health = x;
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
+            else if (health < 0)
+            {
+                health = 0;
+            }
         }
 
         // used exclusively for enemy ai actions
