@@ -56,23 +56,38 @@ namespace DiceBattleGame.GameData.Skills
         //============================================================Assassin Skills======================================================
         public class PreciseStrike : Skill
         {
-            internal PreciseStrike() : base("Precise Strike")
+            internal PreciseStrike() : base("Precise Strike", 3, 3)
             {
 
             }
 
             internal override int UseSkill(Character entity, Character enemy) //precise strike, good for non agile entities
             {
-                if (enemy.getStats()["Dexterity"] < 5)
+                Uses--; //comsumes a use
+                if(Uses > 0)
                 {
-                    int damage = (entity.attack() * 2);
-                    return damage;
+                    if (enemy.getStats()["Dexterity"] < 5)
+                    {
+                        int damage = (entity.attack() * 2);
+                        return damage;
+                    }
+                    else
+                    {
+                        int damage = (entity.attack() / 2);
+                        return damage;
+                    }
                 }
-                else
+                else //popup should be changed, returns 0 if there are not uses This will skill consume the turn, might have to be handled in battle flow.
                 {
-                    int damage = (entity.attack() / 2);
-                    return damage;
+                    MessageBox.Show("This ability is out of uses!");
+                    return 0;
                 }
+
+            }
+
+            internal override void RestoreUses()
+            {
+                Uses = DefaultUses;
             }
         }
         //============================================================Awakened Skills========================================================
@@ -81,13 +96,15 @@ namespace DiceBattleGame.GameData.Skills
 
         public class KillingBlow : Skill
         {
-            internal KillingBlow() : base("Killing Blow") //Low hp enemies will get crumpled should the attack hit, otherwise, normal attack damage
+            internal KillingBlow() : base("Killing Blow", 3, 3) //Low hp enemies will get crumpled should the attack hit, otherwise, normal attack damage
             {
 
             }
 
             internal override int UseSkill(Character entity, Character enemy)
             {
+                Uses--; //comsumes a use
+
                 float remainingHp = enemy.getHealth() / enemy.getMaxHealth();
 
                 if (remainingHp < .33)
@@ -101,37 +118,56 @@ namespace DiceBattleGame.GameData.Skills
                     return damage;
                 }
             }
+
+            internal override void RestoreUses()
+            {
+                Uses = DefaultUses;
+            }
         }
         //===================================================================Cleric Skills======================================================
 
         public class DivineBlessing : Skill
         {
-            internal DivineBlessing() : base("Divine Intervention") //A heal
+            internal DivineBlessing() : base("Divine Intervention", 3, 3) //A heal
             {
 
             }
 
             internal override int UseSkill(Character entity, Character target) // I dont know if this a good way to implement this - J
             {
+                Uses--; //comsumes a use
+
                 int health = entity.getStats()["Faith"] * 5;
                 target.setHealth(target.getHealth() + health);
                 return 0;
+            }
+
+            internal override void RestoreUses()
+            {
+                Uses = DefaultUses;
             }
         }
         //=======================================================================Deprived Skills=================================================
 
         public class PocketSand : Skill
         {
-            internal PocketSand() : base("Pocket Sand") //what does a deprived even have? desperation, and with desperaton, comes pocket sand - J
+            internal PocketSand() : base("Pocket Sand", 3, 3) //what does a deprived even have? desperation, and with desperaton, comes pocket sand - J
             {
 
             }
 
             internal override int UseSkill(Character entity, Character enemy) //I dont know if this will even work - J
             {
+                Uses--; //comsumes a use
+
                 int damage = 1;
                 enemy.getStats()["Dexterity"] = enemy.getStats()["Dexterity"] - 1;
                 return damage;
+            }
+
+            internal override void RestoreUses()
+            {
+                Uses = DefaultUses;
             }
         }
 
