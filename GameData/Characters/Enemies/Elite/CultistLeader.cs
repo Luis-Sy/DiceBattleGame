@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 0.5 }
             };
             armorClass = 14;
-            weapon = new Custom("Ritual Staff", "Ornate Ritual Staff", "Blunt", new diceBag(7, 2));
+            weapon = new Custom("Staff", "Ornate Ritual Staff", "Blunt", new D8());
         }
     }
 }

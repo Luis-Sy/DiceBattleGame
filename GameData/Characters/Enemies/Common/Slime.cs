@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
                 { "Psychic", 0.5 }
             };
             armorClass = 8;
-            weapon = new Custom("Pseudopod", "Gooey Pseudopod", "Blunt", new diceBag(5,2));
+            weapon = new Custom("Pseudopod", "Gooey Pseudopod", "Blunt", new D4());
         }
     }
 }

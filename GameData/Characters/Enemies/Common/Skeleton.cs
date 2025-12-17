@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
                 { "Psychic", 0.5 }
             };
             armorClass = 12;
-            weapon = new Custom("Bone Sword", "Rusty Bone Sword", "Slash", new D8());
+            weapon = new Custom("Sword", "Rusty Bone Sword", "Slash", new D8());
         }
     }
 }

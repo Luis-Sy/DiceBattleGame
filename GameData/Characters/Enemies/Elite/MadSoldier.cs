@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 1.0 }
             };
             armorClass = 15;
-            weapon = new Custom("Great Axe", "Berserker's Great Axe", "Slash", new diceBag(9, 2));
+            weapon = new Custom("Axe", "Berserker's Great Axe", "Slash", new D8());
         }
     }
 }

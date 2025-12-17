@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 1.5 }
             };
             armorClass = 14;
-            weapon = new Custom("Warhammer", "War Commander's Hammer", "Blunt", new D12());
+            weapon = new Custom("Spear", "War Commander's Standard", "Pierce", new D12());
         }
     }
 }

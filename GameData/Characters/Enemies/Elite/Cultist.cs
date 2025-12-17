@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 1.0 }
             };
             armorClass = 13;
-            weapon = new Custom("Dagger", "Ritual Dagger", "Pierce", new diceBag(5, 3));
+            weapon = new Custom("Dagger", "Ritual Dagger", "Pierce", new D6());
         }
     }
 }
