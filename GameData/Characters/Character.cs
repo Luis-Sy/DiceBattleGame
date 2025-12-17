@@ -132,6 +132,7 @@ namespace DiceBattleGame.GameData.Characters
             else
             {
                 // if no defined damage resistance for provided type, deal raw damage
+                // skills will automatically account for damage resistances in their calculations, so pass their damage as is
                 Trace.WriteLine($"Character does not have a defined value for {type} resistance. Assuming 1.0x and dealing damage.");
                 finalDamage = amount;
             }
