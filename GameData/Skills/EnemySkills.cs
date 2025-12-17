@@ -1,9 +1,4 @@
 ﻿using DiceBattleGame.GameData.Characters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.Skills
 {
@@ -42,10 +37,10 @@ namespace DiceBattleGame.GameData.Skills
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
+                if (Uses > 0)
                 {
                     // Heavy smash does Blunt plus extra 5 flat damage
-                    int damage = (int)((entity.attack() + 5) * enemy.getResistances()["Blunt"]); 
+                    int damage = (int)((entity.attack() + 5) * enemy.getResistances()["Blunt"]);
                     Uses--;
                     return damage;
                 }
@@ -63,7 +58,7 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
+                if (Uses > 0)
                 {
                     // Sneaky strike scales with Dexterity and deals Pierce damage
                     int damage = (int)((entity.getStatCheckBonus("Dexterity") * 2) * enemy.getResistances()["Pierce"]);
@@ -83,7 +78,7 @@ namespace DiceBattleGame.GameData.Skills
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
+                if (Uses > 0)
                 {
                     // Swift Slice scales with Dexterity and deals Slash damage
                     int damage = (int)((entity.getStatCheckBonus("Dexterity") * 2) * enemy.getResistances()["Slash"]);
@@ -102,7 +97,7 @@ namespace DiceBattleGame.GameData.Skills
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
+                if (Uses > 0)
                 {
                     // Bite does Pierce damage plus extra 3 flat damage
                     int damage = (int)(entity.getStatCheckBonus("Strength") * enemy.getResistances()["Pierce"]);
@@ -121,7 +116,7 @@ namespace DiceBattleGame.GameData.Skills
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
+                if (Uses > 0)
                 {
                     // Acid Spray does 4 flat Arcane damage
                     int damage = (int)(4 * enemy.getResistances()["Arcane"]);
@@ -142,7 +137,7 @@ namespace DiceBattleGame.GameData.Skills
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
+                if (Uses > 0)
                 {
                     // Fire Bolt does 4 flat Magic damage
                     int damage = (int)(4 * enemy.getResistances()["Magic"]);
@@ -153,5 +148,104 @@ namespace DiceBattleGame.GameData.Skills
             }
         }
 
+        // used by Cultist Leaders
+        public class FireStorm : Skill
+        {
+            internal FireStorm() : base("Fire Storm", 1, 1)
+            {
+            }
+            internal override int UseSkill(Character entity, Character enemy)
+            {
+                if (Uses > 0)
+                {
+                    // Fire Storm scales off of Faith and does Magic damage
+                    int damage = (int)(entity.getStatCheckBonus("Faith") * enemy.getResistances()["Magic"]);
+                    Uses--;
+                    return damage;
+                }
+                return 0;
+            }
+        }
+
+        // used by the Elder Fragment and Elder God
+        public class Scorn : Skill
+        {
+            internal Scorn() : base("Scorn", 2, 2)
+            {
+            }
+            internal override int UseSkill(Character entity, Character enemy)
+            {
+                if (Uses > 0)
+                {
+                    // Scorn scales off of Intellect and does Psychic damage
+                    int damage = (int)(entity.getStatCheckBonus("Intellect") * enemy.getResistances()["Psychic"]);
+                    Uses--;
+                    return damage;
+                }
+                return 0;
+            }
+        }
+
+        // used by the Elder Fragment and Elder God
+        public class Enlighten : Skill
+        {
+            internal Enlighten() : base("Enlighten", 1, 1)
+            {
+            }
+            internal override int UseSkill(Character entity)
+            {
+                if (Uses > 0)
+                {
+                    // Enlighten heals self for Intellect * 2
+                    int healAmount = entity.getStatCheckBonus("Intellect") * 2;
+                    entity.changeHp(healAmount);
+                    Uses--;
+                    return healAmount;
+                }
+                return 0;
+            }
+        }
+
+        // used by the Lich
+        public class SoulSiphon : Skill
+        {
+            internal SoulSiphon() : base("Soul Siphon", 2, 2)
+            {
+            }
+            internal override int UseSkill(Character entity, Character enemy)
+            {
+                if (Uses > 0)
+                {
+                    // Soul Siphon does Magic damage and heals self for half the damage dealt
+                    int damage = (int)(entity.getStatCheckBonus("Intellect") * enemy.getResistances()["Magic"]);
+                    int healAmount = damage / 2;
+                    entity.changeHp(healAmount);
+                    Uses--;
+                    return damage;
+                }
+                return 0;
+            }
+
+        }
+
+        // used by the MadSoldier and MadCommander
+        public class FrenziedStrike : Skill
+        {
+            internal FrenziedStrike() : base("Frenzied Strike", 3, 3)
+            {
+            }
+            internal override int UseSkill(Character entity, Character enemy)
+            {
+                if (Uses > 0)
+                {
+                    // Frenzy Strike scales with Strength and deals Slash damage
+                    int damage = (int)((entity.getStatCheckBonus("Strength") * 2) * enemy.getResistances()["Slash"]);
+                    Uses--;
+                    return damage;
+                }
+                return 0;
+            }
+
+        }
     }
 }

@@ -201,7 +201,7 @@ namespace DiceBattleGame.Forms_UI
             //--------------------------------------
 
             //here goes the other forms to keep going with the map
-            if (nodeType == "Common Battle" || nodeType == "Elite Battle" || nodeType =="Boss Battle")
+            if (nodeType == "Start" || nodeType == "Common Battle" || nodeType == "Elite Battle" || nodeType =="Boss Battle")
             {
                 CombatEncounter enc = node.GetNodeData() as CombatEncounter;
 

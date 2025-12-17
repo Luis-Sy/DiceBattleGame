@@ -37,7 +37,7 @@ namespace DiceBattleGame
                 throw new Exception("No character selected before starting campaign");
 
             Campaign = new CampaignManager(SelectedCharacter);
-            CurrentMapNodeIndex = 0;
+            CurrentMapNodeIndex = -1;
             PlayerIsDead = false;
         }
 
@@ -49,7 +49,7 @@ namespace DiceBattleGame
                 throw new Exception("No character selected before starting campaign");
 
             Campaign = new CampaignManager(SelectedCharacter, seed);
-            CurrentMapNodeIndex = 0;
+            CurrentMapNodeIndex = -1;
             PlayerIsDead = false;
         }
 

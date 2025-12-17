@@ -397,6 +397,10 @@ namespace DiceBattleGame.GameData.Characters
             skill.UseSkill(user, target);
         }
 
+        public void useSkill(Skill skill, Character user){
+            skill.UseSkill(user);
+        }
+
         public List<Skill> getSkills(){
             return skills;
         }
