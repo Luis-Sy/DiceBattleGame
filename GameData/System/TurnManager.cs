@@ -290,6 +290,8 @@ namespace DiceBattleGame
             {
                 Log("All enemies have been defeated.");
                 battleOver = true;
+                // calculate rewards from battle and distribute to the player
+                calculateRewards();
                 return true;
             }
 
@@ -335,6 +337,7 @@ namespace DiceBattleGame
         public void performSkill(Character user, Skill skill)
         {
             int effectiveness = skill.UseSkill(user);
+            // bandaid solution to catch all skills
             Log($"{user.getName()} uses {skill.Name} (Effectiveness: {effectiveness}).");
         }
 
@@ -366,6 +369,41 @@ namespace DiceBattleGame
                 Log($"{user.getName()} uses {item.Name} on {target.getName()}.");
             }
         }
+
+        private void calculateRewards()
+        {
+            int goldEarned = 0;
+            int expEarned = 0;
+
+            Random random = new Random();
+
+            // calculate total gold and exp based on defeated enemies
+            foreach (var enemy in enemyParty!)
+            {
+                // common enemies grant 3-5 gold and 1 exp
+                if (enemy.getCharacterType() == "Enemy")
+                {
+                    goldEarned += random.Next(2, 6);
+                    expEarned += 1;
+                }
+                // elite enemies grant 5-10 gold and 3 exp
+                if (enemy.getCharacterType() == "Elite Enemy")
+                {
+                    goldEarned += random.Next(5, 11);
+                    expEarned += 3;
+                }
+            }
+
+            Log($"You earned {goldEarned} gold and {expEarned} experience points!");
+            // add gold to the campaign state
+            GameManager.Campaign.ChangeGold(goldEarned);
+            // distribute exp to all player characters
+            foreach (var playerChar in playerParty!)
+            {
+                playerChar.gainExp(expEarned);
+            }
+        }
+
     }
 
 }

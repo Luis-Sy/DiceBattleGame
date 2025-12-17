@@ -68,6 +68,11 @@ namespace DiceBattleGame.GameData.System
             // whatever else needs to be initialized here
         }
 
+        public void ChangeGold(int amount)
+        {
+            gold += amount;
+        }
+
         public List<Character> GetPlayerParty()
         {
             return playerParty;

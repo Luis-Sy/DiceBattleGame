@@ -216,8 +216,8 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if (Uses > 0)
                 {
-                    // Soul Siphon does Magic damage and heals self for half the damage dealt
-                    int damage = (int)(entity.getStatCheckBonus("Intellect") * enemy.getResistances()["Magic"]);
+                    // Soul Siphon does Arcane damage and heals self for half the damage dealt
+                    int damage = (int)(entity.getStatCheckBonus("Intellect") * enemy.getResistances()["Arcane"]);
                     int healAmount = damage / 2;
                     entity.changeHp(healAmount);
                     Uses--;
@@ -240,6 +240,29 @@ namespace DiceBattleGame.GameData.Skills
                 {
                     // Frenzy Strike scales with Strength and deals Slash damage
                     int damage = (int)((entity.getStatCheckBonus("Strength") * 2) * enemy.getResistances()["Slash"]);
+                    Uses--;
+                    return damage;
+                }
+                return 0;
+            }
+
+        }
+
+        //used by Vampires
+
+        public class LifeDrain : Skill
+        {
+            internal LifeDrain() : base("Life Drain", 2, 2)
+            {
+            }
+            internal override int UseSkill(Character entity, Character enemy)
+            {
+                if (Uses > 0)
+                {
+                    // Life Drain does Psychic damage and heals self for half the damage dealt
+                    int damage = (int)(entity.getStatCheckBonus("Faith") * enemy.getResistances()["Arcane"]);
+                    int healAmount = damage / 2;
+                    entity.changeHp(healAmount);
                     Uses--;
                     return damage;
                 }
