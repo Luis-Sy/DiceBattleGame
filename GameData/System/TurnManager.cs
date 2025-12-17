@@ -14,20 +14,52 @@ namespace DiceBattleGame
     internal class TurnManager
     {
         //this holds refrences to the player and enemy characters
-        private List<Character>? playerParty = null;
-        private List<Character>? enemyParty = null;
-        //to keep track of whose turn it is and if the battle has ended
-        private bool playerTurn;
-        private bool battleOver;
+        private List<Character>? playerParty = new List<Character>();
+        private List<Character>? enemyParty = new List<Character>();
 
+        //to keep track of whose turn it is and if the battle has ended
+        //private bool playerTurn;
+
+        //turn state         
+        private bool battleOver = false;
+        private int turnIndex = 0;
         int shownHP;
 
 
         // list of all characters in battle
         private List<Character> turnOrder = new List<Character>();
 
-        // index pointing to whose turn it is
-        private int turnIndex = 0;
+        //public IReadOnlyList<Character> GetPlayerParty() => playerParty;
+        //public IReadOnlyList<Character> GetEnemyParty() => enemyParty;
+
+
+        //NEW- exposes who currently owns the turn
+
+        public Character GetCurrentCharacter()
+        {
+            return turnOrder[turnIndex];
+        }
+
+        public void AdvanceTurnIndex()
+        {
+            if (turnOrder == null || turnOrder.Count == 0)
+                return;
+
+            // Move to next
+            turnIndex = (turnIndex + 1) % turnOrder.Count;
+
+            // Skip dead characters so we don't land on invalid turns
+            int safety = turnOrder.Count + 5;
+            while (safety-- > 0 && !turnOrder[turnIndex].isAlive())
+            {
+                turnIndex = (turnIndex + 1) % turnOrder.Count;
+            }
+        }
+
+
+
+
+
 
         // NEW — helper to get all alive characters
         public List<Character> GetAliveCharacters()
@@ -106,13 +138,18 @@ namespace DiceBattleGame
         // Starting a new battle now requires two lists of characters, one for player characters, one for enemies
         public void StartBattle(List<Character> playerCharacters, List<Character> enemyCharacters)
         {
+            playerParty = playerCharacters;
+            enemyParty = enemyCharacters;
+
             // assign all fighters
-            turnOrder = playerCharacters.Concat(enemyCharacters).ToList();
+            turnOrder = playerCharacters.Concat(enemyParty).ToList();
 
             // remove any dead characters just in case
-            turnOrder = turnOrder.Where(c => c.getHealth() > 0).ToList();
+            turnOrder = turnOrder.Where(c => c.isAlive()).ToList();
 
             battleOver = false;
+            turnIndex = 0;
+
 
             // roll initiative for each character
             List<(Character c, int roll)> rolls = new List<(Character c, int roll)>();
@@ -127,7 +164,7 @@ namespace DiceBattleGame
                 .Select(r => r.c)
                 .ToList();
 
-            turnIndex = 0;
+
 
             // log the order (use the sorted rolls for correct roll values)
             Log("=== TURN ORDER ESTABLISHED ===");
@@ -135,7 +172,7 @@ namespace DiceBattleGame
                 Log($"{entry.c.getName()} rolled {entry.roll} initiative.");
             Log("===============================");
         }
-        
+
 
         // NEW -----
         public void NextTurn()
@@ -183,7 +220,7 @@ namespace DiceBattleGame
                     return;
                 }
 
-                
+
             }
             // ENEMY TURN
             else
@@ -192,7 +229,7 @@ namespace DiceBattleGame
 
                 // enemy selects target based on its behavior
                 Character? target = current.enemySelectTarget(playerParty!);
-                
+
 
                 if (target == null)
                 {
@@ -203,14 +240,16 @@ namespace DiceBattleGame
 
                 // enemy then acts using its defined behavior
                 string enemyAction = current.enemyTakeAction();
-                
+
                 if (enemyAction == "Attack")
                 {
                     PerformAttack(current, target);
-                }else if (enemyAction == "Skill")
+                }
+                else if (enemyAction == "Skill")
                 {
                     // to be implemented
-                }else if (enemyAction == "Item")
+                }
+                else if (enemyAction == "Item")
                 {
                     // to be implemented
                 }
@@ -225,12 +264,13 @@ namespace DiceBattleGame
             if (CheckBattleOver())
                 return;
 
+            //I commented this to handle the turn with the button on battleform
             // Move to next character
-            turnIndex++;
-            if (turnIndex >= turnOrder.Count)
-                turnIndex = 0;
+            //turnIndex++;
+            //if (turnIndex >= turnOrder.Count)
+            //    turnIndex = 0;
         }
-        
+
 
         // NEW !!! ADDED HELPER
         private bool CheckBattleOver()
@@ -269,8 +309,10 @@ namespace DiceBattleGame
             {
                 int damage = attacker.attack();
                 string dmgType = attacker.getWeaponType();
-                Log($"{attackerName} hits {defenderName} for {damage} damage! (roll {roll} vs AC{ac});");
-                defender.takeDamage(damage, dmgType);
+                int appliedDamage = defender.takeDamage(damage, dmgType);
+
+                Log($"{attackerName} hits {defenderName} for {appliedDamage} damage! (roll {roll} vs AC{ac});");
+                
                 shownHP = Math.Max(0, defender.getHealth());
                 Log($"{defenderName}'s health is now: {shownHP}");
             }
@@ -299,7 +341,7 @@ namespace DiceBattleGame
             // Placeholder for item usage logic
             // items require a target to use on and an item object, typically pulled from an inventory
 
-            if(user.getCharacterType() == "Player")
+            if (user.getCharacterType() == "Player")
             {
                 user.useItem(item, target);
                 // remove from the player's inventory in the CampaignManager

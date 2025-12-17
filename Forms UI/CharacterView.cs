@@ -22,6 +22,11 @@ namespace DiceBattleGame
         public CharacterView()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Text = "Characters";
+
 
             // change this to test different characters
             Character character = new Samurai();

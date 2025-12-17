@@ -37,7 +37,7 @@
             // 
             btn_StartGame.Location = new Point(323, 67);
             btn_StartGame.Name = "btn_StartGame";
-            btn_StartGame.Size = new Size(131, 40);
+            btn_StartGame.Size = new Size(159, 40);
             btn_StartGame.TabIndex = 0;
             btn_StartGame.Text = "Start game";
             btn_StartGame.UseVisualStyleBackColor = true;
@@ -47,7 +47,7 @@
             // 
             btn_CreditsForm.Location = new Point(323, 227);
             btn_CreditsForm.Name = "btn_CreditsForm";
-            btn_CreditsForm.Size = new Size(131, 40);
+            btn_CreditsForm.Size = new Size(159, 40);
             btn_CreditsForm.TabIndex = 1;
             btn_CreditsForm.Text = "Credits";
             btn_CreditsForm.UseVisualStyleBackColor = true;
@@ -57,7 +57,7 @@
             // 
             btn_InstructionsForm.Location = new Point(323, 145);
             btn_InstructionsForm.Name = "btn_InstructionsForm";
-            btn_InstructionsForm.Size = new Size(131, 40);
+            btn_InstructionsForm.Size = new Size(159, 40);
             btn_InstructionsForm.TabIndex = 2;
             btn_InstructionsForm.Text = "Instructions";
             btn_InstructionsForm.UseVisualStyleBackColor = true;

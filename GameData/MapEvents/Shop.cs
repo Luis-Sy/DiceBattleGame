@@ -45,8 +45,11 @@ namespace DiceBattleGame.GameData.MapEvents
             int numRecruits = rand.Next(2, 5); // between 2 and 4 recruitable members
             for (int i = 0; i < numRecruits; i++)
             {
+                //Character recruit = (Character)Activator.CreateInstance(
+                //    characterPool[rand.Next(characterPool.Count)], targetLevel)!;
                 Character recruit = (Character)Activator.CreateInstance(
-                    characterPool[rand.Next(characterPool.Count)], targetLevel)!;
+                    characterPool[rand.Next(characterPool.Count)])!;
+                recruit.setLevel(targetLevel);
                 partyMemberList.Add(recruit);
             }
         }

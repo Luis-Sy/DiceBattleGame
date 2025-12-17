@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.GameData.MapEvents.CombatEncounters;
+﻿using DiceBattleGame.GameData.MapEvents;
+using DiceBattleGame.GameData.MapEvents.CombatEncounters;
 using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
@@ -43,9 +44,34 @@ namespace DiceBattleGame.Forms_UI
         public MapForm()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Font = new Font("Segoe UI", 10);
+            this.Text = "Map";
+
             nodes = GameManager.Campaign.getMapNodes();
+            StyleButtons();
             
 
+
+        }
+        private void StyleButtons()
+        {
+            StyleButton(btn_PreviousNode, Color.FromArgb(120, 120, 120));//gray
+            StyleButton(btn_Back, Color.FromArgb(120, 120, 120));//gray
+            StyleButton(btn_StartMenuForm, Color.FromArgb(120, 120, 120));//gray
+            StyleButton(btn_Continue, Color.FromArgb(76, 175, 80)); //green
+
+        }
+        private void StyleButton(Button btn, Color backColor)
+        {
+            btn.BackColor = backColor;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
 
         }
 
@@ -148,11 +174,26 @@ namespace DiceBattleGame.Forms_UI
             GameManager.CurrentMapNodeIndex = currentNodeIndex;
             pic_Map.Invalidate();
 
-            if(nodeType == "Shop")
+            //if(nodeType == "Shop")
+            //{
+            //    Shop shopEvent = node.GetNodeData() as Shop;
+
+            //    currentNodeIndex = nextNode;
+            //    GameManager.CurrentMapNodeIndex= currentNodeIndex;
+            //    pic_Map.Invalidate();
+
+            //    GameManager.SwitchTo(new ShopForm(shopEvent));
+            //    return;
+            //}
+            if (nodeType == "Shop")
             {
-                currentNodeIndex = nextNode;
-                pic_Map.Invalidate();
-                GameManager.SwitchTo(new ShopForm());
+                Shop shopEvent = node.GetNodeData() as Shop;
+                if (shopEvent == null)
+                {
+                    MessageBox.Show("shop event not found");
+                    return;
+                }
+                GameManager.SwitchTo(new ShopForm(shopEvent));
                 return;
             }
 
@@ -164,11 +205,12 @@ namespace DiceBattleGame.Forms_UI
             {
                 CombatEncounter enc = node.GetNodeData() as CombatEncounter;
 
-                currentNodeIndex = nextNode;
+                GameManager.CurrentMapNodeIndex = nextNode;
+                //currentNodeIndex = nextNode;
                 
 
-                BattleForm bf = new BattleForm(GameManager.SelectedCharacter, enc);
-                GameManager.SwitchTo(bf);
+                BattleForm battleForm = new BattleForm(GameManager.SelectedCharacter, enc);
+                GameManager.SwitchTo(battleForm);
                 return;
             }
             if(nodeType == "Rest")

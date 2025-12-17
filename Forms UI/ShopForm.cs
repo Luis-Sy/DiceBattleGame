@@ -1,4 +1,6 @@
-﻿using DiceBattleGame.GameData.Items;
+﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Items;
+using DiceBattleGame.GameData.MapEvents;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +15,49 @@ namespace DiceBattleGame.Forms_UI
 {
     public partial class ShopForm : Form
     {
+        private Shop shop;
         private List<Item> items;
 
-        public ShopForm()
+        
+
+        public ShopForm(Shop shopEvent)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Font = new Font("Segoe UI", 10);
+            this.Text = "Shop";
+
+            shop = shopEvent;
+            items = shopEvent.GetEventData<List<Item>>();
+
+
             LoadShopItems();
+            StyleButtons();
+            LoadRecruitableCharacters();
             lst_Items.SelectedIndexChanged += lst_Items_SelectedIndexChanged;
+        }
+
+        private void LoadRecruitableCharacters()
+        {
+            List<Character> recruits = shop.GetEventData<List<Character>>();
+        }
+
+        private void StyleButtons()
+        {
+            StyleButton(btn_BuyItem, Color.FromArgb(76, 175, 80)); //green
+            StyleButton(btn_Back, Color.FromArgb(120, 120, 120));//gray
+        }
+        private void StyleButton(Button btn, Color backColor)
+        {
+            btn.BackColor = backColor;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
+
         }
 
         private void btn_Back_Click(object sender, EventArgs e)
@@ -29,7 +67,8 @@ namespace DiceBattleGame.Forms_UI
 
         public void LoadShopItems()
         {
-            items = ItemDatabase.ShopItems;
+            //items = ItemDatabase.ShopItems;
+            
             lst_Items.Items.Clear();
             foreach (var item in items)
             {

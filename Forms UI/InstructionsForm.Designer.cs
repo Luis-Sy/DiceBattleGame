@@ -34,9 +34,9 @@
             // 
             // btn_StartMenuForm
             // 
-            btn_StartMenuForm.Location = new Point(337, 343);
+            btn_StartMenuForm.Location = new Point(322, 343);
             btn_StartMenuForm.Name = "btn_StartMenuForm";
-            btn_StartMenuForm.Size = new Size(131, 40);
+            btn_StartMenuForm.Size = new Size(169, 40);
             btn_StartMenuForm.TabIndex = 2;
             btn_StartMenuForm.Text = "Start Menu";
             btn_StartMenuForm.UseVisualStyleBackColor = true;

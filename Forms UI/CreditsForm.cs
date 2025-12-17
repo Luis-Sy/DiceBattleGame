@@ -15,6 +15,28 @@ namespace DiceBattleGame.Forms_UI
         public CreditsForm()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Font = new Font("Segoe UI", 10);
+            this.Text = "Credits";
+            StyleButtons();
+
+        }
+        private void StyleButtons()
+        {
+
+            StyleButton(btn_StartMenuForm, Color.FromArgb(120, 120, 120));//gray
+        }
+        private void StyleButton(Button btn, Color backColor)
+        {
+            btn.BackColor = backColor;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btn.Cursor = Cursors.Hand;
+
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
