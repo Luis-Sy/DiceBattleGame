@@ -244,6 +244,10 @@ namespace DiceBattleGame.GameData.Characters
             if (this.type == "Player")
             {
                 maxHealth += 10;
+            }else if (this.type == "Enemy" || this.type == "Elite Enemy")
+            {
+                // enemy health nerf for balancing purposes
+                maxHealth -= 10;
             }
             restoreHp();
         }

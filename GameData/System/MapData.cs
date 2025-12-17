@@ -171,6 +171,10 @@ namespace DiceBattleGame.GameData.System
                 {
                     scaleCounter = 0;
                 }
+                MapNode newNode = new MapNode(nodeType, nodeEvent);
+
+
+                mapNodes.Add(newNode);
             }
 
             // create the boss node at the end
