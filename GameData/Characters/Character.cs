@@ -118,7 +118,7 @@ namespace DiceBattleGame.GameData.Characters
             if (damageResistances.ContainsKey(type))
             {
                 // multiply damage by the character's damage resistance modifier
-                finalDamage = (int)Math.Ceiling(amount * damageResistances[type]) - getStatCheckBonus("Constitution");
+                finalDamage = (int)Math.Ceiling(amount * damageResistances[type]) - (getStatCheckBonus("Constitution") * 2);
 
                 // round up to 1 if necessary to prevent stalemates
                 if (finalDamage < 1)
@@ -247,7 +247,7 @@ namespace DiceBattleGame.GameData.Characters
             }else if (this.type == "Enemy" || this.type == "Elite Enemy")
             {
                 // enemy health nerf for balancing purposes
-                maxHealth -= 10;
+                maxHealth -= 5;
             }
             restoreHp();
         }

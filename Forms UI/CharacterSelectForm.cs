@@ -3,6 +3,7 @@ using DiceBattleGame.Forms_UI;
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace DiceBattleGame
 {
@@ -128,7 +129,17 @@ namespace DiceBattleGame
             int index = cmb_PlayerSelector.SelectedIndex;
 
             GameManager.SelectedCharacter = availableCharacters[index];
-            GameManager.StartCampaign();
+            // check to see if a seed was entered
+            if (int.TryParse(seedTextBox.Text, out int seed))
+            {
+                Trace.WriteLine($"Starting campaign with seed: {seed}");
+                GameManager.StartCampaign(seed);
+            }
+            else
+            {
+                // otherwise start a new campaign without a random seed
+                GameManager.StartCampaign();
+            }
             GameManager.MapInstance = new MapForm();
             GameManager.SwitchTo(GameManager.MapInstance);
         }
@@ -141,6 +152,15 @@ namespace DiceBattleGame
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void seedTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow only digits and control characters (like Backspace and Delete)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Mark the event as handled, preventing the character from being entered
+            }
         }
     }
 }
