@@ -1,5 +1,6 @@
 using DiceBattleGame.GameData.Characters;
 using DiceBattleGame.GameData.Items;
+using DiceBattleGame.GameData.Skills;
 using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
@@ -322,18 +323,19 @@ namespace DiceBattleGame
             }
         }
 
-        public void performSkill(Character user, Character target, string skillName)
+        // skill usage with a target
+        public void performSkill(Character user, Character target, Skill skill)
         {
-            // Placeholder for skill logic
-            // the skillname parameter is a placeholder for an actual skill object
-            if (target == null || user == target)
-            {
-                Log($"{user.getName()} uses {skillName}.");
-            }
-            else
-            {
-                Log($"{user.getName()} uses {skillName} on {target.getName()}.");
-            }
+            int damage = skill.UseSkill(user, target);
+            target.takeDamage(damage, "Skill"); // damage already calculated in skill usage, pass on the damage
+            Log($"{user.getName()} uses {skill.Name} on {target.getName()} for {damage} damage.");
+        }
+
+        // skill usage without a target
+        public void performSkill(Character user, Skill skill)
+        {
+            int effectiveness = skill.UseSkill(user);
+            Log($"{user.getName()} uses {skill.Name} (Effectiveness: {effectiveness}).");
         }
 
         public void useItem(Character user, Character target, Item item)

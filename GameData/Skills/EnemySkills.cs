@@ -48,7 +48,7 @@ namespace DiceBattleGame.GameData.Skills
             }
         }
 
-        // used by Goblins, Skeletons, Bandits, and Mercenaries
+        // used by Skeletons, Bandits, and Mercenaries
         public class SneakyStrike : Skill
         {
 

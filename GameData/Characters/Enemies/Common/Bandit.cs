@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.EnemySkills;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Common
 {
@@ -34,6 +35,8 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
                 { "Psychic", 1.0 }
             };
             armorClass = 12;
+            skills.Add(new SneakyStrike());
+            skills.Add(new SwiftSlice());
             weapon = new Custom("Dagger", "Sharp Dagger", "Pierce", new diceBag(5, 2));
         }
     }
