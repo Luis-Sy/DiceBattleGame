@@ -52,7 +52,12 @@ namespace DiceBattleGame.Forms_UI
 
             nodes = GameManager.Campaign.getMapNodes();
             StyleButtons();
-            
+
+            this.Shown += (s, e) =>
+            {
+                pic_Map.Invalidate();
+                pic_Map.Refresh();
+            };
 
 
         }
@@ -125,6 +130,11 @@ namespace DiceBattleGame.Forms_UI
             //marker size
             int markerSize = nodeSize / 2;
 
+            int markerY = centerY - nodeSize / 2 - markerSize - 6;
+
+            if (markerY < 5) markerY = 5;
+            
+
 
             for (int i = 0; i < nodeCount; i++)
             {
@@ -147,8 +157,8 @@ namespace DiceBattleGame.Forms_UI
 
             }
             //player position marker(on node 0)
-            int playerX = margin + currentNodeIndex * spacing;
-            g.FillEllipse(Brushes.Red, playerX - markerSize / 2, centerY - nodeSize, markerSize, markerSize);
+            int playerX = margin + (GameManager.CurrentMapNodeIndex+1) * spacing;
+            g.FillEllipse(Brushes.Red, playerX - markerSize / 2, markerY, markerSize, markerSize);
         }
 
         private void pic_Map_Paint(object sender, PaintEventArgs e)
@@ -157,34 +167,89 @@ namespace DiceBattleGame.Forms_UI
         }
 
         //move foward to next node
+        //private void btn_Continue_Click(object sender, EventArgs e)
+        //{
+        //    if (currentNodeIndex >= nodes.Count - 1)
+        //    {
+        //        return;
+        //    }
+        //    //next node index
+        //    int nextNode = currentNodeIndex + 1;
+        //    MapNode node = nodes[nextNode];
+
+        //    string nodeType = node.GetNodeType();
+
+        //    //save the progress befroe switching screens
+        //    currentNodeIndex = nextNode;
+        //    GameManager.CurrentMapNodeIndex = currentNodeIndex;
+        //    pic_Map.Invalidate();
+
+        //    //if(nodeType == "Shop")
+        //    //{
+        //    //    Shop shopEvent = node.GetNodeData() as Shop;
+
+        //    //    currentNodeIndex = nextNode;
+        //    //    GameManager.CurrentMapNodeIndex= currentNodeIndex;
+        //    //    pic_Map.Invalidate();
+
+        //    //    GameManager.SwitchTo(new ShopForm(shopEvent));
+        //    //    return;
+        //    //}
+        //    if (nodeType == "Shop")
+        //    {
+        //        Shop shopEvent = node.GetNodeData() as Shop;
+        //        if (shopEvent == null)
+        //        {
+        //            MessageBox.Show("shop event not found");
+        //            return;
+        //        }
+        //        GameManager.SwitchTo(new ShopForm(shopEvent));
+        //        return;
+        //    }
+
+
+        //    //--------------------------------------
+
+        //    //here goes the other forms to keep going with the map
+        //    if (nodeType == "Start" || nodeType == "Common Battle" || nodeType == "Elite Battle" || nodeType =="Boss Battle")
+        //    {
+        //        CombatEncounter enc = node.GetNodeData() as CombatEncounter;
+
+        //        GameManager.CurrentMapNodeIndex = nextNode;
+        //        //currentNodeIndex = nextNode;
+
+
+        //        BattleForm battleForm = new BattleForm(GameManager.SelectedCharacter, enc);
+        //        GameManager.SwitchTo(battleForm);
+        //        return;
+        //    }
+        //    if(nodeType == "Rest")
+        //    {
+        //        MessageBox.Show("You feel stronger now. Your hp is restored");
+        //        GameManager.SelectedCharacter.restoreHp();
+
+        //        currentNodeIndex = nextNode;
+
+        //        return;
+        //    }
+        //    //-----------------------------------------
+
+
+        //    currentNodeIndex = nextNode;
+        //    pic_Map.Invalidate();
+        //}
         private void btn_Continue_Click(object sender, EventArgs e)
         {
             if (currentNodeIndex >= nodes.Count - 1)
             {
                 return;
             }
-            //next node index
+
             int nextNode = currentNodeIndex + 1;
             MapNode node = nodes[nextNode];
-
             string nodeType = node.GetNodeType();
 
-            //save the progress befroe switching screens
-            currentNodeIndex = nextNode;
-            GameManager.CurrentMapNodeIndex = currentNodeIndex;
-            pic_Map.Invalidate();
-
-            //if(nodeType == "Shop")
-            //{
-            //    Shop shopEvent = node.GetNodeData() as Shop;
-
-            //    currentNodeIndex = nextNode;
-            //    GameManager.CurrentMapNodeIndex= currentNodeIndex;
-            //    pic_Map.Invalidate();
-
-            //    GameManager.SwitchTo(new ShopForm(shopEvent));
-            //    return;
-            //}
+            // -------- SHOP --------
             if (nodeType == "Shop")
             {
                 Shop shopEvent = node.GetNodeData() as Shop;
@@ -193,40 +258,54 @@ namespace DiceBattleGame.Forms_UI
                     MessageBox.Show("shop event not found");
                     return;
                 }
+
+                currentNodeIndex = nextNode;
+                GameManager.CurrentMapNodeIndex = currentNodeIndex;
+                pic_Map.Invalidate();
+                pic_Map.Refresh();
+
                 GameManager.SwitchTo(new ShopForm(shopEvent));
                 return;
             }
 
-
-            //--------------------------------------
-
-            //here goes the other forms to keep going with the map
-            if (nodeType == "Start" || nodeType == "Common Battle" || nodeType == "Elite Battle" || nodeType =="Boss Battle")
+            // -------- BATTLE NODES --------
+            if (nodeType == "Start" ||
+                nodeType == "Common Battle" ||
+                nodeType == "Elite Battle" ||
+                nodeType == "Boss Battle")
             {
                 CombatEncounter enc = node.GetNodeData() as CombatEncounter;
 
-                GameManager.CurrentMapNodeIndex = nextNode;
-                //currentNodeIndex = nextNode;
-                
+                BattleForm battleForm = new BattleForm(GameManager.SelectedCharacter, enc,GameManager.Campaign);
+                battleForm.ShowDialog();
 
-                BattleForm battleForm = new BattleForm(GameManager.SelectedCharacter, enc);
-                GameManager.SwitchTo(battleForm);
+                if (!battleForm.playerWon)
+                {
+                    MessageBox.Show("You were defeated. You cannot advance.");
+                    btn_Continue.Enabled = false;
+                    btn_PreviousNode.Enabled = false;
+                    return;
+                }
+                currentNodeIndex = nextNode;
+                GameManager.CurrentMapNodeIndex = currentNodeIndex;
+
+                pic_Map.Invalidate();
+                pic_Map.Refresh();
                 return;
             }
-            if(nodeType == "Rest")
+
+            // -------- REST --------
+            if (nodeType == "Rest")
             {
                 MessageBox.Show("You feel stronger now. Your hp is restored");
                 GameManager.SelectedCharacter.restoreHp();
 
                 currentNodeIndex = nextNode;
-                
+                GameManager.CurrentMapNodeIndex = currentNodeIndex;
+                pic_Map.Invalidate();
+                pic_Map.Refresh();
                 return;
             }
-            //-----------------------------------------
-
-
-            currentNodeIndex = nextNode;
-            pic_Map.Invalidate();
         }
 
         //move to the previous node
@@ -237,6 +316,7 @@ namespace DiceBattleGame.Forms_UI
                 currentNodeIndex--;
                 GameManager.CurrentMapNodeIndex = currentNodeIndex;
                 pic_Map.Invalidate();
+                pic_Map.Refresh();
             }
         }
 

@@ -14,7 +14,9 @@ namespace DiceBattleGame.Forms_UI
     {
         //manges turn logic and combat flow
         private TurnManager turnManager;
-       
+
+        private CampaignManager campaing;
+
 
         //list holding player and enemy characters
         private List<Character> playerParty;
@@ -23,8 +25,12 @@ namespace DiceBattleGame.Forms_UI
         //currently selected enemy for player attacks
         private Character? selectedEnemy = null;
 
+        //battle state flags
+        private bool battleEnded = false;
+        public bool playerWon { get;  set; } = false;
+
         //init the battle form with player and encounter data
-        public BattleForm(Character player, CombatEncounter encounter)
+        public BattleForm(Character player, CombatEncounter encounter, CampaignManager campaignManager)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -33,6 +39,7 @@ namespace DiceBattleGame.Forms_UI
             this.Font = new Font("Segoe UI", 10);
             this.Text = "Battle";
 
+            this.campaing = campaignManager;
             playerParty = new() { player };
             enemyParty = encounter.GetEventData<List<Character>>()!;
 
@@ -40,29 +47,13 @@ namespace DiceBattleGame.Forms_UI
                 e.restoreHp();
 
 
-
-            //InitializeUI();
             StyleButtons();
             StartBattle();
         }
 
         // --------------------------------
         // INIT
-        
-        //initialize labels, names and hp bars for players and enemies
-        //private void InitializeUI()
-        //{
-        //    var player = playerParty[0];
-        //    var enemy = enemyParty[0];
 
-
-        //    lbl_EnemyPlayer.Text = enemy.getName();
-
-        //    statusBar1.maxValue = player.getMaxHealth();
-        //    statusBar2.maxValue = enemy.getMaxHealth();
-
-        //    UpdateStatusBars();
-        //}
         private void StyleButtons()
         {
             StyleButton(btn_Attack, Color.FromArgb(200, 80, 90));   // red
@@ -91,7 +82,6 @@ namespace DiceBattleGame.Forms_UI
 
             BuildPartyPanels();
             UpdateAllHP();
-            //UpdateStatusBars();
 
             btn_Attack.Enabled = false;
             HandleTurnStart();
@@ -138,7 +128,13 @@ namespace DiceBattleGame.Forms_UI
             btn_Attack.Enabled = false;
 
             UpdateAllHP();
-            //UpdateStatusBars();
+
+            //check if battle is over
+            if (AreAllEnemiesDead())
+            {
+                EndBattleVictory();
+                return;
+            }
 
             //advance turn index only after player finish
             turnManager.AdvanceTurnIndex();
@@ -179,7 +175,7 @@ namespace DiceBattleGame.Forms_UI
 
         //------------------------------------------------
         // NEXT
-        
+
 
         //handles advancing the battle when the next button is pressed
         private void btn_NextTurn_Click(object sender, EventArgs e)
@@ -195,7 +191,12 @@ namespace DiceBattleGame.Forms_UI
             {
                 turnManager.NextTurn();
                 UpdateAllHP();
-                //UpdateStatusBars();
+
+                //check if the player lost
+                if (playerParty.All(p => !p.isAlive()))
+                {
+                    EndBattleDefeat();
+                }
 
                 //enemy acts once then control is return
                 turnManager.AdvanceTurnIndex();
@@ -203,78 +204,118 @@ namespace DiceBattleGame.Forms_UI
             }
         }
 
+
+        private bool AreAllEnemiesDead()
+        {
+            return enemyParty.All(e => !e.isAlive());
+        }
+
+        private void EndBattleVictory()
+        {
+            battleEnded = true;
+            playerWon = true;
+
+            lbl_Turn.Text = "VICTORY";
+            btn_Attack.Enabled = false;
+            btn_Skill.Enabled = false;
+            btn_Item.Enabled = false;
+            btn_NextTurn.Enabled = false;
+
+            txt_TextBox.AppendText("\nAll enemies defeated!\n");
+        }
+
+        private void EndBattleDefeat()
+        {
+            battleEnded = true;
+            playerWon = false;
+
+            lbl_Turn.Text = "DEFEAT";
+            btn_Attack.Enabled = false;
+            btn_Skill.Enabled = false;
+            btn_Item.Enabled = false;
+            btn_NextTurn.Enabled = false;
+
+            txt_TextBox.AppendText("\nYou have been defeated...\n");
+        }
+
+        private void btn_BackMap_Click(object sender, EventArgs e)
+        {
+            if (!battleEnded)
+            {
+                MessageBox.Show("You must finish the battle first");
+                return;
+            }
+
+            campaing.ResolveCombat(playerWon);
+            this.Close();
+            //GameManager.SwitchTo(new MapForm());
+        }
+
+
+
         //-----------------------------------
         // UI / HP
-        
-        //private void UpdateStatusBars()
-        //{
-        //    var p = playerParty[0];
-        //    var e = enemyParty[0];
-
-        //    PlayerHealtNumber.Text = $"{p.getHealth()}/{p.getMaxHealth()}";
-        //    EnemyHealtNumber.Text = $"{e.getHealth()}/{e.getMaxHealth()}";
-
-        //    statusBar1.SetCurrentValue(p.getHealth());
-        //    statusBar2.SetCurrentValue(e.getHealth());
-        //}
 
         private void UpdateAllHP()
         {
-            UpdatePartyHP(pnl_PlayerParty);
-            UpdatePartyHP(pnl_EnemyParty);
+            UpdatePartyHP(flp_PlayerParty);
+            UpdatePartyHP(flp_EnemyParty);
         }
 
-        
-        private void UpdatePartyHP(Panel container)
+        //accepts control so it works with flowlayoutpanel
+        private void UpdatePartyHP(Control container)
         {
             foreach (Panel card in container.Controls.OfType<Panel>())
             {
                 Character c = (Character)card.Tag;
 
-                ProgressBar bar = card.Controls.Find("pb_Player", true).First() as ProgressBar;
-                Label lblHP = card.Controls.Find("lbl_HpPlayer", true).First() as Label;
+                ProgressBar bar = card.Controls.OfType<ProgressBar>().FirstOrDefault();
+                Label lblHP = card.Controls.OfType<Label>().FirstOrDefault(l => l.Name.Contains("Hp"));
 
-                bar.Maximum = c.getMaxHealth();
-                bar.Value = Math.Max(0, Math.Min(c.getHealth(), c.getMaxHealth()));
-                lblHP.Text = $"HP: {c.getHealth()} / {c.getMaxHealth()}";
-
+                if (bar != null)
+                {
+                    bar.Maximum = c.getMaxHealth();
+                    bar.Value=Math.Max(0, Math.Min(c.getHealth(),c.getMaxHealth()));
+                }
+                if(lblHP != null)
+                {
+                    lblHP.Text = $"HP:{c.getHealth()}/{c.getMaxHealth()}";
+                }
                 if (!c.isAlive())
                 {
                     card.Enabled = false;
                     card.BackColor = Color.LightGray;
                 }
+
+             
             }
         }
-        private void btn_BackMap_Click(object sender, EventArgs e)
-        {
-            GameManager.SwitchTo(new MapForm());
-        }
+        
 
         // ============================
         // PANELS
         //build characters cards for players and enemy parties but first clear them
         private void BuildPartyPanels()
         {
-            pnl_PlayerParty.Controls.Clear();
-            pnl_EnemyParty.Controls.Clear();
+            flp_PlayerParty.Controls.Clear();
+            flp_EnemyParty.Controls.Clear();
 
             foreach (var p in playerParty)
-                pnl_PlayerParty.Controls.Add(CreateCardFromTemplate(p, false));
+                flp_PlayerParty.Controls.Add(CreatePlayerCardFromTemplate(p));
 
             foreach (var e in enemyParty)
-                pnl_EnemyParty.Controls.Add(CreateCardFromTemplate(e, true));
+                flp_EnemyParty.Controls.Add(CreateEnemyCardFromTemplate(e));
         }
 
-        private Panel CreateCardFromTemplate(Character c, bool isEnemy)
+        private Panel CreatePlayerCardFromTemplate(Character c)
         {
             Panel card = new Panel
             {
-                Width= pnl_CharacterTemplatePlayer.Width,
-                Height= pnl_CharacterTemplatePlayer.Height,
+                Width = pnl_CharacterTemplatePlayer.Width,
+                Height = pnl_CharacterTemplatePlayer.Height,
                 BorderStyle = pnl_CharacterTemplatePlayer.BorderStyle,
                 BackColor = pnl_CharacterTemplatePlayer.BackColor,
-                Margin = pnl_CharacterTemplatePlayer.Margin,
-                Padding = pnl_CharacterTemplatePlayer.Padding,
+                Margin = new Padding(5),
                 Tag = c
             };
 
@@ -315,14 +356,64 @@ namespace DiceBattleGame.Forms_UI
             card.Controls.Add(lblHP);
             card.Controls.Add(hpBar);
 
-            if (isEnemy)
-            {
-                card.Cursor = Cursors.Hand;
-                card.Click += (s, e) => SelectEnemy(card);
+           
+            return card;
+        }
 
-                foreach (Control ctrl in card.Controls)
-                    ctrl.Click += (s, e) => SelectEnemy(card);
-            }
+        private Panel CreateEnemyCardFromTemplate(Character e)
+        {
+            Panel card = new Panel
+            {
+                Width = pnl_CharacterTemplateEnemy.Width,
+                Height = pnl_CharacterTemplateEnemy.Height,
+                BorderStyle = pnl_CharacterTemplateEnemy.BorderStyle,
+                BackColor = pnl_CharacterTemplateEnemy.BackColor,
+                Margin = new Padding(5),
+                Tag = e
+            };
+
+            // NAME
+            Label tplName = pnl_CharacterTemplateEnemy.Controls.Find("lbl_EnemyName", true).First() as Label;
+            Label lblName = new Label
+            {
+                Name = "lbl_EnemyName",
+                Text = e.getName(),
+                Location = tplName.Location,
+                AutoSize = tplName.AutoSize,
+                Font = tplName.Font
+            };
+
+            // HP TEXT
+            Label tplHP = pnl_CharacterTemplateEnemy.Controls.Find("lbl_HpEnemy", true).First() as Label;
+            Label lblHP = new Label
+            {
+                Name = "lbl_HpEnemy",
+                Text = $"HP: {e.getHealth()} / {e.getMaxHealth()}",
+                Location = tplHP.Location,
+                AutoSize = tplHP.AutoSize,
+                Font = tplHP.Font
+            };
+
+            // HP BAR
+            ProgressBar tplBar = pnl_CharacterTemplateEnemy.Controls.Find("pb_Enemy", true).First() as ProgressBar;
+            ProgressBar hpBar = new ProgressBar
+            {
+                Name = "pb_Enemy",
+                Location = tplBar.Location,
+                Size = tplBar.Size,
+                Maximum = e.getMaxHealth(),
+                Value = Math.Max(0, e.getHealth())
+            };
+
+            card.Controls.Add(lblName);
+            card.Controls.Add(lblHP);
+            card.Controls.Add(hpBar);
+
+            card.Cursor = Cursors.Hand;
+            card.Click += (s, e) => SelectEnemy(card);
+
+            foreach (Control c in card.Controls)
+                c.Click += (s, e) => SelectEnemy(card);
 
             return card;
         }
@@ -333,11 +424,12 @@ namespace DiceBattleGame.Forms_UI
             Character enemy = (Character)panel.Tag;
             if (!enemy.isAlive()) return;
 
-            foreach (Panel p in pnl_EnemyParty.Controls)
-                p.BackColor = Color.White;
+            foreach (Panel p in flp_EnemyParty.Controls.OfType<Panel>())
+                p.BackColor = pnl_CharacterTemplateEnemy.BackColor;
 
             panel.BackColor = Color.LightCoral;
             selectedEnemy = enemy;
         }
     }
 }
+

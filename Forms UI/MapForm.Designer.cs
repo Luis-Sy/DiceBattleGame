@@ -72,17 +72,17 @@
             // 
             pic_Map.BackColor = SystemColors.Info;
             pic_Map.BorderStyle = BorderStyle.FixedSingle;
-            pic_Map.Location = new Point(54, 57);
+            pic_Map.Location = new Point(40, 68);
             pic_Map.Margin = new Padding(2);
             pic_Map.Name = "pic_Map";
-            pic_Map.Size = new Size(355, 112);
+            pic_Map.Size = new Size(480, 156);
             pic_Map.TabIndex = 6;
             pic_Map.TabStop = false;
             pic_Map.Paint += pic_Map_Paint;
             // 
             // btn_Continue
             // 
-            btn_Continue.Location = new Point(275, 209);
+            btn_Continue.Location = new Point(363, 261);
             btn_Continue.Margin = new Padding(2);
             btn_Continue.Name = "btn_Continue";
             btn_Continue.Size = new Size(76, 20);
@@ -106,7 +106,7 @@
             tbl_Stats.Controls.Add(lbl_Dexterity, 1, 3);
             tbl_Stats.Controls.Add(lbl_Constitution, 1, 1);
             tbl_Stats.Controls.Add(label1, 1, 0);
-            tbl_Stats.Location = new Point(432, 57);
+            tbl_Stats.Location = new Point(687, 95);
             tbl_Stats.Margin = new Padding(2);
             tbl_Stats.Name = "tbl_Stats";
             tbl_Stats.RowCount = 4;
@@ -221,7 +221,7 @@
             // 
             // btn_PreviousNode
             // 
-            btn_PreviousNode.Location = new Point(112, 209);
+            btn_PreviousNode.Location = new Point(82, 261);
             btn_PreviousNode.Margin = new Padding(2);
             btn_PreviousNode.Name = "btn_PreviousNode";
             btn_PreviousNode.Size = new Size(101, 20);
@@ -234,7 +234,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(588, 263);
+            ClientSize = new Size(1016, 564);
             Controls.Add(btn_PreviousNode);
             Controls.Add(tbl_Stats);
             Controls.Add(btn_Continue);

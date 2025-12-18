@@ -12,7 +12,7 @@ namespace DiceBattleGame.GameData.System
         private string nodeType = "undefined"; // type of node (e.g., battle, shop, event, rest, etc.)
         private bool isVisited = false; // whether the node has been visited by the player
         private MapEvent nodeData;
-        public MapNode next;
+        public MapNode? next;
 
         public MapNode(string type, MapEvent data)
         {

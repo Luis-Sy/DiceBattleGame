@@ -421,7 +421,7 @@ namespace DiceBattleGame.GameData.Skills
                 }
                 else
                 {
-                    MessageBox.Show("This skill is out of uses!")
+                    MessageBox.Show("This skill is out of uses!");
                     return 0;
                 }
             }

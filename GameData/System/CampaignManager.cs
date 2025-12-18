@@ -22,6 +22,10 @@ namespace DiceBattleGame.GameData.System
             "Rest"
         };
 
+        //
+        private int currenNodeIndex = 0;
+        private bool gameOver = false;
+
 
         // default method to initialize a new campaign with a player character, a random seed, and the default node types
         public CampaignManager(Character player)
@@ -97,6 +101,35 @@ namespace DiceBattleGame.GameData.System
                 Trace.WriteLine("Node Type: " + node.GetNodeType() + ", Visited: " + node.IsVisited());
             }
         }
+        //new methods
+        public MapNode GetCurrentNode()
+        {
+            return getMapNodes()[currenNodeIndex];
+        }
+        public int GetCurrentNodeIndex()
+        {
+            return currenNodeIndex;
+        }
+        public bool IsGameOver()
+        {
+            return gameOver;
+        }
 
+        //new method called when a battle ends
+        public void ResolveCombat(bool playerWon)
+        {
+            if (playerWon)
+            {
+                GetCurrentNode().VisitNode();
+                if (currenNodeIndex < getMapNodes().Count - 1)
+                {
+                    currenNodeIndex++;
+                }
+            }
+            else
+            {
+                gameOver = true;
+            }
+        }
     }
 }
