@@ -119,7 +119,7 @@ namespace DiceBattleGame.GameData.Characters
             if (damageResistances.ContainsKey(type))
             {
                 // multiply damage by the character's damage resistance modifier
-                finalDamage = (int)Math.Ceiling(amount * damageResistances[type]) - (getStatCheckBonus("Constitution") * 2);
+                finalDamage = (int)Math.Ceiling(amount * damageResistances[type]) - (getStatCheckBonus("Constitution"));
 
                 // round up to 1 if necessary to prevent stalemates
                 if (finalDamage < 1)

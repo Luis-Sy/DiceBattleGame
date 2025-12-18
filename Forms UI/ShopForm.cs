@@ -32,7 +32,7 @@ namespace DiceBattleGame.Forms_UI
             shop = shopEvent;
             items = shopEvent.GetEventData<List<Item>>();
 
-
+            lbl_Gold.Text = GameManager.Campaign.GetGold().ToString();
             LoadShopItems();
             StyleButtons();
             LoadRecruitableCharacters();

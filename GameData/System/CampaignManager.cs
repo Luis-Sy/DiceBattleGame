@@ -72,6 +72,11 @@ namespace DiceBattleGame.GameData.System
             // whatever else needs to be initialized here
         }
 
+        public int GetGold()
+        {
+            return gold;
+        }
+
         public void ChangeGold(int amount)
         {
             gold += amount;
