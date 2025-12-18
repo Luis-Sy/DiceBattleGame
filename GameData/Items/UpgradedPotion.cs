@@ -66,7 +66,7 @@ namespace DiceBattleGame.GameData.Items
         public GreaterHealthPotion()
             : base("Greater Health Potion", 15, "A stronger potion that restores more HP than the normal version.")
         {
-            value1 = 15;
+            value1 = 20;
         }
 
         public override void Use(Character entity)

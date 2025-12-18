@@ -11,18 +11,18 @@ namespace DiceBattleGame.GameData.Items
     {
       
 
-        public HealthPotion():base("Health Potion",10,"Restores 5 HP") { 
+        public HealthPotion():base("Health Potion",10,"Restores 10 HP") { 
         }
         
 
         public override void Use(Character entity) //uses the changehp method on characters to add the value to the hp, value given must be an int
         {
-            entity.changeHp(5);
+            entity.changeHp(10);
         }
 
         public string Examine() //hate that the hp restore value must be static :( - J
         {
-            return "This health potion restores 5 hp";       
+            return "This health potion restores 10 hp";       
         }
     }
 }

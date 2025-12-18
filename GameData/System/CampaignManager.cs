@@ -38,7 +38,9 @@ namespace DiceBattleGame.GameData.System
 
 
             playerInventory.Clear(); // initialize empty inventory
-            playerInventory.Add(new HealthPotion()); // starting item
+            playerInventory.Add(new HealthPotion());
+            playerInventory.Add(new HealthPotion());
+            playerInventory.Add(new HealthPotion());
 
             // whatever else needs to be initialized here
         }
@@ -53,7 +55,9 @@ namespace DiceBattleGame.GameData.System
             mapData = new MapData(seed, this.NodeTypes); // initialize map data and generate map with the set seed
 
             playerInventory.Clear(); // initialize empty inventory
-            playerInventory.Add(new HealthPotion()); // starting item
+            playerInventory.Add(new HealthPotion());
+            playerInventory.Add(new GreaterHealthPotion());
+            
 
             // whatever else needs to be initialized here
         }
@@ -67,7 +71,9 @@ namespace DiceBattleGame.GameData.System
             mapData = new MapData(seed, nodeTypes); // initialize map data and generate map with the set seed
 
             playerInventory.Clear(); // initialize empty inventory
-            playerInventory.Add(new HealthPotion()); // starting item
+            playerInventory.Add(new HealthPotion());
+            playerInventory.Add(new GreaterHealthPotion());
+            
 
             // whatever else needs to be initialized here
         }

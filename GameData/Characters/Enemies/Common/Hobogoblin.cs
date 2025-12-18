@@ -26,15 +26,15 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             initializeStats();
             damageResistances = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase)
             {
-                { "Slash", 1.0 },
+                { "Slash", 1.25 },
                 { "Pierce", 1.5 },
-                { "Blunt", 0.5 },
+                { "Blunt", 1.0 },
                 { "Magic", 1.0 },
                 { "Radiant", 1.0 },
                 { "Arcane", 1.0 },
                 { "Psychic", 1.0 }
             };
-            armorClass = 14;
+            armorClass = 13;
             skills.Add(new HeavySmash());
             weapon = new Custom("Shortsword", "Rusty Shortsword", "Slash", new D6());
         }
