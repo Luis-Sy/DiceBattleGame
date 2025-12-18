@@ -58,7 +58,7 @@ namespace DiceBattleGame.Forms_UI
                 pic_Map.Invalidate();
                 pic_Map.Refresh();
             };
-
+            lbl_Gold.Text = $"Gold: {GameManager.Campaign.GetGold()}";
 
         }
         private void StyleButtons()
@@ -133,7 +133,7 @@ namespace DiceBattleGame.Forms_UI
             int markerY = centerY - nodeSize / 2 - markerSize - 6;
 
             if (markerY < 5) markerY = 5;
-            
+
 
 
             for (int i = 0; i < nodeCount; i++)
@@ -157,7 +157,7 @@ namespace DiceBattleGame.Forms_UI
 
             }
             //player position marker(on node 0)
-            int playerX = margin + (GameManager.CurrentMapNodeIndex+1) * spacing;
+            int playerX = margin + (GameManager.CurrentMapNodeIndex + 1) * spacing;
             g.FillEllipse(Brushes.Red, playerX - markerSize / 2, markerY, markerSize, markerSize);
         }
 
@@ -276,7 +276,7 @@ namespace DiceBattleGame.Forms_UI
             {
                 CombatEncounter enc = node.GetNodeData() as CombatEncounter;
 
-                BattleForm battleForm = new BattleForm(GameManager.SelectedCharacter, enc,GameManager.Campaign);
+                BattleForm battleForm = new BattleForm(GameManager.Campaign.GetPlayerParty(), enc, GameManager.Campaign);
                 battleForm.ShowDialog();
 
                 if (!battleForm.playerWon)
@@ -297,8 +297,15 @@ namespace DiceBattleGame.Forms_UI
             // -------- REST --------
             if (nodeType == "Rest")
             {
-                MessageBox.Show("You feel stronger now. Your hp is restored");
-                GameManager.SelectedCharacter.restoreHp();
+                MessageBox.Show("You feel stronger now. Your hp is restored and your Skill uses have refreshed.");
+                foreach (var character in GameManager.Campaign.GetPlayerParty())
+                {
+                    character.restoreHp();
+                    foreach(var skill in character.getSkills())
+                    {
+                        skill.RestoreUses();
+                    }
+                }
 
                 currentNodeIndex = nextNode;
                 GameManager.CurrentMapNodeIndex = currentNodeIndex;
@@ -320,7 +327,9 @@ namespace DiceBattleGame.Forms_UI
             }
         }
 
-        
+        private void tbl_Stats_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 }

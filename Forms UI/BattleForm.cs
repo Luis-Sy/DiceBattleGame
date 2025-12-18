@@ -30,7 +30,7 @@ namespace DiceBattleGame.Forms_UI
         public bool playerWon { get;  set; } = false;
 
         //init the battle form with player and encounter data
-        public BattleForm(Character player, CombatEncounter encounter, CampaignManager campaignManager)
+        public BattleForm(List<Character> party, CombatEncounter encounter, CampaignManager campaignManager)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -40,7 +40,7 @@ namespace DiceBattleGame.Forms_UI
             this.Text = "Battle";
 
             this.campaing = campaignManager;
-            playerParty = new() { player };
+            playerParty = party;
             enemyParty = encounter.GetEventData<List<Character>>()!;
 
             foreach (var e in enemyParty)
