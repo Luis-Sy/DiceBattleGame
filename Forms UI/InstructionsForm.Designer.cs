@@ -35,10 +35,17 @@
             // 
             // btn_StartMenuForm
             // 
+<<<<<<< HEAD
             btn_StartMenuForm.Location = new Point(215, 229);
             btn_StartMenuForm.Margin = new Padding(2, 2, 2, 2);
             btn_StartMenuForm.Name = "btn_StartMenuForm";
             btn_StartMenuForm.Size = new Size(113, 27);
+=======
+            btn_StartMenuForm.Location = new Point(269, 355);
+            btn_StartMenuForm.Margin = new Padding(2, 2, 2, 2);
+            btn_StartMenuForm.Name = "btn_StartMenuForm";
+            btn_StartMenuForm.Size = new Size(99, 20);
+>>>>>>> ec939b2b23bc51920d7414acae26a73a1f71275f
             btn_StartMenuForm.TabIndex = 2;
             btn_StartMenuForm.Text = "Start Menu";
             btn_StartMenuForm.UseVisualStyleBackColor = true;
@@ -46,19 +53,33 @@
             // 
             // richTextBox1
             // 
+<<<<<<< HEAD
             richTextBox1.Location = new Point(11, 11);
             richTextBox1.Margin = new Padding(2, 2, 2, 2);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
             richTextBox1.Size = new Size(511, 197);
+=======
+            richTextBox1.Location = new Point(88, 37);
+            richTextBox1.Margin = new Padding(2, 2, 2, 2);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.Size = new Size(446, 314);
+>>>>>>> ec939b2b23bc51920d7414acae26a73a1f71275f
             richTextBox1.TabIndex = 3;
             richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // InstructionsForm
             // 
+<<<<<<< HEAD
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(533, 300);
+=======
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(619, 424);
+>>>>>>> ec939b2b23bc51920d7414acae26a73a1f71275f
             Controls.Add(richTextBox1);
             Controls.Add(btn_StartMenuForm);
             Margin = new Padding(2, 2, 2, 2);

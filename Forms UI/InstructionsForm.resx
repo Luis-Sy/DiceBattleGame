@@ -118,6 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
+<<<<<<< HEAD
     <value>You are an adventurer set off on an expedition to slay a dangerous being terrorizing the land. Will you triumph in glory or die in obscurity?
 
 Begin by selecting a character and entering a new campaign. On the map screen, press next to progress to the next node on the map.
@@ -129,5 +130,44 @@ When all enemies have been defeated (or all of your party members), press the ba
 
 Use your hard earned gold from battles to spend in shops, where you may purchase items to use in battle, or perhaps hire new party members.
 </value>
+=======
+    <value>HOW TO PLAY – DICE BATTLE GAME
+
+OBJECTIVE
+Your goal is to progress through the map, defeat enemies in turn-based battles, and survive until the end of the campaign.
+
+TURN-BASED COMBAT
+Battles are turn-based. Characters act in order based on their initiative roll.
+On your turn, you can perform one action.
+
+PLAYER ACTIONS
+
+ATTACK
+- Performs a basic attack using your equipped weapon.
+- Damage depends on your stats and the enemy’s resistances.
+
+SKILLS
+- Each character has unique skills.
+- Skills have limited uses.
+- Some skills deal extra damage or apply special effects.
+
+ITEMS
+- Items can heal you or increase your stats.
+- Each item can only be used once.
+- Used items are removed from your inventory.
+
+TARGET SELECTION
+- Click on an enemy to select it as your target.
+- The selected enemy is highlighted in red.
+
+WINNING &amp; LOSING
+- You win a battle by defeating all enemies.
+- You lose if all player characters are defeated.
+
+TIPS
+- Manage your skills carefully.
+- Use items when your health is low.
+- Some enemies have resistances, so choose your actions wisely."</value>
+>>>>>>> ec939b2b23bc51920d7414acae26a73a1f71275f
   </data>
 </root>
