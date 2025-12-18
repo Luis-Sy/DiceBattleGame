@@ -12,6 +12,7 @@ namespace DiceBattleGame.GameData.Skills
         public string Name { get; set; }
         public int Uses { get; set; }
         public int DefaultUses { get; set; }
+        public string TargetType { get; set; } // "Self", "Enemy", "Ally"
         //public int ManaCost { get; set; } // for energy use
         protected Skill(string name, int uses, int defaultuses)
         {

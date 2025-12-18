@@ -15,16 +15,16 @@ namespace DiceBattleGame.GameData.Skills
         //{
         //    public Backstab() : base("Backstab") 
         //    {
-
+        //
         //    }
-
+        //
         //    internal override int Use(Character entity)
         //    {
         //        int damage = (entity.attack() * 2);
         //        return damage;
-
+        //
         //    }
-
+        //
         //    internal override int Use(Character entity, Character enemy)
         //    {
         //        enemy.getHealth();
@@ -50,16 +50,16 @@ namespace DiceBattleGame.GameData.Skills
         //            damage = (entity.attack() * 2);
         //            return damage;
         //        }
-
+        //
         //    }
-
-        //}
+        //
+        //} 
         //============================================================Assassin Skills======================================================
         public class PreciseStrike : Skill
         {
             internal PreciseStrike() : base("Precise Strike", 3, 3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy) //precise strike, good for non agile entities
@@ -96,7 +96,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             public ThethingStirs() : base("The Thing Stirs", 3, 3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -122,7 +122,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal KillingBlow() : base("Killing Blow", 3, 3) //Low hp enemies will get crumpled should the attack hit, otherwise, normal attack damage
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -163,7 +163,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal DivineBlessing() : base("Divine Intervention", 3, 3) //A heal
             {
-
+                TargetType = "Ally";
             }
 
             internal override int UseSkill(Character entity, Character target) // I dont know if this a good way to implement this - J
@@ -186,7 +186,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal PocketSand() : base("Pocket Sand", 3, 3) //what does a deprived even have? desperation, and with desperaton, comes pocket sand - J
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy) //I dont know if this will even work - J
@@ -218,7 +218,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal DoubleStrike() : base("Double Strike", 3, 3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -242,7 +242,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal BedazzledHandCannon() : base("Bedazzled Hand Cannon", 3,3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -266,7 +266,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal Afflict() : base("Afflict", 3, 3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -293,7 +293,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal PommelStrike() : base("Pommel Strike", 3, 3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -317,7 +317,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal TheOnePunch() : base("The One Punch", 3, 3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -351,7 +351,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             public Smite() : base("Smite", 3, 3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -374,7 +374,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             public RainOfArrows() : base("Rain of Arrows", 3, 3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -399,6 +399,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             public AtomicSlash() : base("Atomic Slash",1,1)
             {
+                TargetType = "Enemy";
                
             }
 
@@ -422,7 +423,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             public SmileForTheCamera() : base("Smile for the Camera", 3, 3) //another OP ability, very funny
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -452,7 +453,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             public Shackles() : base("Shackles", 3, 3)
             {
-
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)

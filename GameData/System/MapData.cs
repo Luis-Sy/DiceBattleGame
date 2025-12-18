@@ -92,9 +92,10 @@ namespace DiceBattleGame.GameData.System
             // use a weighted selector to select battle types
 
             WeightedRandomSelector<string> selector = new WeightedRandomSelector<string>(seed);
-            selector.AddItem("Common Battle", 60);
+            selector.AddItem("Common Battle", 50);
             selector.AddItem("Elite Battle", 30);
             selector.AddItem("Shop", 10);
+            selector.AddItem("Rest", 10);
 
             int scaleInterval = 3; // increase enemy level every 3 nodes
             int scaleCounter = 0;
@@ -162,15 +163,22 @@ namespace DiceBattleGame.GameData.System
                     nodeType = "Shop";
                 }
                 
-                else if (selectedNode == "Shop")
+                else if (selectedNode == "Rest")
+                {
+                    nodeType = "Rest";
+                    nodeEvent = null;
+                }
+
+                if(scaleCounter >= scaleInterval)
                 {
                     enemyLevel++;
-                    scaleCounter++;
+                    scaleCounter = 0;
                 }
                 else
                 {
-                    scaleCounter = 0;
+                    scaleCounter++;
                 }
+
                 MapNode newNode = new MapNode(nodeType, nodeEvent);
 
 

@@ -9,7 +9,7 @@ namespace DiceBattleGame.GameData.System
     {
         private List<Character> playerParty = new List<Character>();
         private List<Item> playerInventory = new List<Item>(); // the player's inventory during a play session
-        private int gold = 0;
+        private int gold = 20; // player's starting gold
         private MapData mapData;
         public List<string> NodeTypes = new List<string> // default node types
         {

@@ -248,28 +248,39 @@ namespace DiceBattleGame
                 }
                 else if (enemyAction == "Skill")
                 {
-                    // to be implemented
-                }
-                else if (enemyAction == "Item")
-                {
-                    // to be implemented
-                }
-                else
-                {
-                    Log($"{current.getName()} does nothing.");
+
+                    Skill skill = current.enemyUseSkill();
+                    // check for targeting
+                    if (skill.TargetType == "Enemy")
+                    {
+                        performSkill(current, target, skill);
+                    }
+                    else if (skill.TargetType == "Self")
+                    {
+                        performSkill(current, skill);
+
+                    }
+                    else if (enemyAction == "Item")
+                    {
+                        // to be implemented
+                    }
+                    else
+                    {
+                        Log($"{current.getName()} does nothing.");
+                    }
+
                 }
 
+                // Check if the battle is over AFTER attack
+                if (CheckBattleOver())
+                    return;
+
+                //I commented this to handle the turn with the button on battleform
+                // Move to next character
+                //turnIndex++;
+                //if (turnIndex >= turnOrder.Count)
+                //    turnIndex = 0;
             }
-
-            // Check if the battle is over AFTER attack
-            if (CheckBattleOver())
-                return;
-
-            //I commented this to handle the turn with the button on battleform
-            // Move to next character
-            //turnIndex++;
-            //if (turnIndex >= turnOrder.Count)
-            //    turnIndex = 0;
         }
 
 

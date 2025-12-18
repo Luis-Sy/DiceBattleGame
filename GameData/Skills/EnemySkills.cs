@@ -33,7 +33,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal HeavySmash() : base("Heavy Smash", 2, 2)
             {
-
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
@@ -54,6 +54,7 @@ namespace DiceBattleGame.GameData.Skills
 
             internal SneakyStrike() : base("Sneaky Strike", 3, 3)
             {
+                TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
@@ -75,6 +76,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal SwiftSlice() : base("Swift Slice", 2, 2)
             {
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
@@ -94,6 +96,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal Bite() : base("Bite", 2, 2)
             {
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
@@ -113,6 +116,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal AcidSpray() : base("Acid Spray", 2, 2)
             {
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
@@ -134,6 +138,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal FireBolt() : base("Fire Bolt", 3, 3)
             {
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
@@ -153,6 +158,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal FireStorm() : base("Fire Storm", 1, 1)
             {
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
@@ -172,6 +178,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal Scorn() : base("Scorn", 2, 2)
             {
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
@@ -191,6 +198,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal Enlighten() : base("Enlighten", 1, 1)
             {
+                TargetType = "Self";
             }
             internal override int UseSkill(Character entity)
             {
@@ -211,6 +219,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal SoulSiphon() : base("Soul Siphon", 2, 2)
             {
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
@@ -233,6 +242,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal FrenziedStrike() : base("Frenzied Strike", 3, 3)
             {
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
@@ -254,6 +264,7 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal LifeDrain() : base("Life Drain", 2, 2)
             {
+                TargetType = "Enemy";
             }
             internal override int UseSkill(Character entity, Character enemy)
             {
