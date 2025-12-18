@@ -467,14 +467,12 @@ namespace DiceBattleGame.Forms_UI
 
             // HP BAR
             ProgressBar tplBar = pnl_CharacterTemplatePlayer.Controls.Find("pb_Player", true).First() as ProgressBar;
-            ProgressBar hpBar = new ProgressBar
-            {
-                Name = "pb_Player",
-                Location = tplBar.Location,
-                Size = tplBar.Size,
-                Maximum = c.getMaxHealth(),
-                Value = Math.Max(0, c.getHealth())
-            };
+            ProgressBar hpBar = new ProgressBar();
+            hpBar.Name = "pb_Player";
+            hpBar.Location = tplBar.Location;
+            hpBar.Size = tplBar.Size;
+            hpBar.Maximum = Math.Max(1, c.getMaxHealth());
+            hpBar.Value = Math.Clamp(c.getHealth(), 0, hpBar.Maximum);
 
             card.Controls.Add(lblName);
             card.Controls.Add(lblLevel);
@@ -533,14 +531,12 @@ namespace DiceBattleGame.Forms_UI
 
             // HP BAR
             ProgressBar tplBar = pnl_CharacterTemplateEnemy.Controls.Find("pb_Enemy", true).First() as ProgressBar;
-            ProgressBar hpBar = new ProgressBar
-            {
-                Name = "pb_Enemy",
-                Location = tplBar.Location,
-                Size = tplBar.Size,
-                Maximum = e.getMaxHealth(),
-                Value = Math.Max(0, e.getHealth())
-            };
+            ProgressBar hpBar = new ProgressBar();
+            hpBar.Name = "pb_Enemy";
+            hpBar.Location = tplBar.Location;
+            hpBar.Size = tplBar.Size;
+            hpBar.Maximum = Math.Max(1, e.getMaxHealth());
+            hpBar.Value = Math.Clamp(e.getHealth(), 0, hpBar.Maximum);
 
             card.Controls.Add(lblName);
             card.Controls.Add(lblLevel);

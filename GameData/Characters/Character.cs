@@ -304,7 +304,7 @@ namespace DiceBattleGame.GameData.Characters
 
         public void setHealth(int amount) // updated to allow changing the character's current health to whatever we want - Luis
         {
-            health = amount;
+            health = Math.Clamp(amount, 0, maxHealth);
         }
 
         public void restoreHp() //Restores the character back to full health, currently used on battle start, will need to be changed when longer campaign - J
