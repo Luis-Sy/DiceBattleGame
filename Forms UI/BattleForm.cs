@@ -2,13 +2,7 @@
 using DiceBattleGame.GameData.MapEvents.CombatEncounters;
 using DiceBattleGame.GameData.Skills;
 using DiceBattleGame.GameData.System;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace DiceBattleGame.Forms_UI
 {
@@ -29,7 +23,7 @@ namespace DiceBattleGame.Forms_UI
 
         //battle state flags
         private bool battleEnded = false;
-        public bool playerWon { get;  set; } = false;
+        public bool playerWon { get; set; } = false;
 
         //init the battle form with player and encounter data
         public BattleForm(List<Character> party, CombatEncounter encounter, CampaignManager campaignManager)
@@ -50,7 +44,7 @@ namespace DiceBattleGame.Forms_UI
 
 
             pnl_Skills.Visible = true;
-            
+
 
             StyleButtons();
             StartBattle();
@@ -97,12 +91,7 @@ namespace DiceBattleGame.Forms_UI
         {
             Character current = turnManager.GetCurrentCharacter();
 
-            //check if battle is over
-            if (AreAllEnemiesDead())
-            {
-                EndBattleVictory();
-                return;
-            }
+
 
             if (current.getCharacterType() == "Player")
             {
@@ -119,6 +108,13 @@ namespace DiceBattleGame.Forms_UI
                 lbl_Turn.Text = "TURN: ENEMY";
                 btn_Attack.Enabled = false;
                 btn_Skill.Enabled = false;
+            }
+
+            //check if battle is over
+            if (AreAllEnemiesDead())
+            {
+                EndBattleVictory();
+                return;
             }
         }
         private void BuildSkillPanel(Character player)
@@ -137,7 +133,7 @@ namespace DiceBattleGame.Forms_UI
                     Left = 5,
                     Top = y,
                     Enabled = skill.Uses > 0,
-                    Tag = skill 
+                    Tag = skill
                 };
 
                 btn.Click += SkillButton_Click;
@@ -162,7 +158,7 @@ namespace DiceBattleGame.Forms_UI
         }
 
 
-       
+
 
 
         //---------------------------------------------
@@ -390,9 +386,9 @@ namespace DiceBattleGame.Forms_UI
                 if (bar != null)
                 {
                     bar.Maximum = c.getMaxHealth();
-                    bar.Value=Math.Max(0, Math.Min(c.getHealth(),c.getMaxHealth()));
+                    bar.Value = Math.Max(0, Math.Min(c.getHealth(), c.getMaxHealth()));
                 }
-                if(lblHP != null)
+                if (lblHP != null)
                 {
                     lblHP.Text = $"HP:{c.getHealth()}/{c.getMaxHealth()}";
                 }
@@ -402,10 +398,10 @@ namespace DiceBattleGame.Forms_UI
                     card.BackColor = Color.LightGray;
                 }
 
-             
+
             }
         }
-        
+
 
         // ============================
         // PANELS
@@ -439,7 +435,7 @@ namespace DiceBattleGame.Forms_UI
             Label lblName = new Label
             {
                 Name = "lbl_PlayerName",
-                Text = c.getName(),
+                Text = c.getName() + $", Level {c.getLevel()}",
                 Location = tplName.Location,
                 AutoSize = tplName.AutoSize,
                 Font = tplName.Font
@@ -471,7 +467,7 @@ namespace DiceBattleGame.Forms_UI
             card.Controls.Add(lblHP);
             card.Controls.Add(hpBar);
 
-           
+
             return card;
         }
 
@@ -492,7 +488,7 @@ namespace DiceBattleGame.Forms_UI
             Label lblName = new Label
             {
                 Name = "lbl_EnemyName",
-                Text = e.getName(),
+                Text = e.getName() + $", Level {e.getLevel()}",
                 Location = tplName.Location,
                 AutoSize = tplName.AutoSize,
                 Font = tplName.Font

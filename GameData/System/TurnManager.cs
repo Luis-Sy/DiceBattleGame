@@ -338,7 +338,7 @@ namespace DiceBattleGame
             int ac = defender.getArmoclass();
             string attackerName = attacker.getName();
             string defenderName = defender.getName();
-            Log($"It is {attacker.getName()}'s turn ({attacker.getCharacterType().ToUpper()}).");
+            Log($"It is {attacker.getName()}'s turn ({attacker.getCharacterType().ToUpper()}).\n");
 
             if (roll >= ac)
             {
@@ -346,14 +346,14 @@ namespace DiceBattleGame
                 string dmgType = attacker.getWeaponType();
                 int appliedDamage = defender.takeDamage(damage, dmgType);
 
-                Log($"{attackerName} hits {defenderName} for {appliedDamage} damage! (roll {roll} vs AC{ac});");
+                Log($"{attackerName} hits {defenderName} for {appliedDamage} damage! (roll {roll} vs AC{ac});\n");
                 
                 shownHP = Math.Max(0, defender.getHealth());
-                Log($"{defenderName}'s health is now: {shownHP}");
+                Log($"{defenderName}'s health is now: {shownHP}\n");
             }
             else
             {
-                Log($"{attackerName} missed! (Roll{roll} vs AC{ac})");
+                Log($"{attackerName} missed! (Roll{roll} vs AC{ac})\n");
             }
         }
 
@@ -362,7 +362,7 @@ namespace DiceBattleGame
         {
             int damage = skill.UseSkill(user, target);
             target.takeDamage(damage, "Skill"); // damage already calculated in skill usage, pass on the damage
-            Log($"{user.getName()} uses {skill.Name} on {target.getName()} for {damage} damage.");
+            Log($"{user.getName()} uses {skill.Name} on {target.getName()} for {damage} damage.\n");
         }
 
         // skill usage without a target
@@ -370,7 +370,7 @@ namespace DiceBattleGame
         {
             int effectiveness = skill.UseSkill(user);
             // bandaid solution to catch all skills
-            Log($"{user.getName()} uses {skill.Name} (Effectiveness: {effectiveness}).");
+            Log($"{user.getName()} uses {skill.Name} (Effectiveness: {effectiveness}).\n");
         }
 
         // ============================================
