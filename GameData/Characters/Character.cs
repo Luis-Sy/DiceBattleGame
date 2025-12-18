@@ -314,7 +314,7 @@ namespace DiceBattleGame.GameData.Characters
 
         public void changeHp(int x)
         {
-            health = x;
+            health += x;
             if (health > maxHealth)
             {
                 health = maxHealth;

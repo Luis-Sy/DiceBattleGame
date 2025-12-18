@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.PlayerSkills;
 
 namespace DiceBattleGame.GameData.Characters.Playable
 {

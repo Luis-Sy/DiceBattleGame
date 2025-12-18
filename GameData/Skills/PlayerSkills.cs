@@ -63,29 +63,25 @@ namespace DiceBattleGame.GameData.Skills
                 TargetType = "Enemy";
             }
 
-            internal override int UseSkill(Character entity, Character enemy) //precise strike, good for non agile entities
+            internal override int UseSkill(Character entity, Character enemy)
             {
+                double baseDamage;
 
                 if (enemy.getStats()["Dexterity"] < 5)
-                {
-                    return (int)((entity.attack() * 2) * enemy.getResistances()["Pierce"]);
-                }
+                    baseDamage = entity.attack() * 2.0;
                 else
-                {
-                    return (int)((entity.attack() / 2) * enemy.getResistances()["Pierce"]);
-                }
-            }
-               
+                    baseDamage = entity.attack() * 0.5;
 
-            
-
-            internal override void RestoreUses()
-            {
-                Uses = DefaultUses;
+                double finalDamage = baseDamage * enemy.getResistances()["Pierce"];
+                return Math.Max(1, (int)Math.Ceiling(finalDamage));
             }
         }
+
         //============================================================Awakened Skills========================================================
         public class TheThingStirs : Skill
+
+
+        //-----------------------------------me fatla
         {
             public TheThingStirs() : base("The Thing Stirs", 3, 3)
             {
@@ -111,55 +107,45 @@ namespace DiceBattleGame.GameData.Skills
 
         public class KillingBlow : Skill
         {
-            internal KillingBlow() : base("Killing Blow", 3, 3) //Low hp enemies will get crumpled should the attack hit, otherwise, normal attack damage
+            internal KillingBlow() : base("Killing Blow", 3, 3)
             {
                 TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                
-                    //Uses--; //comsumes a use
+                double baseDamage = entity.attack();
+                double multiplier = (enemy.getHealth() / (double)enemy.getMaxHealth()) < 0.33 ? 5.0 : 1.0;
 
-                    float remainingHp = (float)enemy.getHealth() / enemy.getMaxHealth();
-
-                    if (remainingHp < .33f)
-                    {
-                        return  (int)((entity.attack() * 5) * enemy.getResistances()["Blunt"]);
-                        
-                    }
-                return entity.attack();
-                }
-                
-
+                double finalDamage = baseDamage * multiplier * enemy.getResistances()["Blunt"];
+                return Math.Max(1, (int)Math.Ceiling(finalDamage));
             }
-
-            
         }
+
         //===================================================================Cleric Skills======================================================
 
         public class DivineBlessing : Skill
         {
-            internal DivineBlessing() : base("Divine Intervention", 3, 3) //A heal
+            internal DivineBlessing() : base("Divine Intervention", 3, 3)
             {
                 TargetType = "Ally";
             }
 
-            internal override int UseSkill(Character entity, Character target) // I dont know if this a good way to implement this - J
+            internal override int UseSkill(Character entity, Character target)
             {
-            int heal = entity.getStats()["Faith"] * 5;
-            target.setHealth(target.getHealth() + heal);
-            return 0;
-        }
+                int heal = entity.getStats()["Faith"] * 5;
+                int newHp = Math.Min(target.getHealth() + heal, target.getMaxHealth());
+                target.setHealth(newHp);
 
-            internal override void RestoreUses()
-            {
-                Uses = DefaultUses;
+                return 0;
             }
         }
+
         //=======================================================================Deprived Skills=================================================
 
         public class PocketSand : Skill
+
+        //------------------------------------- me falta
         {
             internal PocketSand() : base("Pocket Sand", 3, 3) //what does a deprived even have? desperation, and with desperaton, comes pocket sand - J
             {
@@ -170,16 +156,16 @@ namespace DiceBattleGame.GameData.Skills
             {
 
 
-            //Uses--; //comsumes a use
+                //Uses--; //comsumes a use
 
                 enemy.getStats()["Dexterity"] -= 5;
-                return 5;
+                return 0;
 
 
 
             }
 
-            
+
         }
 
         //========================================================================Duelist Skills===================================================
@@ -192,42 +178,25 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    //Uses--;
-                    int damage = (int)((entity.attack() * 2) * enemy.getResistances()["Slash"]);
-
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+                double finalDamage = (entity.attack() * 2.0) * enemy.getResistances()["Slash"];
+                return Math.Max(1, (int)Math.Ceiling(finalDamage));
             }
         }
+
         //=============================================================================Fallen Noble Skills============================================
         public class BedazzledHandCannon : Skill
+
+        //----------------------------------------me hace falta
         {
-            internal BedazzledHandCannon() : base("Bedazzled Hand Cannon", 3,3)
+            internal BedazzledHandCannon() : base("Bedazzled Hand Cannon", 3, 3)
             {
                 TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    //Uses--;
-                    int damage = (int)((entity.attack() * 4) * enemy.getResistances()["Pierce"]);
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-
-                }
+                int damage = (int)((entity.attack() * 4) * enemy.getResistances()["Pierce"]);
+                return damage;
             }
         }
         //=============================================================================Heretic Skills=================================================
@@ -240,23 +209,16 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    //Uses--;
-                    int damage = (int)((entity.attack()) * enemy.getResistances()["Arcane"]);
-                    enemy.getResistances()["Arcane"] = enemy.getResistances()["Arcane"] + 1; //permanently reduces enemies arcane resistance
-                    enemy.getResistances()["Magic"] = enemy.getResistances()["Magic"] + 1;
-                    enemy.getResistances()["Psychic"] = enemy.getResistances()["Psychic"] + 1;
-                    enemy.getResistances()["Radiant"] = enemy.getResistances()["Radiant"] + 1;
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+                enemy.getResistances()["Arcane"] += 1;
+                enemy.getResistances()["Magic"] += 1;
+                enemy.getResistances()["Psychic"] += 1;
+                enemy.getResistances()["Radiant"] += 1;
+
+                double finalDamage = entity.attack() * enemy.getResistances()["Arcane"];
+                return Math.Max(1, (int)Math.Ceiling(finalDamage));
             }
         }
+
         //===================================================================================Knight Skills=============================================
         public class PommelStrike : Skill
         {
@@ -267,20 +229,13 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    //Uses--;
-                    int damage = (int)((entity.attack() * 0.5) * enemy.getResistances()["Blunt"]);
-                    enemy.getResistances()["Blunt"] = enemy.getResistances()["Blunt"] + 1;
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+                enemy.getResistances()["Blunt"] += 1.0;
+
+                double finalDamage = (entity.attack() * 0.5) * enemy.getResistances()["Blunt"];
+                return Math.Max(1, (int)Math.Ceiling(finalDamage));
             }
         }
+
         //=========================================================================================Monk Skills===========================================
         public class TheOnePunch : Skill
         {
@@ -291,30 +246,14 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    //Uses--;
-                    float remainderHp = entity.getHealth() / entity.getMaxHealth();
+                double hpRatio = entity.getHealth() / (double)entity.getMaxHealth();
+                double multiplier = hpRatio > 0.8 ? 3.0 : 1.0;
 
-                    if(remainderHp > 0.80)
-                    {
-                        int damage = (int)((entity.attack() * 3) * enemy.getResistances()["Blunt"]);
-                        return damage;
-                    }
-                    else
-                    {
-                        int damage = (int)((entity.attack()) * enemy.getResistances()["Blunt"]);
-                        return damage;
-                    }
-                    
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+                double finalDamage = (entity.attack() * multiplier) * enemy.getResistances()["Blunt"];
+                return Math.Max(1, (int)Math.Ceiling(finalDamage));
             }
         }
+
         //===========================================================Paladin Skills==========================================
         public class Smite : Skill
         {
@@ -325,19 +264,11 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    //Uses--;
-                    int damage = (int)((entity.attack()) * enemy.getResistances()["Radiant"]);
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+                double finalDamage = entity.attack() * enemy.getResistances()["Radiant"];
+                return Math.Max(1, (int)Math.Ceiling(finalDamage));
             }
         }
+
         //==================================================Ranger Skill==================================================
         public class RainOfArrows : Skill
         {
@@ -348,75 +279,50 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-               if(Uses > 0)
-                {
-                    //Uses--;
-                    int damage = (int)((entity.attack() *2) * enemy.getResistances()["Pierce"]);
-                    enemy.getResistances()["Pierce"] = enemy.getResistances()["Pierce"] + 1;
-                    return damage;
+                enemy.getResistances()["Pierce"] += 1;
 
-                }
-               else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+                double finalDamage = (entity.attack() * 2.0) * enemy.getResistances()["Pierce"];
+                return Math.Max(1, (int)Math.Ceiling(finalDamage));
             }
         }
+
         //===================================================Samurai Skills==============================================
-        public class AtomicSlash : Skill //This skill is going to be hilariously OP only 1 use
+        public class AtomicSlash : Skill
         {
-            public AtomicSlash() : base("Atomic Slash",1,1)
+            public AtomicSlash() : base("Atomic Slash", 1, 1)
             {
                 TargetType = "Enemy";
-               
             }
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    //Uses--;
-                    int damage = (int)((entity.attack() * 10) * enemy.getResistances()["Slash"]);
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+                double finalDamage = (entity.attack() * 10.0) * enemy.getResistances()["Slash"];
+                return Math.Max(1, (int)Math.Ceiling(finalDamage));
             }
         }
+
         //====================================================Tourist Skills============================================
         public class SmileForTheCamera : Skill
         {
-            public SmileForTheCamera() : base("Smile for the Camera", 3, 3) //another OP ability, very funny
+            public SmileForTheCamera() : base("Smile for the Camera", 3, 3)
             {
                 TargetType = "Enemy";
             }
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    //Uses--;
-                    int damage = 1;
-                    enemy.getResistances()["Slash"] = enemy.getResistances()["Slash"] + 0.1;
-                    enemy.getResistances()["Pierce"] = enemy.getResistances()["Pierce"] + 0.1;
-                    enemy.getResistances()["Blunt"] = enemy.getResistances()["Blunt"] + 0.1;
-                    enemy.getResistances()["Magic"] = enemy.getResistances()["Magic"] + 0.1;
-                    enemy.getResistances()["Radiant"] = enemy.getResistances()["Radiant"] + 0.1;
-                    enemy.getResistances()["Arcane"] = enemy.getResistances()["Arcane"] + 0.1;
-                    enemy.getResistances()["Psychic"] = enemy.getResistances()["Psychic"] + 0.1;
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+                enemy.getResistances()["Slash"] += 0.1;
+                enemy.getResistances()["Pierce"] += 0.1;
+                enemy.getResistances()["Blunt"] += 0.1;
+                enemy.getResistances()["Magic"] += 0.1;
+                enemy.getResistances()["Radiant"] += 0.1;
+                enemy.getResistances()["Arcane"] += 0.1;
+                enemy.getResistances()["Psychic"] += 0.1;
+
+                return 0;
             }
         }
+
         //===================================================Warden Skills===================================================
         public class Shackles : Skill
         {
@@ -427,22 +333,15 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    //Uses--;
-                    int damage = 1;
-                    enemy.getResistances()["Slash"] = enemy.getResistances()["Slash"] + 0.2;
-                    enemy.getResistances()["Pierce"] = enemy.getResistances()["Pierce"] + 0.3;
-                    enemy.getResistances()["Blunt"] = enemy.getResistances()["Blunt"] + 0.1;
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+                enemy.getResistances()["Slash"] += 0.2;
+                enemy.getResistances()["Pierce"] += 0.3;
+                enemy.getResistances()["Blunt"] += 0.1;
+
+                return 0;
             }
         }
-    
+
+
+    }
 }
 

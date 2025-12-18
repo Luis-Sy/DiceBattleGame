@@ -502,6 +502,20 @@ namespace DiceBattleGame
                 playerChar.gainExp(expEarned);
             }
         }
+
+        public void PlayerUseItem(Item item)
+        {
+            Character player = GetCurrentCharacter();
+
+            item.Use(player);
+
+            GameManager.Campaign.GetPlayerInventory().Remove(item);
+
+            Log($"{player.getName()} used {item.Name}.");
+
+            AdvanceTurnIndex();
+        }
+
     }
 
 }

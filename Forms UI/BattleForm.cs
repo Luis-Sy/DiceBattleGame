@@ -1,7 +1,9 @@
 ﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Items;
 using DiceBattleGame.GameData.MapEvents.CombatEncounters;
 using DiceBattleGame.GameData.Skills;
 using DiceBattleGame.GameData.System;
+using Microsoft.VisualBasic.Logging;
 using System.Text;
 
 namespace DiceBattleGame.Forms_UI
@@ -20,6 +22,9 @@ namespace DiceBattleGame.Forms_UI
 
         //currently selected enemy for player attacks
         private Character? selectedEnemy = null;
+
+        private Character? currentPlayerHighlighted = null;
+
 
         //battle state flags
         private bool battleEnded = false;
@@ -44,6 +49,7 @@ namespace DiceBattleGame.Forms_UI
 
 
             pnl_Skills.Visible = true;
+            pnl_Items.Visible = true;
 
 
             StyleButtons();
@@ -98,8 +104,13 @@ namespace DiceBattleGame.Forms_UI
                 lbl_Turn.Text = "TURN: PLAYER";
                 btn_Attack.Enabled = true;
 
+                SelectCurrentPlayer(current);
                 BuildSkillPanel(current);
                 pnl_Skills.Visible = true;
+
+                pnl_Items.Visible = true;
+                btn_Skill_Click(null, null);
+                LoadItemPanel();
 
 
             }
@@ -108,6 +119,8 @@ namespace DiceBattleGame.Forms_UI
                 lbl_Turn.Text = "TURN: ENEMY";
                 btn_Attack.Enabled = false;
                 btn_Skill.Enabled = false;
+                foreach (Panel p in flp_PlayerParty.Controls.OfType<Panel>())
+                    p.BackColor = pnl_CharacterTemplatePlayer.BackColor;
             }
 
             //check if battle is over
@@ -230,58 +243,230 @@ namespace DiceBattleGame.Forms_UI
         }
         //--------------------------------------
         //SKILL
-
         private void btn_Skill_Click(object sender, EventArgs e)
         {
             Character current = turnManager.GetCurrentCharacter();
 
-            // ensure it is player's turn
+            //execute skill (turnmanager handles the logic)
             if (current.getCharacterType() != "Player")
                 return;
+
+            pnl_Skills.Controls.Clear();
+            pnl_Skills.Visible = true;
 
             var skills = current.getSkills();
 
             if (skills.Count == 0)
             {
-                MessageBox.Show("No skills available.");
+                Label lbl = new Label
+                {
+                    Text = "No skills available.",
+                    AutoSize = true,
+                    Left = 5,
+                    Top = 5
+                };
+                pnl_Skills.Controls.Add(lbl);
                 return;
             }
 
-            // build simple selection list
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < skills.Count; i++)
+            int y = 5;
+
+            foreach (Skill skill in skills)
             {
-                sb.AppendLine($"{i + 1}. {skills[i].Name} ({skills[i].Uses}/{skills[i].DefaultUses})");
+                Button btn = new Button
+                {
+                    Text = $"{skill.Name} ({skill.Uses}/{skill.DefaultUses})",
+                    Width = pnl_Skills.Width - 15,
+                    Height = 25,
+                    Left = 5,
+                    Top = y,
+                    Enabled = skill.Uses > 0,
+                    Tag = skill
+                };
+
+                btn.Click += (s, ev) =>
+                {
+                    Skill selectedSkill = (Skill)((Button)s).Tag;
+
+                    if (selectedSkill.Uses <= 0)
+                    {
+                        MessageBox.Show("That skill has no uses left.");
+                        return;
+                    }
+
+                    turnManager.PlayerUseSkill(selectedSkill, selectedEnemy);
+
+                    UpdateAllHP();
+                    HandleTurnStart();
+                };
+
+                pnl_Skills.Controls.Add(btn);
+                y += 30;
             }
-
-            string input = Microsoft.VisualBasic.Interaction.InputBox(
-                $"Choose a skill:\n\n{sb}",
-                "Skills",
-                "1"
-            );
-
-            if (!int.TryParse(input, out int choice))
-                return;
-
-            choice -= 1;
-
-            if (choice < 0 || choice >= skills.Count)
-                return;
-
-            Skill selectedSkill = skills[choice];
-
-            if (selectedSkill.Uses <= 0)
-            {
-                MessageBox.Show("That skill has no uses left.");
-                return;
-            }
-
-            // delegate execution to TurnManager
-            turnManager.PlayerUseSkill(selectedSkill, selectedEnemy);
-
-            UpdateAllHP();
-            HandleTurnStart();
         }
+
+        //------------------------------------------------
+        // ITEM
+
+        //private void btn_Item_Click(object sender, EventArgs e)
+        //{
+        //    // EXACTAMENTE igual que Skills
+        //    Character current = turnManager.GetCurrentCharacter();
+
+        //    // solo permitir en turno del jugador
+        //    if (current.getCharacterType() != "Player")
+        //        return;
+
+        //    pnl_Items.Controls.Clear();
+        //    pnl_Items.Visible = true;
+
+        //    var inventory = GameManager.Campaign.GetPlayerInventory();
+
+        //    if (inventory.Count == 0)
+        //    {
+        //        MessageBox.Show("No items available.");
+        //        return;
+        //    }
+
+        //    // agrupar por tipo para mostrar cantidad
+        //    var groupedItems = inventory
+        //        .GroupBy(i => i.GetType())
+        //        .Select(g => new
+        //        {
+        //            ItemType = g.Key,
+        //            Count = g.Count(),
+        //            SampleItem = g.First()
+        //        });
+
+        //    int y = 5;
+
+        //    foreach (var group in groupedItems)
+        //    {
+        //        Button btn = new Button
+        //        {
+        //            Text = $"{group.SampleItem.Name} (x{group.Count})",
+        //            Width = pnl_Items.Width - 10,
+        //            Height = 25,
+        //            Left = 5,
+        //            Top = y,
+        //            Enabled = true
+        //        };
+
+        //        btn.Click += (s, ev) =>
+        //        {
+        //            // usar UNA instancia del item
+        //            Item itemToUse = inventory.FirstOrDefault(i => i.GetType() == group.ItemType);
+
+        //            if (itemToUse == null)
+        //            {
+        //                MessageBox.Show("You don't have this item anymore.");
+        //                pnl_Items.Controls.Clear();
+        //                btn_Item_Click(null, null);
+        //                return;
+        //            }
+
+        //            itemToUse.Use(current);
+        //            inventory.Remove(itemToUse);
+
+        //            txt_TextBox.AppendText(
+        //                $"{current.getName()} used {itemToUse.Name}.\r\n"
+        //            );
+
+        //            UpdateAllHP();
+        //            HandleTurnStart();
+
+        //            // consumir turno
+        //            turnManager.AdvanceTurnIndex();
+        //        };
+
+        //        pnl_Items.Controls.Add(btn);
+        //        y += 30;
+        //    }
+        //}
+
+        private void btn_Item_Click(object sender, EventArgs e)
+        {
+            Character current = turnManager.GetCurrentCharacter();
+
+            if (current.getCharacterType() != "Player")
+                return;
+
+            pnl_Items.Visible = true;
+
+            LoadItemPanel();
+        }
+        private void LoadItemPanel()
+        {
+            pnl_Items.Controls.Clear();
+
+            var inventory = GameManager.Campaign.GetPlayerInventory();
+
+            if (inventory.Count == 0)
+            {
+                Label lbl = new Label
+                {
+                    Text = "No items available.",
+                    AutoSize = true,
+                    Left = 5,
+                    Top = 5
+                };
+                pnl_Items.Controls.Add(lbl);
+                return;
+            }
+
+            var groupedItems = inventory
+                .GroupBy(i => i.GetType())
+                .Select(g => new
+                {
+                    ItemType = g.Key,
+                    Count = g.Count(),
+                    SampleItem = g.First()
+                });
+
+            int y = 5;
+
+            foreach (var group in groupedItems)
+            {
+                Button btn = new Button
+                {
+                    Text = $"{group.SampleItem.Name} ({group.Count})",
+                    Width = pnl_Items.Width - 10,
+                    Height = 25,
+                    Left = 5,
+                    Top = y
+                };
+
+                btn.Click += (s, e) =>
+                {
+                    Character current = turnManager.GetCurrentCharacter();
+
+
+                    Item itemToUse = inventory.First(i => i.GetType() == group.ItemType);
+
+                    itemToUse.Use(current);
+                    inventory.Remove(itemToUse);
+
+                    txt_TextBox.AppendText(
+                        $"{current.getName()} used {itemToUse.Name}.\n"
+                    );
+
+                    UpdateAllHP();
+                    LoadItemPanel();
+
+                    turnManager.AdvanceTurnIndex();
+                    HandleTurnStart();
+                };
+
+                pnl_Items.Controls.Add(btn);
+                y += 30;
+            }
+        }
+
+
+
+
+
+
 
 
         //------------------------------------------------
@@ -541,6 +726,27 @@ namespace DiceBattleGame.Forms_UI
             panel.BackColor = Color.LightCoral;
             selectedEnemy = enemy;
         }
+        private void SelectCurrentPlayer(Character player)
+        {
+            if (player == null || !player.isAlive())
+                return;
+
+            foreach (Panel p in flp_PlayerParty.Controls.OfType<Panel>())
+                p.BackColor = pnl_CharacterTemplatePlayer.BackColor;
+
+
+            Panel? playerPanel = flp_PlayerParty.Controls
+                .OfType<Panel>()
+                .FirstOrDefault(p => p.Tag == player);
+
+            if (playerPanel == null)
+                return;
+
+    
+            playerPanel.BackColor = Color.LightGreen;
+            currentPlayerHighlighted = player;
+        }
+
     }
 }
 
