@@ -206,7 +206,7 @@ namespace DiceBattleGame
 
             if (turnOrder.Count == 0)
             {
-                Log("Everyone has died. Battle over.");
+                Log("Everyone has died. Battle over.\n");
                 battleOver = true;
                 return;
             }
@@ -236,7 +236,7 @@ namespace DiceBattleGame
 
                 if (target == null)
                 {
-                    Log("No enemies left.");
+                    Log("No enemies left.\n");
                     battleOver = true;
                     return;
                 }
@@ -254,7 +254,7 @@ namespace DiceBattleGame
 
                 if (target == null)
                 {
-                    Log("All players have fallen.");
+                    Log("All players have fallen.\n");
                     battleOver = true;
                     return;
                 }
@@ -286,7 +286,7 @@ namespace DiceBattleGame
                     }
                     else
                     {
-                        Log($"{current.getName()} does nothing.");
+                        Log($"{current.getName()} does nothing.\n");
                     }
 
                 }
@@ -312,14 +312,14 @@ namespace DiceBattleGame
 
             if (!anyPlayers)
             {
-                Log("All players have been defeated.");
+                Log("All players have been defeated.\n");
                 battleOver = true;
                 return true;
             }
 
             if (!anyEnemies)
             {
-                Log("All enemies have been defeated.");
+                Log("All enemies have been defeated.\n");
                 battleOver = true;
                 // calculate rewards from battle and distribute to the player
                 calculateRewards();
@@ -479,11 +479,11 @@ namespace DiceBattleGame
             // calculate total gold and exp based on defeated enemies
             foreach (var enemy in enemyParty!)
             {
-                // common enemies grant 3-5 gold and 1 exp
+                // common enemies grant 3-5 gold and 2 exp
                 if (enemy.getCharacterType() == "Enemy")
                 {
                     goldEarned += random.Next(2, 6);
-                    expEarned += 1;
+                    expEarned += 2;
                 }
                 // elite enemies grant 5-10 gold and 3 exp
                 if (enemy.getCharacterType() == "Elite Enemy")
@@ -497,7 +497,7 @@ namespace DiceBattleGame
             // add gold to the campaign state
             GameManager.Campaign.ChangeGold(goldEarned);
             // distribute exp to all player characters
-            foreach (var playerChar in playerParty!)
+            foreach (var playerChar in GameManager.Campaign.GetPlayerParty())
             {
                 playerChar.gainExp(expEarned);
             }
