@@ -97,7 +97,7 @@ namespace DiceBattleGame.GameData.System
             selector.AddItem("Shop", 10);
             selector.AddItem("Rest", 10);
 
-            int scaleInterval = 3; // increase enemy level every 3 nodes
+            int scaleInterval = 4; // increase enemy level every 4 nodes
             int scaleCounter = 0;
 
             for (int i = 0; i < 13; i++) // generate the next 13 nodes

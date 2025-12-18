@@ -482,13 +482,13 @@ namespace DiceBattleGame
                 if (enemy.getCharacterType() == "Enemy")
                 {
                     goldEarned += random.Next(2, 6);
-                    expEarned += 2;
+                    expEarned += 3;
                 }
                 // elite enemies grant 5-10 gold and 3 exp
                 if (enemy.getCharacterType() == "Elite Enemy")
                 {
                     goldEarned += random.Next(5, 11);
-                    expEarned += 3;
+                    expEarned += 4;
                 }
             }
 

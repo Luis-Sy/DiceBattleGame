@@ -39,8 +39,8 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if (Uses > 0)
                 {
-                    // Heavy smash does Blunt plus extra 5 flat damage
-                    int damage = (int)((entity.attack() + 5) * enemy.getResistances()["Blunt"]);
+                    // Heavy smash does Blunt damage
+                    int damage = (int)(entity.attack() * enemy.getResistances()["Blunt"]);
                     Uses--;
                     return damage;
                 }
