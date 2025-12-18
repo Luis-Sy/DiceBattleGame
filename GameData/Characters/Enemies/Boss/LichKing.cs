@@ -34,6 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Boss
                 { "Psychic", 1.0 }
             };
             armorClass = 15;
+
             weapon = new Custom("Staff", "Frostmourne", "Magic", new diceBag(7, 3));
         }
     }

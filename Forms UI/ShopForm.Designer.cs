@@ -31,7 +31,6 @@
             label1 = new Label();
             lst_Items = new ListBox();
             lbl_ItemName = new Label();
-            lbl_ItemDescription = new Label();
             lbl_Price = new Label();
             btn_BuyItem = new Button();
             btn_Back = new Button();
@@ -44,6 +43,7 @@
             label6 = new Label();
             lst_Recruitable = new ListBox();
             lst_StatView = new ListBox();
+            itemDescriptionBox = new RichTextBox();
             SuspendLayout();
             // 
             // label1
@@ -64,7 +64,7 @@
             lst_Items.Location = new Point(51, 97);
             lst_Items.Margin = new Padding(3, 4, 3, 4);
             lst_Items.Name = "lst_Items";
-            lst_Items.Size = new Size(205, 200);
+            lst_Items.Size = new Size(276, 200);
             lst_Items.TabIndex = 1;
             lst_Items.SelectedIndexChanged += lst_Items_SelectedIndexChanged;
             // 
@@ -77,15 +77,6 @@
             lbl_ItemName.Size = new Size(111, 28);
             lbl_ItemName.TabIndex = 2;
             lbl_ItemName.Text = "ItemName";
-            // 
-            // lbl_ItemDescription
-            // 
-            lbl_ItemDescription.AutoSize = true;
-            lbl_ItemDescription.Location = new Point(349, 164);
-            lbl_ItemDescription.Name = "lbl_ItemDescription";
-            lbl_ItemDescription.Size = new Size(103, 20);
-            lbl_ItemDescription.TabIndex = 3;
-            lbl_ItemDescription.Text = "Select an item";
             // 
             // lbl_Price
             // 
@@ -110,7 +101,7 @@
             // 
             // btn_Back
             // 
-            btn_Back.Location = new Point(612, 497);
+            btn_Back.Location = new Point(655, 507);
             btn_Back.Margin = new Padding(3, 4, 3, 4);
             btn_Back.Name = "btn_Back";
             btn_Back.Size = new Size(86, 31);
@@ -171,7 +162,7 @@
             // 
             // hireBtn
             // 
-            hireBtn.Location = new Point(519, 427);
+            hireBtn.Location = new Point(476, 509);
             hireBtn.Name = "hireBtn";
             hireBtn.Size = new Size(94, 29);
             hireBtn.TabIndex = 13;
@@ -183,7 +174,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(519, 338);
+            label6.Location = new Point(476, 338);
             label6.Name = "label6";
             label6.Size = new Size(235, 28);
             label6.TabIndex = 14;
@@ -202,20 +193,28 @@
             // 
             // lst_StatView
             // 
-            lst_StatView.Enabled = false;
             lst_StatView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lst_StatView.FormattingEnabled = true;
             lst_StatView.ItemHeight = 28;
             lst_StatView.Location = new Point(262, 338);
             lst_StatView.Name = "lst_StatView";
-            lst_StatView.Size = new Size(251, 200);
+            lst_StatView.Size = new Size(198, 200);
             lst_StatView.TabIndex = 16;
+            // 
+            // itemDescriptionBox
+            // 
+            itemDescriptionBox.Location = new Point(349, 128);
+            itemDescriptionBox.Name = "itemDescriptionBox";
+            itemDescriptionBox.Size = new Size(405, 85);
+            itemDescriptionBox.TabIndex = 17;
+            itemDescriptionBox.Text = "Select an item to see details";
             // 
             // ShopForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 600);
+            Controls.Add(itemDescriptionBox);
             Controls.Add(lst_StatView);
             Controls.Add(lst_Recruitable);
             Controls.Add(label6);
@@ -228,7 +227,6 @@
             Controls.Add(btn_Back);
             Controls.Add(btn_BuyItem);
             Controls.Add(lbl_Price);
-            Controls.Add(lbl_ItemDescription);
             Controls.Add(lbl_ItemName);
             Controls.Add(lst_Items);
             Controls.Add(label1);
@@ -244,7 +242,6 @@
         private Label label1;
         private ListBox lst_Items;
         private Label lbl_ItemName;
-        private Label lbl_ItemDescription;
         private Label lbl_Price;
         private Button btn_BuyItem;
         private Button btn_Back;
@@ -257,5 +254,6 @@
         private Label label6;
         private ListBox lst_Recruitable;
         private ListBox lst_StatView;
+        private RichTextBox itemDescriptionBox;
     }
 }

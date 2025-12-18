@@ -122,7 +122,7 @@ namespace DiceBattleGame.Forms_UI
             Item selected = items[index];
 
             lbl_ItemName.Text = selected.Name;
-            lbl_ItemDescription.Text = selected.Description;
+            itemDescriptionBox.Text = selected.Description;
             lbl_Price.Text = selected.Price.ToString();
         }
 

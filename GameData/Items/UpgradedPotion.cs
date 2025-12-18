@@ -7,9 +7,9 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterStrengthPotion : Item
     {
         public GreaterStrengthPotion()
-            : base("Greater Strength Potion", 60, "A stronger potion that increases strength by more than the normal version.")
+            : base("Greater Strength Potion", 20, "A stronger potion that increases strength by more than the normal version.")
         {
-            value1 = 8;
+            value1 = 10;
         }
 
         public override void Use(Character entity)
@@ -21,9 +21,9 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterDexterityPotion : Item
     {
         public GreaterDexterityPotion()
-            : base("Greater Dexterity Potion", 60, "A stronger potion that increases dexterity by more than the normal version.")
+            : base("Greater Dexterity Potion", 20, "A stronger potion that increases dexterity by more than the normal version.")
         {
-            value1 = 8;
+            value1 = 10;
         }
 
         public override void Use(Character entity)
@@ -35,9 +35,9 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterIntelligencePotion : Item
     {
         public GreaterIntelligencePotion()
-            : base("Greater Intelligence Potion", 60, "A stronger potion that increases intelligence by more than the normal version.")
+            : base("Greater Intelligence Potion", 20, "A stronger potion that increases intelligence by more than the normal version.")
         {
-            value1 = 8;
+            value1 = 10;
         }
 
         public override void Use(Character entity)
@@ -50,9 +50,9 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterFaithPotion : Item
     {
         public GreaterFaithPotion()
-            : base("Greater Faith Potion", 60, "A stronger potion that increases faith by more than the normal version.")
+            : base("Greater Faith Potion", 20, "A stronger potion that increases faith by more than the normal version.")
         {
-            value1 = 8;
+            value1 = 10;
         }
 
         public override void Use(Character entity)
@@ -64,7 +64,7 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterHealthPotion : Item
     {
         public GreaterHealthPotion()
-            : base("Greater Health Potion", 55, "A stronger potion that restores more HP than the normal version.")
+            : base("Greater Health Potion", 15, "A stronger potion that restores more HP than the normal version.")
         {
             value1 = 15;
         }

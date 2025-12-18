@@ -25,14 +25,18 @@ namespace DiceBattleGame.GameData.MapEvents
             Random rand = new Random();
 
             // get a list of all available items
-            shopInventory = new List<Item>()
+            List<Type> itemPool = AppDomain.CurrentDomain
+                .GetAssemblies().SelectMany(assembly => assembly.GetTypes())
+                .Where(type => type.IsSubclassOf(typeof(Item)) && !type.IsAbstract)
+                .ToList();
+
+            int numItems = rand.Next(5, 11); // between 5 and 10 items in shop
+            for (int i = 0; i < numItems; i++)
             {
-                new HealthPotion(),
-                new DexterityPotion(),
-                new StrengthPotion(),
-                new IntelligencePotion(),
-                new FaithPotion()
-            };
+                Item item = (Item)Activator.CreateInstance(
+                    itemPool[rand.Next(itemPool.Count)])!;
+                shopInventory.Add(item);
+            }
 
             // generate recruitable party members
 
@@ -42,7 +46,7 @@ namespace DiceBattleGame.GameData.MapEvents
                 .Where(type => type.IsSubclassOf(typeof(Character)) && !type.IsAbstract && type.Name.Contains("Player"))
                 .ToList();
 
-            int numRecruits = rand.Next(2, 5); // between 2 and 4 recruitable members
+            int numRecruits = rand.Next(2, 6); // between 2 and 5 recruitable members
             for (int i = 0; i < numRecruits; i++)
             {
                 //Character recruit = (Character)Activator.CreateInstance(
