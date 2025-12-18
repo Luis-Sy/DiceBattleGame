@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 0.75 }
             };
             armorClass = 14;
-            weapon = new Custom("Crystal Spike", "Elder Crystal Spike", "Pierce", new diceBag(11, 2));
+            weapon = new Custom("Crystal Spike", "Elder Crystal Spike", "Pierce", new diceBag(7, 2));
         }
     }
 }

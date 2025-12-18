@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 1.0 }
             };
             armorClass = 12;
-            weapon = new Custom("Staff", "Staff of the Damned", "Blunt", new diceBag(7, 2));
+            weapon = new Custom("Staff", "Staff of the Damned", "Blunt", new D8());
         }
     }
 }

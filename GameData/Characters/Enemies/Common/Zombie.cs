@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.EnemySkills;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Common
 {
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
                 { "Psychic", 0.5 }
             };
             armorClass = 10;
+            skills.Add(new Bite());
             weapon = new Custom("Club", "Rotten Club", "Blunt", new D6());
         }
     }

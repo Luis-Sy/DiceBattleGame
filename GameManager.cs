@@ -34,13 +34,24 @@ namespace DiceBattleGame
         {
             if (SelectedCharacter == null)
 
-                throw new Exception("No characther selected before starting campaign");
+                throw new Exception("No character selected before starting campaign");
 
             Campaign = new CampaignManager(SelectedCharacter);
-            CurrentMapNodeIndex = 0;
+            CurrentMapNodeIndex = -1;
             PlayerIsDead = false;
         }
 
+        // method for starting a seeded run
+        public static void StartCampaign(int seed)
+        {
+            if (SelectedCharacter == null)
+
+                throw new Exception("No character selected before starting campaign");
+
+            Campaign = new CampaignManager(SelectedCharacter, seed);
+            CurrentMapNodeIndex = -1;
+            PlayerIsDead = false;
+        }
 
         // Switches from the current form to the next form.        
         public static void SwitchTo(Form nextForm)

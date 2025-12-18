@@ -91,7 +91,7 @@ namespace DiceBattleGame.GameData.System
 
             // use a weighted selector to select battle types
 
-            WeightedRandomSelector<string> selector = new WeightedRandomSelector<string>();
+            WeightedRandomSelector<string> selector = new WeightedRandomSelector<string>(seed);
             selector.AddItem("Common Battle", 60);
             selector.AddItem("Elite Battle", 30);
             selector.AddItem("Shop", 10);
@@ -171,6 +171,10 @@ namespace DiceBattleGame.GameData.System
                 {
                     scaleCounter = 0;
                 }
+                MapNode newNode = new MapNode(nodeType, nodeEvent);
+
+
+                mapNodes.Add(newNode);
             }
 
             // create the boss node at the end

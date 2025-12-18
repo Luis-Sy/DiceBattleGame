@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Boss
                 { "Psychic", 0.5 }
             };
             armorClass = 14;
-            weapon = new Custom("Arcane", "Eldritch Blast", "Arcane", new diceBag(13, 3));
+            weapon = new Custom("Arcane", "Eldritch Tendrils", "Arcane", new diceBag(9, 2));
         }
     }
 }

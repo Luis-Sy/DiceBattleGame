@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 0.5 }
             };
             armorClass = 16;
-            weapon = new Custom("Fangs", "Vampire's Fangs", "Pierce", new D12());
+            weapon = new Custom("Claws", "Vampire's Claws", "Slash", new D12());
         }
     }
 }

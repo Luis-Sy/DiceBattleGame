@@ -1,4 +1,5 @@
 using DiceBattleGame.GameData.Items;
+using DiceBattleGame.GameData.Skills;
 using DiceBattleGame.GameData.System;
 using System.Diagnostics;
 
@@ -20,7 +21,7 @@ namespace DiceBattleGame.GameData.Characters
         protected List<Item> enemyInventory = new List<Item>();
 
         // to be implemented
-        // protected List<Skill> skills = new List<Skill>();
+        protected List<Skill> skills = new List<Skill>();
 
 
         // resistances are multipliers to incoming damage (higher means more damage received from that type)
@@ -118,7 +119,7 @@ namespace DiceBattleGame.GameData.Characters
             if (damageResistances.ContainsKey(type))
             {
                 // multiply damage by the character's damage resistance modifier
-                finalDamage = (int)Math.Ceiling(amount * damageResistances[type]) - getStatCheckBonus("Constitution");
+                finalDamage = (int)Math.Ceiling(amount * damageResistances[type]) - (getStatCheckBonus("Constitution") * 2);
 
                 // round up to 1 if necessary to prevent stalemates
                 if (finalDamage < 1)
@@ -131,7 +132,12 @@ namespace DiceBattleGame.GameData.Characters
             else
             {
                 // if no defined damage resistance for provided type, deal raw damage
-                Trace.WriteLine($"Character does not have a defined value for {type} resistance. Assuming 1.0x and dealing damage.");
+                // skills will automatically account for damage resistances in their calculations, so pass their damage as is
+                if(type != "Skill")
+                {
+                    // unrecognized damage type, log to console
+                    Trace.WriteLine($"Character does not have a defined value for {type} resistance. Assuming 1.0x and dealing damage.");
+                }
                 finalDamage = amount;
             }
             health -= finalDamage;
@@ -244,6 +250,10 @@ namespace DiceBattleGame.GameData.Characters
             if (this.type == "Player")
             {
                 maxHealth += 10;
+            }else if (this.type == "Enemy" || this.type == "Elite Enemy")
+            {
+                // enemy health nerf for balancing purposes
+                maxHealth -= 5;
             }
             restoreHp();
         }
@@ -305,6 +315,14 @@ namespace DiceBattleGame.GameData.Characters
         public void changeHp(int x)
         {
             health = x;
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
+            else if (health < 0)
+            {
+                health = 0;
+            }
         }
 
         // used exclusively for enemy ai actions
@@ -328,16 +346,18 @@ namespace DiceBattleGame.GameData.Characters
             return item;
         }
 
-        /*
+        
         // used exclusively for enemy ai actions
         // return skill to be used and handle usage in TurnManager
         public virtual Skill enemyUseSkill(){
             Random random = new Random();
-            Skill skill = skills[random.Next(skills.Count)];
+            // find all skills that still have uses left
+            List<Skill> usableSkills = skills.FindAll(s => s.Uses > 0);
+            Skill skill = usableSkills[random.Next(skills.Count)];
+            // return the skill to be used
             return skill;
         }
          
-         */
 
         // used exclusively for enemy ai actions
         // enemies will return a string to determine their action that turn
@@ -347,7 +367,7 @@ namespace DiceBattleGame.GameData.Characters
             // override this in enemy classes to define unique behaviors
             WeightedRandomSelector<string> actionSelector = new WeightedRandomSelector<string>();
             actionSelector.AddItem("Attack", 40);
-            //actionSelector.AddItem("Skill", 40); to be implemented when skills are available
+            actionSelector.AddItem("Skill", 40);
             actionSelector.AddItem("Item", 20);
 
             string selectedAction = actionSelector.GetRandomItem();
@@ -356,17 +376,17 @@ namespace DiceBattleGame.GameData.Characters
             if (selectedAction == "Item" && enemyInventory.Count == 0){
                 return "Attack";
             }
-            if (selectedAction == "Skill"){
-                // if the enemy has no skills, attack instead
-                /*
-                if(skills.Count == 0){
+            if(selectedAction == "Skill"){
+                // if the enemy has no defined skills, attack instead
+                if (skills.Count == 0){
                     return "Attack";
                 }
-                */
-                // temporarily return attack until skills are implemented
-                return "Attack";
+                // if the enemy has skills and any have uses left, try using a skill
+                if(skills.FindAll(s => s.Uses > 0).Count > 0)
+                {
+                    return "Skill";
+                }
             }
-
 
             return selectedAction;
         }
@@ -385,16 +405,19 @@ namespace DiceBattleGame.GameData.Characters
             return enemyInventory;
         }
 
-        /* placeholder skill methods
 
-        public void useSkill(Skill skill){
-            skill.use();
+        public void useSkill(Skill skill, Character user, Character target){
+            skill.UseSkill(user, target);
+        }
+
+        public void useSkill(Skill skill, Character user){
+            skill.UseSkill(user);
         }
 
         public List<Skill> getSkills(){
             return skills;
         }
-         */
+    
 
     }
 

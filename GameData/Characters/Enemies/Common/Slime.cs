@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.EnemySkills;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Common
 {
@@ -34,7 +35,8 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
                 { "Psychic", 0.5 }
             };
             armorClass = 8;
-            weapon = new Custom("Pseudopod", "Gooey Pseudopod", "Blunt", new diceBag(5,2));
+            skills.Add(new AcidSpray());
+            weapon = new Custom("Pseudopod", "Gooey Pseudopod", "Blunt", new D4());
         }
     }
 }

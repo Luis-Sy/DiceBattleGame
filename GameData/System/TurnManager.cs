@@ -1,5 +1,6 @@
 using DiceBattleGame.GameData.Characters;
 using DiceBattleGame.GameData.Items;
+using DiceBattleGame.GameData.Skills;
 using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
@@ -289,6 +290,8 @@ namespace DiceBattleGame
             {
                 Log("All enemies have been defeated.");
                 battleOver = true;
+                // calculate rewards from battle and distribute to the player
+                calculateRewards();
                 return true;
             }
 
@@ -322,18 +325,20 @@ namespace DiceBattleGame
             }
         }
 
-        public void performSkill(Character user, Character target, string skillName)
+        // skill usage with a target
+        public void performSkill(Character user, Character target, Skill skill)
         {
-            // Placeholder for skill logic
-            // the skillname parameter is a placeholder for an actual skill object
-            if (target == null || user == target)
-            {
-                Log($"{user.getName()} uses {skillName}.");
-            }
-            else
-            {
-                Log($"{user.getName()} uses {skillName} on {target.getName()}.");
-            }
+            int damage = skill.UseSkill(user, target);
+            target.takeDamage(damage, "Skill"); // damage already calculated in skill usage, pass on the damage
+            Log($"{user.getName()} uses {skill.Name} on {target.getName()} for {damage} damage.");
+        }
+
+        // skill usage without a target
+        public void performSkill(Character user, Skill skill)
+        {
+            int effectiveness = skill.UseSkill(user);
+            // bandaid solution to catch all skills
+            Log($"{user.getName()} uses {skill.Name} (Effectiveness: {effectiveness}).");
         }
 
         public void useItem(Character user, Character target, Item item)
@@ -364,6 +369,41 @@ namespace DiceBattleGame
                 Log($"{user.getName()} uses {item.Name} on {target.getName()}.");
             }
         }
+
+        private void calculateRewards()
+        {
+            int goldEarned = 0;
+            int expEarned = 0;
+
+            Random random = new Random();
+
+            // calculate total gold and exp based on defeated enemies
+            foreach (var enemy in enemyParty!)
+            {
+                // common enemies grant 3-5 gold and 1 exp
+                if (enemy.getCharacterType() == "Enemy")
+                {
+                    goldEarned += random.Next(2, 6);
+                    expEarned += 1;
+                }
+                // elite enemies grant 5-10 gold and 3 exp
+                if (enemy.getCharacterType() == "Elite Enemy")
+                {
+                    goldEarned += random.Next(5, 11);
+                    expEarned += 3;
+                }
+            }
+
+            Log($"You earned {goldEarned} gold and {expEarned} experience points!");
+            // add gold to the campaign state
+            GameManager.Campaign.ChangeGold(goldEarned);
+            // distribute exp to all player characters
+            foreach (var playerChar in playerParty!)
+            {
+                playerChar.gainExp(expEarned);
+            }
+        }
+
     }
 
 }
