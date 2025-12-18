@@ -321,8 +321,7 @@ namespace DiceBattleGame
             {
                 Log("All enemies have been defeated.\n");
                 battleOver = true;
-                // calculate rewards from battle and distribute to the player
-                calculateRewards();
+                
                 return true;
             }
 
@@ -469,7 +468,7 @@ namespace DiceBattleGame
             }
         }
 
-        private void calculateRewards()
+        public void calculateRewards()
         {
             int goldEarned = 0;
             int expEarned = 0;

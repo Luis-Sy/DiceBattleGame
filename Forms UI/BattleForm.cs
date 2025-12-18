@@ -129,7 +129,7 @@ namespace DiceBattleGame.Forms_UI
                 {
                     Text = $"{skill.Name} ({skill.Uses}/{skill.DefaultUses})",
                     Width = pnl_Skills.Width - 15,
-                    Height = 25,
+                    Height = 30,
                     Left = 5,
                     Top = y,
                     Enabled = skill.Uses > 0,
@@ -333,6 +333,8 @@ namespace DiceBattleGame.Forms_UI
             btn_NextTurn.Enabled = false;
 
             txt_TextBox.AppendText("\nAll enemies defeated!\n");
+            // calculate rewards from battle and distribute to the player
+            turnManager.calculateRewards();
         }
 
         private void EndBattleDefeat()
@@ -435,9 +437,20 @@ namespace DiceBattleGame.Forms_UI
             Label lblName = new Label
             {
                 Name = "lbl_PlayerName",
-                Text = c.getName() + $", Level {c.getLevel()}",
+                Text = c.getName(),
                 Location = tplName.Location,
                 AutoSize = tplName.AutoSize,
+                Font = tplName.Font
+            };
+
+            // LEVEL
+            Label tplLevel = pnl_CharacterTemplatePlayer.Controls.Find("lbl_PlayerLevel", true).First() as Label;
+            Label lblLevel = new Label
+            {
+                Name = "lbl_PlayerLevel",
+                Text = $"Level {c.getLevel()}",
+                Location = tplLevel.Location,
+                AutoSize = tplLevel.AutoSize,
                 Font = tplName.Font
             };
 
@@ -464,8 +477,10 @@ namespace DiceBattleGame.Forms_UI
             };
 
             card.Controls.Add(lblName);
+            card.Controls.Add(lblLevel);
             card.Controls.Add(lblHP);
             card.Controls.Add(hpBar);
+            
 
 
             return card;
@@ -488,9 +503,20 @@ namespace DiceBattleGame.Forms_UI
             Label lblName = new Label
             {
                 Name = "lbl_EnemyName",
-                Text = e.getName() + $", Level {e.getLevel()}",
+                Text = e.getName(),
                 Location = tplName.Location,
                 AutoSize = tplName.AutoSize,
+                Font = tplName.Font
+            };
+
+            // LEVEL
+            Label tplLevel = pnl_CharacterTemplateEnemy.Controls.Find("lbl_EnemyLevel", true).First() as Label;
+            Label lblLevel = new Label
+            {
+                Name = "lbl_EnemyLevel",
+                Text = $"Level {e.getLevel()}",
+                Location = tplLevel.Location,
+                AutoSize = tplLevel.AutoSize,
                 Font = tplName.Font
             };
 
@@ -517,8 +543,10 @@ namespace DiceBattleGame.Forms_UI
             };
 
             card.Controls.Add(lblName);
+            card.Controls.Add(lblLevel);
             card.Controls.Add(lblHP);
             card.Controls.Add(hpBar);
+            
 
             card.Cursor = Cursors.Hand;
             card.Click += (s, e) => SelectEnemy(card);
