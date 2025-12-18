@@ -1,4 +1,5 @@
 ﻿using DiceBattleGame.GameData.System;
+using static DiceBattleGame.GameData.Skills.PlayerSkills;
 
 namespace DiceBattleGame.GameData.Characters.Playable
 {
@@ -30,6 +31,13 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 12;
             weapon = new Custom("Daggers", "Twin Daggers", "Pierce", new diceBag(7, 2));
+
+            initializeSkills();
+        }
+
+        private void initializeSkills()
+        {
+            skills.Add(new PreciseStrike());
         }
     }
 }

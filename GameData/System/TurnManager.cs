@@ -41,21 +41,41 @@ namespace DiceBattleGame
             return turnOrder[turnIndex];
         }
 
+        //public void AdvanceTurnIndex()
+        //{
+        //    if (turnOrder == null || turnOrder.Count == 0)
+        //        return;
+
+        //    // Move to next
+        //    turnIndex = (turnIndex + 1) % turnOrder.Count;
+
+        //    // Skip dead characters so we don't land on invalid turns
+        //    int safety = turnOrder.Count + 5;
+        //    while (safety-- > 0 && !turnOrder[turnIndex].isAlive())
+        //    {
+        //        turnIndex = (turnIndex + 1) % turnOrder.Count;
+        //    }
+        //}
         public void AdvanceTurnIndex()
         {
-            if (turnOrder == null || turnOrder.Count == 0)
-                return;
+            int safety = 0;
 
-            // Move to next
-            turnIndex = (turnIndex + 1) % turnOrder.Count;
-
-            // Skip dead characters so we don't land on invalid turns
-            int safety = turnOrder.Count + 5;
-            while (safety-- > 0 && !turnOrder[turnIndex].isAlive())
+            do
             {
-                turnIndex = (turnIndex + 1) % turnOrder.Count;
-            }
+                turnIndex++;
+
+                if (turnIndex >= turnOrder.Count)
+                    turnIndex = 0;
+
+                safety++;
+
+                // evita loop infinito si todos están muertos
+                if (safety > turnOrder.Count)
+                    break;
+
+            } while (turnOrder[turnIndex].getHealth() <= 0);
         }
+
 
 
 
@@ -209,7 +229,7 @@ namespace DiceBattleGame
             // PLAYER TURN
             if (current.getCharacterType() == "Player")
             {
-                Log($"It is {current.getName()}'s turn (PLAYER).");
+                //Log($"It is {current.getName()}'s turn (PLAYER).");
 
                 Character? target = turnOrder
                     .FirstOrDefault(c => c.isAlive() && c.getCharacterType() != "Player");
@@ -226,7 +246,7 @@ namespace DiceBattleGame
             // ENEMY TURN
             else
             {
-                Log($"It is {current.getName()}'s turn (ENEMY).");
+                //Log($"It is {current.getName()}'s turn (ENEMY).");
 
                 // enemy selects target based on its behavior
                 Character? target = current.enemySelectTarget(playerParty!);
@@ -318,6 +338,7 @@ namespace DiceBattleGame
             int ac = defender.getArmoclass();
             string attackerName = attacker.getName();
             string defenderName = defender.getName();
+            Log($"It is {attacker.getName()}'s turn ({attacker.getCharacterType().ToUpper()}).");
 
             if (roll >= ac)
             {
@@ -351,6 +372,73 @@ namespace DiceBattleGame
             // bandaid solution to catch all skills
             Log($"{user.getName()} uses {skill.Name} (Effectiveness: {effectiveness}).");
         }
+
+        // ============================================
+        //// PLAYER ACTION — SKILL
+
+        public void PlayerUseSkill(Skill skill, Character? target)
+        {
+            
+            if (battleOver)
+                return;
+
+            Character current = GetCurrentCharacter();
+
+            
+            if (current.getCharacterType() != "Player")
+                return;
+
+
+            if (skill.Uses <= 0)
+            {
+                Log($"{skill.Name} has no uses left.");
+                return;
+            }
+
+
+
+            Log($"It is {current.getName()}'s turn (PLAYER).");
+
+            int result = 0;
+
+            if (target != null)
+            {
+                result = skill.UseSkill(current, target);
+
+                if (result > 0)
+                {
+
+
+                    target.takeDamage(result, "Skill");
+
+                    Log($"{current.getName()} uses {skill.Name} on {target.getName()} for {result} damage.");
+                    Log($"{target.getName()}'s health is now: {target.getHealth()}");
+                }
+                else
+                {
+
+                    Log($"{current.getName()} uses {skill.Name}.");
+                }
+            }
+            else
+            {
+                skill.UseSkill(current);
+                Log($"{current.getName()} uses {skill.Name}.");
+
+
+
+            }
+
+            
+            skill.Uses--;
+
+            if (CheckBattleOver())
+                return;
+
+            AdvanceTurnIndex();
+        }
+
+
 
         public void useItem(Character user, Character target, Item item)
         {
