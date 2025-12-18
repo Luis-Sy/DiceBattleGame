@@ -277,7 +277,7 @@ namespace DiceBattleGame.Forms_UI
                 {
                     Text = $"{skill.Name} ({skill.Uses}/{skill.DefaultUses})",
                     Width = pnl_Skills.Width - 15,
-                    Height = 25,
+                    Height = 30,
                     Left = 5,
                     Top = y,
                     Enabled = skill.Uses > 0,
@@ -431,7 +431,7 @@ namespace DiceBattleGame.Forms_UI
                 {
                     Text = $"{group.SampleItem.Name} ({group.Count})",
                     Width = pnl_Items.Width - 10,
-                    Height = 25,
+                    Height = 30,
                     Left = 5,
                     Top = y
                 };

@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             };
             armorClass = 14;
             skills.Add(new Scorn());
-            skills.Add(new Enlighten());
+            //skills.Add(new Enlighten());
             weapon = new Custom("Crystal Spike", "Elder Crystal Spike", "Pierce", new diceBag(7, 2));
         }
     }

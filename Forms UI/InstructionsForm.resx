@@ -117,4 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>You are an adventurer set off on an expedition to slay a dangerous being terrorizing the land. Will you triumph in glory or die in obscurity?
+
+Begin by selecting a character and entering a new campaign. On the map screen, press next to progress to the next node on the map.
+
+In battle, defeat all of your enemies to achieve victory. Use items and skills to turn the tide to your advantage.
+Items are used on your turn on the current active party member. Skills are used by targeting an enemy and selecting them from the skill list.
+Be mindful that skills have limited uses, and must be replenished by resting.
+When all enemies have been defeated (or all of your party members), press the back button to return to the map.
+
+Use your hard earned gold from battles to spend in shops, where you may purchase items to use in battle, or perhaps hire new party members.
+</value>
+  </data>
 </root>

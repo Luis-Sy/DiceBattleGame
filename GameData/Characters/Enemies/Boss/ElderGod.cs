@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Boss
             };
             armorClass = 14;
             skills.Add(new Scorn());
-            skills.Add(new Enlighten());
+            //skills.Add(new Enlighten());
             weapon = new Custom("Arcane", "Eldritch Tendrils", "Arcane", new diceBag(9, 2));
         }
     }
