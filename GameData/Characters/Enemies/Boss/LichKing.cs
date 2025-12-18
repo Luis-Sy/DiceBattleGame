@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.EnemySkills;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Boss
 {
@@ -34,7 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Boss
                 { "Psychic", 1.0 }
             };
             armorClass = 15;
-
+            skills.Add(new SoulSiphon());
             weapon = new Custom("Staff", "Frostmourne", "Magic", new diceBag(7, 3));
         }
     }

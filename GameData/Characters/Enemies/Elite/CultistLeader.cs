@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.EnemySkills;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Elite
 {
@@ -34,6 +35,8 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 0.5 }
             };
             armorClass = 14;
+            skills.Add(new FireBolt());
+            skills.Add(new FireStorm());
             weapon = new Custom("Staff", "Ornate Ritual Staff", "Blunt", new D8());
         }
     }
