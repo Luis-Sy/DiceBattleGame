@@ -1,4 +1,5 @@
 ﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 0.5 }
             };
             armorClass = 12;
+            skills.Add(new DoubleStrike());
             weapon = new Rapier();
         }
     }

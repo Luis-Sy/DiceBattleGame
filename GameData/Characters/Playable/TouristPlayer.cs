@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.GameData.System;
+﻿using DiceBattleGame.GameData.Skills;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 1.5 }
             };
             armorClass = 14;
+            skills.Add(new SmileForTheCamera());
             weapon = new Custom("Camera", "Digital Camera", "Blunt", new D8());
         }
     }

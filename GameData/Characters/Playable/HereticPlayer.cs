@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.GameData.System;
+﻿using DiceBattleGame.GameData.Skills;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 0.75 }
             };
             armorClass = 11;
+            skills.Add(new Afflict());
             weapon = new Custom("Staff", "Occult Staff", "Blunt", new D8());
         }
     }

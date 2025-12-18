@@ -1,5 +1,6 @@
-﻿using DiceBattleGame.GameData.System;
-using DiceBattleGame.GameData.Characters;
+﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Skills;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             
             armorClass = 13;
+            skills.Add(new RainOfArrows());
             weapon = new Custom("Bow", "Longbow", "Pierce", new diceBag(7, 2));
         }
     }

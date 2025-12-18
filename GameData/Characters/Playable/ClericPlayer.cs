@@ -1,10 +1,12 @@
-﻿using DiceBattleGame.GameData.System;
-using DiceBattleGame.GameData.Characters;
+﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Skills;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.PlayerSkills;
 
 namespace DiceBattleGame.GameData.Characters.Playable
 {
@@ -35,6 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 1.0 }
             };
             armorClass = 14;
+            skills.Add(new DivineBlessing());
             weapon = new Custom("Mace", "Holy Mace", "Blunt", new diceBag(7, 2));
         }
     }

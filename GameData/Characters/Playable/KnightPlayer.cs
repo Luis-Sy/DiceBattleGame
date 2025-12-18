@@ -1,4 +1,5 @@
 ﻿using DiceBattleGame.GameData.Characters;
+using DiceBattleGame.GameData.Skills;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 0.75 }
             };
             armorClass = 15;
+            skills.Add(new PommelStrike());
             weapon = new Sword();
         }
     }

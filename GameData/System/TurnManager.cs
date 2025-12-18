@@ -391,13 +391,13 @@ namespace DiceBattleGame
 
             if (skill.Uses <= 0)
             {
-                Log($"{skill.Name} has no uses left.");
+                Log($"{skill.Name} has no uses left.\n");
                 return;
             }
 
 
 
-            Log($"It is {current.getName()}'s turn (PLAYER).");
+            Log($"It is {current.getName()}'s turn (PLAYER).\n");
 
             int result = 0;
 
@@ -411,19 +411,19 @@ namespace DiceBattleGame
 
                     target.takeDamage(result, "Skill");
 
-                    Log($"{current.getName()} uses {skill.Name} on {target.getName()} for {result} damage.");
-                    Log($"{target.getName()}'s health is now: {target.getHealth()}");
+                    Log($"{current.getName()} uses {skill.Name} on {target.getName()} for {result} damage.\n");
+                    Log($"{target.getName()}'s health is now: {target.getHealth()}\n");
                 }
                 else
                 {
 
-                    Log($"{current.getName()} uses {skill.Name}.");
+                    Log($"{current.getName()} uses {skill.Name}.\n");
                 }
             }
             else
             {
                 skill.UseSkill(current);
-                Log($"{current.getName()} uses {skill.Name}.");
+                Log($"{current.getName()} uses {skill.Name}.\n");
 
 
 
@@ -461,11 +461,11 @@ namespace DiceBattleGame
             // messages for item usage should probably be handled inside the item class itself
             if (target == null || user == target)
             {
-                Log($"{user.getName()} uses {item.Name}.");
+                Log($"{user.getName()} uses {item.Name}.\n");
             }
             else
             {
-                Log($"{user.getName()} uses {item.Name} on {target.getName()}.");
+                Log($"{user.getName()} uses {item.Name} on {target.getName()}.\n");
             }
         }
 
@@ -493,7 +493,7 @@ namespace DiceBattleGame
                 }
             }
 
-            Log($"You earned {goldEarned} gold and {expEarned} experience points!");
+            Log($"\nYou earned {goldEarned} gold and {expEarned} experience points!");
             // add gold to the campaign state
             GameManager.Campaign.ChangeGold(goldEarned);
             // distribute exp to all player characters
@@ -502,7 +502,6 @@ namespace DiceBattleGame
                 playerChar.gainExp(expEarned);
             }
         }
-
     }
 
 }

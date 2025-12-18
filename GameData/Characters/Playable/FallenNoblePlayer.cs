@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.GameData.System;
+﻿using DiceBattleGame.GameData.Skills;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 0.5 }
             };
             armorClass = 15;
+            skills.Add(new BedazzledHandCannon());
             weapon = new Custom("Rapier", "Worn Rapier", "Pierce", new D8());
         }
     }

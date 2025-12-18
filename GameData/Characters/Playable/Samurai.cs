@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.GameData.System;
+﻿using DiceBattleGame.GameData.Skills;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 0.5 }
             };
             armorClass = 17;
+            skills.Add(new AtomicSlash());
             weapon = new Custom("Katana", "Aged Katana", "Slash", new D10());
         }
     }

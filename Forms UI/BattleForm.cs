@@ -97,6 +97,13 @@ namespace DiceBattleGame.Forms_UI
         {
             Character current = turnManager.GetCurrentCharacter();
 
+            //check if battle is over
+            if (AreAllEnemiesDead())
+            {
+                EndBattleVictory();
+                return;
+            }
+
             if (current.getCharacterType() == "Player")
             {
                 lbl_Turn.Text = "TURN: PLAYER";

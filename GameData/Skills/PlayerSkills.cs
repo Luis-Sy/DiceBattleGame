@@ -85,9 +85,9 @@ namespace DiceBattleGame.GameData.Skills
             }
         }
         //============================================================Awakened Skills========================================================
-        public class ThethingStirs : Skill
+        public class TheThingStirs : Skill
         {
-            public ThethingStirs() : base("The Thing Stirs", 3, 3)
+            public TheThingStirs() : base("The Thing Stirs", 3, 3)
             {
                 TargetType = "Enemy";
             }
@@ -172,8 +172,8 @@ namespace DiceBattleGame.GameData.Skills
 
             //Uses--; //comsumes a use
 
-                enemy.getStats()["Dexterity"] += 1;
-                return 1;
+                enemy.getStats()["Dexterity"] -= 5;
+                return 5;
 
 
 

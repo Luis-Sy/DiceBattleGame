@@ -1,4 +1,5 @@
-﻿using DiceBattleGame.GameData.System;
+﻿using DiceBattleGame.GameData.Skills;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 2.0 }
             };
             armorClass = 10;
+            skills.Add(new PocketSand());
             weapon = new Custom("Club", "Wooden Club", "Blunt", new D6());
         }
     }

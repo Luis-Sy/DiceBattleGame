@@ -372,20 +372,18 @@ namespace DiceBattleGame.GameData.Characters
 
             string selectedAction = actionSelector.GetRandomItem();
 
-            // if the enemy tries to use an item but has none, attack instead
-            if (selectedAction == "Item" && enemyInventory.Count == 0){
+            if (selectedAction == "Item" && enemyInventory.Count == 0)
                 return "Attack";
-            }
-            if(selectedAction == "Skill"){
-                // if the enemy has no defined skills, attack instead
-                if (skills.Count == 0){
+
+            if (selectedAction == "Skill")
+            {
+                if (skills.Count == 0)
                     return "Attack";
-                }
-                // if the enemy has skills and any have uses left, try using a skill
-                if(skills.FindAll(s => s.Uses > 0).Count > 0)
-                {
+
+                if (skills.Any(s => s.Uses > 0))
                     return "Skill";
-                }
+
+                return "Attack"; // <-- explicit fallback when no uses left
             }
 
             return selectedAction;

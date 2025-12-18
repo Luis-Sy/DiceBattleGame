@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.PlayerSkills;
 
 namespace DiceBattleGame.GameData.Characters.Playable
 {
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 1.5 }
             };
             armorClass = 13;
+            skills.Add(new KillingBlow());
             weapon = new Custom("Axe", "Battle Axe", "Slash", new D10());
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.PlayerSkills;
 
 namespace DiceBattleGame.GameData.Characters.Playable
 {
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 1.5 }
             };
             armorClass = 12;
+            skills.Add(new TheThingStirs());
             weapon = new Custom("Magic Staff", "Staff of Awakening", "Blunt", new diceBag(7, 2));
         }
     }
