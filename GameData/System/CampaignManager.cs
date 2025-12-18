@@ -23,7 +23,7 @@ namespace DiceBattleGame.GameData.System
         };
 
         //
-        private int currenNodeIndex = 0;
+        private int currentNodeIndex = 0;
         private bool gameOver = false;
 
 
@@ -109,11 +109,11 @@ namespace DiceBattleGame.GameData.System
         //new methods
         public MapNode GetCurrentNode()
         {
-            return getMapNodes()[currenNodeIndex];
+            return getMapNodes()[currentNodeIndex];
         }
         public int GetCurrentNodeIndex()
         {
-            return currenNodeIndex;
+            return currentNodeIndex;
         }
         public bool IsGameOver()
         {
@@ -126,9 +126,15 @@ namespace DiceBattleGame.GameData.System
             if (playerWon)
             {
                 GetCurrentNode().VisitNode();
-                if (currenNodeIndex < getMapNodes().Count - 1)
+                if(GetCurrentNode().GetNodeType() == "Boss Battle")
                 {
-                    currenNodeIndex++;
+                    MessageBox.Show("Congratulations! You have defeated the Boss and completed the campaign!");
+                    GameManager.SwitchTo(new StartMenuForm());
+                    return;
+                }
+                if (currentNodeIndex < getMapNodes().Count - 1)
+                {
+                    currentNodeIndex++;
                 }
             }
             else

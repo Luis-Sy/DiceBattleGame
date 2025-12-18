@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.EnemySkills;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Elite
 {
@@ -34,6 +35,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 1.0 }
             };
             armorClass = 12;
+            skills.Add(new SoulSiphon());
             weapon = new Custom("Staff", "Staff of the Damned", "Blunt", new D8());
         }
     }

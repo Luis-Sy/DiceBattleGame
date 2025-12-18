@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.EnemySkills;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Boss
 {
@@ -34,6 +35,8 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Boss
                 { "Psychic", 0.5 }
             };
             armorClass = 14;
+            skills.Add(new Scorn());
+            skills.Add(new Enlighten());
             weapon = new Custom("Arcane", "Eldritch Tendrils", "Arcane", new diceBag(9, 2));
         }
     }

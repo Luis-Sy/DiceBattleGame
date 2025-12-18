@@ -1,10 +1,4 @@
 ﻿using DiceBattleGame.GameData.Characters;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.Skills
 {
@@ -152,8 +146,8 @@ namespace DiceBattleGame.GameData.Skills
                 TargetType = "Enemy";
             }
 
-            internal override int UseSkill(Character entity, Character enemy) //I dont know if this will even work - J
-            {
+        internal override int UseSkill(Character entity, Character enemy) //I dont know if this will even work - J
+        {
 
 
                 //Uses--; //comsumes a use
@@ -163,18 +157,18 @@ namespace DiceBattleGame.GameData.Skills
 
 
 
-            }
+        }
 
 
         }
 
-        //========================================================================Duelist Skills===================================================
-        public class DoubleStrike : Skill
+    //========================================================================Duelist Skills===================================================
+    public class DoubleStrike : Skill
+    {
+        internal DoubleStrike() : base("Double Strike", 3, 3)
         {
-            internal DoubleStrike() : base("Double Strike", 3, 3)
-            {
-                TargetType = "Enemy";
-            }
+            TargetType = "Enemy";
+        }
 
             internal override int UseSkill(Character entity, Character enemy)
             {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DiceBattleGame.GameData.Skills.EnemySkills;
 
 namespace DiceBattleGame.GameData.Characters.Enemies.Elite
 {
@@ -34,6 +35,8 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 0.75 }
             };
             armorClass = 14;
+            skills.Add(new Scorn());
+            skills.Add(new Enlighten());
             weapon = new Custom("Crystal Spike", "Elder Crystal Spike", "Pierce", new diceBag(7, 2));
         }
     }

@@ -64,7 +64,7 @@
             lst_Items.Location = new Point(51, 97);
             lst_Items.Margin = new Padding(3, 4, 3, 4);
             lst_Items.Name = "lst_Items";
-            lst_Items.Size = new Size(276, 200);
+            lst_Items.Size = new Size(292, 200);
             lst_Items.TabIndex = 1;
             lst_Items.SelectedIndexChanged += lst_Items_SelectedIndexChanged;
             // 
@@ -205,6 +205,7 @@
             // 
             itemDescriptionBox.Location = new Point(349, 128);
             itemDescriptionBox.Name = "itemDescriptionBox";
+            itemDescriptionBox.ReadOnly = true;
             itemDescriptionBox.Size = new Size(405, 85);
             itemDescriptionBox.TabIndex = 17;
             itemDescriptionBox.Text = "Select an item to see details";

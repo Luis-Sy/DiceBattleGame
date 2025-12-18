@@ -90,8 +90,16 @@ namespace DiceBattleGame.GameData.Characters
                 stats[stat] += 1;
             }
 
-            //additionally, recalculate health
-            maxHealth = stats["Vigor"] * 2;
+            // recalculate max health
+            if (this.type == "Player")
+            {
+                maxHealth = (stats["Vigor"] * 2) + 10;
+            }
+            else if (this.type == "Enemy" || this.type == "Elite Enemy" || this.type == "Boss Enemy")
+            {
+                // enemy health nerf for balancing purposes
+                maxHealth = (stats["Vigor"] * 2) - 5;
+            }
 
             level += 1;
             experience -= 5;
@@ -102,7 +110,8 @@ namespace DiceBattleGame.GameData.Characters
         {
             if (weapon != null)
             {
-                return weapon.Attack(); // roll weapon's damage dice
+                // roll weapon's damage dice, scale with Dex bonus
+                return weapon.Attack() + getStatCheckBonus("Dexterity"); 
             }
             else
             {
@@ -245,16 +254,20 @@ namespace DiceBattleGame.GameData.Characters
             }
 
 
-            maxHealth = stats["Vigor"] * 2;
             // if it's a player class, add a flat 10 hp to their health pool
             if (this.type == "Player")
             {
-                maxHealth += 10;
-            }else if (this.type == "Enemy" || this.type == "Elite Enemy")
+                maxHealth = (stats["Vigor"] * 2) + 10;
+                armorClass += 2; // players get a small armor class boost for balancing
+            }
+            else if (this.type == "Enemy" || this.type == "Elite Enemy" || this.type == "Boss Enemy")
             {
                 // enemy health nerf for balancing purposes
-                maxHealth -= 5;
+                maxHealth = (stats["Vigor"] * 2) - 5;
+                // bandaid fix to reduce armor class for balancing
+                armorClass -= 3;
             }
+
             restoreHp();
         }
 
@@ -304,7 +317,7 @@ namespace DiceBattleGame.GameData.Characters
 
         public void setHealth(int amount) // updated to allow changing the character's current health to whatever we want - Luis
         {
-            health = amount;
+            health = Math.Clamp(amount, 0, maxHealth);
         }
 
         public void restoreHp() //Restores the character back to full health, currently used on battle start, will need to be changed when longer campaign - J
