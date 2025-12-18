@@ -1,4 +1,5 @@
 ﻿using DiceBattleGame.GameData.Characters;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,27 +65,19 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy) //precise strike, good for non agile entities
             {
-                Uses--; //comsumes a use
-                if(Uses > 0)
-                {
-                    if (enemy.getStats()["Dexterity"] < 5)
-                    {
-                        int damage = (int)((entity.attack() * 2) * enemy.getResistances()["Pierce"]);
-                        return damage;
-                    }
-                    else
-                    {
-                        int damage = (int)((entity.attack() / 2) * enemy.getResistances()["Pierce"]);
-                        return damage;
-                    }
-                }
-                else //popup should be changed, returns 0 if there are not uses This will skill consume the turn, might have to be handled in battle flow.
-                {
-                    MessageBox.Show("This ability is out of uses!");
-                    return 0;
-                }
 
+                if (enemy.getStats()["Dexterity"] < 5)
+                {
+                    return (int)((entity.attack() * 2) * enemy.getResistances()["Pierce"]);
+                }
+                else
+                {
+                    return (int)((entity.attack() / 2) * enemy.getResistances()["Pierce"]);
+                }
             }
+               
+
+            
 
             internal override void RestoreUses()
             {
@@ -101,17 +94,15 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if (Uses > 0) 
-                { 
-                    int damage = (int)((entity.attack() * 2) * enemy.getResistances()["Psychic"]);
-                    enemy.getResistances()["Psychic"] = enemy.getResistances()["Psychic"] + 0.5;
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+
+                int damage = (int)((entity.attack() * 2) * enemy.getResistances()["Psychic"]);
+
+                // debuff effect
+                enemy.getResistances()["Psychic"] += 0.5;
+
+                return damage;
+
+
 
             }
         }
@@ -127,35 +118,23 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy)
             {
-                if(Uses > 0)
-                {
-                    Uses--; //comsumes a use
+                
+                    //Uses--; //comsumes a use
 
-                    float remainingHp = enemy.getHealth() / enemy.getMaxHealth();
+                    float remainingHp = (float)enemy.getHealth() / enemy.getMaxHealth();
 
-                    if (remainingHp < .33)
+                    if (remainingHp < .33f)
                     {
-                        int damage = (int)((entity.attack() * 5) * enemy.getResistances()["Blunt"]);
-                        return damage;
+                        return  (int)((entity.attack() * 5) * enemy.getResistances()["Blunt"]);
+                        
                     }
-                    else
-                    {
-                        int damage = entity.attack();
-                        return damage;
-                    }
+                return entity.attack();
                 }
-                else
-                {
-                    MessageBox.Show("This ability is out of uses!");
-                    return 0;
-                }
+                
 
             }
 
-            internal override void RestoreUses()
-            {
-                Uses = DefaultUses;
-            }
+            
         }
         //===================================================================Cleric Skills======================================================
 
@@ -168,12 +147,10 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character target) // I dont know if this a good way to implement this - J
             {
-                Uses--; //comsumes a use
-
-                int health = entity.getStats()["Faith"] * 5;
-                target.setHealth(target.getHealth() + health);
-                return 0;
-            }
+            int heal = entity.getStats()["Faith"] * 5;
+            target.setHealth(target.getHealth() + heal);
+            return 0;
+        }
 
             internal override void RestoreUses()
             {
@@ -191,26 +168,18 @@ namespace DiceBattleGame.GameData.Skills
 
             internal override int UseSkill(Character entity, Character enemy) //I dont know if this will even work - J
             {
-                if(Uses > 0)
-                {
-                    Uses--; //comsumes a use
 
-                    int damage = 1;
-                    enemy.getStats()["Dexterity"] = enemy.getStats()["Dexterity"] + 1;
-                    return damage;
-                }
-                else
-                {
-                    MessageBox.Show("This skill is out of uses!");
-                    return 0;
-                }
+
+            //Uses--; //comsumes a use
+
+                enemy.getStats()["Dexterity"] += 1;
+                return 1;
+
+
 
             }
 
-            internal override void RestoreUses()
-            {
-                Uses = DefaultUses;
-            }
+            
         }
 
         //========================================================================Duelist Skills===================================================
@@ -225,7 +194,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     int damage = (int)((entity.attack() * 2) * enemy.getResistances()["Slash"]);
 
                     return damage;
@@ -249,7 +218,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     int damage = (int)((entity.attack() * 4) * enemy.getResistances()["Pierce"]);
                     return damage;
                 }
@@ -273,7 +242,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     int damage = (int)((entity.attack()) * enemy.getResistances()["Arcane"]);
                     enemy.getResistances()["Arcane"] = enemy.getResistances()["Arcane"] + 1; //permanently reduces enemies arcane resistance
                     enemy.getResistances()["Magic"] = enemy.getResistances()["Magic"] + 1;
@@ -300,7 +269,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     int damage = (int)((entity.attack() * 0.5) * enemy.getResistances()["Blunt"]);
                     enemy.getResistances()["Blunt"] = enemy.getResistances()["Blunt"] + 1;
                     return damage;
@@ -324,7 +293,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     float remainderHp = entity.getHealth() / entity.getMaxHealth();
 
                     if(remainderHp > 0.80)
@@ -358,7 +327,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     int damage = (int)((entity.attack()) * enemy.getResistances()["Radiant"]);
                     return damage;
                 }
@@ -381,7 +350,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     int damage = (int)((entity.attack() *2) * enemy.getResistances()["Pierce"]);
                     enemy.getResistances()["Pierce"] = enemy.getResistances()["Pierce"] + 1;
                     return damage;
@@ -406,7 +375,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     int damage = (int)((entity.attack() * 10) * enemy.getResistances()["Slash"]);
                     return damage;
                 }
@@ -429,7 +398,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     int damage = 1;
                     enemy.getResistances()["Slash"] = enemy.getResistances()["Slash"] + 0.1;
                     enemy.getResistances()["Pierce"] = enemy.getResistances()["Pierce"] + 0.1;
@@ -459,7 +428,7 @@ namespace DiceBattleGame.GameData.Skills
             {
                 if(Uses > 0)
                 {
-                    Uses--;
+                    //Uses--;
                     int damage = 1;
                     enemy.getResistances()["Slash"] = enemy.getResistances()["Slash"] + 0.2;
                     enemy.getResistances()["Pierce"] = enemy.getResistances()["Pierce"] + 0.3;
@@ -473,6 +442,6 @@ namespace DiceBattleGame.GameData.Skills
                 }
             }
         }
-    }
+    
 }
 

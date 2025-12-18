@@ -1,10 +1,12 @@
 ﻿using DiceBattleGame.GameData.Characters;
 using DiceBattleGame.GameData.MapEvents.CombatEncounters;
+using DiceBattleGame.GameData.Skills;
 using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -46,6 +48,9 @@ namespace DiceBattleGame.Forms_UI
             foreach (var e in enemyParty)
                 e.restoreHp();
 
+
+            pnl_Skills.Visible = true;
+            
 
             StyleButtons();
             StartBattle();
@@ -96,13 +101,62 @@ namespace DiceBattleGame.Forms_UI
             {
                 lbl_Turn.Text = "TURN: PLAYER";
                 btn_Attack.Enabled = true;
+
+                BuildSkillPanel(current);
+                pnl_Skills.Visible = true;
+
+
             }
             else
             {
                 lbl_Turn.Text = "TURN: ENEMY";
                 btn_Attack.Enabled = false;
+                btn_Skill.Enabled = false;
             }
         }
+        private void BuildSkillPanel(Character player)
+        {
+            pnl_Skills.Controls.Clear();
+
+            int y = 5;
+
+            foreach (Skill skill in player.getSkills())
+            {
+                Button btn = new Button
+                {
+                    Text = $"{skill.Name} ({skill.Uses}/{skill.DefaultUses})",
+                    Width = pnl_Skills.Width - 15,
+                    Height = 25,
+                    Left = 5,
+                    Top = y,
+                    Enabled = skill.Uses > 0,
+                    Tag = skill 
+                };
+
+                btn.Click += SkillButton_Click;
+                pnl_Skills.Controls.Add(btn);
+                y += 30;
+            }
+        }
+
+        private void SkillButton_Click(object sender, EventArgs e)
+        {
+            if (sender is not Button btn)
+                return;
+
+            Skill skill = (Skill)btn.Tag;
+
+            // ejecutar skill (TurnManager controla todo)
+            turnManager.PlayerUseSkill(skill, selectedEnemy);
+
+            // refrescar UI
+            UpdateAllHP();
+            HandleTurnStart();
+        }
+
+
+       
+
 
         //---------------------------------------------
         // ATTACK
@@ -170,6 +224,60 @@ namespace DiceBattleGame.Forms_UI
                     $"{attacker.getName()} missed! (roll {roll} vs AC {ac})\n"
                 );
             }
+        }
+        //--------------------------------------
+        //SKILL
+
+        private void btn_Skill_Click(object sender, EventArgs e)
+        {
+            Character current = turnManager.GetCurrentCharacter();
+
+            // ensure it is player's turn
+            if (current.getCharacterType() != "Player")
+                return;
+
+            var skills = current.getSkills();
+
+            if (skills.Count == 0)
+            {
+                MessageBox.Show("No skills available.");
+                return;
+            }
+
+            // build simple selection list
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < skills.Count; i++)
+            {
+                sb.AppendLine($"{i + 1}. {skills[i].Name} ({skills[i].Uses}/{skills[i].DefaultUses})");
+            }
+
+            string input = Microsoft.VisualBasic.Interaction.InputBox(
+                $"Choose a skill:\n\n{sb}",
+                "Skills",
+                "1"
+            );
+
+            if (!int.TryParse(input, out int choice))
+                return;
+
+            choice -= 1;
+
+            if (choice < 0 || choice >= skills.Count)
+                return;
+
+            Skill selectedSkill = skills[choice];
+
+            if (selectedSkill.Uses <= 0)
+            {
+                MessageBox.Show("That skill has no uses left.");
+                return;
+            }
+
+            // delegate execution to TurnManager
+            turnManager.PlayerUseSkill(selectedSkill, selectedEnemy);
+
+            UpdateAllHP();
+            HandleTurnStart();
         }
 
 
