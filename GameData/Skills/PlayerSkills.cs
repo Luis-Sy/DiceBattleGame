@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DiceBattleGame.GameData.Skills
 {
-    //These skills have 3 overloads, please default to the overload that takes in the player (user) and the enemy (target)
+    //These skills have 3 overloads, please default to the overload that takes in the player (user) and the enemy (target) - J
+    //It've been nice to use player stats to affect these skills but time constraints have prevented me from getting that far - J
     internal class PlayerSkills
     {
         //public class Backstab : Skill
@@ -91,6 +92,29 @@ namespace DiceBattleGame.GameData.Skills
             }
         }
         //============================================================Awakened Skills========================================================
+        public class ThethingStirs : Skill
+        {
+            public ThethingStirs() : base("The Thing Stirs", 3, 3)
+            {
+
+            }
+
+            internal override int UseSkill(Character entity, Character enemy)
+            {
+                if (Uses > 0) 
+                { 
+                    int damage = (int)((entity.attack() * 2) * enemy.getResistances()["Psychic"]);
+                    enemy.getResistances()["Psychic"] = enemy.getResistances()["Psychic"] + 0.5;
+                    return damage;
+                }
+                else
+                {
+                    MessageBox.Show("This skill is out of uses!");
+                    return 0;
+                }
+
+            }
+        }
 
         //============================================================Berserker Skills=======================================================
 
@@ -214,6 +238,29 @@ namespace DiceBattleGame.GameData.Skills
             }
         }
         //=============================================================================Fallen Noble Skills============================================
+        public class BedazzledHandCannon : Skill
+        {
+            internal BedazzledHandCannon() : base("Bedazzled Hand Cannon", 3,3)
+            {
+
+            }
+
+            internal override int UseSkill(Character entity, Character enemy)
+            {
+                if(Uses > 0)
+                {
+                    Uses--;
+                    int damage = (int)((entity.attack() * 4) * enemy.getResistances()["Pierce"]);
+                    return damage;
+                }
+                else
+                {
+                    MessageBox.Show("This skill is out of uses!");
+                    return 0;
+
+                }
+            }
+        }
         //=============================================================================Heretic Skills=================================================
         public class Afflict : Skill
         {
@@ -421,7 +468,7 @@ namespace DiceBattleGame.GameData.Skills
                 }
                 else
                 {
-                    MessageBox.Show("This skill is out of uses!")
+                    MessageBox.Show("This skill is out of uses!");
                     return 0;
                 }
             }
