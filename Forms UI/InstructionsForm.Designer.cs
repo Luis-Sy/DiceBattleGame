@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InstructionsForm));
             btn_StartMenuForm = new Button();
             richTextBox1 = new RichTextBox();
             SuspendLayout();
             // 
             // btn_StartMenuForm
             // 
-            btn_StartMenuForm.Location = new Point(322, 343);
+            btn_StartMenuForm.Location = new Point(269, 355);
+            btn_StartMenuForm.Margin = new Padding(2, 2, 2, 2);
             btn_StartMenuForm.Name = "btn_StartMenuForm";
-            btn_StartMenuForm.Size = new Size(169, 40);
+            btn_StartMenuForm.Size = new Size(99, 20);
             btn_StartMenuForm.TabIndex = 2;
             btn_StartMenuForm.Text = "Start Menu";
             btn_StartMenuForm.UseVisualStyleBackColor = true;
@@ -44,20 +46,22 @@
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(150, 74);
+            richTextBox1.Location = new Point(88, 37);
+            richTextBox1.Margin = new Padding(2, 2, 2, 2);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
-            richTextBox1.Size = new Size(520, 237);
+            richTextBox1.Size = new Size(446, 314);
             richTextBox1.TabIndex = 3;
-            richTextBox1.Text = "Game Instructions\n\n..............................";
+            richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // InstructionsForm
             // 
-            AutoScaleDimensions = new SizeF(12F, 30F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(619, 424);
             Controls.Add(richTextBox1);
             Controls.Add(btn_StartMenuForm);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "InstructionsForm";
             Text = "InstructionsForm";
             ResumeLayout(false);

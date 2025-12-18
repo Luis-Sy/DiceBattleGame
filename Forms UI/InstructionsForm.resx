@@ -117,4 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>HOW TO PLAY – DICE BATTLE GAME
+
+OBJECTIVE
+Your goal is to progress through the map, defeat enemies in turn-based battles, and survive until the end of the campaign.
+
+TURN-BASED COMBAT
+Battles are turn-based. Characters act in order based on their initiative roll.
+On your turn, you can perform one action.
+
+PLAYER ACTIONS
+
+ATTACK
+- Performs a basic attack using your equipped weapon.
+- Damage depends on your stats and the enemy’s resistances.
+
+SKILLS
+- Each character has unique skills.
+- Skills have limited uses.
+- Some skills deal extra damage or apply special effects.
+
+ITEMS
+- Items can heal you or increase your stats.
+- Each item can only be used once.
+- Used items are removed from your inventory.
+
+TARGET SELECTION
+- Click on an enemy to select it as your target.
+- The selected enemy is highlighted in red.
+
+WINNING &amp; LOSING
+- You win a battle by defeating all enemies.
+- You lose if all player characters are defeated.
+
+TIPS
+- Manage your skills carefully.
+- Use items when your health is low.
+- Some enemies have resistances, so choose your actions wisely."</value>
+  </data>
 </root>

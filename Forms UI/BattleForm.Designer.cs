@@ -208,7 +208,7 @@ namespace DiceBattleGame.Forms_UI
             flp_EnemyParty.Location = new Point(646, 28);
             flp_EnemyParty.Margin = new Padding(3, 2, 3, 2);
             flp_EnemyParty.Name = "flp_EnemyParty";
-            flp_EnemyParty.Size = new Size(241, 303);
+            flp_EnemyParty.Size = new Size(247, 303);
             flp_EnemyParty.TabIndex = 21;
             flp_EnemyParty.WrapContents = false;
             // 
@@ -287,7 +287,7 @@ namespace DiceBattleGame.Forms_UI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(922, 605);
+            ClientSize = new Size(944, 605);
             Controls.Add(pnl_Items);
             Controls.Add(pnl_Skills);
             Controls.Add(flp_EnemyParty);

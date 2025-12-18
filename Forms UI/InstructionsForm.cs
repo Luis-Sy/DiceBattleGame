@@ -43,5 +43,16 @@ namespace DiceBattleGame.Forms_UI
         {
             GameManager.SwitchTo(new StartMenuForm());
         }
+
+        private void InstructionsForm_Load(object sender, EventArgs e)
+        {
+            richTextBox1.ReadOnly = true;
+
+            richTextBox1.Text =
+                "HOW TO PLAY – DICE BATTLE GAME\r\n";
+               
+        }
+
     }
+
 }
