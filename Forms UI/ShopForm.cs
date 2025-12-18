@@ -64,7 +64,11 @@ namespace DiceBattleGame.Forms_UI
             {
                 lst_Items.Items.Add(item.Name);
             }
-            lst_Items.SelectedIndex = 0;
+            if(items.Count > 0)
+            {
+                lst_Items.SelectedIndex = 0;
+            }
+                
         }
 
         private void LoadRecruitableCharacters()
@@ -74,7 +78,15 @@ namespace DiceBattleGame.Forms_UI
             {
                 lst_Recruitable.Items.Add(recruit.getName());
             }
-            lst_Recruitable.SelectedIndex = 0;
+            if(recruits.Count > 0)
+            {
+                lst_Recruitable.SelectedIndex = 0;
+            }
+            else
+            {
+                lst_StatView.Items.Clear();
+            }
+                
         }
 
         public bool tryPurchase(int price)

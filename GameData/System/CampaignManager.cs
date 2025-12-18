@@ -126,6 +126,12 @@ namespace DiceBattleGame.GameData.System
             if (playerWon)
             {
                 GetCurrentNode().VisitNode();
+                if(GetCurrentNode().GetNodeType() == "Boss Battle")
+                {
+                    MessageBox.Show("Congratulations! You have defeated the Boss and completed the campaign!");
+                    GameManager.SwitchTo(new StartMenuForm());
+                    return;
+                }
                 if (currentNodeIndex < getMapNodes().Count - 1)
                 {
                     currentNodeIndex++;
