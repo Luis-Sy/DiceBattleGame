@@ -62,8 +62,6 @@ namespace DiceBattleGame.Forms_UI
         private void StyleButtons()
         {
             StyleButton(btn_Attack, Color.FromArgb(200, 80, 90));   // red
-            StyleButton(btn_Skill, Color.FromArgb(80, 120, 200));  // blue
-            StyleButton(btn_Item, Color.FromArgb(150, 150, 150));  // gray
             StyleButton(btn_NextTurn, Color.FromArgb(76, 175, 80)); // green
             StyleButton(btn_BackMap, Color.FromArgb(120, 120, 120)); // dark gray
         }
@@ -118,7 +116,6 @@ namespace DiceBattleGame.Forms_UI
             {
                 lbl_Turn.Text = "TURN: ENEMY";
                 btn_Attack.Enabled = false;
-                btn_Skill.Enabled = false;
                 foreach (Panel p in flp_PlayerParty.Controls.OfType<Panel>())
                     p.BackColor = pnl_CharacterTemplatePlayer.BackColor;
             }
@@ -513,8 +510,6 @@ namespace DiceBattleGame.Forms_UI
 
             lbl_Turn.Text = "VICTORY";
             btn_Attack.Enabled = false;
-            btn_Skill.Enabled = false;
-            btn_Item.Enabled = false;
             btn_NextTurn.Enabled = false;
 
             txt_TextBox.AppendText("\nAll enemies defeated!\n");
@@ -529,8 +524,6 @@ namespace DiceBattleGame.Forms_UI
 
             lbl_Turn.Text = "DEFEAT";
             btn_Attack.Enabled = false;
-            btn_Skill.Enabled = false;
-            btn_Item.Enabled = false;
             btn_NextTurn.Enabled = false;
 
             txt_TextBox.AppendText("\nYou have been defeated...\n");

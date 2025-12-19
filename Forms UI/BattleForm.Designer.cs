@@ -37,9 +37,6 @@ namespace DiceBattleGame.Forms_UI
             pb_Player = new ProgressBar();
             lbl_HpPlayer = new Label();
             lbl_PlayerName = new Label();
-            pnl_Actions = new Panel();
-            btn_Item = new Button();
-            btn_Skill = new Button();
             btn_Attack = new Button();
             lbl_Turn = new Label();
             flp_PlayerParty = new FlowLayoutPanel();
@@ -52,7 +49,6 @@ namespace DiceBattleGame.Forms_UI
             pnl_Skills = new Panel();
             pnl_Items = new Panel();
             pnl_CharacterTemplatePlayer.SuspendLayout();
-            pnl_Actions.SuspendLayout();
             flp_PlayerParty.SuspendLayout();
             flp_EnemyParty.SuspendLayout();
             pnl_CharacterTemplateEnemy.SuspendLayout();
@@ -60,20 +56,20 @@ namespace DiceBattleGame.Forms_UI
             // 
             // txt_TextBox
             // 
-            txt_TextBox.Location = new Point(323, 294);
-            txt_TextBox.Margin = new Padding(2);
+            txt_TextBox.Location = new Point(369, 392);
+            txt_TextBox.Margin = new Padding(2, 3, 2, 3);
             txt_TextBox.Multiline = true;
             txt_TextBox.Name = "txt_TextBox";
             txt_TextBox.ScrollBars = ScrollBars.Vertical;
-            txt_TextBox.Size = new Size(267, 249);
+            txt_TextBox.Size = new Size(305, 331);
             txt_TextBox.TabIndex = 12;
             // 
             // btn_NextTurn
             // 
-            btn_NextTurn.Location = new Point(460, 163);
-            btn_NextTurn.Margin = new Padding(2);
+            btn_NextTurn.Location = new Point(517, 217);
+            btn_NextTurn.Margin = new Padding(2, 3, 2, 3);
             btn_NextTurn.Name = "btn_NextTurn";
-            btn_NextTurn.Size = new Size(105, 23);
+            btn_NextTurn.Size = new Size(120, 31);
             btn_NextTurn.TabIndex = 13;
             btn_NextTurn.Text = "Enemy move";
             btn_NextTurn.UseVisualStyleBackColor = true;
@@ -81,10 +77,9 @@ namespace DiceBattleGame.Forms_UI
             // 
             // btn_BackMap
             // 
-            btn_BackMap.Location = new Point(714, 517);
-            btn_BackMap.Margin = new Padding(3, 2, 3, 2);
+            btn_BackMap.Location = new Point(816, 689);
             btn_BackMap.Name = "btn_BackMap";
-            btn_BackMap.Size = new Size(123, 26);
+            btn_BackMap.Size = new Size(141, 35);
             btn_BackMap.TabIndex = 14;
             btn_BackMap.Text = "Back to map";
             btn_BackMap.UseVisualStyleBackColor = true;
@@ -97,34 +92,36 @@ namespace DiceBattleGame.Forms_UI
             pnl_CharacterTemplatePlayer.Controls.Add(pb_Player);
             pnl_CharacterTemplatePlayer.Controls.Add(lbl_HpPlayer);
             pnl_CharacterTemplatePlayer.Controls.Add(lbl_PlayerName);
-            pnl_CharacterTemplatePlayer.Location = new Point(3, 3);
+            pnl_CharacterTemplatePlayer.Location = new Point(3, 4);
+            pnl_CharacterTemplatePlayer.Margin = new Padding(3, 4, 3, 4);
             pnl_CharacterTemplatePlayer.Name = "pnl_CharacterTemplatePlayer";
-            pnl_CharacterTemplatePlayer.Size = new Size(238, 74);
+            pnl_CharacterTemplatePlayer.Size = new Size(272, 98);
             pnl_CharacterTemplatePlayer.TabIndex = 0;
             pnl_CharacterTemplatePlayer.Visible = false;
             // 
             // lbl_PlayerLevel
             // 
             lbl_PlayerLevel.AutoSize = true;
-            lbl_PlayerLevel.Location = new Point(134, 25);
+            lbl_PlayerLevel.Location = new Point(153, 33);
             lbl_PlayerLevel.Name = "lbl_PlayerLevel";
-            lbl_PlayerLevel.Size = new Size(38, 15);
+            lbl_PlayerLevel.Size = new Size(50, 20);
             lbl_PlayerLevel.TabIndex = 3;
             lbl_PlayerLevel.Text = "label1";
             // 
             // pb_Player
             // 
-            pb_Player.Location = new Point(11, 43);
+            pb_Player.Location = new Point(13, 57);
+            pb_Player.Margin = new Padding(3, 4, 3, 4);
             pb_Player.Name = "pb_Player";
-            pb_Player.Size = new Size(137, 23);
+            pb_Player.Size = new Size(157, 31);
             pb_Player.TabIndex = 2;
             // 
             // lbl_HpPlayer
             // 
             lbl_HpPlayer.AutoSize = true;
-            lbl_HpPlayer.Location = new Point(11, 25);
+            lbl_HpPlayer.Location = new Point(13, 33);
             lbl_HpPlayer.Name = "lbl_HpPlayer";
-            lbl_HpPlayer.Size = new Size(26, 15);
+            lbl_HpPlayer.Size = new Size(31, 20);
             lbl_HpPlayer.TabIndex = 1;
             lbl_HpPlayer.Text = "HP:";
             // 
@@ -132,48 +129,18 @@ namespace DiceBattleGame.Forms_UI
             // 
             lbl_PlayerName.AutoSize = true;
             lbl_PlayerName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_PlayerName.Location = new Point(11, 6);
+            lbl_PlayerName.Location = new Point(13, 8);
             lbl_PlayerName.Name = "lbl_PlayerName";
-            lbl_PlayerName.Size = new Size(75, 15);
+            lbl_PlayerName.Size = new Size(95, 20);
             lbl_PlayerName.TabIndex = 0;
             lbl_PlayerName.Text = "Player name";
             // 
-            // pnl_Actions
-            // 
-            pnl_Actions.BorderStyle = BorderStyle.FixedSingle;
-            pnl_Actions.Controls.Add(btn_Item);
-            pnl_Actions.Controls.Add(btn_Skill);
-            pnl_Actions.Controls.Add(btn_Attack);
-            pnl_Actions.Location = new Point(294, 130);
-            pnl_Actions.Margin = new Padding(3, 2, 3, 2);
-            pnl_Actions.Name = "pnl_Actions";
-            pnl_Actions.Size = new Size(101, 99);
-            pnl_Actions.TabIndex = 19;
-            // 
-            // btn_Item
-            // 
-            btn_Item.Location = new Point(3, 61);
-            btn_Item.Name = "btn_Item";
-            btn_Item.Size = new Size(93, 23);
-            btn_Item.TabIndex = 2;
-            btn_Item.Text = "Item";
-            btn_Item.UseVisualStyleBackColor = true;
-            btn_Item.Click += btn_Item_Click;
-            // 
-            // btn_Skill
-            // 
-            btn_Skill.Location = new Point(3, 32);
-            btn_Skill.Name = "btn_Skill";
-            btn_Skill.Size = new Size(93, 23);
-            btn_Skill.TabIndex = 1;
-            btn_Skill.Text = "Skill";
-            btn_Skill.UseVisualStyleBackColor = true;
-            // 
             // btn_Attack
             // 
-            btn_Attack.Location = new Point(3, 3);
+            btn_Attack.Location = new Point(384, 217);
+            btn_Attack.Margin = new Padding(3, 4, 3, 4);
             btn_Attack.Name = "btn_Attack";
-            btn_Attack.Size = new Size(93, 23);
+            btn_Attack.Size = new Size(106, 31);
             btn_Attack.TabIndex = 0;
             btn_Attack.Text = "Attack";
             btn_Attack.UseVisualStyleBackColor = true;
@@ -183,9 +150,9 @@ namespace DiceBattleGame.Forms_UI
             // 
             lbl_Turn.AutoSize = true;
             lbl_Turn.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_Turn.Location = new Point(354, 28);
+            lbl_Turn.Location = new Point(405, 37);
             lbl_Turn.Name = "lbl_Turn";
-            lbl_Turn.Size = new Size(137, 25);
+            lbl_Turn.Size = new Size(174, 32);
             lbl_Turn.TabIndex = 20;
             lbl_Turn.Text = "TURN:PLAYER";
             // 
@@ -194,10 +161,9 @@ namespace DiceBattleGame.Forms_UI
             flp_PlayerParty.AutoScroll = true;
             flp_PlayerParty.Controls.Add(pnl_CharacterTemplatePlayer);
             flp_PlayerParty.FlowDirection = FlowDirection.TopDown;
-            flp_PlayerParty.Location = new Point(12, 28);
-            flp_PlayerParty.Margin = new Padding(3, 2, 3, 2);
+            flp_PlayerParty.Location = new Point(14, 37);
             flp_PlayerParty.Name = "flp_PlayerParty";
-            flp_PlayerParty.Size = new Size(245, 303);
+            flp_PlayerParty.Size = new Size(280, 404);
             flp_PlayerParty.TabIndex = 0;
             flp_PlayerParty.WrapContents = false;
             // 
@@ -205,10 +171,9 @@ namespace DiceBattleGame.Forms_UI
             // 
             flp_EnemyParty.Controls.Add(pnl_CharacterTemplateEnemy);
             flp_EnemyParty.FlowDirection = FlowDirection.TopDown;
-            flp_EnemyParty.Location = new Point(646, 28);
-            flp_EnemyParty.Margin = new Padding(3, 2, 3, 2);
+            flp_EnemyParty.Location = new Point(738, 37);
             flp_EnemyParty.Name = "flp_EnemyParty";
-            flp_EnemyParty.Size = new Size(247, 303);
+            flp_EnemyParty.Size = new Size(282, 404);
             flp_EnemyParty.TabIndex = 21;
             flp_EnemyParty.WrapContents = false;
             // 
@@ -219,34 +184,36 @@ namespace DiceBattleGame.Forms_UI
             pnl_CharacterTemplateEnemy.Controls.Add(pb_Enemy);
             pnl_CharacterTemplateEnemy.Controls.Add(lbl_HpEnemy);
             pnl_CharacterTemplateEnemy.Controls.Add(lbl_EnemyName);
-            pnl_CharacterTemplateEnemy.Location = new Point(3, 3);
+            pnl_CharacterTemplateEnemy.Location = new Point(3, 4);
+            pnl_CharacterTemplateEnemy.Margin = new Padding(3, 4, 3, 4);
             pnl_CharacterTemplateEnemy.Name = "pnl_CharacterTemplateEnemy";
-            pnl_CharacterTemplateEnemy.Size = new Size(238, 79);
+            pnl_CharacterTemplateEnemy.Size = new Size(272, 105);
             pnl_CharacterTemplateEnemy.TabIndex = 3;
             pnl_CharacterTemplateEnemy.Visible = false;
             // 
             // lbl_EnemyLevel
             // 
             lbl_EnemyLevel.AutoSize = true;
-            lbl_EnemyLevel.Location = new Point(134, 21);
+            lbl_EnemyLevel.Location = new Point(153, 28);
             lbl_EnemyLevel.Name = "lbl_EnemyLevel";
-            lbl_EnemyLevel.Size = new Size(88, 15);
+            lbl_EnemyLevel.Size = new Size(110, 20);
             lbl_EnemyLevel.TabIndex = 3;
             lbl_EnemyLevel.Text = "lbl_EnemyLevel";
             // 
             // pb_Enemy
             // 
-            pb_Enemy.Location = new Point(11, 39);
+            pb_Enemy.Location = new Point(13, 52);
+            pb_Enemy.Margin = new Padding(3, 4, 3, 4);
             pb_Enemy.Name = "pb_Enemy";
-            pb_Enemy.Size = new Size(137, 23);
+            pb_Enemy.Size = new Size(157, 31);
             pb_Enemy.TabIndex = 2;
             // 
             // lbl_HpEnemy
             // 
             lbl_HpEnemy.AutoSize = true;
-            lbl_HpEnemy.Location = new Point(11, 21);
+            lbl_HpEnemy.Location = new Point(13, 28);
             lbl_HpEnemy.Name = "lbl_HpEnemy";
-            lbl_HpEnemy.Size = new Size(26, 15);
+            lbl_HpEnemy.Size = new Size(31, 20);
             lbl_HpEnemy.TabIndex = 1;
             lbl_HpEnemy.Text = "HP:";
             // 
@@ -254,9 +221,9 @@ namespace DiceBattleGame.Forms_UI
             // 
             lbl_EnemyName.AutoSize = true;
             lbl_EnemyName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lbl_EnemyName.Location = new Point(11, 6);
+            lbl_EnemyName.Location = new Point(13, 8);
             lbl_EnemyName.Name = "lbl_EnemyName";
-            lbl_EnemyName.Size = new Size(75, 15);
+            lbl_EnemyName.Size = new Size(95, 20);
             lbl_EnemyName.TabIndex = 0;
             lbl_EnemyName.Text = "Player name";
             // 
@@ -264,10 +231,9 @@ namespace DiceBattleGame.Forms_UI
             // 
             pnl_Skills.AutoScroll = true;
             pnl_Skills.BorderStyle = BorderStyle.FixedSingle;
-            pnl_Skills.Location = new Point(27, 350);
-            pnl_Skills.Margin = new Padding(3, 2, 3, 2);
+            pnl_Skills.Location = new Point(31, 467);
             pnl_Skills.Name = "pnl_Skills";
-            pnl_Skills.Size = new Size(200, 100);
+            pnl_Skills.Size = new Size(228, 133);
             pnl_Skills.TabIndex = 22;
             pnl_Skills.Visible = false;
             pnl_Skills.Click += btn_Skill_Click;
@@ -276,32 +242,31 @@ namespace DiceBattleGame.Forms_UI
             // 
             pnl_Items.AutoScroll = true;
             pnl_Items.BorderStyle = BorderStyle.FixedSingle;
-            pnl_Items.Location = new Point(27, 467);
-            pnl_Items.Margin = new Padding(3, 2, 3, 2);
+            pnl_Items.Location = new Point(31, 623);
             pnl_Items.Name = "pnl_Items";
-            pnl_Items.Size = new Size(201, 100);
+            pnl_Items.Size = new Size(229, 133);
             pnl_Items.TabIndex = 23;
             pnl_Items.Visible = false;
             // 
             // BattleForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(944, 605);
+            ClientSize = new Size(1079, 807);
             Controls.Add(pnl_Items);
             Controls.Add(pnl_Skills);
+            Controls.Add(btn_Attack);
             Controls.Add(flp_EnemyParty);
             Controls.Add(flp_PlayerParty);
             Controls.Add(lbl_Turn);
-            Controls.Add(pnl_Actions);
             Controls.Add(btn_BackMap);
             Controls.Add(btn_NextTurn);
             Controls.Add(txt_TextBox);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "BattleForm";
             Text = "BattleForm";
             pnl_CharacterTemplatePlayer.ResumeLayout(false);
             pnl_CharacterTemplatePlayer.PerformLayout();
-            pnl_Actions.ResumeLayout(false);
             flp_PlayerParty.ResumeLayout(false);
             flp_EnemyParty.ResumeLayout(false);
             pnl_CharacterTemplateEnemy.ResumeLayout(false);
@@ -315,9 +280,6 @@ namespace DiceBattleGame.Forms_UI
         private Button btn_NextTurn;
         private Button btn_BackMap;
         private Panel pnl_EnemyParty;
-        private Panel pnl_Actions;
-        private Button btn_Item;
-        private Button btn_Skill;
         private Button btn_Attack;
         private Label lbl_Turn;
         private Panel pnl_CharacterTemplatePlayer;
