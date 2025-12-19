@@ -9,7 +9,7 @@ namespace DiceBattleGame.GameData.Items
 {
     internal class StrengthPotion:Item
     {
-        public StrengthPotion():base("Strength Potion",10,"Description")
+        public StrengthPotion():base("Strength Potion",10, "Increases Strength by 5")
         {
             //string name = "Strength Potion";
             //int price = 10;

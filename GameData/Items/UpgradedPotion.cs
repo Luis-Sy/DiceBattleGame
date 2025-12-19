@@ -7,7 +7,7 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterStrengthPotion : Item
     {
         public GreaterStrengthPotion()
-            : base("Greater Strength Potion", 20, "A stronger potion that increases strength by more than the normal version.")
+            : base("Greater Strength Potion", 20, "A strong potion that increases Strength by 10.")
         {
             value1 = 10;
         }
@@ -21,7 +21,7 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterDexterityPotion : Item
     {
         public GreaterDexterityPotion()
-            : base("Greater Dexterity Potion", 20, "A stronger potion that increases dexterity by more than the normal version.")
+            : base("Greater Dexterity Potion", 20, "A strong potion that increases Dexterity by 10.")
         {
             value1 = 10;
         }
@@ -35,7 +35,7 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterIntelligencePotion : Item
     {
         public GreaterIntelligencePotion()
-            : base("Greater Intelligence Potion", 20, "A stronger potion that increases intelligence by more than the normal version.")
+            : base("Greater Intelligence Potion", 20, "A strong potion that increases Intellect by 10.")
         {
             value1 = 10;
         }
@@ -50,7 +50,7 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterFaithPotion : Item
     {
         public GreaterFaithPotion()
-            : base("Greater Faith Potion", 20, "A stronger potion that increases faith by more than the normal version.")
+            : base("Greater Faith Potion", 20, "A strong potion that increases Faith by 10.")
         {
             value1 = 10;
         }
@@ -64,7 +64,7 @@ namespace DiceBattleGame.GameData.Items
     internal class GreaterHealthPotion : Item
     {
         public GreaterHealthPotion()
-            : base("Greater Health Potion", 15, "A stronger potion that restores more HP than the normal version.")
+            : base("Greater Health Potion", 15, "A strong potion that restores 20 HP")
         {
             value1 = 20;
         }

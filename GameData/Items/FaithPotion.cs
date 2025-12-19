@@ -9,7 +9,7 @@ namespace DiceBattleGame.GameData.Items
 {
     internal class FaithPotion:Item
     {
-        public FaithPotion() :base("Faith Potion",10,"Description")
+        public FaithPotion() :base("Faith Potion",10, "Increases Faith by 5")
         {
             //string name = "Faith Potion"; //just read a prayer book really fast or some random mushroom
             //int price = 10;

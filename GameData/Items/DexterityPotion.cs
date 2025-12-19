@@ -9,7 +9,7 @@ namespace DiceBattleGame.GameData.Items
 {
     internal class DexterityPotion:Item
     {
-        public DexterityPotion():base("Dexeterity Potion",10,"Description")
+        public DexterityPotion():base("Dexeterity Potion",10, "Increases Dexterity by 5")
         {
             
         }
