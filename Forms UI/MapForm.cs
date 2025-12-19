@@ -59,6 +59,7 @@ namespace DiceBattleGame.Forms_UI
                 pic_Map.Refresh();
             };
             lbl_Gold.Text = $"Gold: {GameManager.Campaign.GetGold()}";
+            //lbl_Gold.Hide();
 
         }
         private void StyleButtons()
@@ -163,6 +164,7 @@ namespace DiceBattleGame.Forms_UI
 
         private void pic_Map_Paint(object sender, PaintEventArgs e)
         {
+            lbl_Gold.Text = $"Gold: {GameManager.Campaign.GetGold()}";
             DrawMap(e.Graphics);
         }
 
@@ -291,6 +293,7 @@ namespace DiceBattleGame.Forms_UI
 
                 pic_Map.Invalidate();
                 pic_Map.Refresh();
+                lbl_Gold.Text = $"Gold: {GameManager.Campaign.GetGold()}";
                 return;
             }
 
