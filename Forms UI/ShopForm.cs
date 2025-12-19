@@ -120,6 +120,7 @@ namespace DiceBattleGame.Forms_UI
             // hiring has a fixed cost of 15 gold
             if (tryPurchase(15))
             {
+                character.initializeStats();
                 GameManager.Campaign.GetPlayerParty().Add(character);
                 recruits.RemoveAt(lst_Recruitable.SelectedIndex);
                 MessageBox.Show($"You have recruited {character.getName()}!", "Recruitment Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);

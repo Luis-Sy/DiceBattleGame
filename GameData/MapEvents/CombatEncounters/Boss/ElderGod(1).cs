@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Boss
 {
     [EventType("Boss Battle")]
-    public class Dragon_1_ : CombatEncounter
+    internal class ElderGod_1_ : CombatEncounter
     {
-        public Dragon_1_(int targetLevel) : base(targetLevel)
+        public ElderGod_1_(int targetLevel) : base(targetLevel)
         {
             initializeEvent(targetLevel);
         }
@@ -18,9 +18,8 @@ namespace DiceBattleGame.GameData.MapEvents.CombatEncounters.Boss
         {
             enemies = new List<Character>()
             {
-                new Characters.Enemies.Boss.Dragon()
+                new Characters.Enemies.Boss.ElderGod()
             };
-
             scaleEnemies(targetLevel);
         }
     }
