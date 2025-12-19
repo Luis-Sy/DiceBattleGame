@@ -158,7 +158,7 @@ namespace DiceBattleGame
         //        static Dice d8 = new D8();
         //        static Dice d20 = new D20();
 
-        //          Weapon knife = new Custom("shoot", "debug", "ouchy", d8);  This creates a custom weapon with a D8. Ill fix this when I figure out whats wrong...
+        //          Weapon knife = new Custom("shoot", "debug", "ouchy", d8, "Dexterity");  This creates a custom weapon with a D8. Ill fix this when I figure out whats wrong...
         Dice die;
         public Custom()
         {
@@ -166,6 +166,7 @@ namespace DiceBattleGame
             weaponType = "Sword";
             weaponName = "Cake Cutter";
             damageType = "Slash";
+            damageStat = "Strength";
         }
         public Custom(string weaponType, string weaponName, string damageType, Dice dice, string damageStat)
         {
