@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Boss
                 { "Psychic", 0.75 }
             };
             armorClass = 15;
-            weapon = new Custom("Claws", "Mutated Claws", "Arcane", new diceBag(11, 2));
+            weapon = new Custom("Claws", "Mutated Claws", "Arcane", new diceBag(11, 2), "Strength");
         }
     }
 }

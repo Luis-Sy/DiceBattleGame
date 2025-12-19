@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             };
             armorClass = 13;
             skills.Add(new FireBolt());
-            weapon = new Custom("Dagger", "Ritual Dagger", "Pierce", new D6());
+            weapon = new Custom("Dagger", "Ritual Dagger", "Pierce", new D6(), "Dexterity");
         }
     }
 }

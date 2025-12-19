@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
                 { "Psychic", 0.5 }
             };
             armorClass = 10;
-            weapon = new Custom("Club", "Dirty Club", "Blunt", new D4());
+            weapon = new Custom("Club", "Dirty Club", "Blunt", new D4(), "Strength");
         }
     }
 }

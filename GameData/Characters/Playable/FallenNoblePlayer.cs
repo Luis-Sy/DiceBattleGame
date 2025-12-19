@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 15;
             skills.Add(new BedazzledHandCannon());
-            weapon = new Custom("Rapier", "Worn Rapier", "Pierce", new D8());
+            weapon = new Custom("Rapier", "Worn Rapier", "Pierce", new D8(), "Dexterity");
         }
     }
 }

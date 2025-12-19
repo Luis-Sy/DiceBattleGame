@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 11;
             skills.Add(new Afflict());
-            weapon = new Custom("Staff", "Occult Staff", "Blunt", new D8());
+            weapon = new Custom("Staff", "Occult Staff", "Blunt", new D8(), "Intellect");
         }
     }
 }

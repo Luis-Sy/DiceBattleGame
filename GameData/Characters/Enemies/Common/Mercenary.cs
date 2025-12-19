@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             armorClass = 14;
             skills.Add(new SneakyStrike());
             skills.Add(new SwiftSlice());
-            weapon = new Custom("Sword", "Broad Sword", "Slash", new D8());
+            weapon = new Custom("Sword", "Broad Sword", "Slash", new D8(), "Dexterity");
         }
     }
 }

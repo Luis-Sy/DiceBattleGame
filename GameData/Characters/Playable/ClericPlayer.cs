@@ -38,7 +38,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 14;
             skills.Add(new DivineBlessing());
-            weapon = new Custom("Mace", "Holy Mace", "Blunt", new diceBag(7, 2));
+            weapon = new Custom("Mace", "Holy Mace", "Blunt", new diceBag(7, 2), "Faith");
         }
     }
 }

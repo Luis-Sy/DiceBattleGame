@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 0.5 }
             };
             armorClass = 14;
-            weapon = new Custom("Whip", "Leather Whip", "Slash", new diceBag(7, 2));
+            weapon = new Custom("Whip", "Leather Whip", "Slash", new diceBag(7, 2), "Intellect");
         }
     }
 }

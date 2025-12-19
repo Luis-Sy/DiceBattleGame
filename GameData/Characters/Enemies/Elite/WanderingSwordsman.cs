@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 0.75 }
             };
             armorClass = 18;
-            weapon = new Custom("Sword", "Katana", "Slash", new D10());
+            weapon = new Custom("Sword", "Katana", "Slash", new D10(), "Dexterity");
         }
     }
 }

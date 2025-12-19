@@ -30,14 +30,9 @@ namespace DiceBattleGame.GameData.Characters.Playable
                 { "Psychic", 0.5 }
             };
             armorClass = 12;
-            weapon = new Custom("Daggers", "Twin Daggers", "Pierce", new diceBag(7, 2));
-
-            initializeSkills();
-        }
-
-        private void initializeSkills()
-        {
             skills.Add(new PreciseStrike());
+            weapon = new Custom("Daggers", "Twin Daggers", "Pierce", new diceBag(7, 2), "Dexterity");
         }
+
     }
 }

@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 10;
             skills.Add(new PocketSand());
-            weapon = new Custom("Club", "Wooden Club", "Blunt", new D6());
+            weapon = new Custom("Club", "Wooden Club", "Blunt", new D6(), "Strength");
         }
     }
 }

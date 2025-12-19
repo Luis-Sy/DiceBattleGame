@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 14;
             skills.Add(new TheOnePunch());
-            weapon = new Custom("Fists", "Monk's Fists", "Blunt", new diceBag(5, 2));
+            weapon = new Custom("Fists", "Monk's Fists", "Blunt", new diceBag(5, 2), "Dexterity");
         }
     }
 }

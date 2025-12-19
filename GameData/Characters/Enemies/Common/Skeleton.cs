@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             };
             armorClass = 12;
             skills.Add(new SneakyStrike());
-            weapon = new Custom("Sword", "Rusty Bone Sword", "Slash", new D8());
+            weapon = new Custom("Sword", "Rusty Bone Sword", "Slash", new D8(), "Dexterity");
         }
     }
 }

@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 17;
             skills.Add(new AtomicSlash());
-            weapon = new Custom("Katana", "Aged Katana", "Slash", new D10());
+            weapon = new Custom("Katana", "Aged Katana", "Slash", new D10(), "Dexterity");
         }
     }
 }

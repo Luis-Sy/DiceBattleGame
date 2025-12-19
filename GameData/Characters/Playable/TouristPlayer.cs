@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 14;
             skills.Add(new SmileForTheCamera());
-            weapon = new Custom("Camera", "Digital Camera", "Blunt", new D8());
+            weapon = new Custom("Camera", "Digital Camera", "Blunt", new D8(), "Intellect");
         }
     }
 }

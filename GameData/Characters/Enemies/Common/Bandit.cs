@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             armorClass = 12;
             skills.Add(new SneakyStrike());
             skills.Add(new SwiftSlice());
-            weapon = new Custom("Dagger", "Sharp Dagger", "Pierce", new diceBag(5, 2));
+            weapon = new Custom("Dagger", "Sharp Dagger", "Pierce", new diceBag(5, 2), "Dexterity");
         }
     }
 }

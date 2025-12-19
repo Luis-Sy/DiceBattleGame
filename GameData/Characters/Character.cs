@@ -110,8 +110,8 @@ namespace DiceBattleGame.GameData.Characters
         {
             if (weapon != null)
             {
-                // roll weapon's damage dice, scale with Dex bonus
-                return weapon.Attack() + getStatCheckBonus("Dexterity"); 
+                // roll weapon's damage dice, scale with the weapon's relevant stat
+                return weapon.Attack() + getStatCheckBonus(weapon.getDamageStat()); 
             }
             else
             {
@@ -127,7 +127,7 @@ namespace DiceBattleGame.GameData.Characters
             // check to see if the character has a defined resistance for the provided damage type
             if (damageResistances.ContainsKey(type))
             {
-                // multiply damage by the character's damage resistance modifier
+                // multiply damage by the character's damage resistance modifier and reduce by constitution bonus
                 finalDamage = (int)Math.Ceiling(amount * damageResistances[type]) - (getStatCheckBonus("Constitution"));
 
                 // round up to 1 if necessary to prevent stalemates

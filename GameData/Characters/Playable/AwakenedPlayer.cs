@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 12;
             skills.Add(new TheThingStirs());
-            weapon = new Custom("Magic Staff", "Staff of Awakening", "Blunt", new diceBag(7, 2));
+            weapon = new Custom("Magic Staff", "Staff of Awakening", "Blunt", new diceBag(7, 2), "Faith");
         }
     }
 }

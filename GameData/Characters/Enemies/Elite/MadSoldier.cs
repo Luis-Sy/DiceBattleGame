@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             };
             armorClass = 15;
             skills.Add(new FrenziedStrike());
-            weapon = new Custom("Axe", "Berserker's Great Axe", "Slash", new D8());
+            weapon = new Custom("Axe", "Berserker's Great Axe", "Slash", new D8(), "Strength");
         }
     }
 }

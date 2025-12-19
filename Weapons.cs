@@ -14,18 +14,21 @@ namespace DiceBattleGame
         protected string weaponName = "Weapon";
 
         protected string damageType = "Damage";
+        protected string damageStat = "Strength"; // default damage stat;
 
         public Weapon()
         {
             weaponType = string.Empty;
             weaponName = string.Empty;
             damageType = string.Empty;
+            damageStat = string.Empty;
         }
-        public Weapon(string weaponType, string weaponName, string damageType)
+        public Weapon(string weaponType, string weaponName, string damageType, string damageStat)
         {
             this.weaponType = weaponType;
             this.weaponName = weaponName;
             this.damageType = damageType;
+            this.damageStat = damageStat;
         }
         public virtual int Attack()
         {
@@ -59,6 +62,11 @@ namespace DiceBattleGame
         public string getDamageType()
         {
             return damageType;
+        }
+
+        public string getDamageStat()
+        {
+            return damageStat;
         }
 
     }
@@ -100,13 +108,15 @@ namespace DiceBattleGame
             weaponType = "Sword";
             weaponName = "Cake Cutter";
             damageType = "Slash";
+            damageStat = "Strength";
         }
-        public Sword(string weaponType, string weaponName, string damageType)
+        public Sword(string weaponType, string weaponName, string damageType, string damageStat)
         {
             die = new D8();
             this.weaponType = weaponType;
             this.weaponName = weaponName;
             this.damageType = damageType;
+            this.damageStat = damageStat;
         }
 
         public override int Attack()
@@ -124,13 +134,15 @@ namespace DiceBattleGame
             weaponType = "Sword";
             weaponName = "Cake Cutter";
             damageType = "Slash";
+            damageStat = "Dexterity";
         }
-        public Rapier(string weaponType, string weaponName, string damageType)
+        public Rapier(string weaponType, string weaponName, string damageType, string damageStat)
         {
             die = new D8();
             this.weaponType = weaponType;
             this.weaponName = weaponName;
             this.damageType = damageType;
+            this.damageStat = damageStat;
         }
 
         public override int Attack()
@@ -155,12 +167,13 @@ namespace DiceBattleGame
             weaponName = "Cake Cutter";
             damageType = "Slash";
         }
-        public Custom(string weaponType, string weaponName, string damageType, Dice dice)
+        public Custom(string weaponType, string weaponName, string damageType, Dice dice, string damageStat)
         {
             die = dice;
             this.weaponType = weaponType;
             this.weaponName = weaponName;
             this.damageType = damageType;
+            this.damageStat = damageStat;
         }
 
         public override int Attack()

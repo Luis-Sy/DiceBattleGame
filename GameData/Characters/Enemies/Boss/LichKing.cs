@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Boss
             };
             armorClass = 15;
             skills.Add(new SoulSiphon());
-            weapon = new Custom("Staff", "Frostmourne", "Magic", new diceBag(7, 3));
+            weapon = new Custom("Staff", "Frostmourne", "Magic", new diceBag(7, 3), "Intellect");
         }
     }
 }

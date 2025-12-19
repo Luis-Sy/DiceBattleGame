@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             armorClass = 14;
             skills.Add(new FireBolt());
             skills.Add(new FireStorm());
-            weapon = new Custom("Staff", "Ornate Ritual Staff", "Blunt", new D8());
+            weapon = new Custom("Staff", "Ornate Ritual Staff", "Blunt", new D8(), "Faith");
         }
     }
 }

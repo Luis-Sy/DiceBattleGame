@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             };
             armorClass = 10;
             skills.Add(new Bite());
-            weapon = new Custom("Club", "Rotten Club", "Blunt", new D6());
+            weapon = new Custom("Club", "Rotten Club", "Blunt", new D6(), "Strength");
         }
     }
 }

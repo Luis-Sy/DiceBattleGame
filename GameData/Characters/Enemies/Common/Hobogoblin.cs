@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             };
             armorClass = 13;
             skills.Add(new HeavySmash());
-            weapon = new Custom("Shortsword", "Rusty Shortsword", "Slash", new D6());
+            weapon = new Custom("Shortsword", "Rusty Shortsword", "Slash", new D6(), "Strength");
         }
     }
 }

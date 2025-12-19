@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 1.5 }
             };
             armorClass = 16;
-            weapon = new Custom("Claws", "Razor Claws", "Slash", new diceBag(5, 2));
+            weapon = new Custom("Claws", "Razor Claws", "Slash", new diceBag(5, 2), "Strength");
         }
     }
 }

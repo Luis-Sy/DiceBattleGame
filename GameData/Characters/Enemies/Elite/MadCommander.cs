@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             };
             armorClass = 14;
             skills.Add(new FrenziedStrike());
-            weapon = new Custom("Spear", "War Commander's Standard", "Pierce", new D12());
+            weapon = new Custom("Spear", "War Commander's Standard", "Pierce", new D12(), "Strength");
         }
     }
 }

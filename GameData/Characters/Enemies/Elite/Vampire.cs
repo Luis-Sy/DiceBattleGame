@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             };
             armorClass = 16;
             skills.Add(new LifeDrain());
-            weapon = new Custom("Claws", "Vampire's Claws", "Slash", new D12());
+            weapon = new Custom("Claws", "Vampire's Claws", "Slash", new D12(), "Dexterity");
         }
     }
 }

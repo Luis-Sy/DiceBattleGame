@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
             };
             armorClass = 12;
             skills.Add(new SoulSiphon());
-            weapon = new Custom("Staff", "Staff of the Damned", "Blunt", new D8());
+            weapon = new Custom("Staff", "Staff of the Damned", "Blunt", new D8(), "Intellect");
         }
     }
 }

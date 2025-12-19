@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 13;
             skills.Add(new KillingBlow());
-            weapon = new Custom("Axe", "Battle Axe", "Slash", new D10());
+            weapon = new Custom("Axe", "Battle Axe", "Slash", new D10(), "Strength");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DiceBattleGame.GameData.Characters;
 using DiceBattleGame.GameData.Skills;
+using DiceBattleGame.GameData.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 16;
             skills.Add(new Smite());
-            weapon = new Hammer();
+            weapon = new Custom("Hammer", "Warhammer", "Blunt", new D10(), "Strength");
         }
     }
 }

@@ -39,7 +39,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             
             armorClass = 13;
             skills.Add(new RainOfArrows());
-            weapon = new Custom("Bow", "Longbow", "Pierce", new diceBag(7, 2));
+            weapon = new Custom("Bow", "Longbow", "Pierce", new diceBag(7, 2), "Dexterity");
         }
     }
 }

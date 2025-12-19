@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             };
             armorClass = 16;
             skills.Add(new HeavySmash());
-            weapon = new Custom("Axe", "Battle Axe", "Slash", new D12());
+            weapon = new Custom("Axe", "Battle Axe", "Slash", new D12(), "Strength");
         }
     }
 }

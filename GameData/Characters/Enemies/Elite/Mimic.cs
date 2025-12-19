@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Elite
                 { "Psychic", 0.5 }
             };
             armorClass = 16;
-            weapon = new Custom("Bite", "Mimic's Jaw", "Pierce", new D10());
+            weapon = new Custom("Bite", "Mimic's Jaw", "Pierce", new D10(), "Dexterity");
         }
     }
 }

@@ -37,7 +37,7 @@ namespace DiceBattleGame.GameData.Characters.Playable
             };
             armorClass = 16;
             skills.Add(new Shackles());
-            weapon = new Custom("Halberd", "Halberd", "Slash", new D10());
+            weapon = new Custom("Halberd", "Halberd", "Slash", new D10(), "Strength");
         }
     }
 }

@@ -36,7 +36,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Common
             };
             armorClass = 8;
             skills.Add(new AcidSpray());
-            weapon = new Custom("Pseudopod", "Gooey Pseudopod", "Blunt", new D4());
+            weapon = new Custom("Pseudopod", "Gooey Pseudopod", "Blunt", new D4(), "Constitution");
         }
     }
 }

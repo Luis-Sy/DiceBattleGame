@@ -34,7 +34,7 @@ namespace DiceBattleGame.GameData.Characters.Enemies.Boss
                 { "Psychic", 0.5 }
             };
             armorClass = 15;
-            weapon = new Custom("Sword", "Demonic Sword", "Arcane", new D20());
+            weapon = new Custom("Sword", "Demonic Sword", "Arcane", new D20(), "Strength");
         }
     }
 }
