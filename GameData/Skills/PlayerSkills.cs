@@ -122,14 +122,14 @@ namespace DiceBattleGame.GameData.Skills
         {
             internal DivineBlessing() : base("Divine Intervention", 3, 3)
             {
-                TargetType = "Ally";
+                TargetType = "Self";
             }
 
             internal override int UseSkill(Character entity, Character target)
             {
-                int heal = entity.getStats()["Faith"] * 5;
-                int newHp = Math.Min(target.getHealth() + heal, target.getMaxHealth());
-                target.setHealth(newHp);
+                int heal = entity.getStatCheckBonus("Faith") * 5;
+                int newHp = Math.Min(entity.getHealth() + heal, entity.getMaxHealth());
+                entity.setHealth(newHp);
 
                 return 0;
             }
